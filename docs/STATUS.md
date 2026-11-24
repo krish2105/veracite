@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Tue 24 Nov, 21:10 (Dubai)** · commit `0c61331`
+> Last updated **Tue 24 Nov, 21:16 (Dubai)** · commit `7b0ca18`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ░░░░░░░░░░ **2%** (1/49 tasks) |
-| **P0 demo spine** | ░░░░░░░░░░ 1/24 |
+| **Overall progress** | ░░░░░░░░░░ **4%** (2/49 tasks) |
+| **P0 demo spine** | █░░░░░░░░░ 2/24 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | not deployed yet |
 | **In progress / blocked** | 0 🔨 · 0 ⛔ |
@@ -17,13 +17,13 @@
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **1d 1h** |
 | Deck upload (official, hard) | Thu 09:00 | **1d 11h** |
-| Arrive at the Simulation Lab | Thu 13:15 | **1d 16h** |
+| Arrive at the Simulation Lab | Thu 13:15 | **1d 15h** |
 | Phase 2 submissions close | Thu 15:00 | **1d 17h** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █░░░░░░░░░ 6% | 1 | 0 | 17 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █░░░░░░░░░ 11% | 2 | 0 | 16 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ░░░░░░░░░░ 0% | 0 | 0 | 16 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
@@ -35,7 +35,7 @@
 | Research & citation features | 12 | ░░░░░░░░░░ 0% (0/16) |
 | Honesty & verification in action | 10 | ░░░░░░░░░░ 0% (0/17) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | ░░░░░░░░░░ 0% (0/14) |
+| User experience | 8 | █░░░░░░░░░ 7% (1/14) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -49,7 +49,6 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
-- ⬜ **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · _due Tue 22:30_
 - ⬜ **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · _due Tue 23:30_
 - ⬜ **K07** · P0 · First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · _due Tue 23:59_
 - ⬜ **K03** · P0 · Registry clients: Crossref (DOI, `query.bibliographic`, retractions via `update-to`), OpenAlex (DOI, search, abstract), arXiv; polite headers, 24h cache, max 3 concurrent · _due Wed 10:30_
@@ -103,3 +102,4 @@ _Nothing blocked._
 
 ## ✅ Done
 - **K00** Docs, deck, repo, task system and 3D prototypes in place · Krishna Mathur
+- **K01** Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · Krishna Mathur
