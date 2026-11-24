@@ -1,0 +1,11 @@
+[
+  {
+    "id": "fab-001",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Flett, J. A. M., Conner, T. S., Riordan, B. C., Patterson, T., & Hayne, H. (2019). App-based mindfulness meditation for psychological distress and well-being: A systematic review and meta-analysis. Journal of Medical Internet Research, 21(1), e14228. https://doi.org/10.2196/14228",
+    "expected": "chimera",
+    "doi": "10.2196/14228",
+    "notes": "ChatGPT (chatgpt.com, logged out, model not shown) output, unedited, prompt 3 of the golden README, 24 Nov 2026. ChatGPT presented it as an 'established reference'. Crossref 24 Nov 2026: DOI 10.2196/14228 → 404 (does not exist). The authors are real and do publish on app-based mindfulness (their real paper: Psychology & Health 2020, 10.1080/08870446.2019.1711089, a randomised trial, not a meta-analysis), but this title, journal, year and DOI belong to no paper. Real authors + invented paper = chimera. A DOI-only checker would say notfound; Veracite should explain why."
+  }
+]
