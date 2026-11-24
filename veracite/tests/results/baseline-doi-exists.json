@@ -1,0 +1,478 @@
+{
+  "sample": true,
+  "adapter": "Baseline: DOI-exists check (Crossref lookup / URL status only), NOT Veracite",
+  "label": "BASELINE, not Veracite: a naive DOI-exists checker, for comparison only. SAMPLE data.",
+  "ranAt": "2026-11-24T18:40:10.902Z",
+  "sets": [
+    "real",
+    "fabricated",
+    "chimeras",
+    "retracted",
+    "web"
+  ],
+  "proofLine": "Tested on 51 references (30 real, 1 fabricated, 10 chimeras, 5 retracted, 5 web) · 4/11 fakes caught · 12 fakes marked Verified · 100% of real references verified · 0/5 retractions flagged · median 0.2 s per reference · 1 could not be checked (errors)",
+  "summary": {
+    "total": 51,
+    "errors": 1,
+    "fakes": {
+      "total": 11,
+      "checked": 11,
+      "caught": 4,
+      "caughtPct": 36.4
+    },
+    "falseVerified": {
+      "count": 12,
+      "ids": [
+        "chim-001",
+        "chim-002",
+        "chim-004",
+        "chim-005",
+        "chim-006",
+        "chim-007",
+        "chim-009",
+        "ret-001",
+        "ret-002",
+        "ret-003",
+        "ret-004",
+        "ret-005"
+      ]
+    },
+    "real": {
+      "total": 30,
+      "checked": 30,
+      "verified": 30,
+      "verifiedPct": 100,
+      "missed": []
+    },
+    "retracted": {
+      "total": 5,
+      "flagged": 0,
+      "missed": [
+        "ret-001:verified",
+        "ret-002:verified",
+        "ret-003:verified",
+        "ret-004:verified",
+        "ret-005:verified"
+      ]
+    },
+    "web": {
+      "total": 5,
+      "matched": 3
+    },
+    "exactAgreement": {
+      "count": 33,
+      "pct": 66
+    },
+    "timeMs": {
+      "median": 202,
+      "p95": 1387,
+      "total": 16496
+    },
+    "perSet": {
+      "real": {
+        "total": 30,
+        "errors": 0,
+        "exact": 30,
+        "confusion": {
+          "verified→verified": 30
+        }
+      },
+      "fabricated": {
+        "total": 1,
+        "errors": 0,
+        "exact": 0,
+        "confusion": {
+          "chimera→notfound": 1
+        }
+      },
+      "chimeras": {
+        "total": 10,
+        "errors": 0,
+        "exact": 0,
+        "confusion": {
+          "chimera→verified": 7,
+          "chimera→notfound": 3
+        }
+      },
+      "retracted": {
+        "total": 5,
+        "errors": 0,
+        "exact": 0,
+        "confusion": {
+          "retracted→verified": 5
+        }
+      },
+      "web": {
+        "total": 5,
+        "errors": 1,
+        "exact": 3,
+        "confusion": {
+          "verified→verified": 2,
+          "verified→error": 1,
+          "partial→notfound": 1,
+          "notfound→notfound": 1
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "real-001",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1868
+    },
+    {
+      "id": "real-002",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 615
+    },
+    {
+      "id": "real-003",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 405
+    },
+    {
+      "id": "real-004",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 287
+    },
+    {
+      "id": "real-005",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 225
+    },
+    {
+      "id": "real-006",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 206
+    },
+    {
+      "id": "real-007",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 579
+    },
+    {
+      "id": "real-008",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 253
+    },
+    {
+      "id": "real-009",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 332
+    },
+    {
+      "id": "real-010",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 336
+    },
+    {
+      "id": "real-011",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1383
+    },
+    {
+      "id": "real-012",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 209
+    },
+    {
+      "id": "real-013",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 195
+    },
+    {
+      "id": "real-014",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 203
+    },
+    {
+      "id": "real-015",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 196
+    },
+    {
+      "id": "real-016",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 203
+    },
+    {
+      "id": "real-017",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 205
+    },
+    {
+      "id": "real-018",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 211
+    },
+    {
+      "id": "real-019",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 201
+    },
+    {
+      "id": "real-020",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 199
+    },
+    {
+      "id": "real-021",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 202
+    },
+    {
+      "id": "real-022",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1391
+    },
+    {
+      "id": "real-023",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 194
+    },
+    {
+      "id": "real-024",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 202
+    },
+    {
+      "id": "real-025",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 192
+    },
+    {
+      "id": "real-026",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 200
+    },
+    {
+      "id": "real-027",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 202
+    },
+    {
+      "id": "real-028",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 218
+    },
+    {
+      "id": "real-029",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 196
+    },
+    {
+      "id": "real-030",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 205
+    },
+    {
+      "id": "fab-001",
+      "set": "fabricated",
+      "expected": "chimera",
+      "got": "notfound",
+      "ms": 190
+    },
+    {
+      "id": "chim-001",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 198
+    },
+    {
+      "id": "chim-002",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 201
+    },
+    {
+      "id": "chim-003",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "notfound",
+      "ms": 0
+    },
+    {
+      "id": "chim-004",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 199
+    },
+    {
+      "id": "chim-005",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 1387
+    },
+    {
+      "id": "chim-006",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 205
+    },
+    {
+      "id": "chim-007",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 191
+    },
+    {
+      "id": "chim-008",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "notfound",
+      "ms": 0
+    },
+    {
+      "id": "chim-009",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "verified",
+      "ms": 201
+    },
+    {
+      "id": "chim-010",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "notfound",
+      "ms": 0
+    },
+    {
+      "id": "ret-001",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "verified",
+      "ms": 192
+    },
+    {
+      "id": "ret-002",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "verified",
+      "ms": 204
+    },
+    {
+      "id": "ret-003",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "verified",
+      "ms": 191
+    },
+    {
+      "id": "ret-004",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "verified",
+      "ms": 199
+    },
+    {
+      "id": "ret-005",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "verified",
+      "ms": 194
+    },
+    {
+      "id": "web-001",
+      "set": "web",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 84
+    },
+    {
+      "id": "web-002",
+      "set": "web",
+      "expected": "verified",
+      "got": "",
+      "ms": 1181,
+      "error": "fetch failed"
+    },
+    {
+      "id": "web-003",
+      "set": "web",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 768
+    },
+    {
+      "id": "web-004",
+      "set": "web",
+      "expected": "partial",
+      "got": "notfound",
+      "ms": 167
+    },
+    {
+      "id": "web-005",
+      "set": "web",
+      "expected": "notfound",
+      "got": "notfound",
+      "ms": 212
+    }
+  ]
+}
