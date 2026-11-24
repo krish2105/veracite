@@ -1,0 +1,2086 @@
+{
+ "sample": true,
+ "fetched": "2026-11-24",
+ "source": "OpenAlex API, fields: publication_year, language, type, open_access, primary_location.source, authorships[].countries/institutions[].country_code (author names removed)",
+ "works": [
+  {
+   "golden_id": "real-001",
+   "id": "https://openalex.org/W4281742090",
+   "doi": "https://doi.org/10.1111/jsr.13666",
+   "publication_year": 2022,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Sleep Research",
+     "host_organization_name": "Wiley",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE",
+      "JO"
+     ],
+     "institutions": [
+      {
+       "country_code": "JO"
+      },
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BN"
+     ],
+     "institutions": [
+      {
+       "country_code": "BN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "MY"
+     ],
+     "institutions": [
+      {
+       "country_code": "MY"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-002",
+   "id": "https://openalex.org/W4400893762",
+   "doi": "https://doi.org/10.1016/j.jadohealth.2024.06.006",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Adolescent Health",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CA"
+     ],
+     "institutions": [
+      {
+       "country_code": "CA"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US",
+      "ZA"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      },
+      {
+       "country_code": "ZA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-003",
+   "id": "https://openalex.org/W4402196081",
+   "doi": "https://doi.org/10.1001/jamapediatrics.2024.2914",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Archives of Pediatrics and Adolescent Medicine",
+     "host_organization_name": "American Medical Association",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "NZ"
+     ],
+     "institutions": [
+      {
+       "country_code": "NZ"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-004",
+   "id": "https://openalex.org/W4377232020",
+   "doi": "https://doi.org/10.1016/j.sleepx.2023.100073",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Sleep Medicine X",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "BR"
+     ],
+     "institutions": [
+      {
+       "country_code": "BR"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-005",
+   "id": "https://openalex.org/W4401850697",
+   "doi": "https://doi.org/10.1007/s10734-024-01288-w",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Higher Education",
+     "host_organization_name": "Springer Science+Business Media",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "SE"
+     ],
+     "institutions": [
+      {
+       "country_code": "SE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "SE"
+     ],
+     "institutions": [
+      {
+       "country_code": "SE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "SE"
+     ],
+     "institutions": [
+      {
+       "country_code": "SE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-006",
+   "id": "https://openalex.org/W4417477029",
+   "doi": "https://doi.org/10.1186/s41239-025-00571-9",
+   "publication_year": 2025,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "diamond"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "International Journal of Educational Technology in Higher Education",
+     "host_organization_name": "Springer Nature",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-007",
+   "id": "https://openalex.org/W4405925613",
+   "doi": "https://doi.org/10.3390/educsci15010026",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Education Sciences",
+     "host_organization_name": "Multidisciplinary Digital Publishing Institute",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "ES"
+     ],
+     "institutions": [
+      {
+       "country_code": "ES"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-008",
+   "id": "https://openalex.org/W4200032847",
+   "doi": "https://doi.org/10.1111/aphw.12328",
+   "publication_year": 2021,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Applied Psychology Health and Well-Being",
+     "host_organization_name": "Wiley",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "NL"
+     ],
+     "institutions": [
+      {
+       "country_code": "NL"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      },
+      {
+       "country_code": "DE"
+      },
+      {
+       "country_code": "DE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-009",
+   "id": "https://openalex.org/W3181587562",
+   "doi": "https://doi.org/10.1037/cou0000568",
+   "publication_year": 2022,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Counseling Psychology",
+     "host_organization_name": "American Psychological Association",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-010",
+   "id": "https://openalex.org/W4294653459",
+   "doi": "https://doi.org/10.2196/39128",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Medical Internet Research",
+     "host_organization_name": "JMIR Publications",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-011",
+   "id": "https://openalex.org/W4386609530",
+   "doi": "https://doi.org/10.1016/j.invent.2023.100665",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Internet Interventions",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "SE"
+     ],
+     "institutions": [
+      {
+       "country_code": "SE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-012",
+   "id": "https://openalex.org/W4317104582",
+   "doi": "https://doi.org/10.1108/jbsed-09-2022-0104",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "diamond"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Business and Socio-economic Development",
+     "host_organization_name": "Emerald Publishing Limited",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "MY"
+     ],
+     "institutions": [
+      {
+       "country_code": "MY"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-013",
+   "id": "https://openalex.org/W7212369388",
+   "doi": "https://doi.org/10.1111/issj.70070",
+   "publication_year": 2026,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "bronze"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "International Social Science Journal",
+     "host_organization_name": "Wiley",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AE"
+     ],
+     "institutions": [
+      {
+       "country_code": "AE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-014",
+   "id": "https://openalex.org/W4200543371",
+   "doi": "https://doi.org/10.1016/j.copsyc.2021.12.006",
+   "publication_year": 2021,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Current Opinion in Psychology",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "NL"
+     ],
+     "institutions": [
+      {
+       "country_code": "NL"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-015",
+   "id": "https://openalex.org/W4391455785",
+   "doi": "https://doi.org/10.1093/jcmc/zmad055",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "diamond"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Computer-Mediated Communication",
+     "host_organization_name": "Wiley",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "CA"
+     ],
+     "institutions": [
+      {
+       "country_code": "CA"
+      },
+      {
+       "country_code": "CA"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CA"
+     ],
+     "institutions": [
+      {
+       "country_code": "CA"
+      },
+      {
+       "country_code": "CA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-016",
+   "id": "https://openalex.org/W4401906585",
+   "doi": "https://doi.org/10.1089/cyber.2024.0001",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Cyberpsychology Behavior and Social Networking",
+     "host_organization_name": "Mary Ann Liebert, Inc.",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "IN"
+     ],
+     "institutions": [
+      {
+       "country_code": "IN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "IN"
+     ],
+     "institutions": [
+      {
+       "country_code": "IN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "IN"
+     ],
+     "institutions": [
+      {
+       "country_code": "IN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "IN"
+     ],
+     "institutions": [
+      {
+       "country_code": "IN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "IN"
+     ],
+     "institutions": [
+      {
+       "country_code": "IN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "IR"
+     ],
+     "institutions": [
+      {
+       "country_code": "IR"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-017",
+   "id": "https://openalex.org/W4402219961",
+   "doi": "https://doi.org/10.1016/j.jad.2024.08.193",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Affective Disorders",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU",
+      "SA"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      },
+      {
+       "country_code": "SA"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-018",
+   "id": "https://openalex.org/W4392360602",
+   "doi": "https://doi.org/10.1016/j.chbr.2024.100398",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Computers in Human Behavior Reports",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "AU"
+     ],
+     "institutions": [
+      {
+       "country_code": "AU"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-019",
+   "id": "https://openalex.org/W4390619822",
+   "doi": "https://doi.org/10.1007/s11469-023-01224-6",
+   "publication_year": 2024,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "hybrid"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "International Journal of Mental Health and Addiction",
+     "host_organization_name": "Springer Science+Business Media",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [],
+     "institutions": []
+    },
+    {
+     "countries": [
+      "GB"
+     ],
+     "institutions": [
+      {
+       "country_code": "GB"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-020",
+   "id": "https://openalex.org/W4414491025",
+   "doi": "https://doi.org/10.1371/journal.pone.0329466",
+   "publication_year": 2025,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "PLoS ONE",
+     "host_organization_name": "Public Library of Science",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CN"
+     ],
+     "institutions": [
+      {
+       "country_code": "CN"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-021",
+   "id": "https://openalex.org/W2919115771",
+   "doi": "https://doi.org/10.1038/nature14539",
+   "publication_year": 2015,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Nature",
+     "host_organization_name": "Nature Portfolio",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      },
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CA"
+     ],
+     "institutions": [
+      {
+       "country_code": "CA"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "CA",
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      },
+      {
+       "country_code": "CA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-022",
+   "id": "https://openalex.org/W3124536214",
+   "doi": "https://doi.org/10.1177/014920639101700108",
+   "publication_year": 1991,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Management",
+     "host_organization_name": "SAGE Publishing",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-023",
+   "id": "https://openalex.org/W1791587663",
+   "doi": "https://doi.org/10.2307/249008",
+   "publication_year": 1989,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "MIS Quarterly",
+     "host_organization_name": "MIS Quarterly",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-024",
+   "id": "https://openalex.org/W2100379340",
+   "doi": "https://doi.org/10.2307/30036540",
+   "publication_year": 2003,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "MIS Quarterly",
+     "host_organization_name": "MIS Quarterly",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-025",
+   "id": "https://openalex.org/W2123709218",
+   "doi": "https://doi.org/10.1002/(sici)1097-0266(199708)18:7<509::aid-smj882>3.0.co;2-z",
+   "publication_year": 1997,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Strategic Management Journal",
+     "host_organization_name": "Wiley",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-026",
+   "id": "https://openalex.org/W4235678817",
+   "doi": "https://doi.org/10.1177/002224378101800104",
+   "publication_year": 1981,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Journal of Marketing Research",
+     "host_organization_name": "SAGE Publishing",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-027",
+   "id": "https://openalex.org/W4309674289",
+   "doi": "https://doi.org/10.1145/3571730",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "ACM Computing Surveys",
+     "host_organization_name": "Association for Computing Machinery",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "HK"
+     ],
+     "institutions": [
+      {
+       "country_code": "HK"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-028",
+   "id": "https://openalex.org/W4386510404",
+   "doi": "https://doi.org/10.1038/s41598-023-41032-5",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "gold"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Scientific Reports",
+     "host_organization_name": "Nature Portfolio",
+     "is_in_doaj": true
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      },
+      {
+       "country_code": "US"
+      },
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-029",
+   "id": "https://openalex.org/W4323655724",
+   "doi": "https://doi.org/10.1016/j.lindif.2023.102274",
+   "publication_year": 2023,
+   "language": "en",
+   "type": "article",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Learning and Individual Differences",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    },
+    {
+     "countries": [],
+     "institutions": []
+    },
+    {
+     "countries": [],
+     "institutions": []
+    },
+    {
+     "countries": [
+      "DE"
+     ],
+     "institutions": [
+      {
+       "country_code": "DE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "golden_id": "real-030",
+   "id": "https://openalex.org/W2093916237",
+   "doi": "https://doi.org/10.1016/j.smrv.2014.07.007",
+   "publication_year": 2014,
+   "language": "en",
+   "type": "review",
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green"
+   },
+   "primary_location": {
+    "source": {
+     "display_name": "Sleep Medicine Reviews",
+     "host_organization_name": "Elsevier BV",
+     "is_in_doaj": false
+    }
+   },
+   "authorships": [
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    },
+    {
+     "countries": [
+      "US"
+     ],
+     "institutions": [
+      {
+       "country_code": "US"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
