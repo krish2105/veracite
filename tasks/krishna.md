@@ -7,7 +7,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Tuesday night · unblock the team (M0)
 - [x] **K00** · P0 · Docs, deck, repo, task system and 3D prototypes in place · `docs/** submissions/** tasks/**` · due Tue 13:00 · #deck
 - [ ] **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · due Tue 22:00 · #mvp
-    - Update `.env.example` to the new model map in docs/11 §6 (Llama is gone from Groq's free tier). Confirm the IDs and whether Prompt Guard 2 is free in the Groq console.
+    - `.env.example` model map already updated in K06. Still to do: paste the keys, confirm the model IDs and whether Prompt Guard 2 is free in the Groq console, Vercel project + env vars.
 - [x] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
     - Blocks everyone. Merge to `main` first.
 - [x] **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · `veracite/src/lib/types.ts veracite/src/lib/flags.ts` · due Tue 23:30 · #mvp
@@ -20,7 +20,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K05** · P0 · `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · `veracite/src/app/api/sources/** veracite/src/components/app/tabs/xray/**` · due Wed 13:00 · #mvp #honesty
 
 ## Wednesday afternoon · the research session goes live (M2)
-- [ ] **K06** · P0 · LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · `veracite/src/lib/llm/**` · due Wed 14:30 · #mvp #honesty
+- [x] **K06** · P0 · LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · `veracite/src/lib/llm/**` · due Wed 14:30 · #mvp #honesty
 - [ ] **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · `veracite/src/lib/agents/**` · due Wed 16:30 · #mvp #research #honesty
 - [ ] **K09** · P0 · Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · `veracite/src/lib/session/** veracite/src/components/app/tabs/research/**` · due Wed 19:00 · #mvp #research #ux
 
