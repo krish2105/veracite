@@ -195,5 +195,24 @@ The deck is judged without us, and this is an honesty hackathon, so every number
 
 ---
 
+## 11. Demo topic (decided Tue 21:30): "Does generative AI help or hurt student learning?"
+
+**How we chose:** we tested 5 topics live against Crossref and OpenAlex (no keys) and kept the one with open abstracts the Reader can quote, real DOIs, mixed evidence for the Skeptic, and a real retraction. Coverage of the top 25 OpenAlex results: AI & learning 92 % with abstracts, 84 % open access, 96 % with DOIs. Generative AI & productivity was the runner-up (72 % abstracts, landmark papers, but no retraction).
+
+**Why it wins the room:**
+1. **A real retraction, live.** Wang & Fan (2025), *"The effect of ChatGPT on students' learning performance…"*, Humanities & Social Sciences Communications, DOI `10.1057/s41599-025-04787-y`. A meta-analysis claiming large positive effects of ChatGPT on learning: **775 citations in OpenAlex, retracted 22 Apr 2026** over "discrepancies in the meta-analysis". Crossref carries the notice from both the publisher and Retraction Watch. Ranked by citations, it is near the top of this topic, and Veracite blocks it. Line for the demo: *"The most-cited evidence that ChatGPT helps students learn was retracted this year. A tool that ranks by citations would have handed it to you first."*
+2. **Mixed evidence, so the Skeptic has work to do.** Bastani et al. (2025, PNAS, `10.1073/pnas.2422633122`): *"Generative AI without guardrails can harm learning"*, which also carries a **correction** notice (amber badge). Kestin et al. (2025, Scientific Reports, `10.1038/s41598-025-97652-6`): an AI tutor outperformed in-class active learning.
+3. **A preprint, so the badge and Skeptic rule S6 show up.** Kosmyna et al. (2025, MIT, *"Your Brain on ChatGPT"*, arXiv `10.48550/arXiv.2506.08872`). The deck already cites it for over-reliance.
+4. **It closes the loop on our own design.** The research says AI *without guardrails* harms learning, and Veracite is the guardrails. The judges are educators, and the hackathon problem is students using AI.
+
+**What this means for the build:**
+- **K03/K04:** arXiv DOIs (`10.48550/…`) return 404 from Crossref because they are DataCite DOIs. Verify preprints with OpenAlex + arXiv. Take abstracts from OpenAlex first (Crossref had none for Kestin et al.), then Crossref. Read retractions from Crossref `updated-by` on the original record plus OpenAlex `is_retracted`.
+- **Z01:** add Wang & Fan to `retracted.json` and Bastani et al. (correction) to the notes. Ask ChatGPT for the fabricated set **on this topic** too, so the X-ray demo bibliography is on-topic.
+- **A11 / demo script:** the X-ray clipboard bibliography and the research question both use this topic. The sample data in `components/app/data.ts` (screen time) stays as the labelled SAMPLE preview until the real flow replaces it.
+
+Sources: Crossref and OpenAlex API responses (24 Nov 2026) · [Plagiarism Today on the retraction](https://www.plagiarismtoday.com/2026/07/15/study-claiming-ai-helps-students-learn-retracted/) · [EdTech Innovation Hub](https://www.edtechinnovationhub.com/news/highly-cited-meta-analysis-claiming-chatgpt-boosts-student-learning-retracted-over-data-concerns).
+
+---
+
 ## Sources for this plan
 Groq models (console.groq.com/docs/models) · Groq free tier changes 2026 (klymentiev.com/blog/groq-pricing; agentdeals.dev/vendor/groq) · OpenAlex authentication (developers.openalex.org/api-reference/authentication) · Crossref rate limits (community.crossref.org/t/16137) · OpenScholar, Nature Feb 2026 (washington.edu news, 4 Feb 2026) · NeurIPS hallucinated citations (techcrunch.com, 21 Jan 2026) · arXiv 2602.05930, 2605.08583, 2607.22693 · SP Jain Academic Integrity Policy v2 (spjain.ae) · CiteTrue, Sourcely, Apify Reference Checker (vendor pages).

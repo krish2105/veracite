@@ -10,7 +10,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - Update `.env.example` to the new model map in docs/11 §6 (Llama is gone from Groq's free tier). Confirm the IDs and whether Prompt Guard 2 is free in the Groq console.
 - [x] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
     - Blocks everyone. Merge to `main` first.
-- [ ] **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · `veracite/src/lib/types.ts veracite/src/lib/flags.ts` · due Tue 23:30 · #mvp
+- [x] **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · `veracite/src/lib/types.ts veracite/src/lib/flags.ts` · due Tue 23:30 · #mvp
     - Everyone codes against these. Interfaces in docs/11 §5.
 - [ ] **K07** · P0 · First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · due Tue 23:59 · #mvp
 
