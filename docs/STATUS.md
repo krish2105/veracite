@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Tue 24 Nov, 22:26 (Dubai)** · commit `781deae`
+> Last updated **Tue 24 Nov, 22:39 (Dubai)** · commit `8a9d599`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | █░░░░░░░░░ **10%** (5/49 tasks) |
-| **P0 demo spine** | ██░░░░░░░░ 5/24 |
+| **Overall progress** | █░░░░░░░░░ **12%** (6/49 tasks) |
+| **P0 demo spine** | ███░░░░░░░ 6/24 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | not deployed yet |
 | **In progress / blocked** | 0 🔨 · 0 ⛔ |
@@ -23,7 +23,7 @@
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ███░░░░░░░ 28% | 5 | 0 | 13 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ███░░░░░░░ 33% | 6 | 0 | 12 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ░░░░░░░░░░ 0% | 0 | 0 | 16 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
@@ -31,9 +31,9 @@
 *Share of tasks tagged with each criterion that are done. A progress signal, not a predicted score.*
 | Criterion | Points | Readiness |
 |---|---|---|
-| Working MVP | 15 | ██░░░░░░░░ 22% (2/9) |
+| Working MVP | 15 | ███░░░░░░░ 33% (3/9) |
 | Research & citation features | 12 | █░░░░░░░░░ 6% (1/16) |
-| Honesty & verification in action | 10 | █░░░░░░░░░ 12% (2/17) |
+| Honesty & verification in action | 10 | ██░░░░░░░░ 18% (3/17) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
 | User experience | 8 | █░░░░░░░░░ 7% (1/14) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
@@ -50,7 +50,6 @@ _Nothing blocked._
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
 - ⬜ **K07** · P0 · First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · _due Tue 23:59_
-- ⬜ **K05** · P0 · `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · _due Wed 13:00_
 - ⬜ **K06** · P0 · LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · _due Wed 14:30_
 - ⬜ **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · _due Wed 16:30_
 - ⬜ **K09** · P0 · Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · _due Wed 19:00_
@@ -103,3 +102,4 @@ _Nothing blocked._
 - **K18** Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · Krishna Mathur
 - **K03** Registry clients: Crossref (DOI, `query.bibliographic`, retractions via `updated-by`), OpenAlex (DOI, search, abstract), arXiv; polite headers, 24h cache, max 3 concurrent · Krishna Mathur
 - **K04** Verifier (code only): title normaliser and similarity, author match, year rule, DOI→title consistency, chimera detector, status rules + unit tests on Zedan's golden set · Krishna Mathur
+- **K05** `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · Krishna Mathur
