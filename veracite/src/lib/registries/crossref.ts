@@ -105,14 +105,19 @@ export function parseCrossrefWork(w: CrossrefWork, fetchedAt = new Date().toISOS
   const title = stripMarkup(w.title?.[0] ?? "");
   const subtitle = stripMarkup(w.subtitle?.[0] ?? "");
   const fullTitle = subtitle && !title.toLowerCase().includes(subtitle.toLowerCase()) ? `${title}: ${subtitle}` : title;
-  const updates = mapUpdates(w["updated-by"]);
+  const doi = normalizeDoi(w.DOI);
+  // Some publishers (Elsevier) mark a retracted article with an `update-to` that points at ITSELF. That is a
+  // retraction marker on the work, not a notice about another work (e.g. 10.1016/j.fct.2012.08.005).
+  const selfMarks = (w["update-to"] ?? []).filter((u) => normalizeDoi(u.DOI) === doi);
+  const updates = mapUpdates([...(w["updated-by"] ?? []), ...selfMarks]).filter(
+    (u, i, all) => all.findIndex((o) => o.kind === u.kind && o.source === u.source && o.noticeDoi === u.noticeDoi) === i,
+  );
   if (titleSaysRetracted(fullTitle) && !updates.some((u) => u.kind === "retraction")) updates.push({ kind: "retraction", source: "publisher" });
 
-  const target = w["update-to"]?.find((u) => updateKind(u.type));
+  const target = w["update-to"]?.find((u) => updateKind(u.type) && normalizeDoi(u.DOI) !== doi);
   const titleNotice = noticeKindFromTitle(fullTitle);
   const noticeFor = target ? { kind: updateKind(target.type)!, doi: normalizeDoi(target.DOI) } : titleNotice ? { kind: titleNotice } : undefined;
 
-  const doi = normalizeDoi(w.DOI);
   return {
     registry: "crossref",
     id: doi ?? w.DOI,
@@ -181,4 +186,17 @@ export async function crossrefSearch(query: string, opts: CrossrefSearchOptions 
   const json = await getJson<{ message: { items: CrossrefWork[] } }>("crossref", `${BASE}/works?${params}`, listLimiter);
   const items = (json?.message.items ?? []).map((w) => parseCrossrefWork(w)).filter((r) => !r.noticeFor);
   return { data: items, receipt: receipt("crossref", query, items.length) };
+}
+
+/**
+ * Works by these authors (Crossref `query.author`). Used only when nothing matches a reference, to tell the
+ * student "these researchers are real, but they never wrote this paper" (real authors on an invented paper).
+ */
+export async function crossrefByAuthors(surnames: string[], rows = 5): Promise<RegistryResult<RegistryRecord[]>> {
+  const q = surnames.slice(0, 4).join(" ").trim();
+  if (!q) return { data: [], receipt: receipt("crossref", "author:", 0) };
+  const params = withMailto(new URLSearchParams({ "query.author": q, rows: String(rows), select: SELECT }));
+  const json = await getJson<{ message: { items: CrossrefWork[] } }>("crossref", `${BASE}/works?${params}`, listLimiter);
+  const items = (json?.message.items ?? []).map((w) => parseCrossrefWork(w)).filter((r) => !r.noticeFor);
+  return { data: items, receipt: receipt("crossref", `author:${q}`, items.length) };
 }

@@ -17,7 +17,7 @@ const ORG = /\b(organi[sz]ation|association|institute|university|department|mini
 
 /** Split an author segment into authors. Returns [] when nothing name-like is found. */
 export function parseAuthors(seg: string): Author[] {
-  const s = seg.replace(/\bet al\.?/gi, "").replace(/\.\.\./g, ",").trim();
+  const s = seg.replace(/\bet al\.?/gi, "").replace(/\.\.\.|…/g, ",").trim(); // APA 21+ authors: "… Last, A."
   if (!s) return [];
   const apa = [...s.matchAll(APA_AUTHOR)];
   if (apa.length) return apa.map((m) => ({ family: m[1].trim(), given: m[2].trim() }));
@@ -42,10 +42,21 @@ export function parseAuthors(seg: string): Author[] {
 
 const cleanTitle = (t: string) => t.replace(/^[\s“"'‘]+|[\s”"'’.,]+$/g, "").trim();
 
-/** Find where an APA title ends: the first ". " / "? " / "! " followed by a capital or digit, after ≥ 8 chars. */
+/**
+ * Find where an APA title ends: the first ". " followed by a capital or digit, after ≥ 8 chars.
+ * A "?" or "!" ends the title only when a journal follows it (a volume, pages, link or nothing more), so
+ * "…outcomes? A meta-analysis of 141 studies. Journal…" and "ChatGPT for good? On opportunities…" stay whole.
+ */
 function titleEnd(s: string): number {
   const re = /([.?!])\s+(?=[\p{Lu}\d])/gu;
-  for (const m of s.matchAll(re)) if (m.index! >= 8) return m.index! + (m[1] === "." ? 0 : 1);
+  for (const m of s.matchAll(re)) {
+    if (m.index! < 8) continue;
+    if (m[1] === ".") return m.index!;
+    const rest = s.slice(m.index! + 1);
+    const nextStop = rest.search(/\.\s+(?=[\p{Lu}\d])/u);
+    const segment = nextStop >= 0 ? rest.slice(0, nextStop) : rest;
+    if (nextStop < 0 || /,\s*\d|\(\d|https?:|\bdoi\b/i.test(segment)) return m.index! + 1;
+  }
   return -1;
 }
 

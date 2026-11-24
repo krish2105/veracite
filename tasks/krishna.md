@@ -17,6 +17,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Wednesday morning · the Verifier goes live (M1)
 - [x] **K03** · P0 · Registry clients: Crossref (DOI, `query.bibliographic`, retractions via `updated-by`), OpenAlex (DOI, search, abstract), arXiv; polite headers, 24h cache, max 3 concurrent · `veracite/src/lib/registries/**` · due Wed 10:30 · #mvp #honesty #research
 - [x] **K04** · P0 · Verifier (code only): title normaliser and similarity, author match, year rule, DOI→title consistency, chimera detector, status rules + unit tests on Zedan's golden set · `veracite/src/lib/verify/**` · due Wed 11:30 · #honesty
+    - Golden set (Zedan, live, 25 Nov 01:30): real 30/30, retracted 5/5, chimera 10/11, **0 fakes marked Verified**. The one "miss" (chim-002, year only) is a mismatch by docs/03.
 - [x] **K05** · P0 · `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · `veracite/src/app/api/sources/** veracite/src/components/app/tabs/xray/**` · due Wed 13:00 · #mvp #honesty
 
 ## Wednesday afternoon · the research session goes live (M2)

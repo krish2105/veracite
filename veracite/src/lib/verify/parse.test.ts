@@ -74,6 +74,18 @@ describe("parseReference", () => {
     expect(r.venue).toBe("Humanities and Social Sciences Communications");
   });
 
+  it("a '?' inside the title does not end it (golden real-015, real-029)", () => {
+    const a = parseReference("Godard, R., & Holtzman, S. (2024). Are active and passive social media use related to mental health, wellbeing, and social support outcomes? A meta-analysis of 141 studies. Journal of Computer-Mediated Communication, 29(1), zmad055. https://doi.org/10.1093/jcmc/zmad055");
+    expect(a.title).toBe("Are active and passive social media use related to mental health, wellbeing, and social support outcomes? A meta-analysis of 141 studies");
+    expect(a.venue).toBe("Journal of Computer-Mediated Communication");
+    const b = parseReference("Kasneci, E., Seßler, K., … Kasneci, G. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, 102274.");
+    expect(b.title).toBe("ChatGPT for good? On opportunities and challenges of large language models for education");
+    expect(b.authors?.map((x) => x.family)).toEqual(["Kasneci", "Seßler", "Kasneci"]);
+    const c = parseReference("Lee, K. (2024). Is ChatGPT a good recommender? Journal of Things, 12(3), 1–10.");
+    expect(c.title).toBe("Is ChatGPT a good recommender?");
+    expect(c.venue).toBe("Journal of Things");
+  });
+
   it("organisation author", () => {
     expect(parseAuthors("World Health Organization")).toEqual([{ family: "World Health Organization" }]);
   });
@@ -95,6 +107,7 @@ describe("text checks", () => {
 
   it("surnames: accents, particles, compound names", () => {
     expect(sameSurname("Kabakcı", "Kabakci")).toBe(true);
+    expect(sameSurname("Seßler", "Sessler")).toBe(true);
     expect(sameSurname("Al Suwaidi", "Suwaidi")).toBe(true);
     expect(sameSurname("García-Pérez", "Garcia Perez")).toBe(true);
     expect(sameSurname("Kestin", "Bastani")).toBe(false);

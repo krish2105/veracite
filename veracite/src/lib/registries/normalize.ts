@@ -6,7 +6,8 @@ import type { Author, Update } from "../types";
 /** Pull a DOI out of any string ("https://doi.org/10.1/x.", "doi:10.1/X") → "10.1/x" (lower-case), or undefined. */
 export function normalizeDoi(input: string | null | undefined): string | undefined {
   if (!input) return undefined;
-  const m = decodeURIComponent(String(input)).match(/10\.\d{4,9}\/[^\s"'<>]+/i);
+  // Old SICI DOIs contain < > ; ( ) and colons, e.g. 10.1002/(SICI)1097-0266(199708)18:7<509::AID-SMJ882>3.0.CO;2-Z
+  const m = decodeURIComponent(String(input)).match(/10\.\d{4,9}\/[^\s"']+/i);
   if (!m) return undefined;
   return m[0].replace(/[.,;:)\]}>]+$/, "").toLowerCase();
 }

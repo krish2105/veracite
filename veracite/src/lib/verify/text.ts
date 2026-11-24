@@ -21,6 +21,7 @@ export function normalizeText(s: string | undefined): string {
     .replace(/[̀-ͯ]/g, "")
     .replace(/ı/g, "i")
     .toLowerCase()
+    .replace(/ß/g, "ss") // "Seßler" = "Sessler"
     .replace(/[’'`]/g, "")
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, " ")
@@ -122,10 +123,12 @@ export interface AuthorCheck {
 
 export function checkAuthors(claimed: Author[] | undefined, found: Author[], etAl = false): AuthorCheck {
   if (!claimed?.length) return { match: "missing", firstOk: false, overlap: 0, strangers: [] };
-  const on = (c: Author) => found.some((f) => sameSurname(c.family, f.family));
+  // Crossref sometimes swaps given and family names (family "Jing", given "Zhang"): a full given name counts too.
+  const isAuthor = (surname: string, f: Author | undefined) => !!f && (sameSurname(surname, f.family) || (!!f.given && !f.given.includes(".") && sameSurname(surname, f.given)));
+  const on = (c: Author) => found.some((f) => isAuthor(c.family, f));
   const strangers = claimed.filter((c) => !on(c)).map((c) => c.family);
   const overlap = (claimed.length - strangers.length) / claimed.length;
-  const firstOk = sameSurname(claimed[0].family, found[0]?.family);
+  const firstOk = isAuthor(claimed[0].family, found[0]);
   // APA lists up to 20 authors, so a full list should not be missing many. "et al." excuses the rest.
   const complete = etAl || claimed.length >= Math.min(found.length, 20);
   let match: FieldMatch = "different";

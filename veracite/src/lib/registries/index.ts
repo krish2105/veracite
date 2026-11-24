@@ -2,7 +2,7 @@
  * Registry clients (K03): the ONLY place references come from. Server-side use (route handlers).
  * Keys come from non-NEXT_PUBLIC env vars, so they can never reach the browser bundle.
  *
- *   crossrefByDoi · crossrefMatchReference · crossrefSearch
+ *   crossrefByDoi · crossrefMatchReference · crossrefSearch · crossrefByAuthors
  *   openalexByDoi · openalexSearch
  *   arxivById · arxivSearch
  *   lookupDoi: one DOI checked in every registry where it can live, in parallel
@@ -14,7 +14,7 @@ import { RegistryError, type RegistryResult } from "./http";
 import { isArxivDoi, normalizeDoi } from "./normalize";
 import { openalexByDoi } from "./openalex";
 
-export { crossrefByDoi, crossrefMatchReference, crossrefSearch, parseCrossrefWork } from "./crossref";
+export { crossrefByAuthors, crossrefByDoi, crossrefMatchReference, crossrefSearch, parseCrossrefWork } from "./crossref";
 export { openalexByDoi, openalexSearch, parseOpenAlexWork } from "./openalex";
 export { arxivById, arxivSearch, parseArxivFeed } from "./arxiv";
 export { RegistryError, type RegistryResult } from "./http";
