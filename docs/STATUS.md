@@ -1,14 +1,14 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Tue 24 Nov, 11:45 (Dubai)** · commit `uncommitted`
+> Last updated **Tue 24 Nov, 11:46 (Dubai)** · commit `7c5b06a`
 
 ## At a glance
 | | |
 |---|---|
 | **Overall progress** | ░░░░░░░░░░ **2%** (1/45 tasks) |
 | **P0 demo spine** | ░░░░░░░░░░ 1/25 |
-| **Build** | Type-check 🟢 passing · Production build 🟢 passing |
+| **Build** | Type-check 🔴 failing · Production build 🟢 passing |
 | **Live link** | not deployed yet |
 | **In progress / blocked** | 0 🔨 · 0 ⛔ |
 
