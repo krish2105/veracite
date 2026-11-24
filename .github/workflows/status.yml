@@ -1,0 +1,59 @@
+name: Build + status
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: status-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # The bot's own STATUS.md commit must not trigger another run.
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: veracite/package-lock.json
+
+      - name: Install
+        working-directory: veracite
+        run: npm ci
+
+      - name: Type-check
+        id: typecheck
+        working-directory: veracite
+        continue-on-error: true
+        run: npx tsc --noEmit
+
+      - name: Production build
+        id: build
+        working-directory: veracite
+        continue-on-error: true
+        run: npx next build
+
+      - name: Regenerate docs/STATUS.md
+        run: node scripts/status.mjs --typecheck=${{ steps.typecheck.outcome }} --build=${{ steps.build.outcome }}
+
+      - name: Commit STATUS.md (main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/STATUS.md
+          git diff --cached --quiet || (git commit -m "chore(status): refresh STATUS.md [skip ci]" && git push)
+
+      - name: Fail if the app doesn't build
+        if: steps.typecheck.outcome == 'failure' || steps.build.outcome == 'failure'
+        run: exit 1

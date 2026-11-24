@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en" data-dir="1" data-mode="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veracite · 3D design directions · Team 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,400&family=Martian+Mono:wdth,wght@75..112.5,300..700&family=Libre+Caslon+Display&family=Atkinson+Hyperlegible+Next:wght@300..700&family=IBM+Plex+Mono:wght@400;500&family=Gloock&family=Hanken+Grotesk:wght@300..700&family=Courier+Prime:wght@400;700&family=Schibsted+Grotesk:wght@400..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<style>
+/* ---------- direction tokens ---------- */
+html[data-dir="1"]{--display:'Archivo',sans-serif;--stretch:125%;--dw:760;--dcase:uppercase;--dtrack:.01em;--body:'Literata',serif;--mono:'Martian Mono',monospace;
+  --bg:#EDF1EE;--ink:#0E2A23;--ink2:#41574F;--pri:#1F6F68;--acc:#5B4BC4;--alert:#C3263B;--panel:rgba(247,250,248,.78);--line:rgba(14,42,35,.16);--radius:6px}
+html[data-dir="1"][data-mode="night"]{--bg:#0A0820;--ink:#E9E6FF;--ink2:#ABA5DA;--pri:#4DF2FF;--acc:#FF4FD8;--alert:#FF3B5C;--panel:rgba(22,18,58,.72);--line:rgba(233,230,255,.16)}
+html[data-dir="2"]{--display:'Libre Caslon Display',serif;--stretch:100%;--dw:400;--dcase:none;--dtrack:-.01em;--body:'Atkinson Hyperlegible Next',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#EAF0F7;--ink:#12357A;--ink2:#3E5A93;--pri:#5C7DB8;--acc:#A9814A;--alert:#E0445E;--panel:rgba(240,245,251,.8);--line:rgba(18,53,122,.18);--radius:14px}
+html[data-dir="2"][data-mode="night"]{--bg:#060914;--ink:#F2EBD9;--ink2:#BDB6A2;--pri:#3355AA;--acc:#C9A15E;--alert:#FF5A73;--panel:rgba(12,17,34,.72);--line:rgba(242,235,217,.16)}
+html[data-dir="3"]{--display:'Gloock',serif;--stretch:100%;--dw:400;--dcase:none;--dtrack:-.015em;--body:'Hanken Grotesk',sans-serif;--mono:'Courier Prime',monospace;
+  --bg:#E4E6E3;--ink:#1B1D1F;--ink2:#4B5054;--pri:#24477A;--acc:#A8864F;--alert:#B5317A;--panel:rgba(247,247,244,.86);--line:rgba(27,29,31,.16);--radius:4px}
+html[data-dir="3"][data-mode="night"]{--bg:#121416;--ink:#ECE9E2;--ink2:#A8A49B;--pri:#7FA3DB;--acc:#C9A56A;--alert:#E0559F;--panel:rgba(29,32,35,.8);--line:rgba(236,233,226,.14)}
+html[data-dir="4"]{--display:'Schibsted Grotesk',sans-serif;--stretch:100%;--dw:760;--dcase:none;--dtrack:-.03em;--body:'Instrument Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+  --bg:#F5F6F8;--ink:#0F1216;--ink2:#4A515B;--pri:#3A4048;--acc:#3A4048;--alert:#D4183D;--panel:rgba(255,255,255,.8);--line:rgba(15,18,22,.14);--radius:10px}
+html[data-dir="4"][data-mode="night"]{--bg:#07080B;--ink:#EEF1F6;--ink2:#9AA3AE;--pri:#9AA3AE;--acc:#FFFFFF;--alert:#FF4D6A;--panel:rgba(16,18,23,.78);--line:rgba(238,241,246,.14)}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);transition:background-color .7s ease,color .5s ease;-webkit-font-smoothing:antialiased}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:18px;padding:14px clamp(16px,3vw,32px);border-bottom:1px solid var(--line);background:linear-gradient(var(--bg),transparent)}
+.brand{font-family:var(--display);font-stretch:var(--stretch);font-weight:var(--dw);letter-spacing:.14em;font-size:15px;text-transform:uppercase;white-space:nowrap}
+.brand small{font-family:var(--mono);font-size:10px;letter-spacing:.08em;opacity:.7;margin-left:10px;text-transform:none;font-stretch:100%;font-weight:400}
+.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.tabs button{background:transparent;border:1px solid transparent;border-radius:999px;padding:7px 13px;font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--ink2)}
+.tabs button[aria-selected="true"]{border-color:var(--ink);color:var(--ink)}
+.tabs button:hover{color:var(--ink)}
+.mode{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-family:var(--mono);font-size:11.5px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.mode i{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 25%,transparent)}
+
+/* ---------- hero ---------- */
+.hero{position:fixed;z-index:10;left:clamp(18px,5vw,76px);top:50%;transform:translateY(-52%);width:min(500px,40vw);pointer-events:none}
+.hero[hidden]{display:none}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pri);margin:0 0 18px;display:flex;gap:10px;align-items:center}
+.eyebrow b{font-weight:500;color:var(--acc)}
+h1{font-family:var(--display);font-stretch:var(--stretch);font-weight:var(--dw);text-transform:var(--dcase);letter-spacing:var(--dtrack);font-size:clamp(34px,4.9vw,78px);line-height:.98;margin:0 0 22px;text-wrap:balance}
+html[data-dir="1"] h1{font-size:clamp(30px,4.1vw,64px);line-height:1.02}
+.hero p{font-size:clamp(15px,1.2vw,17.5px);line-height:1.6;color:var(--ink2);margin:0 0 26px;max-width:44ch}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;pointer-events:auto}
+.cta{border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:var(--radius);font-family:var(--mono);font-size:12.5px;letter-spacing:.03em}
+.cta.ghost{background:transparent;color:var(--ink)}
+.claims{display:flex;flex-direction:column;gap:8px;margin:0 0 20px;pointer-events:auto}
+.claims button{text-align:left;border:1px solid var(--line);background:var(--panel);padding:10px 14px;border-radius:var(--radius);font-size:14px;color:var(--ink2)}
+.claims button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+
+/* ---------- mini x-ray card ---------- */
+.xray{position:fixed;z-index:9;right:clamp(14px,2.4vw,30px);bottom:clamp(14px,2.4vw,30px);width:min(380px,calc(100vw - 28px));background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%)}
+html[data-dir="1"] .xray{outline:1px solid var(--line);outline-offset:3px}
+.xray h3{margin:0 0 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);display:flex;justify-content:space-between}
+.xray h3 span{color:var(--alert)}
+.row{display:grid;grid-template-columns:18px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.4}
+.row svg{width:16px;height:16px;margin-top:2px}
+.row b{font-weight:600}
+.row em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:2px}
+
+/* ---------- spec drawer ---------- */
+.specbtn{position:fixed;z-index:11;left:clamp(14px,2.4vw,30px);bottom:clamp(14px,2.4vw,30px);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 15px;font-family:var(--mono);font-size:11.5px;backdrop-filter:blur(12px)}
+.spec{position:fixed;z-index:12;left:clamp(14px,2.4vw,30px);bottom:calc(clamp(14px,2.4vw,30px) + 48px);width:min(460px,calc(100vw - 28px));max-height:62vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;backdrop-filter:blur(16px)}
+.spec[hidden]{display:none}
+.spec h4{margin:14px 0 8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.spec h4:first-child{margin-top:0}
+.sw{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sw div{font-family:var(--mono);font-size:9.5px;line-height:1.3;color:var(--ink2)}
+.sw div::before{content:"";display:block;height:34px;border-radius:4px;background:var(--c);border:1px solid var(--line);margin-bottom:4px}
+.type p{margin:4px 0;font-size:20px;color:var(--ink)}
+.type small{font-family:var(--mono);font-size:10px;color:var(--ink2);display:block}
+.spec .txt{font-size:13.5px;line-height:1.55;color:var(--ink2);margin:0}
+
+/* ---------- overlays ---------- */
+.xray{transition:opacity .4s}
+body.boom .xray{opacity:.08;pointer-events:none}
+html[data-dir="4"] .xray{display:none}
+.tag{position:fixed;z-index:15;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:11px;line-height:1.35;padding:7px 10px;border-radius:4px;background:var(--panel);border:1px solid var(--alert);color:var(--ink);max-width:250px;opacity:0;transition:opacity .25s;backdrop-filter:blur(8px)}
+.tag b{color:var(--alert);font-weight:600}
+.tag.ok{border-color:var(--pri)}
+.tag.ok b{color:var(--pri)}
+#lens{position:fixed;z-index:7;left:0;top:0;width:230px;height:230px;margin:-115px 0 0 -115px;pointer-events:none;opacity:0;transition:opacity .3s}
+.ticker{position:fixed;z-index:6;left:0;right:0;bottom:0;height:26px;overflow:hidden;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--pri);white-space:nowrap;display:flex;align-items:center}
+.ticker div{display:inline-block;padding-left:100%;animation:tick 60s linear infinite}
+@keyframes tick{to{transform:translateX(-100%)}}
+.note{position:fixed;z-index:6;right:clamp(14px,2.4vw,30px);top:64px;font-family:var(--mono);font-size:10px;color:var(--ink2);text-align:right;max-width:330px;line-height:1.5;opacity:.85}
+.loading{position:fixed;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--ink2);z-index:30;background:var(--bg);transition:opacity .5s}
+@media (max-width:900px){
+  .hero{width:auto;right:18px;top:96px;transform:none}
+  .xray{display:none}
+  .tabs button{padding:6px 9px;font-size:10.5px}
+  .note{display:none}
+}
+@media (prefers-reduced-motion:reduce){.ticker div{animation:none}}
+</style>
+</head>
+<body>
+<div class="loading" id="loading">Loading 3D design boards…</div>
+<canvas id="stage" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <div class="brand">Veracite<small>Team 7 · 3D design directions</small></div>
+  <nav class="tabs" role="tablist" aria-label="Design direction">
+    <button role="tab" data-go="1" aria-selected="true">1 · Watermark ★</button>
+    <button role="tab" data-go="2" aria-selected="false">2 · Observatory</button>
+    <button role="tab" data-go="3" aria-selected="false">3 · Cabinet</button>
+    <button role="tab" data-go="4" aria-selected="false">4 · Spectrograph</button>
+  </nav>
+  <button class="mode" id="mode" aria-pressed="false"><i></i><span id="modeLabel">Switch on UV lamp</span></button>
+</header>
+
+<p class="note">Design exploration only, not the product. Every reference shown is fictional <b>SAMPLE</b> data.</p>
+
+<!-- ===== Direction 1 ===== -->
+<section class="hero" data-for="1">
+  <p class="eyebrow">Direction 1 · Watermark <b>recommended</b></p>
+  <h1>Every reference, held to the light.</h1>
+  <p>Veracite checks every citation against the world's research registries and shows its receipts. Hover a reference to shine the UV torch, then switch on the UV lamp to see what a counterfeit hides.</p>
+  <div class="ctas"><button class="cta" data-sig>X-ray the counterfeit</button><button class="cta ghost" data-mode-btn>Switch on UV lamp</button></div>
+</section>
+<!-- ===== Direction 2 ===== -->
+<section class="hero" data-for="2" hidden>
+  <p class="eyebrow">Direction 2 · Cyanotype Observatory</p>
+  <h1>Navigate by verified stars.</h1>
+  <p>Every source in Veracite has a catalogue number: its DOI. Move the astrolabe lens across the sky. Ghost stars (AI hallucinations) vanish; real ones show their record.</p>
+  <div class="ctas"><button class="cta" data-sig>Resolve the whole sky</button><button class="cta ghost" data-mode-btn>Night sky</button></div>
+</section>
+<!-- ===== Direction 3 ===== -->
+<section class="hero" data-for="3" hidden>
+  <p class="eyebrow">Direction 3 · Cabinet of Curiosities</p>
+  <h1>Some references are stitched together.</h1>
+  <p>Like the Fiji-mermaid hoax, AI builds fake references from parts of real ones, exactly what SP Jain policy §h(ix) warns about. Veracite takes them apart and shows where every piece came from.</p>
+  <div class="ctas"><button class="cta" data-sig>Take the chimera apart</button><button class="cta ghost" data-mode-btn>After hours</button></div>
+</section>
+<!-- ===== Direction 4 ===== -->
+<section class="hero" data-for="4" hidden>
+  <p class="eyebrow">Direction 4 · Spectrograph</p>
+  <h1>Every claim has a fingerprint.</h1>
+  <p>Pass a claim through Veracite's prism. Each verified source shows up as a spectral line. An invented claim has no signature at all.</p>
+  <div class="claims" role="group" aria-label="Sample claims">
+    <button data-claim="0" aria-pressed="true">“Screen time before bed reduces sleep quality in teens” <small>· SAMPLE</small></button>
+    <button data-claim="1" aria-pressed="false">“73 % of students cite fake papers” <small>· AI-invented SAMPLE</small></button>
+  </div>
+  <div class="ctas"><button class="cta" data-sig>Test the other claim</button><button class="cta ghost" data-mode-btn>Darkroom</button></div>
+</section>
+
+<!-- mini X-ray card (styled per direction) -->
+<aside class="xray" aria-label="Sample X-ray result">
+  <h3>Reference X-ray <span>SAMPLE</span></h3>
+  <div class="row"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="var(--pri)"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="var(--bg)" stroke-width="1.8" fill="none"/></svg><div><b>Verified</b> · Rahman &amp; Okafor (2021)<em>DOI resolves · title ✓ authors ✓ year ✓ · Crossref + OpenAlex</em></div></div>
+  <div class="row"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.3" fill="none" stroke="var(--acc)" stroke-width="1.4"/><path d="M8 1.7a6.3 6.3 0 0 1 0 12.6z" fill="var(--acc)"/></svg><div><b>Reported, not checked</b> · Ortiz (2022)<em>source is real · this detail isn't in the open text</em></div></div>
+  <div class="row"><svg viewBox="0 0 16 16"><path d="M8 1.5L14.5 8 8 14.5 1.5 8z" fill="none" stroke="var(--ink)" stroke-width="1.5"/><path d="M8 5L11 8 8 11 5 8z" fill="var(--ink)"/></svg><div><b>AI reasoning</b> · links two sources<em>the AI's inference, not a source's statement</em></div></div>
+  <div class="row"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.3" fill="none" stroke="var(--alert)" stroke-width="1.5"/><path d="M3.6 12.4l8.8-8.8" stroke="var(--alert)" stroke-width="1.5"/></svg><div><b>Not found / chimera</b> · Rahman &amp; Lee (2020)<em>title from one paper, authors from another, year invented</em></div></div>
+</aside>
+
+<button class="specbtn" id="specbtn" aria-expanded="false" aria-controls="spec">Design spec ▴</button>
+<div class="spec" id="spec" hidden></div>
+
+<div class="tag" id="tag0"></div><div class="tag" id="tag1"></div><div class="tag" id="tag2"></div><div class="tag" id="tag3"></div><div class="tag" id="tag4"></div>
+<svg id="lens" viewBox="0 0 230 230" aria-hidden="true"></svg>
+<div class="ticker" id="ticker" aria-hidden="true"><div>10.5555/sample.2021.0142 ● VERIFIED · 10.5555/sample.2020.9917 ○ VOID: NO REGISTRY RECORD · 10.5555/sample.2019.0031 ● VERIFIED · 10.5555/sample.2022.0774 ◐ REPORTED · 10.5555/sample.2018.4410 ⚠ RETRACTED · 10.5555/sample.2023.1208 ● VERIFIED · 10.5555/sample.2020.9917 ○ VOID · SAMPLE DATA · </div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const html = document.documentElement;
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+
+/* ---------------- renderer ---------------- */
+const canvas = $('#stage');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setClearColor(0x000000, 0);
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envMap = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const ptr = { ndc: new THREE.Vector2(9, 9), x: -999, y: -999, inside: false };
+addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1); ptr.inside = true; });
+document.addEventListener('pointerleave', () => { ptr.inside = false; ptr.ndc.set(9, 9); });
+const raycaster = new THREE.Raycaster();
+
+function canvasTex(w, h, draw) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d'); draw(g, w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy(); return t;
+}
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+function rosette(g, cx, cy, R, r, d, color, alpha, lw = 1) {
+  const loops = r / gcd(R, r), k = (R - r) / r, N = 3000;
+  g.save(); g.strokeStyle = color; g.globalAlpha = alpha; g.lineWidth = lw; g.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const t = i / N * Math.PI * 2 * loops;
+    const x = cx + (R - r) * Math.cos(t) + d * Math.cos(k * t), y = cy + (R - r) * Math.sin(t) - d * Math.sin(k * t);
+    i ? g.lineTo(x, y) : g.moveTo(x, y);
+  }
+  g.stroke(); g.restore();
+}
+function toScreen(v, camera) { const p = v.clone().project(camera); return { x: (p.x * .5 + .5) * innerWidth, y: (-p.y * .5 + .5) * innerHeight, z: p.z }; }
+const tags = [0, 1, 2, 3, 4].map(i => $('#tag' + i));
+function hideTags() { tags.forEach(t => { t.style.opacity = 0; }); }
+function placeTag(i, x, y, htmlStr, ok, show) {
+  const t = tags[i]; if (t.dataset.h !== htmlStr) { t.innerHTML = htmlStr; t.dataset.h = htmlStr; }
+  t.classList.toggle('ok', !!ok); t.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`; t.style.opacity = show ? 1 : 0;
+}
+function disposeScene(scene) {
+  scene.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    const m = o.material; if (!m) return;
+    (Array.isArray(m) ? m : [m]).forEach(mm => { Object.values(mm).forEach(v => { if (v && v.isTexture && v !== envMap) v.dispose(); }); if (mm.uniforms) Object.values(mm.uniforms).forEach(u => { if (u.value && u.value.isTexture) u.value.dispose(); }); mm.dispose(); });
+  });
+}
+
+/* =====================================================================
+   DIRECTION 1 · WATERMARK
+   ===================================================================== */
+const FACE_VS = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+const FACE_FS = `
+uniform sampler2D dayMap; uniform sampler2D uvMap; uniform float uMode; uniform vec2 uPointer; uniform float uHover; uniform float uAspect;
+varying vec2 vUv;
+void main(){
+  vec3 d = texture2D(dayMap, vUv).rgb; vec3 u = texture2D(uvMap, vUv).rgb;
+  vec2 p = vUv - uPointer; p.x *= uAspect; float dist = length(p);
+  float torch = (1.0 - smoothstep(0.17, 0.215, dist)) * uHover;
+  float k = clamp(max(uMode, torch), 0.0, 1.0);
+  vec3 col = mix(d, u, k);
+  float ring = smoothstep(0.205, 0.214, dist) * (1.0 - smoothstep(0.214, 0.226, dist)) * uHover * (1.0 - uMode);
+  col = mix(col, vec3(0.357, 0.294, 0.769), ring);
+  gl_FragColor = vec4(col, 1.0);
+  #include <colorspace_fragment>
+}`;
+const FOIL_FS = `
+uniform float uTime; uniform vec2 uTilt; uniform float uMode; uniform float uOpacity; varying vec2 vUv;
+vec3 pal(float t){ return 0.5 + 0.5 * cos(6.28318 * (t + vec3(0.0, 0.33, 0.67))); }
+void main(){
+  float t = vUv.y * 1.4 + uTilt.x * 1.6 + uTilt.y * 1.1 + uTime * 0.04;
+  vec3 c = mix(vec3(0.84, 0.88, 0.87), pal(t), 0.28);
+  c *= 0.9 + 0.1 * sin(vUv.y * 260.0 + vUv.x * 40.0);
+  float edge = smoothstep(0.0, 0.08, vUv.x) * smoothstep(1.0, 0.92, vUv.x);
+  c = mix(c, c * vec3(0.55, 0.95, 1.25), uMode * 0.6);
+  gl_FragColor = vec4(c, 0.88 * edge * uOpacity);
+  #include <colorspace_fragment>
+}`;
+
+const REFS = {
+  real: { kicker: 'REFERENCE · SAMPLE', title: ['Screen time and sleep quality', 'in adolescents: a cohort study'], authors: 'Rahman, S., & Okafor, T. (2021)', venue: 'Journal of Sample Studies, 12(3), 44–59', doi: 'doi:10.5555/sample.2021.0142', serial: 'VC 2021 0142' },
+  fake: { kicker: 'SAMPLE · WRITTEN BY AN AI CHATBOT', title: ['Digital wellbeing apps raise GPA:', 'a meta-analysis of 48 trials'], authors: 'Rahman, S., & Lee, J. (2020)', venue: 'Journal of Sample Studies, 9(1), 12–30', doi: 'doi:10.5555/sample.2020.9917', serial: 'VC 2020 9917' }
+};
+function drawNoteDay(g, w, h, ref, fake) {
+  g.fillStyle = '#F6F9F5'; g.fillRect(0, 0, w, h);
+  g.save(); g.globalAlpha = .07; g.strokeStyle = '#1F6F68'; g.lineWidth = 1;
+  for (let row = 0; row < 46; row++) { g.beginPath(); for (let x = 0; x <= w; x += 6) { const y = 16 + row * 13.6 + Math.sin(x / 38 + row * .7) * 4; x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); }
+  g.restore();
+  const cx = w * .845, cy = h * .5;
+  rosette(g, cx, cy, 120, 36, 70, '#1F6F68', .45, 1);
+  rosette(g, cx, cy, 120, 45, 52, '#5B4BC4', .35, 1);
+  rosette(g, cx, cy, 96, 32, 40, '#1F6F68', .3, .8);
+  g.strokeStyle = 'rgba(31,111,104,.75)'; g.lineWidth = 2; g.strokeRect(18, 18, w - 36, h - 36);
+  g.lineWidth = .8; g.strokeRect(28, 28, w - 56, h - 56);
+  g.fillStyle = 'rgba(31,111,104,.85)'; g.font = '500 9px "Martian Mono"';
+  const micro = (ref.doi.replace('doi:', '') + ' · VERACITE · ').toUpperCase().repeat(12);
+  g.fillText(micro, 34, 24.5); g.fillText(micro, 34, h - 20);
+  g.fillStyle = fake ? '#C3263B' : '#5B4BC4'; g.font = '500 15px "Martian Mono"'; g.fillText(ref.kicker, 58, 76);
+  g.fillStyle = '#0E2A23'; g.font = '600 34px "Literata"'; g.fillText(ref.title[0], 58, 132); g.fillText(ref.title[1], 58, 176);
+  g.font = 'italic 400 25px "Literata"'; g.fillStyle = '#21423A'; g.fillText(ref.authors, 58, 300);
+  g.font = '500 13px "Martian Mono"'; g.fillStyle = 'rgba(14,42,35,.55)'; g.fillText('AUTHORS · YEAR', 58, 336);
+  g.font = '400 21px "Literata"'; g.fillStyle = '#21423A'; g.fillText(ref.venue, 58, 478);
+  g.font = '500 17px "Martian Mono"'; g.fillStyle = '#1F6F68'; g.fillText(ref.doi, 58, 522);
+  g.font = '600 22px "Martian Mono"'; g.fillStyle = '#C3263B'; g.fillText(ref.serial, w - 250, h - 52);
+}
+function drawNoteUV(g, w, h, ref, fake) {
+  g.fillStyle = '#17123F'; g.fillRect(0, 0, w, h);
+  const cols = ['#4DF2FF', '#FF4FD8', '#E8FF7A'];
+  g.save(); g.lineWidth = 1.3;
+  for (let i = 0; i < (fake ? 70 : 230); i++) {
+    const x = Math.random() * w, y = Math.random() * h, a = Math.random() * 6.28, L = 6 + Math.random() * 16;
+    g.strokeStyle = cols[i % 3]; g.globalAlpha = .55 + Math.random() * .4; g.beginPath(); g.moveTo(x, y);
+    g.quadraticCurveTo(x + Math.cos(a + 1) * L * .6, y + Math.sin(a + 1) * L * .6, x + Math.cos(a) * L, y + Math.sin(a) * L); g.stroke();
+  }
+  g.restore();
+  g.save(); g.shadowColor = '#FF4FD8'; g.shadowBlur = 10; rosette(g, w * .845, h * .5, 120, 36, 70, '#FF4FD8', .35, 1); g.restore();
+  g.save(); g.shadowColor = '#4DF2FF'; g.shadowBlur = 8; g.strokeStyle = '#4DF2FF'; g.lineWidth = 2; g.strokeRect(18, 18, w - 36, h - 36);
+  g.fillStyle = '#4DF2FF'; g.font = '500 9px "Martian Mono"';
+  const micro = (ref.doi.replace('doi:', '') + ' · VERACITE · ').toUpperCase().repeat(12);
+  g.fillText(micro, 34, 24.5); g.fillText(micro, 34, h - 20); g.restore();
+  g.fillStyle = '#B9B3EA'; g.font = '500 15px "Martian Mono"'; g.fillText(ref.kicker, 58, 76);
+  g.font = '600 34px "Literata"'; g.fillText(ref.title[0], 58, 132); g.fillText(ref.title[1], 58, 176);
+  g.font = 'italic 400 25px "Literata"'; g.fillText(ref.authors, 58, 300);
+  g.font = '400 21px "Literata"'; g.fillText(ref.venue, 58, 478);
+  g.font = '500 17px "Martian Mono"'; g.fillText(ref.doi, 58, 522);
+  if (!fake) {
+    g.save(); g.shadowColor = '#4DF2FF'; g.shadowBlur = 16; g.strokeStyle = '#4DF2FF'; g.lineWidth = 3;
+    g.beginPath(); g.arc(w * .845, h * .5, 104, 0, 6.283); g.stroke(); g.lineWidth = 1.2; g.beginPath(); g.arc(w * .845, h * .5, 92, 0, 6.283); g.stroke();
+    g.fillStyle = '#4DF2FF'; g.textAlign = 'center'; g.font = '700 30px "Archivo"'; g.fontStretch = 'expanded';
+    g.fillText('VERIFIED', w * .845, h * .5 + 4); g.font = '500 11px "Martian Mono"'; g.fillText('CROSSREF · OPENALEX', w * .845, h * .5 + 30); g.restore();
+  } else {
+    const pc = document.createElement('canvas'); pc.width = pc.height = 8; const pg = pc.getContext('2d');
+    pg.strokeStyle = '#FF3B5C'; pg.lineWidth = 1.6; pg.beginPath(); pg.moveTo(0, 8); pg.lineTo(8, 0); pg.stroke();
+    g.save(); g.translate(w * .5, h * .52); g.rotate(-.13); g.fillStyle = g.createPattern(pc, 'repeat');
+    g.shadowColor = '#FF3B5C'; g.shadowBlur = 14; g.font = '900 250px "Archivo"'; g.fontStretch = 'expanded'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.globalAlpha = .9; g.fillText('VOID', 0, 0); g.restore();
+    g.save(); g.shadowColor = '#FF3B5C'; g.shadowBlur = 8; g.fillStyle = '#FF6B85'; g.font = '600 15px "Martian Mono"';
+    g.fillText('NO REGISTRY RECORD · NOT FOUND IN CROSSREF, OPENALEX OR ARXIV', 58, h - 60); g.restore();
+  }
+}
+
+function buildWatermark() {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, .1, 100); camera.position.set(0, 0, 9.5);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2)); const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(3, 4, 6); scene.add(dl);
+  const root = new THREE.Group(); scene.add(root);
+  const W = 3.2, H = 2.0;
+  function note(ref, fake) {
+    const mat = new THREE.ShaderMaterial({
+      uniforms: { dayMap: { value: canvasTex(1024, 640, (g, w, h) => drawNoteDay(g, w, h, ref, fake)) }, uvMap: { value: canvasTex(1024, 640, (g, w, h) => drawNoteUV(g, w, h, ref, fake)) },
+        uMode: { value: 0 }, uPointer: { value: new THREE.Vector2(-2, -2) }, uHover: { value: 0 }, uAspect: { value: W / H } },
+      vertexShader: FACE_VS, fragmentShader: FACE_FS
+    });
+    const grp = new THREE.Group(); const slices = [];
+    for (let i = 0; i < 3; i++) {
+      const geo = new THREE.PlaneGeometry(W, H / 3); const uv = geo.attributes.uv;
+      for (let j = 0; j < uv.count; j++) uv.setY(j, (i + uv.getY(j)) / 3);
+      const m = new THREE.Mesh(geo, mat); m.position.y = (i - 1) * H / 3; m.userData = { home: m.position.clone(), owner: null }; grp.add(m); slices.push(m);
+    }
+    const back = new THREE.Mesh(new THREE.BoxGeometry(W, H, .035), new THREE.MeshStandardMaterial({ color: '#d9e2dc', roughness: .9, transparent: true }));
+    back.position.z = -.02; grp.add(back);
+    const foilMat = new THREE.ShaderMaterial({ uniforms: { uTime: { value: 0 }, uTilt: { value: new THREE.Vector2() }, uMode: { value: 0 }, uOpacity: { value: 1 } }, vertexShader: FACE_VS, fragmentShader: FOIL_FS, transparent: true, depthWrite: false });
+    const foil = new THREE.Mesh(new THREE.PlaneGeometry(.3, H * .94), foilMat); foil.position.set(W * (.69 - .5), 0, .004); grp.add(foil);
+    const n = { grp, slices, mat, back, foil, foilMat, fake, hover: 0, hoverT: 0 };
+    slices.forEach(s => s.userData.owner = n);
+    return n;
+  }
+  const real = note(REFS.real, false), fake = note(REFS.fake, true);
+  root.add(real.grp, fake.grp);
+  const layout = { realPos: new THREE.Vector3(1.05, .78, -.7), realRot: new THREE.Euler(.05, -.24, .06), fakePos: new THREE.Vector3(-.35, -.72, .35), fakeRot: new THREE.Euler(-.04, -.16, -.05) };
+  real.grp.position.copy(layout.realPos); real.grp.rotation.copy(layout.realRot);
+  fake.grp.position.copy(layout.fakePos); fake.grp.rotation.copy(layout.fakeRot);
+  let modeK = 0, modeT = 0, boomK = 0, boomT = 0;
+  const offsets = [new THREE.Vector3(-.25, -.45, .6), new THREE.Vector3(.45, .35, .75), new THREE.Vector3(.15, 1.15, .55)];
+  const notes = [real, fake];
+  const ticker = $('#ticker');
+  const labels = ['<b>Year + DOI · invented.</b><br>No record in Crossref, OpenAlex or arXiv.', '<b>Authors · real people, different paper.</b><br>Rahman &amp; Lee never co-wrote this (sample).', '<b>Title · copied</b> from a real 2019 paper by other authors (sample).'];
+  return {
+    scene, camera, hasTicker: true,
+    resize(a) { const wide = a > 1.2; root.position.set(wide ? 1.75 : 0, wide ? .45 : -2.1, 0); root.scale.setScalar(wide ? Math.min(.98, a / 1.7) : .62); },
+    setMode(m) { modeT = m === 'night' ? 1 : 0; },
+    signature() { boomT = boomT ? 0 : 1; },
+    click() { raycaster.setFromCamera(ptr.ndc, camera); const hit = raycaster.intersectObjects([...real.slices, ...fake.slices])[0]; if (hit && hit.object.userData.owner === fake) this.signature(); },
+    update(t, dt) {
+      const k = 1 - Math.pow(.001, dt);
+      modeK = lerp(modeK, modeT, k * .9); boomK = lerp(boomK, boomT, k * .7);
+      root.rotation.y = lerp(root.rotation.y, ptr.inside ? ptr.ndc.x * .12 : 0, k * .5);
+      root.rotation.x = lerp(root.rotation.x, ptr.inside ? -ptr.ndc.y * .07 : 0, k * .5);
+      raycaster.setFromCamera(ptr.ndc, camera);
+      const hit = raycaster.intersectObjects([...real.slices, ...fake.slices])[0];
+      notes.forEach((n, i) => {
+        n.hoverT = hit && hit.object.userData.owner === n ? 1 : 0;
+        if (hit && n.hoverT) n.mat.uniforms.uPointer.value.copy(hit.uv);
+        n.hover = lerp(n.hover, n.hoverT, k);
+        n.mat.uniforms.uHover.value = n.hover; n.mat.uniforms.uMode.value = modeK;
+        n.foilMat.uniforms.uMode.value = modeK; n.foilMat.uniforms.uTime.value = t;
+        n.foilMat.uniforms.uTilt.value.set(root.rotation.y + n.grp.rotation.y, root.rotation.x + n.grp.rotation.x);
+        n.back.material.color.set(modeK > .5 ? '#1b1745' : '#d9e2dc');
+        if (!REDUCED) n.grp.position.y = (i ? layout.fakePos.y : layout.realPos.y) + Math.sin(t * .8 + i * 2) * .05;
+      });
+      const e = ease(boomK);
+      fake.slices.forEach((s, i) => { s.position.copy(s.userData.home).addScaledVector(offsets[i], e); s.rotation.z = (i - 1) * -.06 * e; });
+      fake.back.material.opacity = 1 - e; fake.foilMat.uniforms.uOpacity.value = 1 - e; fake.back.visible = e < .98;
+      real.grp.position.x = layout.realPos.x + e * .9; real.grp.position.z = layout.realPos.z - e * 1.4;
+      fake.slices.forEach((s, i) => {
+        const p = s.localToWorld(new THREE.Vector3(W / 2 + .05, .1, 0)); const sp = toScreen(p, camera);
+        placeTag(i, Math.min(sp.x + 8, innerWidth - 262), sp.y - 18, labels[i], false, boomK > .65);
+      });
+      ticker.style.color = modeK > .5 ? '#4DF2FF' : '';
+      document.body.classList.toggle('boom', boomK > .3);
+    },
+    dispose() { disposeScene(scene); }
+  };
+}
+
+/* =====================================================================
+   DIRECTION 2 · CYANOTYPE OBSERVATORY
+   ===================================================================== */
+const STAR_VS = `attribute float aSize; attribute float aPhase; attribute float aAlpha; uniform float uTime; uniform float uPR; uniform float uFlicker; varying float vA;
+void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); gl_Position = projectionMatrix * mv;
+  float tw = 0.72 + 0.28 * sin(uTime * 1.4 + aPhase); float fl = mix(1.0, 0.35 + 0.65 * step(0.0, sin(uTime * 9.0 + aPhase * 3.0)), uFlicker);
+  vA = aAlpha * tw * fl; gl_PointSize = aSize * uPR; }`;
+const STAR_FS = `uniform vec3 uColor; varying float vA; void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.12, d) * vA; if (a < 0.01) discard; gl_FragColor = vec4(uColor, a);
+  #include <colorspace_fragment>
+}`;
+function starPoints(positions, sizes, flicker) {
+  const n = positions.length / 3, geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
+  geo.setAttribute('aPhase', new THREE.BufferAttribute(Float32Array.from({ length: n }, () => Math.random() * 6.28), 1));
+  geo.setAttribute('aAlpha', new THREE.BufferAttribute(new Float32Array(n).fill(1), 1));
+  const mat = new THREE.ShaderMaterial({ uniforms: { uColor: { value: new THREE.Color() }, uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() }, uFlicker: { value: flicker ? 1 : 0 } }, vertexShader: STAR_VS, fragmentShader: STAR_FS, transparent: true, depthWrite: false });
+  return new THREE.Points(geo, mat);
+}
+const sph = (az, el, r) => new THREE.Vector3(r * Math.cos(el) * Math.sin(az), r * Math.sin(el), -r * Math.cos(el) * Math.cos(az));
+const rnd = (a, b) => a + Math.random() * (b - a);
+
+function buildObservatory() {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(58, 1, .1, 300);
+  const sky = new THREE.Group(); scene.add(sky);
+  const N = 2600, P = new Float32Array(N * 3), S = new Float32Array(N);
+  for (let i = 0; i < N; i++) { const u = Math.random() * 2 - 1, th = Math.random() * 6.283, s = Math.sqrt(1 - u * u); P.set([60 * s * Math.cos(th), 60 * u, 60 * s * Math.sin(th)], i * 3); S[i] = Math.pow(Math.random(), 3) * 3.4 + 1; }
+  const stars = starPoints(P, S, false); sky.add(stars);
+  const gpts = [];
+  for (let lon = 0; lon < 360; lon += 30) for (let lat = -80; lat < 80; lat += 4) { gpts.push(sph(lon * Math.PI / 180, lat * Math.PI / 180, 58), sph(lon * Math.PI / 180, (lat + 4) * Math.PI / 180, 58)); }
+  for (let lat = -60; lat <= 60; lat += 20) for (let lon = 0; lon < 360; lon += 4) { gpts.push(sph(lon * Math.PI / 180, lat * Math.PI / 180, 58), sph((lon + 4) * Math.PI / 180, lat * Math.PI / 180, 58)); }
+  const grat = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(gpts), new THREE.LineBasicMaterial({ transparent: true, opacity: .16, depthWrite: false }));
+  sky.add(grat);
+  const papers = [
+    ['10.5555/sample.2021.0142', 'Rahman & Okafor 2021'], ['10.5555/sample.2019.0031', 'Chen et al. 2019'], ['10.5555/sample.2022.0774', 'Ortiz 2022'],
+    ['10.5555/sample.2020.1188', 'Haddad & Iyer 2020'], ['10.5555/sample.2018.0456', 'Nakamura 2018'], ['10.5555/sample.2023.1208', 'Mensah et al. 2023'],
+    ['10.5555/sample.2017.0090', 'Varga 2017'], ['10.5555/sample.2024.0311', 'Al Suwaidi 2024']
+  ];
+  const catPos = [], catSize = [], catInfo = [], linePts = [];
+  const clusters = [[-.62, .24], [-.18, .36], [.3, .2], [.6, -.08], [-.38, -.22], [.08, -.3], [.44, -.38]];
+  let pi = 0;
+  clusters.forEach(([az, el]) => {
+    const n = 4 + Math.floor(Math.random() * 3), pts = [];
+    for (let i = 0; i < n; i++) { const v = sph(az + rnd(-.11, .11), el + rnd(-.09, .09), 56); pts.push(v); catPos.push(v.x, v.y, v.z); catSize.push(rnd(5, 8.5)); catInfo.push({ v, paper: papers[pi++ % papers.length] }); }
+    for (let i = 1; i < n; i++) linePts.push(pts[i - 1], pts[i]);
+    if (n > 4) linePts.push(pts[1], pts[n - 1]);
+  });
+  const cats = starPoints(new Float32Array(catPos), new Float32Array(catSize), false); sky.add(cats);
+  const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(linePts), new THREE.LineBasicMaterial({ transparent: true, opacity: .55, depthWrite: false })); sky.add(lines);
+  const G = 70, GP = new Float32Array(G * 3), GS = new Float32Array(G), ghostV = [];
+  for (let i = 0; i < G; i++) { const v = sph(rnd(-1.1, 1.1), rnd(-.55, .55), 55); ghostV.push(v); GP.set([v.x, v.y, v.z], i * 3); GS[i] = rnd(4, 7); }
+  const ghosts = starPoints(GP, GS, true); sky.add(ghosts);
+  const gAlpha = ghosts.geometry.attributes.aAlpha;
+  const lens = $('#lens');
+  let ticks = ''; for (let i = 0; i < 72; i++) { const a = i / 72 * 6.283, r1 = 104, r2 = i % 6 ? 98 : 90; ticks += `<line x1="${115 + r1 * Math.cos(a)}" y1="${115 + r1 * Math.sin(a)}" x2="${115 + r2 * Math.cos(a)}" y2="${115 + r2 * Math.sin(a)}"/>`; }
+  lens.innerHTML = `<g id="lensg" fill="none" stroke="currentColor"><circle cx="115" cy="115" r="108" stroke-width="2.5"/><circle cx="115" cy="115" r="86" stroke-width=".8" stroke-dasharray="2 5"/><g stroke-width="1">${ticks}</g><line x1="115" y1="7" x2="115" y2="30" stroke-width="2"/></g>`;
+  const lensg = $('#lensg');
+  let modeK = 0, modeT = 0, resolveUntil = 0, yaw = 0, pitch = 0;
+  const C = { day: { star: new THREE.Color('#12357A'), grat: new THREE.Color('#12357A'), line: new THREE.Color('#5C7DB8'), cat: new THREE.Color('#0B2763'), ghost: new THREE.Color('#E0445E'), lens: '#A9814A' },
+    night: { star: new THREE.Color('#F2EBD9'), grat: new THREE.Color('#C9A15E'), line: new THREE.Color('#C9A15E'), cat: new THREE.Color('#FFF6DF'), ghost: new THREE.Color('#FF5A73'), lens: '#C9A15E' } };
+  const tmp = new THREE.Color();
+  const mix = (a, b, k) => tmp.copy(a).lerp(b, k);
+  return {
+    scene, camera,
+    resize() {},
+    setMode(m) { modeT = m === 'night' ? 1 : 0; },
+    signature() { resolveUntil = performance.now() + 3200; },
+    click() {},
+    update(t, dt) {
+      const k = 1 - Math.pow(.001, dt); modeK = lerp(modeK, modeT, k * .8);
+      [stars, cats, ghosts].forEach(p => p.material.uniforms.uTime.value = t);
+      stars.material.uniforms.uColor.value.copy(mix(C.day.star, C.night.star, modeK));
+      cats.material.uniforms.uColor.value.copy(mix(C.day.cat, C.night.cat, modeK));
+      ghosts.material.uniforms.uColor.value.copy(mix(C.day.ghost, C.night.ghost, modeK));
+      grat.material.color.copy(mix(C.day.grat, C.night.grat, modeK)); grat.material.opacity = lerp(.15, .1, modeK);
+      lines.material.color.copy(mix(C.day.line, C.night.line, modeK));
+      if (!REDUCED) sky.rotation.y = t * .006;
+      yaw = lerp(yaw, ptr.inside ? -ptr.ndc.x * .07 : 0, k * .4); pitch = lerp(pitch, ptr.inside ? ptr.ndc.y * .045 : 0, k * .4);
+      camera.rotation.set(pitch, yaw, 0);
+      camera.updateMatrixWorld(); sky.updateMatrixWorld();
+      const R = 104, resolving = performance.now() < resolveUntil;
+      lens.style.opacity = ptr.inside ? 1 : 0; lens.style.color = modeK > .5 ? C.night.lens : C.day.lens;
+      lens.style.transform = `translate(${ptr.x}px, ${ptr.y}px)`; lensg.setAttribute('transform', `rotate(${(t * 6) % 360} 115 115)`);
+      for (let i = 0; i < G; i++) {
+        const sp = toScreen(sky.localToWorld(ghostV[i].clone()), camera);
+        const inLens = ptr.inside && Math.hypot(sp.x - ptr.x, sp.y - ptr.y) < R;
+        gAlpha.array[i] = lerp(gAlpha.array[i], (inLens || resolving) ? 0 : 1, k * .9);
+      }
+      gAlpha.needsUpdate = true;
+      const shown = [];
+      for (const c of catInfo) {
+        if (shown.length >= 2) break;
+        const sp = toScreen(sky.localToWorld(c.v.clone()), camera);
+        if (sp.z < 1 && ptr.inside && Math.hypot(sp.x - ptr.x, sp.y - ptr.y) < R * .8) shown.push({ sp, c });
+      }
+      for (let i = 0; i < 2; i++) {
+        const s = shown[i];
+        if (s) placeTag(i, Math.min(s.sp.x + 14, innerWidth - 262), s.sp.y - 10, `<b>● Verified · ${s.c.paper[1]}</b><br>${s.c.paper[0]} · SAMPLE`, true, true);
+        else placeTag(i, -999, -999, tags[i].dataset.h || '', true, false);
+      }
+    },
+    dispose() { lens.style.opacity = 0; lens.innerHTML = ''; disposeScene(scene); }
+  };
+}
+
+/* =====================================================================
+   DIRECTION 3 · CABINET OF CURIOSITIES
+   ===================================================================== */
+const SPECIMENS = [
+  ['Sleep and screen time in adolescents', 'Rahman, S. & Okafor, T.', 2021], ['Mindfulness apps and exam stress', 'Chen, L. et al.', 2019], ['Remote learning and attention spans', 'Ortiz, M.', 2022], ['Peer tutoring outcomes in business schools', 'Haddad, R. & Iyer, P.', 2020],
+  ['Gamified quizzes and retention', 'Nakamura, K.', 2018], ['Wellbeing apps raise GPA: a meta-analysis', 'Rahman, S. & Lee, J.', 2020], ['Caffeine, sleep debt and grades', 'Mensah, A. et al.', 2023], ['Feedback timing in online courses', 'Varga, E.', 2017],
+  ['Group work and free-riding', 'Al Suwaidi, N.', 2024], ['Digital wellbeing interventions: a review', 'Lee, J. & Park, H.', 2022], ['Note-taking by hand vs laptop', 'Okafor, T.', 2019], ['Library use and research skills', 'Iyer, P. & Chen, L.', 2021]
+];
+const CHIMERA = 5;
+function drawSpecimen(g, w, h, s, idx) {
+  const chim = idx === CHIMERA;
+  g.fillStyle = '#F7F7F4'; g.fillRect(0, 0, w, h);
+  g.strokeStyle = 'rgba(27,29,31,.55)'; g.lineWidth = 2; g.strokeRect(10, 10, w - 20, h - 20); g.lineWidth = .8; g.strokeRect(16, 16, w - 32, h - 32);
+  g.fillStyle = '#4B5054'; g.font = '700 14px "Courier Prime"'; g.fillText('VERACITE COLLECTION · SAMPLE', 30, 44); g.textAlign = 'right'; g.fillText('No. ' + String(idx * 7 + 3).padStart(3, '0'), w - 30, 44); g.textAlign = 'left';
+  g.fillStyle = '#1B1D1F'; g.font = '30px "Gloock"';
+  const words = s[0].split(' '); let line = '', y = 96;
+  for (const wd of words) { const tst = line ? line + ' ' + wd : wd; if (g.measureText(tst).width > w - 70) { g.fillText(line, 30, y); y += 36; line = wd; } else line = tst; }
+  g.fillText(line, 30, y);
+  g.font = '400 20px "Courier Prime"'; g.fillStyle = '#2C3034'; g.fillText(s[1], 30, 214); g.fillText(`(${s[2]})  J. Sample Studies`, 30, 244);
+  g.font = '400 15px "Courier Prime"'; g.fillStyle = '#4B5054'; g.fillText(`doi 10.5555/sample.${s[2]}.${String(idx * 131 % 9000).padStart(4, '0')}`, 30, 296);
+  g.save(); g.translate(w - 120, h - 62); g.rotate(-.12);
+  g.strokeStyle = chim ? '#B5317A' : '#24477A'; g.fillStyle = g.strokeStyle; g.lineWidth = 3; g.strokeRect(-92, -26, 184, 52); g.lineWidth = 1; g.strokeRect(-86, -20, 172, 40);
+  g.font = '700 19px "Courier Prime"'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(chim ? '⚠ CHIMERA?' : '● VERIFIED', 0, 1); g.restore();
+  if (chim) { g.save(); g.strokeStyle = 'rgba(181,49,122,.7)'; g.setLineDash([6, 5]); g.lineWidth = 1.5; [h / 3, 2 * h / 3].forEach(yy => { g.beginPath(); g.moveTo(14, yy); g.lineTo(w - 14, yy); g.stroke(); }); g.restore(); }
+}
+function buildCabinet() {
+  const scene = new THREE.Scene(); scene.environment = envMap;
+  const camera = new THREE.PerspectiveCamera(32, 1, .1, 100); camera.position.set(0, 9.2, 7.4); camera.lookAt(0, 0, .35);
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x8d928d, 1.1); scene.add(hemi);
+  const sun = new THREE.DirectionalLight(0xffffff, 1.8); sun.position.set(3.5, 9, 4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 5, bottom: -5, near: 1, far: 25 }); sun.shadow.bias = -.0004; scene.add(sun);
+  const spot = new THREE.SpotLight(0xffe0b0, 0, 18, .34, .55, 1.1); spot.position.set(0, 6.5, 1.5); spot.castShadow = true; spot.shadow.mapSize.set(1024, 1024); scene.add(spot, spot.target);
+  const root = new THREE.Group(); scene.add(root);
+  const felt = new THREE.MeshStandardMaterial({ color: '#D6DAD5', roughness: 1 });
+  const steel = new THREE.MeshStandardMaterial({ color: '#B9BFBA', roughness: .42, metalness: .55, envMapIntensity: .8 });
+  const base = new THREE.Mesh(new THREE.BoxGeometry(8.6, .1, 5.6), felt); base.position.y = -.05; base.receiveShadow = true; root.add(base);
+  [[0, .28, -2.85, 8.9, .62, .2], [0, .28, 2.85, 8.9, .62, .2], [-4.4, .28, 0, .2, .62, 5.9], [4.4, .28, 0, .2, .62, 5.9]].forEach(([x, y, z, a, b, c]) => { const m = new THREE.Mesh(new THREE.BoxGeometry(a, b, c), steel); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; root.add(m); });
+  for (let i = 1; i < 4; i++) { const m = new THREE.Mesh(new THREE.BoxGeometry(.05, .16, 5.5), steel); m.position.set(-4.3 + i * 2.15, .08, 0); m.receiveShadow = true; root.add(m); }
+  for (let j = 1; j < 3; j++) { const m = new THREE.Mesh(new THREE.BoxGeometry(8.6, .16, .05), steel); m.position.set(0, .08, -2.8 + j * 1.87); m.receiveShadow = true; root.add(m); }
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(8.6, 5.6), new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: .03, metalness: 0, transparent: true, opacity: .1, clearcoat: 1, envMapIntensity: 1.4, depthWrite: false }));
+  glass.rotation.x = -Math.PI / 2; glass.position.y = .62; root.add(glass);
+  const CW = 1.66, CH = 1.12, cards = [], pickables = [];
+  const pinMat = new THREE.MeshStandardMaterial({ color: '#A8864F', metalness: .8, roughness: .3 });
+  SPECIMENS.forEach((s, idx) => {
+    const col = idx % 4, row = Math.floor(idx / 4);
+    const center = new THREE.Vector3(-3.225 + col * 2.15, .03, -1.87 + row * 1.87);
+    const tex = canvasTex(512, 346, (g, w, h) => drawSpecimen(g, w, h, s, idx));
+    const mat = new THREE.MeshStandardMaterial({ map: tex, roughness: .85 });
+    const card = { idx, center, lift: 0, liftT: 0, meshes: [], pin: null };
+    const nSl = idx === CHIMERA ? 3 : 1;
+    for (let i = 0; i < nSl; i++) {
+      const geo = new THREE.PlaneGeometry(CW, CH / nSl); const uv = geo.attributes.uv;
+      for (let j = 0; j < uv.count; j++) uv.setY(j, (i + uv.getY(j)) / nSl);
+      const m = new THREE.Mesh(geo, mat); m.rotation.x = -Math.PI / 2; m.castShadow = m.receiveShadow = true;
+      const home = center.clone().add(new THREE.Vector3(0, 0, -((i - (nSl - 1) / 2) * CH / nSl)));
+      m.position.copy(home); m.userData = { home, card }; root.add(m); card.meshes.push(m); pickables.push(m);
+    }
+    const pin = new THREE.Group(); const head = new THREE.Mesh(new THREE.SphereGeometry(.07, 16, 12), pinMat); head.position.y = .2; head.castShadow = true;
+    const needle = new THREE.Mesh(new THREE.CylinderGeometry(.008, .008, .2, 6), pinMat); needle.position.y = .1; pin.add(head, needle);
+    pin.position.copy(center).add(new THREE.Vector3(0, 0, -CH * .36)); root.add(pin); card.pin = pin; cards.push(card);
+  });
+  const chim = cards[CHIMERA];
+  const targets = [
+    { from: 2, to: cards[9], label: '<b>Title</b> · lifted from No. 066 (a real review, other authors)' },
+    { from: 1, to: cards[0], label: '<b>Authors</b> · "Rahman, S." is real, but wrote No. 003, not this' },
+    { from: 0, to: null, label: '<b>Year + DOI</b> · invented. No registry record' }
+  ];
+  const dashMat = new THREE.LineDashedMaterial({ color: '#B5317A', dashSize: .12, gapSize: .08, transparent: true, opacity: 0 });
+  const threads = targets.map(() => { const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]), dashMat); root.add(l); return l; });
+  let modeK = 0, modeT = 0, boomK = 0, boomT = 0;
+  const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hitP = new THREE.Vector3();
+  return {
+    scene, camera,
+    resize(a) { root.scale.setScalar(a > 1.2 ? Math.min(.74, a * .46) : .6); root.position.set(a > 1.2 ? 2.35 : 0, 0, a > 1.2 ? .25 : 1.6); },
+    setMode(m) { modeT = m === 'night' ? 1 : 0; },
+    signature() { boomT = boomT ? 0 : 1; },
+    click() { raycaster.setFromCamera(ptr.ndc, camera); const hit = raycaster.intersectObjects(pickables)[0]; if (hit && hit.object.userData.card === chim) this.signature(); },
+    update(t, dt) {
+      const k = 1 - Math.pow(.001, dt); modeK = lerp(modeK, modeT, k * .8); boomK = lerp(boomK, boomT, k * .6);
+      hemi.intensity = lerp(1.1, .05, modeK); sun.intensity = lerp(1.8, 0, modeK); spot.intensity = lerp(0, 55, modeK);
+      felt.color.set(modeK > .5 ? '#22262A' : '#D6DAD5'); steel.color.set(modeK > .5 ? '#3A3F43' : '#B9BFBA');
+      raycaster.setFromCamera(ptr.ndc, camera);
+      if (raycaster.ray.intersectPlane(plane, hitP)) { spot.target.position.lerp(hitP, k); spot.position.set(spot.target.position.x * .4, 6.5, spot.target.position.z * .4 + 1.5); }
+      const hit = raycaster.intersectObjects(pickables)[0];
+      cards.forEach(c => {
+        c.liftT = hit && hit.object.userData.card === c ? 1 : 0; c.lift = lerp(c.lift, c.liftT, k);
+        if (c === chim && boomK > .02) return;
+        c.meshes.forEach(m => { m.position.y = m.userData.home.y + c.lift * .32; m.rotation.z = c.lift * .05; });
+        c.pin.position.y = c.lift * .32;
+      });
+      const e = ease(boomK);
+      targets.forEach((tg, i) => {
+        const m = chim.meshes[tg.from], home = m.userData.home;
+        const dest = tg.to ? tg.to.center.clone().add(new THREE.Vector3(0, 1.05 + i * .1, 0)) : home.clone().add(new THREE.Vector3(.4, 2.2, -.6));
+        m.position.lerpVectors(home, dest, e); m.position.y += Math.sin(Math.PI * e) * .8 + chim.lift * .32 * (1 - e);
+        m.rotation.z = e * (i - 1) * .12;
+        m.material.transparent = true; m.material.opacity = 1;
+        const tl = threads[i];
+        if (tg.to) { tl.geometry.setFromPoints([m.position.clone(), tg.to.center.clone().add(new THREE.Vector3(0, .05, 0))]); tl.computeLineDistances(); }
+        tl.visible = !!tg.to && e > .05;
+        const sp = toScreen(root.localToWorld(m.position.clone()), camera);
+        placeTag(i, Math.min(sp.x + 40, innerWidth - 262), sp.y - 46, tg.label, false, boomK > .6);
+      });
+      chim.pin.position.y = chim.lift * .32 + e * -.4; chim.pin.visible = e < .9;
+      dashMat.opacity = e;
+    },
+    dispose() { renderer.shadowMap.enabled = false; disposeScene(scene); }
+  };
+}
+
+/* =====================================================================
+   DIRECTION 4 · SPECTROGRAPH
+   ===================================================================== */
+const SPECTRUM = ['#7B3FE4', '#3F5BFF', '#2FB4FF', '#35D07F', '#E8E03A', '#FF9A2E', '#FF3B3B'];
+const CLAIM_LINES = [
+  [[.12, 'verified', 'Rahman & Okafor 2021 · cohort'], [.3, 'verified', 'Chen et al. 2019 · RCT'], [.47, 'reported', 'Ortiz 2022 · reported, not checked'], [.66, 'verified', 'Haddad & Iyer 2020 · meta-analysis'], [.84, 'verified', 'Mensah et al. 2023 · survey']],
+  []
+];
+function drawStrip(g, w, h, lines) {
+  const gr = g.createLinearGradient(0, 0, 0, h); SPECTRUM.forEach((c, i) => gr.addColorStop(i / (SPECTRUM.length - 1), c));
+  g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  if (!lines.length) { g.fillStyle = 'rgba(10,10,14,.35)'; g.fillRect(0, 0, w, h); for (let y = 0; y < h; y += 10) { g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(0, y, w, 1); } return; }
+  lines.forEach(([p, kind]) => {
+    const y = p * h; g.fillStyle = '#05060A';
+    if (kind === 'verified') g.fillRect(0, y - 7, w, 14);
+    else { for (let x = 0; x < w; x += 12) g.fillRect(x, y - 5, 7, 10); }
+  });
+}
+function quad(a, b, width, mat) { const len = a.distanceTo(b); const m = new THREE.Mesh(new THREE.PlaneGeometry(len, width), mat); m.position.copy(a).add(b).multiplyScalar(.5); m.rotation.z = Math.atan2(b.y - a.y, b.x - a.x); return m; }
+function buildSpectrograph() {
+  const scene = new THREE.Scene(); scene.environment = envMap;
+  const camera = new THREE.PerspectiveCamera(32, 1, .1, 100); camera.position.set(0, .7, 11.5); camera.lookAt(.4, -.15, 0);
+  scene.add(new THREE.AmbientLight(0xffffff, .6)); const key = new THREE.DirectionalLight(0xffffff, 2); key.position.set(-3, 5, 6); scene.add(key);
+  const root = new THREE.Group(); scene.add(root);
+  const benchMat = new THREE.MeshStandardMaterial({ color: '#D9DCE1', roughness: .75, metalness: .1 });
+  const bench = new THREE.Mesh(new THREE.BoxGeometry(13, .18, 2.6), benchMat); bench.position.y = -1.62; root.add(bench);
+  [-.9, .9].forEach(z => { const r = new THREE.Mesh(new THREE.BoxGeometry(13, .06, .12), new THREE.MeshStandardMaterial({ color: '#8A9099', metalness: .7, roughness: .35 })); r.position.set(0, -1.5, z); root.add(r); });
+  const prismGeo = new THREE.CylinderGeometry(1.05, 1.05, 1.7, 3, 1); prismGeo.rotateX(Math.PI / 2); prismGeo.rotateZ(Math.PI / 2);
+  const prism = new THREE.Mesh(prismGeo, new THREE.MeshPhysicalMaterial({ color: '#ffffff', metalness: 0, roughness: .02, transmission: 1, thickness: 1.4, ior: 1.52, dispersion: 4, envMapIntensity: 1.2, specularIntensity: 1, attenuationColor: new THREE.Color('#e9f0ff'), attenuationDistance: 6 }));
+  prism.position.set(0, -.25, 0); root.add(prism);
+  const edgeMat = new THREE.LineBasicMaterial({ color: '#3A4048', transparent: true, opacity: .75 });
+  prism.add(new THREE.LineSegments(new THREE.EdgesGeometry(prismGeo), edgeMat));
+  const stand = new THREE.Mesh(new THREE.CylinderGeometry(.16, .22, .8, 24), new THREE.MeshStandardMaterial({ color: '#5A616B', metalness: .7, roughness: .35 })); stand.position.set(0, -1.15, 0); root.add(stand);
+  const beamMat = new THREE.MeshBasicMaterial({ color: '#5E7BFF', transparent: true, opacity: .85, depthWrite: false });
+  root.add(quad(new THREE.Vector3(-6.4, .05, 0), new THREE.Vector3(-.55, -.2, 0), .06, beamMat));
+  const src = new THREE.Mesh(new THREE.CircleGeometry(.12, 32), beamMat); src.position.set(-6.4, .05, .01); root.add(src);
+  const rayMats = SPECTRUM.map(c => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: .5, depthWrite: false }));
+  const exitP = new THREE.Vector3(.5, -.3, 0);
+  SPECTRUM.forEach((c, i) => root.add(quad(exitP, new THREE.Vector3(4.45, 1.05 - i * (2.2 / 6), 0), .035, rayMats[i])));
+  let claim = 0;
+  const stripCanvasTex = () => canvasTex(128, 1024, (g, w, h) => drawStrip(g, w, h, CLAIM_LINES[claim]));
+  const stripMat = new THREE.MeshBasicMaterial({ map: stripCanvasTex() });
+  const strip = new THREE.Mesh(new THREE.PlaneGeometry(.5, 2.5), stripMat); strip.position.set(4.75, -.05, 0); root.add(strip);
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(.7, 2.75, .08), new THREE.MeshStandardMaterial({ color: '#2B3036', metalness: .6, roughness: .4 })); frame.position.set(4.75, -.05, -.06); root.add(frame);
+  let modeK = 0, modeT = 0, pulse = 0;
+  function setClaim(c) {
+    claim = c; stripMat.map.dispose(); stripMat.map = stripCanvasTex(); stripMat.needsUpdate = true; pulse = 1;
+    $$('[data-claim]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.claim === c)));
+  }
+  $$('[data-claim]').forEach(b => b.onclick = () => setClaim(+b.dataset.claim));
+  return {
+    scene, camera,
+    resize(a) { root.scale.setScalar(a > 1.2 ? .66 : .5); root.position.set(a > 1.2 ? -.15 : -.9, a > 1.2 ? .05 : -1.4, 0); },
+    setMode(m) { modeT = m === 'night' ? 1 : 0; },
+    signature() { setClaim(claim ? 0 : 1); },
+    click() {},
+    update(t, dt) {
+      const k = 1 - Math.pow(.001, dt); modeK = lerp(modeK, modeT, k * .8); pulse = lerp(pulse, 0, k * .5);
+      benchMat.color.set(modeK > .5 ? '#16181D' : '#D9DCE1');
+      edgeMat.color.set(modeK > .5 ? '#C9D2DE' : '#3A4048'); prism.material.envMapIntensity = lerp(.55, 1.3, modeK);
+      beamMat.color.set(modeK > .5 ? '#FFFFFF' : '#5E7BFF'); beamMat.opacity = .75 + pulse * .25;
+      rayMats.forEach(m => { m.opacity = lerp(.45, .7, modeK) * (claim ? .55 : 1) + pulse * .3; m.blending = modeK > .5 ? THREE.AdditiveBlending : THREE.NormalBlending; });
+      if (!REDUCED) prism.rotation.y = Math.sin(t * .4) * .18;
+      camera.position.x = lerp(camera.position.x, ptr.inside ? ptr.ndc.x * .5 : 0, k * .3); camera.lookAt(.4, -.15, 0);
+      const lines = CLAIM_LINES[claim];
+      for (let i = 0; i < 5; i++) {
+        const L = lines[i];
+        if (L) {
+          const wp = root.localToWorld(new THREE.Vector3(5.05, -.05 + 1.25 - L[0] * 2.5, 0)); const sp = toScreen(wp, camera);
+          const icon = L[1] === 'verified' ? '●' : '◐';
+          placeTag(i, Math.min(sp.x + 10, innerWidth - 262), sp.y - 14, `<b>${icon} ${L[1] === 'verified' ? 'Verified' : 'Reported'}</b> · ${L[2]} · SAMPLE`, true, true);
+        } else if (i === 0 && !lines.length) {
+          const sp = toScreen(root.localToWorld(new THREE.Vector3(5.05, .4, 0)), camera);
+          placeTag(0, Math.min(sp.x + 10, innerWidth - 262), sp.y, '<b>○ No spectral signature</b><br>No source supports this claim. Veracite says <b>Not found</b> instead of inventing one.', false, true);
+        } else placeTag(i, -999, -999, tags[i].dataset.h || '', true, false);
+      }
+    },
+    dispose() { $$('[data-claim]').forEach(b => b.onclick = null); disposeScene(scene); }
+  };
+}
+
+/* =====================================================================
+   SPEC DATA + APP SHELL
+   ===================================================================== */
+const SPECS = {
+  1: { mode: ['Switch on UV lamp', 'Back to daylight'],
+    day: [['Security paper', '#EDF1EE'], ['Intaglio ink', '#0E2A23'], ['Guilloché teal', '#1F6F68'], ['Engraver violet', '#5B4BC4'], ['Void red', '#C3263B']],
+    night: [['Blacklight', '#0A0820'], ['UV white', '#E9E6FF'], ['UV cyan', '#4DF2FF'], ['UV magenta', '#FF4FD8'], ['Void glow', '#FF3B5C']],
+    type: [["font-family:'Archivo';font-stretch:125%;font-weight:760;text-transform:uppercase", 'Display · Archivo Expanded 760'], ["font-family:'Literata'", 'Body · Literata'], ["font-family:'Martian Mono';font-size:15px", 'Data · Martian Mono']],
+    sig: 'The theme toggle is a UV lamp. Under UV, genuine references glow with fluorescent DOI microprint and a VERIFIED seal; counterfeits reveal a hidden VOID pantograph. Hover = UV torch. Click the counterfeit to split it into the real parts it was forged from.',
+    from: 'Swiss franc 9th-series banknotes, passport security pages, anti-copy void pantographs, guilloché engraving, holographic foil.' },
+  2: { mode: ['Night sky', 'Cyanotype day'],
+    day: [['Blueprint paper', '#EAF0F7'], ['Prussian blue', '#12357A'], ['Faded cyan', '#5C7DB8'], ['Brass', '#A9814A'], ['Nova', '#E0445E']],
+    night: [['Deep sky', '#060914'], ['Starlight', '#F2EBD9'], ['Nebula blue', '#3355AA'], ['Brass', '#C9A15E'], ['Nova', '#FF5A73']],
+    type: [["font-family:'Libre Caslon Display';font-size:26px", 'Display · Libre Caslon Display'], ["font-family:'Atkinson Hyperlegible Next'", 'Body · Atkinson Hyperlegible Next'], ["font-family:'IBM Plex Mono';font-size:15px", 'Data · IBM Plex Mono']],
+    sig: 'The Astrolabe Lens. Wherever you point it, ghost stars (AI hallucinations, flickering red) vanish and real stars show their catalogue record. The 3D Evidence Galaxy is native here: your library is the sky.',
+    from: 'Anna Atkins’ cyanotypes (1843), 18th-century star atlases, brass astrolabes, planetarium domes.' },
+  3: { mode: ['After hours', 'Collection room'],
+    day: [['Conservation grey', '#E4E6E3'], ['Label paper', '#F7F7F4'], ['Ink', '#1B1D1F'], ['Archival blue', '#24477A'], ['Hoax magenta', '#B5317A']],
+    night: [['Cabinet dark', '#121416'], ['Paper', '#1D2023'], ['Ink', '#ECE9E2'], ['Archival blue', '#7FA3DB'], ['Hoax magenta', '#E0559F']],
+    type: [["font-family:'Gloock';font-size:26px", 'Display · Gloock'], ["font-family:'Hanken Grotesk'", 'Body · Hanken Grotesk'], ["font-family:'Courier Prime';font-size:16px", 'Labels · Courier Prime']],
+    sig: 'The Chimera Explode. The suspicious specimen comes apart in 3D, and each piece flies to the real paper it was taken from, joined by stitched threads. After hours, a curator’s torch follows your cursor.',
+    from: 'Wunderkammer cabinets, museum type-specimen drawers, the Fiji-mermaid hoax, typed museum labels.' },
+  4: { mode: ['Darkroom', 'Lab bench'],
+    day: [['Bench white', '#F5F6F8'], ['Ink', '#0F1216'], ['Graphite', '#3A4048'], ['Beam', '#5E7BFF'], ['Alert', '#D4183D']],
+    night: [['Darkroom', '#07080B'], ['Ink', '#EEF1F6'], ['Graphite', '#9AA3AE'], ['Beam', '#FFFFFF'], ['Alert', '#FF4D6A']],
+    type: [["font-family:'Schibsted Grotesk';font-weight:760;letter-spacing:-.03em;font-size:26px", 'Display · Schibsted Grotesk'], ["font-family:'Instrument Sans'", 'Body · Instrument Sans'], ["font-family:'JetBrains Mono';font-size:15px", 'Data · JetBrains Mono']],
+    sig: 'The Evidence Spectrum. A claim passes through the prism; every source appears as a spectral line (solid = verified, dashed = reported). An invented claim has no lines. The UI stays monochrome; colour appears only as data.',
+    from: 'Newton’s prism, Fraunhofer absorption lines, optical benches, spectrometer readouts.' }
+};
+const BUILDERS = { 1: buildWatermark, 2: buildObservatory, 3: buildCabinet, 4: buildSpectrograph };
+const state = { dir: 1, mode: { 1: 'day', 2: 'day', 3: 'day', 4: 'day' } };
+let current = null;
+
+function renderSpec() {
+  const s = SPECS[state.dir];
+  const sw = arr => `<div class="sw">${arr.map(([n, c]) => `<div style="--c:${c}">${n}<br>${c}</div>`).join('')}</div>`;
+  $('#spec').innerHTML = `<h4>Palette · light</h4>${sw(s.day)}<h4>Palette · dark</h4>${sw(s.night)}<h4>Type</h4><div class="type">${s.type.map(([st, l]) => `<p style="${st}">Every reference real.</p><small>${l}</small>`).join('')}</div><h4>Signature moment</h4><p class="txt">${s.sig}</p><h4>Inspired by</h4><p class="txt">${s.from}</p>`;
+}
+function syncModeUI() {
+  const m = state.mode[state.dir], s = SPECS[state.dir];
+  html.dataset.mode = m; $('#mode').setAttribute('aria-pressed', String(m === 'night'));
+  $('#modeLabel').textContent = s.mode[m === 'night' ? 1 : 0];
+  $$('[data-mode-btn]').forEach(b => b.textContent = s.mode[m === 'night' ? 1 : 0]);
+}
+function go(dir) {
+  state.dir = dir; html.dataset.dir = dir;
+  $$('.tabs button').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.go === dir)));
+  $$('.hero').forEach(h => h.hidden = +h.dataset.for !== dir);
+  $('#ticker').style.display = dir === 1 ? '' : 'none';
+  hideTags(); tags.forEach(t => { t.dataset.h = ''; }); document.body.classList.remove('boom');
+  if (current) current.dispose();
+  current = BUILDERS[dir](); current.setMode(state.mode[dir]);
+  syncModeUI(); renderSpec(); resize();
+  history.replaceState(null, '', '#' + dir);
+}
+function toggleMode() { state.mode[state.dir] = state.mode[state.dir] === 'day' ? 'night' : 'day'; current.setMode(state.mode[state.dir]); syncModeUI(); }
+function resize() {
+  const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false);
+  if (current) { current.camera.aspect = w / h; current.camera.updateProjectionMatrix(); current.resize(w / h); }
+}
+addEventListener('resize', resize);
+$$('.tabs button').forEach(b => b.onclick = () => go(+b.dataset.go));
+$('#mode').onclick = toggleMode;
+$$('[data-mode-btn]').forEach(b => b.onclick = toggleMode);
+$$('[data-sig]').forEach(b => b.onclick = () => current.signature());
+$('#specbtn').onclick = () => { const s = $('#spec'), open = s.hidden; s.hidden = !open; $('#specbtn').setAttribute('aria-expanded', String(open)); $('#specbtn').textContent = open ? 'Design spec ▾' : 'Design spec ▴'; };
+canvas.addEventListener('click', () => current && current.click());
+addEventListener('keydown', e => { if (e.target.closest('input,textarea')) return; if (['1', '2', '3', '4'].includes(e.key)) go(+e.key); if (e.key === 'u' || e.key === 'U') toggleMode(); });
+
+const FONTS = ['600 34px Literata', 'italic 400 25px Literata', '500 15px "Martian Mono"', '900 40px Archivo', '700 30px Archivo', '30px Gloock', '700 14px "Courier Prime"', '400 20px "Courier Prime"', '16px "Libre Caslon Display"', '700 16px "Schibsted Grotesk"'];
+await Promise.race([Promise.all(FONTS.map(f => document.fonts.load(f))), new Promise(r => setTimeout(r, 3500))]);
+go(+(location.hash.slice(1)) || 1);
+const qp = new URLSearchParams(location.search);
+if (qp.get('mode') === 'night') toggleMode();
+if (qp.get('sig')) setTimeout(() => current.signature(), 400);
+$('#loading').style.opacity = 0; setTimeout(() => $('#loading').remove(), 600);
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
+  if (!current) return;
+  current.update(t, dt);
+  renderer.render(current.scene, current.camera);
+});
+</script>
+</body>
+</html>

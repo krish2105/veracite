@@ -1,0 +1,26 @@
+# ---- dependencies & builds ----
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# ---- secrets: never commit keys ----
+.env
+.env.*
+!.env.example
+
+# ---- personal data: organiser PDFs list other students' emails and phone numbers ----
+/AI_Club_Hackathon_2026_Teams.pdf
+/AI_Club_Hackathon_2026_Rules_and_Regulations.pdf
+
+# ---- local tooling ----
+.claude/
+.vercel/
+.DS_Store
+*.log
+.status/
+
+# ---- heavy raw recordings (keep PNG screenshots only) ----
+docs/ui-directions/shots/**/*.webm
+docs/ui-directions/shots/**/*.start

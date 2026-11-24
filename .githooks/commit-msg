@@ -1,0 +1,9 @@
+#!/bin/sh
+# Team rule: only the three of us appear as contributors.
+# Strips AI co-author trailers and "Generated with ..." lines from every commit message.
+MSG_FILE="$1"
+sed -i.bak -E \
+  -e '/^[Cc]o-[Aa]uthored-[Bb]y:.*([Cc]laude|[Aa]nthropic|noreply@anthropic\.com|[Cc]opilot|[Cc]hat[Gg][Pp][Tt]|[Oo]pen[Aa][Ii])/d' \
+  -e '/[Gg]enerated with \[?[Cc]laude [Cc]ode/d' \
+  "$MSG_FILE" && rm -f "$MSG_FILE.bak"
+exit 0

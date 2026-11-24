@@ -1,0 +1,13 @@
+{
+  "name": "veracite-team7",
+  "private": true,
+  "description": "Team 7 · AI Club Hackathon 2026 · Veracite: honest references with an AI research assistant",
+  "scripts": {
+    "setup": "git config core.hooksPath .githooks && chmod +x .githooks/commit-msg && npm --prefix veracite install",
+    "dev": "npm --prefix veracite run dev",
+    "build": "npm --prefix veracite run build",
+    "typecheck": "cd veracite && npx tsc --noEmit",
+    "status": "node scripts/status.mjs",
+    "check": "node scripts/check.mjs"
+  }
+}
