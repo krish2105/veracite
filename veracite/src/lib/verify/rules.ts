@@ -13,7 +13,7 @@
 import type { DoiLookup } from "../registries";
 import type { RegistryError } from "../registries/http";
 import type { ChimeraPart, FieldCheck, RefStatus, ReferenceInput, RegistryName, RegistryRecord, SearchReceipt, Update, Verification } from "../types";
-import { authorsLabel, checkAuthors, checkYear, normalizeText, T, titleMatch, titleSimilarity, venueMatch, venueSimilarity, type AuthorCheck } from "./text";
+import { authorsLabel, checkAuthors, checkYear, normalizeText, sameSurname, T, titleMatch, titleSimilarity, venueMatch, venueSimilarity, type AuthorCheck } from "./text";
 
 export interface Evidence {
   input: ReferenceInput;
@@ -23,6 +23,8 @@ export interface Evidence {
   candidates: RegistryRecord[];
   /** Second-registry lookups for search candidates, keyed by DOI. */
   confirmations: Record<string, DoiLookup>;
+  /** Works by the cited authors (only fetched when nothing else matched), to spot real authors on an invented paper. */
+  authorWorks?: RegistryRecord[];
   receipts: SearchReceipt[];
   errors: RegistryError[];
   startedAt: number;
@@ -102,14 +104,35 @@ function merge(primary: RegistryRecord, others: RegistryRecord[], updates: Updat
   return m;
 }
 
+/**
+ * A real paper written by at least two of the cited authors (surname AND first initial must agree, so common
+ * surnames alone never count). Used to explain "real authors, invented paper".
+ */
+function paperByCitedAuthors(input: ReferenceInput, works: RegistryRecord[] | undefined): { work: RegistryRecord; names: string[] } | undefined {
+  const cited = input.authors ?? [];
+  if (cited.length < 2 || !works?.length) return undefined;
+  const initial = (s?: string) => normalizeText(s).charAt(0);
+  for (const w of works) {
+    const names = cited
+      .filter((c) => w.authors.some((a) => sameSurname(c.family, a.family) && (!c.given || !a.given || initial(c.given) === initial(a.given))))
+      .map((c) => c.family);
+    if (names.length >= 2) return { work: w, names };
+  }
+  return undefined;
+}
+
 const cite = (r: RegistryRecord) => `“${r.title}” (${authorsLabel(r.authors) || "unknown authors"}, ${r.year ?? "n.d."})`;
 const belongs = (r: RegistryRecord) => ({ doi: r.doi, title: r.title, year: r.year, authors: authorsLabel(r.authors) });
 
 export function decide(ev: Evidence, now = Date.now()): Verification {
   const input = ev.input;
   const base = { searched: ev.receipts, checkedAt: new Date(now).toISOString(), ms: now - ev.startedAt };
-  const failed = [...new Set(ev.errors.map((e) => REGISTRY_NAME[e.registry]))];
-  const incomplete = failed.length ? `${list(failed)} did not respond, so this check is incomplete. Try again in a minute.` : undefined;
+  // Say which happened: a rate limit (busy) is not an outage (no answer).
+  const names = (kind: "limited" | "down") => [...new Set(ev.errors.filter((e) => (e.kind === "rate_limited") === (kind === "limited")).map((e) => REGISTRY_NAME[e.registry]))];
+  const limited = names("limited");
+  const down = names("down");
+  const why = [...(limited.length ? [`${list(limited)} ${limited.length > 1 ? "are" : "is"} rate-limiting us right now`] : []), ...(down.length ? [`${list(down)} did not respond`] : [])];
+  const incomplete = why.length ? `${why.join(" and ")}, so this check is incomplete. Try again in a minute.` : undefined;
 
   /* ---------- 1. What the written DOI points at ---------- */
   const doiRec = primaryOf(ev.claimedDoi);
@@ -150,6 +173,32 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
         parts,
         updates: [],
         reasons: [`The DOI is real but belongs to a different paper: ${cite(doiRec)}.`, "No paper with the cited title exists in the registries we searched."],
+      };
+    }
+    const byAuthors = incomplete ? undefined : paperByCitedAuthors(input, ev.authorWorks);
+    if (byAuthors) {
+      const { work: real, names } = byAuthors;
+      return {
+        ...base,
+        status: "chimera",
+        checks: [
+          { field: "title", claimed: input.title, match: "different", score: titleScoreFor(input, real) },
+          { field: "authors", claimed: input.authors ? authorsLabel(input.authors, 6) : undefined, found: authorsLabel(real.authors, 6), match: "close" },
+          ...(input.doi ? [{ field: "doi" as const, claimed: input.doi, found: doiUnregistered ? "not registered" : undefined, match: "different" as const }] : []),
+        ],
+        registries: [real.registry],
+        matched: real,
+        parts: [
+          { field: "authors", claimed: authorsLabel(input.authors ?? [], 6), belongsTo: belongs(real) },
+          { field: "title", claimed: input.title ?? input.raw.slice(0, 90), note: "No paper with this title exists in Crossref, OpenAlex or arXiv" },
+          ...(input.doi && doiUnregistered ? [{ field: "doi" as const, claimed: input.doi, note: "This DOI is not registered" }] : []),
+        ],
+        updates: [],
+        reasons: [
+          `The authors are real: ${list(names)} wrote ${cite(real)}.`,
+          "But no paper with the cited title exists in Crossref, OpenAlex or arXiv. Real authors attached to an invented paper is a stitched reference (SP Jain policy §h(ix)).",
+          ...(doiUnregistered ? [`The DOI ${input.doi} is not registered anywhere.`] : []),
+        ],
       };
     }
     const closest = rankCandidates(input, ev.candidates)[0];
@@ -229,13 +278,25 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
     );
   }
 
-  if (titleIsReal && input.authors?.length && au.overlap === 0) {
-    const parts: ChimeraPart[] = [
-      { field: "title", claimed: input.title ?? "", belongsTo: belongs(work) },
-      { field: "authors", claimed: authorsLabel(input.authors, 6), note: `None of these authors are on the real paper (its authors: ${authorsLabel(work.authors)})` },
-    ];
-    if (yMatch === "different") parts.push({ field: "year", claimed: String(input.year), note: `The real paper is from ${work.year}` });
-    return result("chimera", [`The title is real: ${cite(work)}. But none of the cited authors wrote it.`, "This is a reference stitched together from real parts (SP Jain policy §h(ix))."], parts);
+  // Parts of the reference that do not belong to the paper whose title it carries.
+  const foreign: { part: ChimeraPart; issue: string }[] = [];
+  if (input.authors?.length && !au.firstOk) {
+    foreign.push({
+      part: { field: "authors", claimed: authorsLabel(input.authors, 6), note: au.overlap === 0 ? `None of these authors are on the real paper (its authors: ${authorsLabel(work.authors)})` : `Not the real author list (the real paper is by ${authorsLabel(work.authors)})` },
+      issue: au.overlap === 0 ? "none of the cited authors wrote it" : `it is by ${authorsLabel(work.authors)}, not ${authorsLabel(input.authors)}`,
+    });
+  }
+  if (yMatch === "different") foreign.push({ part: { field: "year", claimed: String(input.year), note: `The real paper is from ${work.year}` }, issue: `it is from ${work.year}, not ${input.year}` });
+  if (vMatch === "different") foreign.push({ part: { field: "venue", claimed: input.venue ?? "", note: `The real paper is in ${work.venue}` }, issue: `it appeared in ${work.venue}, not ${input.venue}` });
+  if (doiMatch === "different") foreign.push({ part: { field: "doi", claimed: input.doi ?? "", note: doiUnregistered ? "This DOI is not registered" : `The real DOI is ${work.doi}` }, issue: doiUnregistered ? `the DOI ${input.doi} is not registered` : `its DOI is ${work.doi}` });
+  // Most cited authors are strangers (one overlapping name must not hide a swap), or two or more parts are foreign.
+  const authorsForeign = !!input.authors?.length && (au.overlap === 0 || (!au.firstOk && au.overlap < 0.5));
+  if (titleIsReal && (authorsForeign || foreign.length >= 2)) {
+    return result(
+      "chimera",
+      [`The title is real: ${cite(work)}. But ${list(foreign.map((f) => f.issue))}.`, "This is a reference stitched together from real parts (SP Jain policy §h(ix))."],
+      [{ field: "title", claimed: input.title ?? "", belongsTo: belongs(work) }, ...foreign.map((f) => f.part)],
+    );
   }
 
   const wrong: string[] = [];

@@ -28,14 +28,21 @@ const kosmynaAx = parseArxivFeed(fx("arxiv-kosmyna.xml"))[0];
 const kosmynaOa = asOpenAlex(kosmynaAx);
 const bibBastani = (JSON.parse(fx("crossref-bibliographic-bastani.json")) as { message: { items: CrossrefWork[] } }).message.items.map((w) => parseCrossrefWork(w));
 
+const seraliniCr = cr("crossref-seralini-self-retraction.json");
+const seraliniOa = asOpenAlex(seraliniCr, { updates: [{ kind: "retraction", source: "openalex" }] });
+
+type Records = Record<RegistryName, RegistryRecord[]>;
 interface World {
   bib?: RegistryRecord[];
   down?: RegistryName[];
+  /** What a Crossref author search returns. */
+  byAuthors?: RegistryRecord[];
+  all?: Records;
 }
-const ALL = { crossref: [bastaniCr, wangCr, kestinCr], openalex: [bastaniOa, wangOa, kestinOa, kosmynaOa], arxiv: [kosmynaAx] };
+const ALL: Records = { crossref: [bastaniCr, wangCr, kestinCr, seraliniCr], openalex: [bastaniOa, wangOa, kestinOa, kosmynaOa, seraliniOa], arxiv: [kosmynaAx] };
 
 /** A fake registry: DOI lookups answer from the saved records; text search returns `bib`. */
-function world({ bib = [], down = [] }: World = {}): RegistryDeps {
+function world({ bib = [], down = [], byAuthors = [], all = ALL }: World = {}): RegistryDeps {
   const rcpt = (registry: RegistryName, query: string, hits: number) => ({ registry, query, hits, at: "2026-11-24T00:00:00Z" });
   return {
     async lookupDoi(doi) {
@@ -47,7 +54,7 @@ function world({ bib = [], down = [] }: World = {}): RegistryDeps {
           out.errors.push(new RegistryError(name, "upstream_down", `${name} down`));
           continue;
         }
-        const rec = ALL[name].find((r) => r.doi === d || (name === "arxiv" && r.id === arxivIdFromString(d))) ?? null;
+        const rec = all[name].find((r) => r.doi === d || (name === "arxiv" && r.id === arxivIdFromString(d))) ?? null;
         out.records[name] = rec;
         out.receipts.push(rcpt(name, `doi:${d}`, rec ? 1 : 0));
       }
@@ -62,6 +69,9 @@ function world({ bib = [], down = [] }: World = {}): RegistryDeps {
     },
     async arxivSearch(t) {
       return { data: [], receipt: rcpt("arxiv", `title:${t}`, 0) };
+    },
+    async crossrefByAuthors(names) {
+      return { data: byAuthors, receipt: rcpt("crossref", `author:${names.join(" ")}`, byAuthors.length) };
     },
   };
 }
@@ -155,6 +165,59 @@ describe("verifyReference: one test per status", () => {
     const v = await verifyReference("Okafor, T. (2021). Caffeine improves essay grades. Journal of Sample Psychology.", world({ down: ["crossref"] }));
     expect(v.status).toBe("partial");
     expect(v.reasons.join(" ")).toMatch(/Crossref did not respond/);
+  });
+});
+
+describe("fixes from Zedan's golden set (25 Nov)", () => {
+  it("CHIMERA: stitched authors even when one real author overlaps (golden chim-001)", async () => {
+    const v = await verifyReference(
+      "Kestin, G., Bastani, O., & Miller, K. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. Proceedings of the National Academy of Sciences, 122(26). https://doi.org/10.1073/pnas.2422633122",
+      world(),
+    );
+    expect(v.status).toBe("chimera");
+    expect(v.parts?.find((p) => p.field === "authors")?.note).toMatch(/Not the real author list/);
+  });
+
+  it("CHIMERA: two parts that do not belong to the title's paper (golden chim-003, chim-008)", async () => {
+    const v = await verifyReference("Sungu, A. (2019). Generative AI without guardrails can harm learning: Evidence from high school mathematics. Proceedings of the National Academy of Sciences.", world({ bib: bibBastani }));
+    expect(v.status).toBe("chimera");
+    expect(v.reasons[0]).toMatch(/it is from 2025, not 2019/);
+    expect(v.parts?.map((p) => p.field)).toEqual(["title", "authors", "year"]);
+  });
+
+  it("VERIFIED: Crossref swapped the first author's given and family names (golden real-020)", async () => {
+    const swap = (r: RegistryRecord): RegistryRecord => ({ ...r, authors: [{ family: "Greg", given: "Kestin" }, ...r.authors.slice(1)] });
+    const v = await verifyReference(KESTIN(), world({ all: { crossref: [swap(kestinCr)], openalex: [swap(kestinOa)], arxiv: [] } }));
+    expect(v.status).toBe("verified");
+  });
+
+  it("RETRACTED: Elsevier's self-pointing retraction marker (golden ret-004, real record)", async () => {
+    const v = await verifyReference(
+      "Séralini, G.-E., Clair, E., Mesnage, R., Gress, S., Defarge, N., Malatesta, M., Hennequin, D., & de Vendômois, J. S. (2012). Long term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize. Food and Chemical Toxicology, 50(11), 4221–4231. https://doi.org/10.1016/j.fct.2012.08.005",
+      world(),
+    );
+    expect(v.status).toBe("retracted");
+    expect(v.reasons[0]).toMatch(/Retraction Watch/);
+  });
+
+  it("CHIMERA: real authors on an invented paper, naming their real paper (golden fab-001)", async () => {
+    const v = await verifyReference("Bastani, H., & Sungu, A. (2024). Dashboards that predict tutoring outcomes in Gulf universities. Journal of Nothing, 3, 1–9.", world({ byAuthors: [bastaniCr] }));
+    expect(v.status).toBe("chimera");
+    expect(v.parts?.[0]).toMatchObject({ field: "authors", belongsTo: { doi: "10.1073/pnas.2422633122" } });
+    expect(v.reasons[0]).toMatch(/The authors are real: Bastani and Sungu wrote/);
+  });
+
+  it("says 'rate-limiting', not 'did not respond', when a registry is busy (keyless OpenAlex budget)", async () => {
+    const w = world();
+    const deps: RegistryDeps = { ...w, crossrefMatchReference: async () => Promise.reject(new RegistryError("crossref", "rate_limited", "busy", 429)) };
+    const v = await verifyReference("Okafor, T. (2021). Caffeine improves essay grades. Journal of Sample Psychology.", deps);
+    expect(v.status).toBe("partial");
+    expect(v.reasons.join(" ")).toMatch(/Crossref is rate-limiting us right now/);
+  });
+
+  it("NOT FOUND, not chimera, when only surnames match and initials differ (common surnames)", async () => {
+    const v = await verifyReference("Bastani, X., & Sungu, Y. (2024). Dashboards that predict tutoring outcomes in Gulf universities. Journal of Nothing, 3, 1–9.", world({ byAuthors: [bastaniCr] }));
+    expect(v.status).toBe("notfound");
   });
 });
 

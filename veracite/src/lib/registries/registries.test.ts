@@ -29,6 +29,9 @@ describe("normalize", () => {
     expect(normalizeDoi("doi:10.1057/s41599-025-04787-y.")).toBe("10.1057/s41599-025-04787-y");
     expect(normalizeDoi("Retrieved from https://doi.org/10.1038/s41598-025-97652-6)")).toBe("10.1038/s41598-025-97652-6");
     expect(normalizeDoi("no doi here")).toBeUndefined();
+    // Old SICI DOIs contain < > ; ( ) : (golden real-025)
+    expect(normalizeDoi("https://doi.org/10.1002/(SICI)1097-0266(199708)18:7<509::AID-SMJ882>3.0.CO;2-Z")).toBe("10.1002/(sici)1097-0266(199708)18:7<509::aid-smj882>3.0.co;2-z");
+    expect(normalizeDoi("<https://doi.org/10.1073/pnas.2422633122>")).toBe("10.1073/pnas.2422633122");
     expect(normalizeDoi(undefined)).toBeUndefined();
   });
 
@@ -88,6 +91,12 @@ describe("Crossref parser", () => {
     expect(rec.abstract?.startsWith("Generative AI is poised to revolutionize how humans work")).toBe(true);
     expect(rec.abstract).not.toContain("<");
     expect(rec.noticeFor).toBeUndefined();
+  });
+
+  it("reads Elsevier's self-pointing update-to as a retraction OF the work, not a notice (golden ret-004)", () => {
+    const rec = parseCrossrefWork(json<{ message: CrossrefWork }>("crossref-seralini-self-retraction.json").message);
+    expect(rec.noticeFor).toBeUndefined();
+    expect(rec.updates.filter((u) => u.kind === "retraction").map((u) => u.source).sort()).toEqual(["publisher", "retraction-watch"]);
   });
 
   it("marks the correction NOTICE that Crossref ranks above the real paper", () => {

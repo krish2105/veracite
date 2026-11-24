@@ -7,9 +7,11 @@
  *   2. no DOI, or the DOI points at another title → Crossref query.bibliographic on the raw text,
  *      then OpenAlex/arXiv title search only if Crossref has nothing close (preprints, books).
  *   3. confirm the best search match in a second registry (lookupDoi on its DOI).
+ *   4. still nothing: one Crossref author search, to say "these authors are real, this paper is not".
  */
 import {
   arxivSearch,
+  crossrefByAuthors,
   crossrefMatchReference,
   lookupDoi,
   openalexSearch,
@@ -27,9 +29,10 @@ export interface RegistryDeps {
   crossrefMatchReference: (text: string, rows?: number) => Promise<RegistryResult<RegistryRecord[]>>;
   openalexSearch: (q: string, opts?: { titleOnly?: boolean; perPage?: number }) => Promise<RegistryResult<RegistryRecord[]>>;
   arxivSearch: (title: string, max?: number) => Promise<RegistryResult<RegistryRecord[]>>;
+  crossrefByAuthors: (surnames: string[], rows?: number) => Promise<RegistryResult<RegistryRecord[]>>;
 }
 
-const LIVE: RegistryDeps = { lookupDoi, crossrefMatchReference, openalexSearch, arxivSearch };
+const LIVE: RegistryDeps = { lookupDoi, crossrefMatchReference, openalexSearch, arxivSearch, crossrefByAuthors };
 
 /** Accepts raw text, or a ReferenceInput whose missing fields are filled in by parsing its raw text. */
 export function toInput(input: ReferenceInput | string): ReferenceInput {
@@ -76,6 +79,8 @@ export async function verifyReference(input: ReferenceInput | string, deps: Regi
   // 3. Confirm the best match in a second registry.
   const best = ev.candidates[0];
   if (best?.doi && titleScoreFor(ref, best) >= T.titleSimilar) ev.confirmations[best.doi] = take(await deps.lookupDoi(best.doi));
+  // 4. Nothing matched and no real DOI: are the cited authors real people who wrote a different paper?
+  else if (!doiRec && (ref.authors?.length ?? 0) >= 2) ev.authorWorks = await safe(deps.crossrefByAuthors(ref.authors!.map((a) => a.family), 5), [], "crossref");
 
   return decide(ev);
 }
