@@ -35,7 +35,7 @@ jobs:
         id: typecheck
         working-directory: veracite
         continue-on-error: true
-        run: npx tsc --noEmit
+        run: npx next typegen && npx tsc --noEmit
 
       - name: Production build
         id: build

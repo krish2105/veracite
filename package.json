@@ -6,7 +6,7 @@
     "setup": "git config core.hooksPath .githooks && chmod +x .githooks/commit-msg && npm --prefix veracite install",
     "dev": "npm --prefix veracite run dev",
     "build": "npm --prefix veracite run build",
-    "typecheck": "cd veracite && npx tsc --noEmit",
+    "typecheck": "cd veracite && npx next typegen && npx tsc --noEmit",
     "status": "node scripts/status.mjs",
     "check": "node scripts/check.mjs"
   }
