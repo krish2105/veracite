@@ -8,7 +8,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K00** · P0 · Docs, deck, repo, task system and 3D prototypes in place · `docs/** submissions/** tasks/**` · due Tue 13:00 · #deck
 - [ ] **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · due Tue 22:00 · #mvp
     - Update `.env.example` to the new model map in docs/11 §6 (Llama is gone from Groq's free tier). Confirm the IDs and whether Prompt Guard 2 is free in the Groq console.
-- [ ] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
+- [x] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
     - Blocks everyone. Merge to `main` first.
 - [ ] **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · `veracite/src/lib/types.ts veracite/src/lib/flags.ts` · due Tue 23:30 · #mvp
     - Everyone codes against these. Interfaces in docs/11 §5.

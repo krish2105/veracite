@@ -1,4 +1,4 @@
-import { ResearchTab } from "@/components/app/tabs";
+import { ResearchTab } from "@/components/app/tabs/research";
 
 export const metadata = { title: "Veracite · Research" };
 
