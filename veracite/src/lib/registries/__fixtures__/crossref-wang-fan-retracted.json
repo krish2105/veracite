@@ -1,0 +1,432 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     24
+    ]
+   ],
+   "date-time": "2026-11-24T08:47:33Z",
+   "timestamp": 1795510053390,
+   "version": "4.11.0"
+  },
+  "reference-count": 143,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "1",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       5,
+       6
+      ]
+     ],
+     "date-time": "2025-05-06T00:00:00Z",
+     "timestamp": 1746489600000
+    },
+    "content-version": "tdm",
+    "delay-in-days": 0,
+    "URL": "https://creativecommons.org/licenses/by-nc-nd/4.0"
+   },
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       5,
+       6
+      ]
+     ],
+     "date-time": "2025-05-06T00:00:00Z",
+     "timestamp": 1746489600000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "https://creativecommons.org/licenses/by-nc-nd/4.0"
+   }
+  ],
+  "funder": [
+   {
+    "name": "Major Project of Humanities and Social Sciences Key Research Base of the Ministry of Educatio",
+    "award": [
+     "22JJD880023"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "22JJD880023"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Major Project of Humanities and Social Sciences Key Research Base of the Ministry of Educatio",
+    "award": [
+     "22JJD880023"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "22JJD880023"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "University-Industry Collaborative Education Program",
+    "award": [
+     "240904171111322"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "240904171111322"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "University-Industry Collaborative Education Program",
+    "award": [
+     "240904171111322"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "240904171111322"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Hangzhou Social Science Routine Planning Project",
+    "award": [
+     "Z24JC014"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "Z24JC014"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Hangzhou Social Science Routine Planning Project",
+    "award": [
+     "Z24JC014"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "Z24JC014"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Hangzhou Normal University’s 2023 Teaching Construction and Reform Project “Exploration and Practice of Generative Artificial Intelligence to Promote University Teaching Reform”"
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "link.springer.com"
+   ],
+   "crossmark-restriction": false
+  },
+  "short-container-title": [
+   "Humanit Soc Sci Commun"
+  ],
+  "DOI": "10.1057/s41599-025-04787-y",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2025,
+     5,
+     6
+    ]
+   ],
+   "date-time": "2025-05-06T05:02:59Z",
+   "timestamp": 1746507779000
+  },
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 335,
+  "title": [
+   "RETRACTED ARTICLE: The effect of ChatGPT on students’ learning performance, learning perception, and higher-order thinking: insights from a meta-analysis"
+  ],
+  "prefix": "10.1057",
+  "volume": "12",
+  "author": [
+   {
+    "given": "Jin",
+    "family": "Wang",
+    "sequence": "first",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Wenxiang",
+    "family": "Fan",
+    "sequence": "additional",
+    "affiliation": [],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "297",
+  "published-online": {
+   "date-parts": [
+    [
+     2025,
+     5,
+     6
+    ]
+   ]
+  },
+  "updated-by": [
+   {
+    "DOI": "10.1057/s41599-026-07310-z",
+    "type": "retraction",
+    "label": "Retraction",
+    "source": "publisher",
+    "updated": {
+     "date-parts": [
+      [
+       2026,
+       4,
+       22
+      ]
+     ],
+     "date-time": "2026-04-22T00:00:00Z",
+     "timestamp": 1776816000000
+    }
+   },
+   {
+    "DOI": "10.1057/s41599-026-07310-z",
+    "type": "retraction",
+    "label": "Retraction",
+    "source": "retraction-watch",
+    "updated": {
+     "date-parts": [
+      [
+       2026,
+       4,
+       22
+      ]
+     ],
+     "date-time": "2026-04-22T00:00:00Z",
+     "timestamp": 1776816000000
+    },
+    "record-id": "70475"
+   }
+  ],
+  "container-title": [
+   "Humanities and Social Sciences Communications"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://www.nature.com/articles/s41599-025-04787-y.pdf",
+    "content-type": "application/pdf",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://www.nature.com/articles/s41599-025-04787-y",
+    "content-type": "text/html",
+    "content-version": "vor",
+    "intended-application": "text-mining"
+   },
+   {
+    "URL": "https://www.nature.com/articles/s41599-025-04787-y.pdf",
+    "content-type": "application/pdf",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2026,
+     4,
+     22
+    ]
+   ],
+   "date-time": "2026-04-22T05:55:20Z",
+   "timestamp": 1776837320000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://www.nature.com/articles/s41599-025-04787-y"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2025,
+     5,
+     6
+    ]
+   ]
+  },
+  "references-count": 143,
+  "journal-issue": {
+   "issue": "1",
+   "published-online": {
+    "date-parts": [
+     [
+      2025,
+      12
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "4787"
+  ],
+  "URL": "https://doi.org/10.1057/s41599-025-04787-y",
+  "relation": {},
+  "ISSN": [
+   "2662-9992"
+  ],
+  "issn-type": [
+   {
+    "value": "2662-9992",
+    "type": "electronic"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2025,
+     5,
+     6
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "1 December 2024",
+    "order": 1,
+    "name": "received",
+    "label": "Received",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "19 March 2025",
+    "order": 2,
+    "name": "accepted",
+    "label": "Accepted",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "6 May 2025",
+    "order": 3,
+    "name": "first_online",
+    "label": "First Online",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "22 April 2026",
+    "order": 5,
+    "name": "change_date",
+    "label": "Change Date",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "Correction",
+    "order": 6,
+    "name": "change_type",
+    "label": "Change Type",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "This article has been retracted. Please see the Retraction Notice for more detail:",
+    "order": 7,
+    "name": "change_details",
+    "label": "Change Details",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "https://doi.org/10.1057/s41599-026-07310-z",
+    "URL": "https://doi.org/10.1057/s41599-026-07310-z",
+    "order": 8,
+    "name": "change_details",
+    "label": "Change Details",
+    "group": {
+     "name": "ArticleHistory",
+     "label": "Article History"
+    }
+   },
+   {
+    "value": "The authors declare no competing interests.",
+    "order": 1,
+    "name": "Ethics",
+    "group": {
+     "name": "EthicsHeading",
+     "label": "Competing interests"
+    }
+   },
+   {
+    "value": "This article does not include any studies performed by any of the authors with human participants or animals.",
+    "order": 2,
+    "name": "Ethics",
+    "group": {
+     "name": "EthicsHeading",
+     "label": "Ethical approval"
+    }
+   },
+   {
+    "value": "This article does not include any studies performed by any of the authors with human participants or animals.",
+    "order": 3,
+    "name": "Ethics",
+    "group": {
+     "name": "EthicsHeading",
+     "label": "Informed consent"
+    }
+   }
+  ],
+  "article-number": "621"
+ }
+}

@@ -43,6 +43,12 @@ jobs:
         continue-on-error: true
         run: npx next build
 
+      - name: Unit tests (offline; live registry tests are skipped)
+        id: tests
+        working-directory: veracite
+        continue-on-error: true
+        run: npx vitest run
+
       - name: Regenerate docs/STATUS.md
         run: node scripts/status.mjs --typecheck=${{ steps.typecheck.outcome }} --build=${{ steps.build.outcome }}
 
@@ -54,6 +60,6 @@ jobs:
           git add docs/STATUS.md
           git diff --cached --quiet || (git commit -m "chore(status): refresh STATUS.md [skip ci]" && git push)
 
-      - name: Fail if the app doesn't build
-        if: steps.typecheck.outcome == 'failure' || steps.build.outcome == 'failure'
+      - name: Fail if the app doesn't build or a test fails
+        if: steps.typecheck.outcome == 'failure' || steps.build.outcome == 'failure' || steps.tests.outcome == 'failure'
         run: exit 1
