@@ -1,0 +1,434 @@
+{
+ "status": "ok",
+ "message-type": "work",
+ "message-version": "1.0.0",
+ "message": {
+  "indexed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     24
+    ]
+   ],
+   "date-time": "2026-11-24T12:55:03Z",
+   "timestamp": 1795524903808,
+   "version": "4.11.0"
+  },
+  "reference-count": 28,
+  "publisher": "National Academy of Sciences",
+  "issue": "26",
+  "license": [
+   {
+    "start": {
+     "date-parts": [
+      [
+       2025,
+       6,
+       25
+      ]
+     ],
+     "date-time": "2025-06-25T00:00:00Z",
+     "timestamp": 1750809600000
+    },
+    "content-version": "vor",
+    "delay-in-days": 0,
+    "URL": "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+   }
+  ],
+  "funder": [
+   {
+    "name": "Wharton AI and Analytics Initiative",
+    "award": [
+     "N/A"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "N/A"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Fishman Davidson Center at Wharton",
+    "award": [
+     "N/A"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "N/A"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Wharton Global Initiatives",
+    "award": [
+     "N/A"
+    ],
+    "award-info": [
+     {
+      "award-number": [
+       "N/A"
+      ]
+     }
+    ]
+   }
+  ],
+  "content-domain": {
+   "domain": [
+    "www.pnas.org"
+   ],
+   "crossmark-restriction": true
+  },
+  "short-container-title": [
+   "Proc. Natl. Acad. Sci. U.S.A."
+  ],
+  "published-print": {
+   "date-parts": [
+    [
+     2025,
+     7
+    ]
+   ]
+  },
+  "abstract": "<jats:p>Generative AI is poised to revolutionize how humans work, and has already demonstrated promise in significantly improving human productivity. A key question is how generative AI affects learning—namely, how humans acquire new skills as they perform tasks. Learning is critical to long-term productivity, especially since generative AI is fallible and users must check its outputs. We study this question via a field experiment where we provide nearly a thousand high school math students with access to generative AI tutors. To understand the differential impact of tool design on learning, we deploy two generative AI tutors: one that mimics a standard ChatGPT interface (“GPT Base”) and one with prompts designed to safeguard learning (“GPT Tutor”). Consistent with prior work, our results show that having GPT-4 access while solving problems significantly improves performance (48% improvement in grades for GPT Base and 127% for GPT Tutor). However, we additionally find that when access is subsequently taken away, students actually perform worse than those who never had access (17% reduction in grades for GPT Base)—i.e., unfettered access to GPT-4 can harm educational outcomes. These negative learning effects are largely mitigated by the safeguards in GPT Tutor. Without guardrails, students attempt to use GPT-4 as a “crutch” during practice problem sessions, and subsequently perform worse on their own. Thus, decision-makers must be cautious about design choices underlying generative AI deployments to preserve skill learning and long-term productivity.</jats:p>",
+  "DOI": "10.1073/pnas.2422633122",
+  "type": "journal-article",
+  "created": {
+   "date-parts": [
+    [
+     2025,
+     6,
+     25
+    ]
+   ],
+   "date-time": "2025-06-25T11:38:07Z",
+   "timestamp": 1750851487000
+  },
+  "update-policy": "https://doi.org/10.1073/pnas.cm10313",
+  "source": "Crossref",
+  "is-referenced-by-count": 451,
+  "title": [
+   "Generative AI without guardrails can harm learning: Evidence from high school mathematics"
+  ],
+  "prefix": "10.1073",
+  "volume": "122",
+  "author": [
+   {
+    "ORCID": "https://orcid.org/0000-0002-8793-4732",
+    "authenticated-orcid": false,
+    "given": "Hamsa",
+    "family": "Bastani",
+    "sequence": "first",
+    "affiliation": [
+     {
+      "name": "Department of Operations, Information, and Decisions",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "Wharton School",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "University of Pennsylvania",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "Wharton AI & Analytics",
+      "place": [
+       "Philadelphia"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Osbert",
+    "family": "Bastani",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Department of Computer and Information Science",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "School of Engineering and Applied Science",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "University of Pennsylvania",
+      "place": [
+       "Philadelphia"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0009-0002-1130-677X",
+    "authenticated-orcid": false,
+    "given": "Alp",
+    "family": "Sungu",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Department of Operations, Information, and Decisions",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "Wharton School",
+      "place": [
+       "Philadelphia"
+      ]
+     },
+     {
+      "name": "University of Pennsylvania",
+      "place": [
+       "Philadelphia"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "ORCID": "https://orcid.org/0000-0002-2443-3949",
+    "authenticated-orcid": false,
+    "given": "Haosen",
+    "family": "Ge",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Wharton AI & Analytics",
+      "place": [
+       "Philadelphia"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Özge",
+    "family": "Kabakcı",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Department of Mathematics",
+      "place": [
+       "Budapest, Hungary"
+      ]
+     },
+     {
+      "name": "Budapest British International School",
+      "place": [
+       "Budapest, Hungary"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   },
+   {
+    "given": "Rei",
+    "family": "Mariman",
+    "sequence": "additional",
+    "affiliation": [
+     {
+      "name": "Independent",
+      "place": [
+       "Philadelphia"
+      ]
+     }
+    ],
+    "role": [
+     {
+      "vocabulary": "crossref",
+      "role": "author"
+     }
+    ]
+   }
+  ],
+  "member": "341",
+  "published-online": {
+   "date-parts": [
+    [
+     2025,
+     6,
+     25
+    ]
+   ]
+  },
+  "updated-by": [
+   {
+    "DOI": "10.1073/pnas.2518204122",
+    "type": "correction",
+    "label": "Correction",
+    "source": "publisher",
+    "updated": {
+     "date-parts": [
+      [
+       2025,
+       8,
+       20
+      ]
+     ],
+     "date-time": "2025-08-20T00:00:00Z",
+     "timestamp": 1755648000000
+    }
+   }
+  ],
+  "container-title": [
+   "Proceedings of the National Academy of Sciences"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+   {
+    "URL": "https://pnas.org/doi/pdf/10.1073/pnas.2422633122",
+    "content-type": "unspecified",
+    "content-version": "vor",
+    "intended-application": "similarity-checking"
+   }
+  ],
+  "deposited": {
+   "date-parts": [
+    [
+     2025,
+     8,
+     20
+    ]
+   ],
+   "date-time": "2025-08-20T14:42:50Z",
+   "timestamp": 1755700970000
+  },
+  "score": 1,
+  "resource": {
+   "primary": {
+    "URL": "https://pnas.org/doi/10.1073/pnas.2422633122"
+   }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+   "date-parts": [
+    [
+     2025,
+     6,
+     25
+    ]
+   ]
+  },
+  "references-count": 28,
+  "journal-issue": {
+   "issue": "26",
+   "published-print": {
+    "date-parts": [
+     [
+      2025,
+      7
+     ]
+    ]
+   }
+  },
+  "alternative-id": [
+   "10.1073/pnas.2422633122"
+  ],
+  "URL": "https://doi.org/10.1073/pnas.2422633122",
+  "relation": {},
+  "ISSN": [
+   "0027-8424",
+   "1091-6490"
+  ],
+  "issn-type": [
+   {
+    "value": "0027-8424",
+    "type": "print"
+   },
+   {
+    "value": "1091-6490",
+    "type": "electronic"
+   }
+  ],
+  "subject": [],
+  "published": {
+   "date-parts": [
+    [
+     2025,
+     6,
+     25
+    ]
+   ]
+  },
+  "assertion": [
+   {
+    "value": "2024-11-03",
+    "order": 0,
+    "name": "received",
+    "label": "Received",
+    "group": {
+     "name": "publication_history",
+     "label": "Publication History"
+    }
+   },
+   {
+    "value": "2025-05-05",
+    "order": 2,
+    "name": "accepted",
+    "label": "Accepted",
+    "group": {
+     "name": "publication_history",
+     "label": "Publication History"
+    }
+   },
+   {
+    "value": "2025-06-25",
+    "order": 3,
+    "name": "published",
+    "label": "Published",
+    "group": {
+     "name": "publication_history",
+     "label": "Publication History"
+    }
+   }
+  ],
+  "article-number": "e2422633122"
+ }
+}

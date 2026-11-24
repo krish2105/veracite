@@ -77,6 +77,19 @@ export interface RegistryRecord {
   language?: string;
   /** CSL-JSON for citation-js (A06), when the registry provides it. */
   csl?: Record<string, unknown>;
+  /** For APA 7 and other styles (A06). */
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  /**
+   * Set when this record is itself a correction/retraction NOTICE for another work. The Verifier must never
+   * treat a notice as the work: Crossref ranks "Correction for Bastani et al., …" above the paper itself.
+   */
+  noticeFor?: { kind: Update["kind"]; doi?: string };
+  /** For a preprint: the DOI of the published version, when the registry knows it (arXiv `arxiv:doi`). */
+  publishedDoi?: string;
+  /** The registry's own relevance score for a search hit (not comparable across registries). */
+  score?: number;
   fetchedAt: string; // ISO
 }
 
@@ -157,6 +170,9 @@ export interface SourceRecord {
   authors: Author[];
   year?: number;
   venue?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
   type: WorkType;
   abstract?: string;
   /** What text we could read to check quotes against. */
