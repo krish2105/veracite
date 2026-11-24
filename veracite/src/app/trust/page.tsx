@@ -1,4 +1,4 @@
-import { TrustTab } from "@/components/app/tabs";
+import { TrustTab } from "@/components/app/tabs/trust";
 
 export const metadata = { title: "Veracite · Trust Center" };
 

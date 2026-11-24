@@ -26,4 +26,4 @@ Rule: **edit only files you own.** To change someone else's file, message them o
 | `docs/STATUS.md` | **the bot** | Generated; never edit by hand |
 | `veracite/src/components/app/data.ts` (sample data), `README.md`, `CLAUDE.md`, `docs/HANDOFF.md` | **Shared** | Change via PR with a 👍 from the other two |
 
-**Until K01 is merged**, `veracite/src/components/app/tabs.tsx` is one file. Don't edit it; Krishna splits it first.
+**K01 split the tabs:** each tab now lives in `veracite/src/components/app/tabs/<tab>/` (`<Tab>Tab.tsx` + `index.ts`), and each page imports its own folder, e.g. `@/components/app/tabs/trust`. Add new files inside your own tab folder; there is no shared barrel file to edit.

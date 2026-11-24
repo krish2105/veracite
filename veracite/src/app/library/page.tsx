@@ -1,4 +1,4 @@
-import { LibraryTab } from "@/components/app/tabs";
+import { LibraryTab } from "@/components/app/tabs/library";
 
 export const metadata = { title: "Veracite · Library" };
 

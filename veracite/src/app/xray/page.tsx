@@ -1,4 +1,4 @@
-import { XrayTab } from "@/components/app/tabs";
+import { XrayTab } from "@/components/app/tabs/xray";
 
 export const metadata = { title: "Veracite · Reference X-ray" };
 
