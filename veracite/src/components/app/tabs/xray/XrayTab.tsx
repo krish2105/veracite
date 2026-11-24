@@ -1,46 +1,137 @@
 "use client";
 
-import { useState } from "react";
-import { Download, Upload } from "lucide-react";
+import { useMemo, useState } from "react";
+import { AlertTriangle, Download, FlaskConical, ScanSearch, X } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
 import { Card, Sample, StatusBadge } from "@/components/app/ui";
-import { XRAY } from "@/components/app/data";
+import type { RefStatus } from "@/lib/types";
+import { MAX_REFERENCES, splitBibliography } from "@/lib/verify/split";
+import { ChimeraPanel } from "./ChimeraPanel";
+import { ResultRow } from "./ResultRow";
+import { TEST_LIST } from "./testList";
+import { useXray } from "./useXray";
 
-const PASTED = XRAY.map((r) => `${r.n}. ${r.pasted}`).join("\n\n");
+const ORDER: RefStatus[] = ["verified", "partial", "mismatch", "chimera", "retracted", "notfound"];
 
 export function XrayTab() {
-  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [chimeraN, setChimeraN] = useState<number | undefined>();
+  const { state, run, reset } = useXray();
+  const count = useMemo(() => splitBibliography(text).length, [text]);
+  const isTestList = text.trim() === TEST_LIST.trim();
+
+  const lines = Object.values(state.lines);
+  const done = lines.length;
+  const counts = ORDER.map((s) => [s, lines.filter((l) => l.verification.status === s).length] as const).filter(([, c]) => c > 0);
+  const firstChimera = lines.filter((l) => l.verification.status === "chimera").sort((a, b) => a.n - b.n)[0];
+  const shown = chimeraN ? state.lines[chimeraN] : firstChimera;
+
+  const start = () => {
+    setChimeraN(undefined);
+    void run(text);
+  };
+  const download = () => {
+    const report = { tool: "Veracite Reference X-ray", checkedAt: new Date().toISOString(), summary: state.summary, results: lines.sort((a, b) => a.n - b.n) };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(report, null, 2)], { type: "application/json" }));
+    Object.assign(document.createElement("a"), { href: url, download: "veracite-xray-report.json" }).click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
-    <AppShell title="Reference X-ray" subtitle="Paste any bibliography. Every line is checked field by field against Crossref, OpenAlex and arXiv. No AI involved."
-      actions={<button className="btn primary">X-ray 5 references</button>}>
+    <AppShell
+      title="Reference X-ray"
+      subtitle="Paste any bibliography. Every reference is checked field by field against Crossref, OpenAlex and arXiv. No AI involved."
+      actions={
+        <button className="btn primary" onClick={start} disabled={!count || state.running} aria-busy={state.running}>
+          <ScanSearch size={15} /> {state.running ? `Checking ${done}/${state.refs.length || count}…` : `X-ray ${count || ""} reference${count === 1 ? "" : "s"}`}
+        </button>
+      }
+    >
       <div className="g2">
-        <Card title={<>Pasted bibliography <Sample>SAMPLE · AI-generated test list</Sample></>} aside={<button className="btn small"><Upload size={14} /> Drop PDF / BibTeX</button>}>
-          <textarea className="paste" defaultValue={PASTED} spellCheck={false} />
-          <div className="summary" style={{ marginTop: 12 }}>
-            <StatusBadge status="verified" /><StatusBadge status="chimera" /><StatusBadge status="mismatch" /><StatusBadge status="notfound" /><StatusBadge status="retracted" />
-          </div>
+        <Card
+          title={<>Your reference list {isTestList && <Sample>TEST LIST · by Team 7 · includes deliberate fakes</Sample>}</>}
+          aside={
+            <span style={{ display: "inline-flex", gap: 6 }}>
+              <button className="btn small" onClick={() => setText(TEST_LIST)} disabled={state.running}>
+                <FlaskConical size={14} /> Load test list
+              </button>
+              {text && (
+                <button
+                  className="btn small"
+                  onClick={() => {
+                    setText("");
+                    reset();
+                  }}
+                  disabled={state.running}
+                >
+                  <X size={14} /> Clear
+                </button>
+              )}
+            </span>
+          }
+        >
+          <label htmlFor="xray-input" className="vx-eyebrow">
+            One reference per line, numbered, or separated by blank lines · APA, Harvard, MLA, IEEE or a ChatGPT answer · up to {MAX_REFERENCES}
+          </label>
+          <textarea
+            id="xray-input"
+            className="paste"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            spellCheck={false}
+            placeholder={"1. Author, A., & Author, B. (2025). Title of the paper. Journal Name, 12(3), 45–67. https://doi.org/…\n2. …"}
+          />
+          <p className="vx-tiny">
+            {count ? `${count} reference${count === 1 ? "" : "s"} detected.` : "Nothing to check yet."} Only titles, authors and DOIs are sent to the public
+            registries. Nothing is stored.
+          </p>
         </Card>
-        <Card title="Chimera, taken apart" aside={<button className="btn small" onClick={() => setOpen((o) => !o)}>{open ? "Reassemble" : "Take apart"}</button>}>
-          <div className={`chim ${open ? "open" : ""}`} onClick={() => setOpen((o) => !o)}>
-            <div className="chim-card">
-              <div className="chim-void">VOID</div>
-              <div className="chim-slice a">Digital wellbeing apps raise GPA: a meta-analysis of 48 trials<small>Title · reworded from Lee &amp; Park (2019)</small></div>
-              <div className="chim-slice b">Rahman, S., &amp; Lee, J.<small>Authors · real, but never co-authored</small></div>
-              <div className="chim-slice c">(2020) · J. Sample Studies, 9(1) · doi:10.5555/sample.2020.9917<small>Year + DOI · invented, no record</small></div>
-            </div>
-            <span className="chim-hint">SP Jain policy §h(ix): fabricated from components of actual references · click</span>
-          </div>
+
+        <Card title="Chimera, taken apart">
+          <ChimeraPanel n={shown?.n} parts={shown?.verification.parts} />
         </Card>
       </div>
-      <Card title={<>Results · 5 references <Sample /></>} aside={<button className="btn small"><Download size={14} /> Export report</button>}>
-        {XRAY.map((r) => (
-          <div className="xr" key={r.n}>
-            <div className="xr-head"><span className="xr-ref"><span className="mono muted">{r.n}. </span>{r.pasted}</span><StatusBadge status={r.status} /></div>
-            <p className="xr-note">{r.note}</p>
-            <table><thead><tr><th>Field</th><th>You pasted</th><th>Registry says</th><th>Match</th></tr></thead>
-              <tbody>{r.fields.map((f) => <tr key={f.f}><td className="mono">{f.f}</td><td>{f.pasted}</td><td>{f.registry}</td><td className={`mono field-${f.match}`}>{f.match}</td></tr>)}</tbody></table>
+
+      {state.error && (
+        <div className="banner" role="alert">
+          <AlertTriangle size={16} color="var(--alert)" />
+          <span>{state.error}</span>
+        </div>
+      )}
+
+      <Card
+        title={<>Results · live from Crossref, OpenAlex and arXiv</>}
+        aside={
+          state.summary ? (
+            <button className="btn small" onClick={download}>
+              <Download size={14} /> Download report
+            </button>
+          ) : undefined
+        }
+      >
+        {counts.length > 0 && (
+          <div className="summary" style={{ marginBottom: 12 }} aria-label="Summary">
+            {counts.map(([s, c]) => (
+              <span key={s} style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
+                <StatusBadge status={s} />
+                <b className="mono">{c}</b>
+              </span>
+            ))}
+            {state.summary && <span className="vx-tiny" style={{ margin: 0 }}>{state.summary.total} checked in {(state.summary.ms / 1000).toFixed(1)} s</span>}
           </div>
-        ))}
+        )}
+        <div aria-live="polite">
+          {state.refs.length === 0 ? (
+            <p className="xr-note">
+              Paste a reference list above and press <b>X-ray</b>. Each reference gets a verdict: Verified, Partial, Mismatch, Chimera, Retracted or Not
+              found, with the reasons and what the registries actually say.
+            </p>
+          ) : (
+            state.refs.map((raw, i) => (
+              <ResultRow key={i} n={i + 1} raw={raw} v={state.lines[i + 1]?.verification} onTakeApart={() => setChimeraN(i + 1)} />
+            ))
+          )}
+        </div>
       </Card>
     </AppShell>
   );
