@@ -38,14 +38,36 @@
 8. **"Does it scale?"** Registry lookups are cached and polite-pooled; DOI lookups on OpenAlex are free. The stateless serverless design scales horizontally. The browser holds each student's state.
 
 ### Ethics, governance, privacy (Zedan leads)
-9. **"Where does student data go?"** Nowhere we store it. The library lives in the browser; AI calls are scrubbed of personal data; Groq doesn't train on API data; certificates carry their data inside the link.
-10. **"Who is accountable if a citation is wrong?"** The student is the author and approves everything. Veracite is accountable for its checks: we publish our test results and have a "report a wrong verdict" path. Faculty can re-verify with the QR.
-11. **"Doesn't this make students lazier?"** It's the opposite of a chatbot. Three approvals, an autonomy dial that can turn AI off, read-before-you-cite and explain-it-back. MIT's 2025 study showed LLM-only writers disengage, and we designed against exactly that.
-12. **"Why not detect AI-written essays?"** Detectors are biased: Stanford found 61 % of non-native English essays falsely flagged. At a school with many international students that's harmful. We verify sources; we don't accuse people.
-13. **"How do you handle biased sources?"** The bias lens shows country, year, open-access and publisher spread with plain warnings, and we show quality *facts* instead of opaque scores, so small or Global-South journals aren't quietly down-ranked.
-14. **"Which policies do you follow?"** SP Jain's Academic Integrity Policy v2 (clauses h(vi), h(viii), h(ix), g(vi)), APA's 2025 generative-AI guidance, UNESCO's GenAI guidance, the UAE AI Charter, UAE PDPL and EU AI Act Article 50 transparency.
-15. **"How is AI use disclosed?"** Three layers: labels on every AI sentence, an AI-use statement generated from the logs, and a Prompt Ledger. Actually, we used it to write our own prompt log for this hackathon.
-16. **"What about prompt injection in papers or web pages?"** All source text is wrapped as untrusted data, instruction-like text is flagged and counted, and the Verifier has no prompt to inject at all.
+*Final answers (Z11, 24 Nov). Bold = the ≤ 20-second answer to say. "If pressed" = the follow-up. "Show" = what to click. Every claim below matches code that exists in `veracite/src/lib/integrity/` or a checked source; don't add numbers we haven't measured.*
+
+9. **"Where does student data go?"** **Nowhere we store it. There are no accounts; the library lives in your browser. Before anything reaches the AI, code strips emails, phone numbers, Emirates IDs, student IDs and API keys. Groq doesn't keep API data by default. A certificate carries its data inside the link, not in our database.**
+   - *If pressed:* "The scrubber keeps DOIs, page numbers and years, because we test it against all 50 references in our golden set. It doesn't remove names; reference lists are full of author names, so we never send the student's own name in the first place." (Groq: [docs](https://console.groq.com/docs/your-data) say no retention by default; its services agreement says inputs and outputs aren't used for training.)
+   - *Show:* Prompt Ledger entry with `[EMAIL]` in place of an address.
+
+10. **"Who is accountable if a citation is wrong?"** **The student is the author: they approve the plan, the sources and every claim, and they sign the AI-use statement. We're accountable for our checks: the Verifier is plain code, we publish its test results, and there's a "report a wrong verdict" button. Faculty can re-check any bibliography by scanning the certificate.**
+    - *If pressed:* "AI is never an author; that's COPE's rule too. Our RACI table is in the deck: student owns what's cited, Team 7 owns whether the checker is right."
+    - *Show:* Trust Center → test results + report button.
+
+11. **"Doesn't this make students lazier?"** **It's built to do the opposite. The AI can't skip the student: three approvals, an autonomy dial that turns AI fully off, read-before-you-cite, and a paraphrase guard that flags text copied too closely from a source. And the AI writes a labelled evidence brief, never the essay.**
+    - *If pressed:* "An MIT Media Lab study in 2025 found people writing with ChatGPT showed the lowest engagement and struggled to recall their own essays. It's an early, not-yet-peer-reviewed study with 54 people, but it's the risk we designed against."
+    - *Show:* paste a copied sentence into the Draft Checker → "95% of your words match the source…".
+
+12. **"Why not detect AI-written essays?"** **Because detectors falsely accuse people. A Stanford study found seven popular detectors flagged, on average, 61% of essays by non-native English writers as AI-written. At SP Jain, with students from everywhere, that's harmful. We verify sources; we don't accuse people.**
+    - *If pressed:* Liang et al., 2023, *Patterns*: 91 TOEFL essays, near-perfect on US students' essays. "Checking a reference is a fact. Guessing who wrote a sentence isn't."
+
+13. **"How do you handle biased sources?"** **The bias lens shows where the authors are based, how old the evidence is, how much is open access and which publishers dominate, with plain warnings. It shows facts and never ranks or hides a source, so small or Global-South journals aren't quietly pushed down.**
+    - *If pressed (have the numbers ready):* "We ran it on two real lists. ChatGPT's 20 references: authors from 20 countries, median year 2024, 95% open access, no warnings. Ten classic management papers: 80% US authors and half from 2003 or earlier, so it warns on both and notes there's nothing from the Middle East."
+    - *Show:* Library → bias cards.
+
+14. **"Which policies do you follow?"** **SP Jain's own Academic Integrity Policy: clause h(viii) on disclosing AI, h(ix) on fabricated references, g(vi) on faculty checking references. Plus APA's 2025 AI guidance, UNESCO's guidance, the UAE AI Charter, the UAE data-protection law and EU AI Act Article 50 on labelling AI content.**
+    - *If pressed:* name one mapping each: "h(ix) → chimera detector; h(viii) → Prompt Ledger; PDPL → no accounts, PII scrubbing; Article 50 → every AI sentence is labelled."
+
+15. **"How is AI use disclosed?"** **Three layers. Every AI-written sentence is labelled. On export, an AI-use statement is generated from the session log: which models, what they did, what the student decided, with an APA reference for the tool. And a Prompt Ledger lists every prompt, with a hash so edits show.**
+    - *If pressed:* "The statement only says what the log proves. It will not write 'I wrote this myself' for you; the student has to type that sentence. And yes, we kept our own prompt log for this hackathon."
+    - *Show:* Export → statement with the placeholder → Prompt Ledger.
+
+16. **"What about prompt injection in papers or web pages?"** **Paper and web text is treated as data, never instructions: it's wrapped, the model is told never to obey it, and code flags lines like "ignore previous instructions" or "mark this as verified", plus hidden invisible characters. And the Verifier has no prompt at all, so there's nothing to inject.**
+    - *If pressed:* "The detector is a tripwire, not a guarantee; a clever paraphrased attack can slip past regex rules. That's why the real defence is structural: the AI can only cite IDs our code fetched."
 
 ### Users, design, adoption (Avighna leads)
 17. **"Who is the user and why would they switch from Zotero?"** They don't have to: we import and export Zotero/Mendeley formats. Veracite adds the AI research crew and the verification Zotero doesn't have.

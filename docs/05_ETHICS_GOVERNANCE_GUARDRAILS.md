@@ -41,7 +41,11 @@
 
 1. **In the product, always:** every AI-written sentence carries a label; the AI-generated brief has an "AI-drafted" watermark until the student edits and approves it (EU AI Act Art. 50 spirit: tell people when content is AI-generated).
 2. **On export:** an auto-generated **AI-use statement** built from the session log, never typed from memory. It names the tools, models and dates, what the AI did, what the student decided, the autonomy level, and the count of sources opened. It follows APA Style's generative-AI guidance (updated Sept 2025) and SP Jain §h(viii). Example:
-   > *"I used Veracite (Team 7, 2026) in Assist mode on 25 Nov 2026 to plan searches and check references. Its AI agents (Groq-hosted open models: gpt-oss-120b, Llama 3.3 70B, Qwen) proposed search terms and drafted a labelled evidence summary. All 12 references were verified against Crossref and OpenAlex; I reviewed and approved every source and claim, opened all 12 sources, and wrote the final text myself. The full prompt ledger is attached."*
+   > *"I used Veracite (Team 7, 2026), an AI research assistant, in Assist mode on 25 November 2026 to plan searches, find sources and check references. Its AI agents (models llama-3.3-70b-versatile, openai/gpt-oss-120b and qwen/qwen3-32b) proposed a search plan, extracted quoted evidence from the sources, drafted a labelled evidence summary that could cite only sources I had approved and challenged each claim in that summary. In total 4 AI requests were made; every prompt is listed in the attached Prompt Ledger.*
+   > *12 references in my reference list were checked by code against Crossref and OpenAlex: 12 verified. I approved the search plan, chose which sources to keep and reviewed the 7 AI-drafted claims and kept 5, edited 1 and dropped 1. I opened 12 of the 12 sources myself.*
+   > *[Student's own sentence, e.g. "I wrote the final text myself."]"*
+
+   *(SAMPLE. Real output format of `veracite/src/lib/integrity/statement.ts`. The last sentence is never generated: the student must type it, or a placeholder and a warning appear.)*
 3. **For faculty:** the **Verification Certificate** (QR + hash) re-runs the checks live, plus the **Prompt Ledger** (every prompt sent to AI, redacted). This makes SP Jain §g(vi), faculty verifying references, a 30-second job.
 
 ### B3. Rules and policies the website follows
@@ -114,4 +118,6 @@ Grouped from strongest (can't happen) to softest (nudges). **The strongest guard
 **Slide-6 proof line (fill after testing on Wednesday):**
 > *"Tested on N references (N real, N fabricated, N chimeras, N retracted): X/X fabricated caught · **0 fakes marked Verified** · Y % of real references verified."*
 
-⚠️ Only put numbers on the slide that Zedan actually measured. If testing isn't finished, write "Test set: 70 references (results on our Trust Center)" instead. Never estimate.
+⚠️ Only put numbers on the slide that Zedan actually measured. If testing isn't finished, write "Test set: 51 references (results on our Trust Center)" instead. Never estimate.
+
+*Test set as built (24 Nov): 51 references = 30 real · **1** AI-fabricated · 10 chimeras · 5 retracted · 5 web. The plan was 20 AI-fabricated, but ChatGPT and Gemini refused to invent references on 7 test prompts and slipped only once (see `veracite/tests/golden/README.md`). We kept that one genuine fake rather than pad the set. Comparison already measured: a naive DOI-exists checker marked 12 of our chimeras/retracted papers Verified (`veracite/tests/results/baseline-doi-exists.md`).*
