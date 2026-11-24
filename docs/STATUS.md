@@ -1,7 +1,7 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Tue 24 Nov, 22:39 (Dubai)** · commit `8a9d599`
+> Last updated **Tue 24 Nov, 22:57 (Dubai)** · commit `cbf27e6`
 
 ## At a glance
 | | |
