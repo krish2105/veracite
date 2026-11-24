@@ -376,9 +376,18 @@ export interface VerifyRequest {
 }
 export type VerifyResponse = { ok: true; verification: Verification } | ApiError;
 
-/** POST /api/sources/xray. Responds with NDJSON: one XrayLine per reference, in order, then one XraySummary. */
+/**
+ * POST /api/sources/xray. Responds with NDJSON: one XrayStart, then one XrayLine per reference as each finishes
+ * (use `n` to place it; they may arrive out of order), then one XraySummary.
+ */
 export interface XrayRequest {
   text: string;
+}
+export interface XrayStart {
+  type: "start";
+  total: number;
+  /** The references exactly as the server split them, so the UI can show them while they are checked. */
+  refs: string[];
 }
 export interface XrayLine {
   type: "line";

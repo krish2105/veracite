@@ -6,5 +6,6 @@
  */
 export { verifyReference, toInput, type RegistryDeps } from "./verify";
 export { parseReference, parseAuthors } from "./parse";
+export { splitBibliography, MAX_REFERENCES } from "./split";
 export { decide, rankCandidates, titleScoreFor, type Evidence } from "./rules";
 export { T as THRESHOLDS, titleSimilarity, checkAuthors, checkYear, venueSimilarity } from "./text";
