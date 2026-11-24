@@ -5,4 +5,4 @@
 export { gateway, createGateway, type AgentCall, type AgentResult, type Attempt, type AiMode, type Gateway, type GatewayDeps } from "./gateway";
 export { chainFor, familyOf, DEFAULT_CHAINS, type LlmAgent, type ModelFamily } from "./models";
 export { createBudget, DEFAULT_LIMITS, type Budget, type BudgetLimits, type BudgetSnapshot } from "./budget";
-export { defaultGuards, interimGuards, type Guards } from "./guards";
+export { defaultGuards, integrityGuards, type Guards } from "./guards";

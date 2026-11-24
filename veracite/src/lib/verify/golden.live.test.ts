@@ -23,15 +23,19 @@ const records: GoldenRecord[] = files.flatMap((f) => JSON.parse(readFileSync(new
 describe.skipIf(!process.env.LIVE || records.length === 0)("Verifier on the golden set (live)", { timeout: 600_000 }, () => {
   it("never marks a non-verified reference as Verified", async () => {
     const wrongVerified: string[] = [];
+    const misses: { id: string; expected: string; got: string; why: string }[] = [];
     const tally: Record<string, { n: number; right: number }> = {};
     for (const r of records) {
-      const got = (await verifyReference(r.raw)).status;
+      const v = await verifyReference(r.raw);
+      const got = v.status;
       const t = (tally[r.expected] ??= { n: 0, right: 0 });
       t.n++;
       if (got === r.expected) t.right++;
+      else misses.push({ id: r.id, expected: r.expected, got, why: v.reasons.join(" ").slice(0, 140) });
       if (got === "verified" && r.expected !== "verified") wrongVerified.push(`${r.id} (expected ${r.expected})`);
     }
     console.table(Object.entries(tally).map(([expected, t]) => ({ expected, total: t.n, correct: t.right, rate: `${Math.round((100 * t.right) / t.n)}%` })));
+    if (misses.length) console.table(misses);
     expect(wrongVerified, "fakes wrongly marked Verified").toEqual([]);
   });
 });
