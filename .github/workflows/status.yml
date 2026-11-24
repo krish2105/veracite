@@ -43,11 +43,11 @@ jobs:
         continue-on-error: true
         run: npx next build
 
-      - name: Unit tests (offline; live registry tests are skipped)
+      - name: Unit tests (Vitest + integrity node:test; live registry tests are skipped)
         id: tests
         working-directory: veracite
         continue-on-error: true
-        run: npx vitest run
+        run: npm test
 
       - name: Regenerate docs/STATUS.md
         run: node scripts/status.mjs --typecheck=${{ steps.typecheck.outcome }} --build=${{ steps.build.outcome }}
