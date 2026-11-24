@@ -17,7 +17,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Wednesday morning · the Verifier goes live (M1)
 - [x] **K03** · P0 · Registry clients: Crossref (DOI, `query.bibliographic`, retractions via `updated-by`), OpenAlex (DOI, search, abstract), arXiv; polite headers, 24h cache, max 3 concurrent · `veracite/src/lib/registries/**` · due Wed 10:30 · #mvp #honesty #research
 - [x] **K04** · P0 · Verifier (code only): title normaliser and similarity, author match, year rule, DOI→title consistency, chimera detector, status rules + unit tests on Zedan's golden set · `veracite/src/lib/verify/**` · due Wed 11:30 · #honesty
-- [ ] **K05** · P0 · `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · `veracite/src/app/api/sources/** veracite/src/components/app/tabs/xray/**` · due Wed 13:00 · #mvp #honesty
+- [x] **K05** · P0 · `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · `veracite/src/app/api/sources/** veracite/src/components/app/tabs/xray/**` · due Wed 13:00 · #mvp #honesty
 
 ## Wednesday afternoon · the research session goes live (M2)
 - [ ] **K06** · P0 · LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · `veracite/src/lib/llm/**` · due Wed 14:30 · #mvp #honesty
