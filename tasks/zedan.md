@@ -1,7 +1,7 @@
 # Zedan Nasir Parol · Trust, Ethics & QA Lead
 
 **Owns:** golden test set and measured results, integrity features (AI-use statement, Prompt Ledger, certificate, PII scrubber), Trust Center, prompt log. **Demo segment:** 5:30–7:00 (export, governance, Rules mode). **Q&A lead:** ethics, privacy, policy, testing. **Quiz:** ethics, regulation, UAE and global AI policy.
-Read first: `docs/HANDOFF.md` → `docs/05_ETHICS_GOVERNANCE_GUARDRAILS.md` → `docs/SCORING_PLAN.md`.
+**Start here:** [`docs/onboarding/ZEDAN_START.md`](../docs/onboarding/ZEDAN_START.md) · then `docs/HANDOFF.md` → `docs/05_ETHICS_GOVERNANCE_GUARDRAILS.md` → `docs/SCORING_PLAN.md`.
 
 ## Tuesday · no code needed yet (Krishna is splitting the tabs, K01)
 - [ ] **Z01** · P0 · Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · `veracite/tests/golden/**` · due Wed 09:00 · #honesty
