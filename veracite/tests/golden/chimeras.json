@@ -1,0 +1,102 @@
+[
+  {
+    "id": "chim-001",
+    "sample": true,
+    "built_from": ["real-021"],
+    "altered": "authors",
+    "raw": "Goodfellow, I., Bengio, Y., & Courville, A. (2015). Deep learning. Nature, 521(7553), 436–444. https://doi.org/10.1038/nature14539",
+    "expected": "chimera",
+    "doi": "10.1038/nature14539",
+    "notes": "Built by hand 24 Nov 2026. Real DOI, title, journal and year; authors swapped for those of the 2016 MIT Press book of the same name. One author (Bengio) overlaps, so a 'one author matches' rule would wrongly pass this."
+  },
+  {
+    "id": "chim-002",
+    "sample": true,
+    "built_from": ["real-022"],
+    "altered": "year",
+    "raw": "Barney, J. (1995). Firm resources and sustained competitive advantage. Journal of Management, 17(1), 99–120. https://doi.org/10.1177/014920639101700108",
+    "expected": "chimera",
+    "doi": "10.1177/014920639101700108",
+    "notes": "Built by hand 24 Nov 2026. Everything real except the year (1991 → 1995). Four years off: outside any online-vs-print tolerance."
+  },
+  {
+    "id": "chim-003",
+    "sample": true,
+    "built_from": ["real-023", "real-024"],
+    "altered": "title",
+    "raw": "Davis, F. D. (1989). User acceptance of information technology: Toward a unified view. MIS Quarterly, 13(3), 319–340.",
+    "expected": "chimera",
+    "doi": null,
+    "notes": "Built by hand 24 Nov 2026. No DOI. Davis 1989's authors, year, volume and pages, with the title of Venkatesh et al. (2003). Crossref query.bibliographic (24 Nov 2026): top hit Venkatesh 2003 (title match, year/volume/pages disagree), second hit Davis 1989 (author/year match, title disagrees). Neither hit matches all fields."
+  },
+  {
+    "id": "chim-004",
+    "sample": true,
+    "built_from": ["real-028", "real-027"],
+    "altered": "title",
+    "raw": "Walters, W. H., & Wilder, E. I. (2023). Survey of hallucination in natural language generation. Scientific Reports, 13, Article 14045. https://doi.org/10.1038/s41598-023-41032-5",
+    "expected": "chimera",
+    "doi": "10.1038/s41598-023-41032-5",
+    "notes": "Built by hand 24 Nov 2026. Real DOI, authors, journal and year; title belongs to Ji et al. (2023). Title-vs-DOI similarity must fail."
+  },
+  {
+    "id": "chim-005",
+    "sample": true,
+    "built_from": ["real-014"],
+    "altered": "title",
+    "raw": "Valkenburg, P. M. (2022). Associations between screen time and lower psychological well-being among children and adolescents: Evidence from a population-based study. Current Opinion in Psychology, 45, 101294. https://doi.org/10.1016/j.copsyc.2021.12.006",
+    "expected": "chimera",
+    "doi": "10.1016/j.copsyc.2021.12.006",
+    "notes": "Built by hand 24 Nov 2026. Real Valkenburg DOI and metadata; title from Twenge & Campbell (2018), Preventive Medicine Reports. 'Real author, wrong paper' – the error type named in the brief."
+  },
+  {
+    "id": "chim-006",
+    "sample": true,
+    "built_from": ["real-002", "real-003"],
+    "altered": "doi",
+    "raw": "Brosnan, B., Haszard, J. J., Meredith-Jones, K. A., Wickham, S.-R., Galland, B. C., & Taylor, R. W. (2024). Screen use at bedtime and sleep duration and quality among youths. JAMA Pediatrics, 178(11), 1147–1154. https://doi.org/10.1016/j.jadohealth.2024.06.006",
+    "expected": "chimera",
+    "doi": "10.1016/j.jadohealth.2024.06.006",
+    "notes": "Built by hand 24 Nov 2026. A fully correct Brosnan citation with the DOI of Nagata et al. (2024), a paper on the same topic. The DOI resolves, but to a different paper: the Verifier must compare the DOI record to the citation, not just check that the DOI exists."
+  },
+  {
+    "id": "chim-007",
+    "sample": true,
+    "built_from": ["real-030"],
+    "altered": "authors+year",
+    "raw": "Twenge, J. M., & Campbell, W. K. (2015). Screen time and sleep among school-aged children and adolescents: A systematic literature review. Sleep Medicine Reviews, 21, 50–58. https://doi.org/10.1016/j.smrv.2014.07.007",
+    "expected": "chimera",
+    "doi": "10.1016/j.smrv.2014.07.007",
+    "notes": "Built by hand 24 Nov 2026. Hale & Guan's paper credited to Twenge & Campbell (real researchers in the same field). Year 2015 matches the issue; only authors are wrong."
+  },
+  {
+    "id": "chim-008",
+    "sample": true,
+    "built_from": ["real-029"],
+    "altered": "year+journal",
+    "raw": "Kasneci, E., Seßler, K., Küchemann, S., & Bannert, M. (2021). ChatGPT for good? On opportunities and challenges of large language models for education. Computers & Education, 168, 104212.",
+    "expected": "chimera",
+    "doi": null,
+    "notes": "Built by hand 24 Nov 2026. No DOI. Real title and first authors, but wrong year (2021, before ChatGPT existed), wrong journal, made-up volume and article number. Crossref query.bibliographic (24 Nov 2026): top hit is the 2023 OSF preprint (10.35542/osf.io/5er8f), second is the 2023 journal record. Both disagree on year and journal, so this must not pass on title alone."
+  },
+  {
+    "id": "chim-009",
+    "sample": true,
+    "built_from": ["real-026"],
+    "altered": "authors",
+    "raw": "Hair, J. F., & Sarstedt, M. (1981). Evaluating structural equation models with unobservable variables and measurement error. Journal of Marketing Research, 18(1), 39–50. https://doi.org/10.1177/002224378101800104",
+    "expected": "chimera",
+    "doi": "10.1177/002224378101800104",
+    "notes": "Built by hand 24 Nov 2026. Fornell & Larcker's classic paper credited to two well-known SEM authors. No author overlap."
+  },
+  {
+    "id": "chim-010",
+    "sample": true,
+    "built_from": ["real-025", "real-022"],
+    "altered": "title",
+    "raw": "Teece, D. J., Pisano, G., & Shuen, A. (1997). Firm resources and sustained competitive advantage. Strategic Management Journal, 18(7), 509–533.",
+    "expected": "chimera",
+    "doi": null,
+    "notes": "Built by hand 24 Nov 2026. No DOI. Teece et al.'s authors, year, journal and pages with Barney (1991)'s title. Crossref query.bibliographic (24 Nov 2026): the author names dominate and the top hits are Teece et al.'s own 'Dynamic capabilities' paper (an SSRN critique, then the OUP chapter), NOT Barney. The Verifier must compare the title of the best hit, not trust the top hit."
+  }
+]
