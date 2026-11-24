@@ -104,6 +104,8 @@ export interface ReferenceInput {
   year?: number;
   venue?: string;
   url?: string;
+  /** The author list was cut short with "et al.", so missing co-authors are not an error. */
+  etAl?: boolean;
 }
 
 /** One row of the field-by-field table shown in the X-ray and on every source. */
@@ -120,7 +122,10 @@ export interface FieldCheck {
 export interface ChimeraPart {
   field: FieldName;
   claimed: string;
-  belongsTo: { doi?: string; title: string; year?: number; authors: string };
+  /** The real paper this part belongs to. Absent when the part matches no record (e.g. authors who never wrote it). */
+  belongsTo?: { doi?: string; title: string; year?: number; authors: string };
+  /** Plain-English explanation, e.g. "None of these authors are on that paper". */
+  note?: string;
 }
 
 /** Receipt of one registry search, so "Not found" can show exactly what was searched. */
