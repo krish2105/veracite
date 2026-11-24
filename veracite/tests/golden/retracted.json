@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ret-001",
+    "sample": true,
+    "raw": "Wakefield, A. J., Murch, S. H., Anthony, A., Linnell, J., Casson, D. M., Malik, M., Berelowitz, M., Dhillon, A. P., Thomson, M. A., Harvey, P., Valentine, A., Davies, S. E., & Walker-Smith, J. A. (1998). Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children. The Lancet, 351(9103), 637–641. https://doi.org/10.1016/S0140-6736(97)11096-0",
+    "expected": "retracted",
+    "doi": "10.1016/S0140-6736(97)11096-0",
+    "notes": "Crossref 24 Nov 2026: updated-by retraction 10.1016/s0140-6736(10)60175-4 (2010, source retraction-watch); also a 2004 correction. Crossref title is prefixed 'RETRACTED:'; the raw citation is not. DOI contains brackets."
+  },
+  {
+    "id": "ret-002",
+    "sample": true,
+    "raw": "Mehra, M. R., Desai, S. S., Kuy, S., Henry, T. D., & Patel, A. N. (2020). Cardiovascular disease, drug therapy, and mortality in Covid-19. New England Journal of Medicine, 382(25). https://doi.org/10.1056/NEJMoa2007621",
+    "expected": "retracted",
+    "doi": "10.1056/NEJMoa2007621",
+    "notes": "Crossref 24 Nov 2026: expression of concern 10.1056/nejme2020822, then retraction 10.1056/nejmc2021225 (June 2020, source retraction-watch). Surgisphere case. Crossref has no page or article number, so none is given here."
+  },
+  {
+    "id": "ret-003",
+    "sample": true,
+    "raw": "Obokata, H., Wakayama, T., Sasai, Y., Kojima, K., Vacanti, M. P., Niwa, H., Yamato, M., & Vacanti, C. A. (2014). Stimulus-triggered fate conversion of somatic cells into pluripotency. Nature, 505(7485), 641–647. https://doi.org/10.1038/nature12968",
+    "expected": "retracted",
+    "doi": "10.1038/nature12968",
+    "notes": "Crossref 24 Nov 2026: retraction 10.1038/nature13598 (July 2014, sources publisher + retraction-watch). Crossref title prefixed 'RETRACTED ARTICLE:'."
+  },
+  {
+    "id": "ret-004",
+    "sample": true,
+    "raw": "Séralini, G.-E., Clair, E., Mesnage, R., Gress, S., Defarge, N., Malatesta, M., Hennequin, D., & de Vendômois, J. S. (2012). Long term toxicity of a Roundup herbicide and a Roundup-tolerant genetically modified maize. Food and Chemical Toxicology, 50(11), 4221–4231. https://doi.org/10.1016/j.fct.2012.08.005",
+    "expected": "retracted",
+    "doi": "10.1016/j.fct.2012.08.005",
+    "notes": "Crossref 24 Nov 2026: retraction 10.1016/j.fct.2013.11.047 (Dec 2013, source retraction-watch). Note: the paper was later republished in another journal; the Verifier should still flag this DOI."
+  },
+  {
+    "id": "ret-005",
+    "sample": true,
+    "raw": "Stapel, D. A., & Lindenberg, S. (2011). Coping with chaos: How disordered contexts promote stereotyping and discrimination. Science, 332(6026), 251–253. https://doi.org/10.1126/science.1201068",
+    "expected": "retracted",
+    "doi": "10.1126/science.1201068",
+    "notes": "Crossref 24 Nov 2026: retraction 10.1126/science.334.6060.1202-a (Dec 2011, source retraction-watch only). HARD CASE: the Crossref title has NO 'RETRACTED' prefix, so the Verifier must read updated-by / filter=updates, not the title."
+  }
+]

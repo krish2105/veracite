@@ -1,0 +1,272 @@
+[
+  {
+    "id": "real-001",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Bani-Issa, W., Radwan, H., Saqan, R., Hijazi, H., Fakhry, R., Alameddine, M., Naja, F., Ibrahim, A., Lin, N., Naing, Y. T., & Awad, M. (2023). Association between quality of sleep and screen time during the COVID-19 outbreak among adolescents in the United Arab Emirates. Journal of Sleep Research, 32(1), e13666. https://doi.org/10.1111/jsr.13666",
+    "expected": "verified",
+    "doi": "10.1111/jsr.13666",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026 (11 authors). Online 2022, issue 2023: year rule must accept the issue year."
+  },
+  {
+    "id": "real-002",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Nagata, J. M., Cheng, C. M., Shim, J., Kiss, O., Ganson, K. T., Testa, A., He, J., & Baker, F. C. (2024). Bedtime screen use behaviors and sleep outcomes in early adolescents: A prospective cohort study. Journal of Adolescent Health, 75(4), 650–655. https://doi.org/10.1016/j.jadohealth.2024.06.006",
+    "expected": "verified",
+    "doi": "10.1016/j.jadohealth.2024.06.006",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-003",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Brosnan, B., Haszard, J. J., Meredith-Jones, K. A., Wickham, S.-R., Galland, B. C., & Taylor, R. W. (2024). Screen use at bedtime and sleep duration and quality among youths. JAMA Pediatrics, 178(11), 1147–1154. https://doi.org/10.1001/jamapediatrics.2024.2914",
+    "expected": "verified",
+    "doi": "10.1001/jamapediatrics.2024.2914",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Crossref gives only the first page (1147); the end page cannot be checked from the registry."
+  },
+  {
+    "id": "real-004",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Echevarria, P., Del-Ponte, B., Tovo-Rodrigues, L., Matijasevich, A., Halal, C. S., & Santos, I. S. (2023). Screen use and sleep duration and quality at 15 years old: Cohort study. Sleep Medicine: X, 5, 100073. https://doi.org/10.1016/j.sleepx.2023.100073",
+    "expected": "verified",
+    "doi": "10.1016/j.sleepx.2023.100073",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-005",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "McGrath, C., Farazouli, A., & Cerratto-Pargman, T. (2025). Generative AI chatbots in higher education: A review of an emerging research area. Higher Education, 89, 1533–1549. https://doi.org/10.1007/s10734-024-01288-w",
+    "expected": "verified",
+    "doi": "10.1007/s10734-024-01288-w",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. ChatGPT left out the issue (Crossref: 89(6)). Online 2024, issue 2025."
+  },
+  {
+    "id": "real-006",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Bai, H., Lui, W. C., & Khiatani, P. V. (2025). Promoting student engagement with GPTutor: An intelligent tutoring system powered by generative AI. International Journal of Educational Technology in Higher Education, 22, Article 77. https://doi.org/10.1186/s41239-025-00571-9",
+    "expected": "verified",
+    "doi": "10.1186/s41239-025-00571-9",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. ChatGPT left out the issue (Crossref: 22(1))."
+  },
+  {
+    "id": "real-007",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Sánchez-Vera, F. (2025). Subject-specialized chatbot in higher education as a tutor for autonomous exam preparation: Analysis of the impact on academic performance and students' perception of its usefulness. Education Sciences, 15(1), Article 26. https://doi.org/10.3390/educsci15010026",
+    "expected": "verified",
+    "doi": "10.3390/educsci15010026",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Online 30 Dec 2024, issue 2025. Accented surname: normaliser must handle diacritics."
+  },
+  {
+    "id": "real-008",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Schulte-Frankenfeld, P. M., & Trautwein, F.-M. (2022). App-based mindfulness meditation reduces perceived stress and improves self-regulation in working university students: A randomised controlled trial. Applied Psychology: Health and Well-Being, 14(4), 1151–1171. https://doi.org/10.1111/aphw.12328",
+    "expected": "verified",
+    "doi": "10.1111/aphw.12328",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Crossref 'issued' is 2021 (online); print issue Nov 2022. Year rule must allow online-vs-print."
+  },
+  {
+    "id": "real-009",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Sun, S., Lin, D., Goldberg, S., Shen, Z., Chen, P., Qiao, S., Brewer, J., Loucks, E., & Operario, D. (2022). A mindfulness-based mobile health (mHealth) intervention among psychologically distressed university students in quarantine during the COVID-19 pandemic: A randomized controlled trial. Journal of Counseling Psychology, 69(2), 157–171. https://doi.org/10.1037/cou0000568",
+    "expected": "verified",
+    "doi": "10.1037/cou0000568",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Crossref title ends with a full stop: normaliser must strip it."
+  },
+  {
+    "id": "real-010",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Chen, B., Yang, T., Xiao, L., Xu, C., & Zhu, C. (2023). Effects of mobile mindfulness meditation on the mental health of university students: Systematic review and meta-analysis. Journal of Medical Internet Research, 25, e39128. https://doi.org/10.2196/39128",
+    "expected": "verified",
+    "doi": "10.2196/39128",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-011",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Young, D. K.-W., Carlbring, P., Ng, P. Y.-N., Cheng, D. Y. T., Chen, J. Q.-R., & Ng, S.-M. (2023). Low-intensity online mindfulness-based intervention for university students with anxiety during the COVID-19 pandemic: A randomized controlled trial with 3-month follow-up. Internet Interventions, 34, 100665. https://doi.org/10.1016/j.invent.2023.100665",
+    "expected": "verified",
+    "doi": "10.1016/j.invent.2023.100665",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Crossref title uses an em dash before 'A randomized'; ChatGPT uses a colon."
+  },
+  {
+    "id": "real-012",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Kurdy, D. M., Al-Malkawi, H.-A. N., & Rizwan, S. (2023). The impact of remote working on employee productivity during COVID-19 in the UAE: The moderating role of job level. Journal of Business and Socio-Economic Development, 3(4), 339–352. https://doi.org/10.1108/JBSED-09-2022-0104",
+    "expected": "verified",
+    "doi": "10.1108/JBSED-09-2022-0104",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Uppercase DOI: DOI comparison must be case-insensitive."
+  },
+  {
+    "id": "real-013",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Alawad, M., & Smail, L. (2026). The UAE's 4.5-day workweek: Employee perceptions, organizational redesign and employee well-being under a reduced-hours workweek. International Social Science Journal. https://doi.org/10.1111/issj.70070",
+    "expected": "verified",
+    "doi": "10.1111/issj.70070",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Advance online: Crossref has no volume, issue or pages. Missing fields must not cause notfound."
+  },
+  {
+    "id": "real-014",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Valkenburg, P. M. (2022). Social media use and well-being: What we know and what we need to know. Current Opinion in Psychology, 45, 101294. https://doi.org/10.1016/j.copsyc.2021.12.006",
+    "expected": "verified",
+    "doi": "10.1016/j.copsyc.2021.12.006",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-015",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Godard, R., & Holtzman, S. (2024). Are active and passive social media use related to mental health, wellbeing, and social support outcomes? A meta-analysis of 141 studies. Journal of Computer-Mediated Communication, 29(1), zmad055. https://doi.org/10.1093/jcmc/zmad055",
+    "expected": "verified",
+    "doi": "10.1093/jcmc/zmad055",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Crossref 'issued' 2023; volume 29 is 2024."
+  },
+  {
+    "id": "real-016",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Ansari, S., Iqbal, N., Asif, R., Hashim, M., Farooqi, S. R., & Alimoradi, Z. (2024). Social media use and well-being: A systematic review and meta-analysis. Cyberpsychology, Behavior, and Social Networking, 27(10), 704–719. https://doi.org/10.1089/cyber.2024.0001",
+    "expected": "verified",
+    "doi": "10.1089/cyber.2024.0001",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-017",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Ahmed, O., Walsh, E. I., Dawel, A., Alateeq, K., Espinoza Oyarce, D. A., & Cherbuin, N. (2024). Social media use, mental health and sleep: A systematic review with meta-analyses. Journal of Affective Disorders, 367, 701–712. https://doi.org/10.1016/j.jad.2024.08.193",
+    "expected": "verified",
+    "doi": "10.1016/j.jad.2024.08.193",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. Two-word surname (Espinoza Oyarce)."
+  },
+  {
+    "id": "real-018",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Hurley, E. C., Williams, I. R., Tomyn, A. J., & Sanci, L. (2024). Social media use among Australian university students: Understanding links with stress and mental health. Computers in Human Behavior Reports, 14, 100398. https://doi.org/10.1016/j.chbr.2024.100398",
+    "expected": "verified",
+    "doi": "10.1016/j.chbr.2024.100398",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-019",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Ramsden, E., & Talbot, C. V. (2025). The role of TikTok in students' health and wellbeing. International Journal of Mental Health and Addiction, 23, 2180–2202. https://doi.org/10.1007/s11469-023-01224-6",
+    "expected": "verified",
+    "doi": "10.1007/s11469-023-01224-6",
+    "notes": "ChatGPT output, unedited. Crossref match 24 Nov 2026. ChatGPT left out the issue (Crossref: 23(3)). Online Jan 2024, issue 2025."
+  },
+  {
+    "id": "real-020",
+    "sample": true,
+    "origin": "chatgpt-2026-11-24",
+    "raw": "Zhang, J., Wang, Y., Zhou, L., Wu, J., Li, H., & Zhu, T. (2025). Correlations between social media addiction and anxiety, depression, FoMO, loneliness and self-esteem among students: A systematic review and meta-analysis. PLOS ONE, 20(9), e0329466. https://doi.org/10.1371/journal.pone.0329466",
+    "expected": "verified",
+    "doi": "10.1371/journal.pone.0329466",
+    "notes": "ChatGPT output, unedited. KEY EDGE CASE: the Crossref record has given/family names swapped (family='Jing', given='Zhang'). The citation is right. Author matching must also try given-name matches before flagging a chimera."
+  },
+  {
+    "id": "real-021",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. Nature, 521(7553), 436–444. https://doi.org/10.1038/nature14539",
+    "expected": "verified",
+    "doi": "10.1038/nature14539",
+    "notes": "Crossref match 24 Nov 2026. Very short title: similarity must not over-match."
+  },
+  {
+    "id": "real-022",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Barney, J. (1991). Firm resources and sustained competitive advantage. Journal of Management, 17(1), 99–120. https://doi.org/10.1177/014920639101700108",
+    "expected": "verified",
+    "doi": "10.1177/014920639101700108",
+    "notes": "Crossref match 24 Nov 2026. Crossref title is in Title Case."
+  },
+  {
+    "id": "real-023",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. MIS Quarterly, 13(3), 319–340. https://doi.org/10.2307/249008",
+    "expected": "verified",
+    "doi": "10.2307/249008",
+    "notes": "Crossref match 24 Nov 2026. JSTOR DOI."
+  },
+  {
+    "id": "real-024",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Venkatesh, V., Morris, M. G., Davis, G. B., & Davis, F. D. (2003). User acceptance of information technology: Toward a unified view. MIS Quarterly, 27(3), 425–478. https://doi.org/10.2307/30036540",
+    "expected": "verified",
+    "doi": "10.2307/30036540",
+    "notes": "Crossref match 24 Nov 2026. Crossref title has a stray footnote marker ('Unified View1'): normaliser must tolerate it."
+  },
+  {
+    "id": "real-025",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Teece, D. J., Pisano, G., & Shuen, A. (1997). Dynamic capabilities and strategic management. Strategic Management Journal, 18(7), 509–533. https://doi.org/10.1002/(SICI)1097-0266(199708)18:7<509::AID-SMJ882>3.0.CO;2-Z",
+    "expected": "verified",
+    "doi": "10.1002/(SICI)1097-0266(199708)18:7<509::AID-SMJ882>3.0.CO;2-Z",
+    "notes": "Crossref match 24 Nov 2026. SICI DOI with brackets, colons and < >: DOI extraction and URL-encoding must handle it."
+  },
+  {
+    "id": "real-026",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Fornell, C., & Larcker, D. F. (1981). Evaluating structural equation models with unobservable variables and measurement error. Journal of Marketing Research, 18(1), 39–50. https://doi.org/10.1177/002224378101800104",
+    "expected": "verified",
+    "doi": "10.1177/002224378101800104",
+    "notes": "Crossref match 24 Nov 2026."
+  },
+  {
+    "id": "real-027",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., & Fung, P. (2023). Survey of hallucination in natural language generation. ACM Computing Surveys, 55(12), 1–38. https://doi.org/10.1145/3571730",
+    "expected": "verified",
+    "doi": "10.1145/3571730",
+    "notes": "Crossref match 24 Nov 2026 (10 authors)."
+  },
+  {
+    "id": "real-028",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Walters, W. H., & Wilder, E. I. (2023). Fabrication and errors in the bibliographic citations generated by ChatGPT. Scientific Reports, 13, Article 14045. https://doi.org/10.1038/s41598-023-41032-5",
+    "expected": "verified",
+    "doi": "10.1038/s41598-023-41032-5",
+    "notes": "Crossref match 24 Nov 2026. Good for the pitch: measures how often ChatGPT fabricates citations."
+  },
+  {
+    "id": "real-029",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Kasneci, E., Seßler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., Gasser, U., Groh, G., Günnemann, S., Hüllermeier, E., Krusche, S., Kutyniok, G., Michaeli, T., Nerdel, C., Pfeffer, J., Poquet, O., Sailer, M., Schmidt, A., Seidel, T., … Kasneci, G. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274",
+    "expected": "verified",
+    "doi": "10.1016/j.lindif.2023.102274",
+    "notes": "Crossref match 24 Nov 2026 (23 authors). APA 7 21+ author ellipsis rule: author matcher must not require every author. 'Seßler' here vs 'Sessler' in Crossref: normaliser must fold ß to ss."
+  },
+  {
+    "id": "real-030",
+    "sample": true,
+    "origin": "hand-picked",
+    "raw": "Hale, L., & Guan, S. (2015). Screen time and sleep among school-aged children and adolescents: A systematic literature review. Sleep Medicine Reviews, 21, 50–58. https://doi.org/10.1016/j.smrv.2014.07.007",
+    "expected": "verified",
+    "doi": "10.1016/j.smrv.2014.07.007",
+    "notes": "Crossref match 24 Nov 2026."
+  }
+]
