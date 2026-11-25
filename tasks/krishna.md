@@ -25,6 +25,10 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [ ] **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · `veracite/src/lib/agents/**` · due Wed 16:30 · #mvp #research #honesty
 - [ ] **K09** · P0 · Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · `veracite/src/lib/session/** veracite/src/components/app/tabs/research/**` · due Wed 19:00 · #mvp #research #ux
 
+## Day-of path (added Wed 14:15)
+- [x] **K19** · P0 · Five-requirement path on the X-ray page: fake-reference check, labels + legend, approve to list, APA 7 copy/download, AI-use statement, phone layout · `veracite/src/components/app/tabs/xray/**` · due Wed 16:00 · #mvp #research #honesty #ux
+    - Interim list store and APA formatter live in `tabs/xray/`; Avighna's A05/A06 can replace them (records use `SourceRecord`).
+
 ## Wednesday evening · deck-promised extras (M3)
 - [ ] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.

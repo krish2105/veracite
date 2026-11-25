@@ -1,15 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, Download, FlaskConical, ScanSearch, X } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
 import { Card, Sample, StatusBadge } from "@/components/app/ui";
 import type { RefStatus } from "@/lib/types";
 import { MAX_REFERENCES, splitBibliography } from "@/lib/verify/split";
 import { ChimeraPanel } from "./ChimeraPanel";
+import { LabelLegend } from "./LabelLegend";
+import { ReferenceList } from "./ReferenceList";
+import { refList } from "./refList";
 import { ResultRow } from "./ResultRow";
 import { TEST_LIST } from "./testList";
 import { useXray } from "./useXray";
+import "./xray.css";
 
 const ORDER: RefStatus[] = ["verified", "partial", "mismatch", "chimera", "retracted", "notfound"];
 
@@ -26,6 +30,11 @@ export function XrayTab() {
   const firstChimera = lines.filter((l) => l.verification.status === "chimera").sort((a, b) => a.n - b.n)[0];
   const shown = chimeraN ? state.lines[chimeraN] : firstChimera;
 
+  // Every finished check goes into the log the AI-use statement is built from.
+  useEffect(() => {
+    if (state.summary) refList.logCheck(state.summary.total, state.summary.byStatus);
+  }, [state.summary]);
+
   const start = () => {
     setChimeraN(undefined);
     void run(text);
@@ -40,13 +49,14 @@ export function XrayTab() {
   return (
     <AppShell
       title="Reference X-ray"
-      subtitle="Paste any bibliography. Every reference is checked field by field against Crossref, OpenAlex and arXiv. No AI involved."
+      subtitle="1. Paste references. 2. Check them against Crossref, OpenAlex and arXiv. 3. Approve the good ones. 4. Copy your APA 7 list and AI-use statement. No AI involved."
       actions={
         <button className="btn primary" onClick={start} disabled={!count || state.running} aria-busy={state.running}>
           <ScanSearch size={15} /> {state.running ? `Checking ${done}/${state.refs.length || count}…` : `X-ray ${count || ""} reference${count === 1 ? "" : "s"}`}
         </button>
       }
     >
+      <div className="xrx">
       <div className="g2">
         <Card
           title={<>Your reference list {isTestList && <Sample>TEST LIST · by Team 7 · includes deliberate fakes</Sample>}</>}
@@ -133,6 +143,10 @@ export function XrayTab() {
           )}
         </div>
       </Card>
+
+      <LabelLegend />
+      <ReferenceList />
+      </div>
     </AppShell>
   );
 }

@@ -1,0 +1,40 @@
+/* K19: reference list, label legend and phone layout for the X-ray page. */
+.xrx { display: grid; gap: 18px; min-width: 0; }
+.xrx-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.xrx-row .vx-tiny { margin: 0; }
+.xrx-list { list-style: none; margin: 0 0 14px; padding: 0; }
+.xrx-list li { border-top: 1px solid var(--line); padding: 12px 0; }
+.xrx-list li:first-child { border-top: 0; padding-top: 0; }
+.xrx-apa { font-family: var(--f-read); font-size: 14px; line-height: 1.6; margin: 0; padding-left: 28px; text-indent: -28px; overflow-wrap: anywhere; }
+.xrx-own { min-height: 64px; }
+.xrx-statement { white-space: pre-wrap; overflow-wrap: anywhere; user-select: text; }
+.xrx-warn { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.5; color: var(--warn); }
+.xrx-legend { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 12px 16px; }
+.xrx-legend summary { cursor: pointer; font: 500 10.5px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); }
+.xrx-legend dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; margin: 12px 0 0; }
+.xrx-legend dl div { display: flex; gap: 10px; align-items: flex-start; }
+.xrx-legend dt { flex: 0 0 108px; }
+.xrx-legend dd { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ink2); }
+.xrx-verdict { font-weight: 600; color: var(--ink); }
+.xrx .chim { overflow: hidden; }
+
+@media (max-width: 640px) {
+  .xrx-legend dl { grid-template-columns: minmax(0, 1fr); }
+  .vx:has(.xrx) { grid-template-columns: 52px minmax(0, 1fr); }
+  .vx:has(.xrx) .vx-side { padding: 14px 4px; }
+  .vx:has(.xrx) .vx-main { padding: 0 12px 32px; }
+  .vx:has(.xrx) .vx-top { position: static; }
+  .xrx .vx-card { padding: 16px 12px 12px; }
+  .xrx .vx-card-h { flex-wrap: wrap; }
+  .xrx .xr-head { flex-direction: column-reverse; gap: 6px; }
+  .xrx .xr-ref { overflow-wrap: anywhere; }
+  /* The field table becomes stacked blocks, so nothing scrolls sideways. */
+  .xrx .xr table, .xrx .xr tbody, .xrx .xr tr, .xrx .xr td { display: block; width: 100%; }
+  .xrx .xr thead { display: none; }
+  .xrx .xr tr { border-top: 1px dashed var(--line); padding: 6px 0; }
+  .xrx .xr td { border: 0; padding: 1px 0; overflow-wrap: anywhere; }
+  .xrx .xr td:nth-child(2)::before { content: "You: "; color: var(--ink2); }
+  .xrx .xr td:nth-child(3)::before { content: "Registry: "; color: var(--ink2); }
+  .xrx .chim { height: 300px; }
+  .xrx .chim-card { width: 190px; }
+}

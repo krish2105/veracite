@@ -1,16 +1,28 @@
 "use client";
 
-import { ExternalLink, Scissors } from "lucide-react";
+import { Check, ExternalLink, Plus, Scissors } from "lucide-react";
 import { StatusBadge } from "@/components/app/ui";
-import type { RegistryName, Verification } from "@/lib/types";
+import type { RefStatus, RegistryName, Verification } from "@/lib/types";
+import { canAdd, refList, sourceId, useRefList } from "./refList";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
+/** The plain verdict, said first, so nobody has to know what a label means. */
+const VERDICT: Record<RefStatus, string> = {
+  verified: "Verified.",
+  partial: "Not yet verified.",
+  mismatch: "Not verified as typed.",
+  chimera: "Could not be verified. Do not cite it.",
+  retracted: "Retracted. Do not cite it.",
+  notfound: "Could not be verified.",
+};
 const FIELD: Record<string, string> = { doi: "DOI", title: "Title", authors: "Authors", year: "Year", venue: "Journal" };
 
 /** One reference in the X-ray results: verdict, plain-English reasons, the field-by-field table and the receipts. */
 export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; v?: Verification; onTakeApart?: () => void }) {
   const rows = v?.checks.filter((c) => c.claimed || c.found) ?? [];
   const notice = v?.updates.find((u) => u.noticeDoi);
+  const { sources } = useRefList();
+  const added = !!v?.matched && sources.some((s) => s.id === sourceId(v));
   return (
     <div className="xr">
       <div className="xr-head">
@@ -23,7 +35,9 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
 
       {v && (
         <>
-          <p className="xr-note">{v.reasons.join(" ")}</p>
+          <p className="xr-note">
+            <span className="xrx-verdict">{VERDICT[v.status]}</span> {v.reasons.join(" ")}
+          </p>
           {rows.length > 0 && (
             <table>
               <thead>
@@ -50,6 +64,13 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
             </table>
           )}
           <div className="chips" style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
+            {canAdd(v) ? (
+              <button className={`btn small ${added ? "ok" : "primary"}`} onClick={() => refList.approve(v)} disabled={added}>
+                {added ? <Check size={13} /> : <Plus size={13} />} {added ? "In my list" : v.status === "mismatch" ? "Add the registry's version" : "Add to my list"}
+              </button>
+            ) : (
+              <span className="vx-tiny" style={{ margin: 0 }}>Cannot be added to your list.</span>
+            )}
             {v.registries.map((r) => (
               <span key={r} className="lbl lbl-verified">{REGISTRY[r]} ✓</span>
             ))}
