@@ -25,7 +25,7 @@ export const FLAG_DEFAULTS = {
 
   // P2 · stretch
   missionControl3d: false, // A07
-  arabic: false, // A08
+  arabic: true, // A08 · built in K43 (menus, titles, trust labels, badges)
   commandPalette: false, // A09
   pdfDrop: false, // A10
   galaxyRealData: false, // A05 stretch

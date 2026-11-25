@@ -91,5 +91,6 @@
 | 76 | 26 Nov 2026, ~01:20 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K40: journal-index chips from OpenAlex (`lib/registries/journal.ts`, 3 tests) on X-ray, Library and research sources | Kept |
 | 77 | 26 Nov 2026, ~01:30 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K41: new papers citing your sources (`relatedQuery` with `since`, 3 tests; Library card) | Kept |
 | 78 | 26 Nov 2026, ~01:45 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K42: related-papers map (`mapLayout.ts` 4 tests, `PaperMap.tsx`); fixed an oversized map and a CSS rule that enlarged badge icons after the screenshot check | Kept |
+| 79 | 26 Nov 2026, ~02:00 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K43: Arabic / English toggle (`lib/i18n/strings.ts`, `lang.ts`, 5 tests): menus, titles, trust labels and badges; results stay English with a beta note | Kept; Arabic wording to be read once by an Arabic speaker |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*
