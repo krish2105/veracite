@@ -1,7 +1,7 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 23:56 (Dubai)** · commit `bcbcb40`
+> Last updated **Thu 26 Nov, 00:00 (Dubai)** · commit `54c1fd4`
 
 ## At a glance
 | | |
@@ -10,20 +10,20 @@
 | **P0 demo spine** | ███████░░░ 20/28 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
-| **In progress / blocked** | 2 🔨 · 0 ⛔ |
+| **In progress / blocked** | 3 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **9h 3m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **13h 18m** |
-| Phase 2 submissions close | Thu 15:00 | **15h 3m** |
+| Deck upload (official, hard) | Thu 09:00 | **8h 59m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **13h 14m** |
+| Phase 2 submissions close | Thu 15:00 | **14h 59m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 77% | 24 | 0 | 7 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 77% | 24 | 1 | 6 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -42,6 +42,7 @@
 
 ## 🔨 Doing now
 - **A11** Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · Avighna Gavhane · due Thu 11:00
+- **K32** Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · Krishna Mathur
 - **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol · due Wed 22:00
 
 ## ⛔ Blocked
@@ -50,7 +51,7 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
-- ⬜ **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
+- 🔨 **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
 - ⬜ **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server)
 - ⬜ **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds)
 - ⬜ **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · _due Thu 11:00_
