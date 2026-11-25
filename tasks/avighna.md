@@ -16,7 +16,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [ ] **A06** · P0 · Export with citation-js + official CSL: APA 7, BibTeX, RIS first (MLA 9, Harvard, IEEE, Chicago in the evening); import BibTeX/RIS · `veracite/src/lib/cite/** veracite/src/app/api/export/**` · due Wed 15:00 · #research
 - [ ] **A14** · P0 · Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · `veracite/src/components/app/tabs/draft/Writer.tsx veracite/src/lib/cite/insert*` · due Wed 18:00 · #research #ux #honesty
     - The brief asks for "insert citations while you write". Krishna's Draft Checker (K10) checks the same text.
-- [ ] **A03** · P0 · Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · `veracite/src/app/page.tsx veracite/src/components/lab/vault/**` · due Wed 19:00 · #ux #honesty
+- [x] **A03** · P0 · Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · `veracite/src/app/page.tsx veracite/src/components/lab/vault/**` · due Wed 19:00 · #ux #honesty
 
 ## Wednesday evening · deck-promised extras (M3)
 - [ ] **A15** · P1 · One-click "Save to Veracite" bookmarklet: reads the page's DOI meta tag, opens Veracite's `/save` page, verifies via `/api/sources/verify`, saves to the library (like Zotero's browser button) · `veracite/src/app/save/** veracite/src/lib/library/bookmarklet*` · due Wed 21:00 · #research #ux
@@ -26,6 +26,6 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [ ] **A10** · P2 · PDF drop: read DOIs and the reference list in the browser (pdf.js) and send them to the X-ray · `veracite/src/lib/pdf/**` · #research
 
 ## Thursday
-- [ ] **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · `docs/08_DEMO_SCRIPT_AND_QA.md submissions/phase2/**` · due Thu 11:00 · #pres
+- [~] **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · `docs/08_DEMO_SCRIPT_AND_QA.md submissions/phase2/**` · due Thu 11:00 · #pres
 - [ ] **A12** · DAY · Phase 2: rewrite demo segment 4:30–5:30 around the new requirement; keep the clock · due Thu 14:50 · #dayof #pres
 - [ ] **A13** · PRES · Rehearse the opening and close with a timer; check outfits, chargers and logins · due Thu 12:30 · #pres
