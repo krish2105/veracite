@@ -34,6 +34,6 @@ export function noteRect(width: number, height: number) {
   const left = upright ? 12 : g.textRight + 24;
   const right = upright ? width - 12 : width - g.pinSpace - 16;
   const top = upright ? g.textBottom + 6 : g.textBottom;
-  const bottom = g.cardsTop - (upright ? 52 : 80);
+  const bottom = g.cardsTop - 80; // the stamp hangs below the note
   return { cx: (left + right) / 2, cy: (top + bottom) / 2, width: Math.min(right - left, (bottom - top) / 0.625, 760) };
 }

@@ -15,14 +15,14 @@ describe("noteRect", () => {
     expect(r.cy + half.h).toBeLessThanOrEqual(g.cardsTop - 70); // room for the stamp
     expect(r.width).toBeGreaterThanOrEqual(280);
   });
-  it.each([[390, 600], [390, 664], [390, 844], [430, 932], [768, 1024]])("fits between the headline and the buttons on an upright %i × %i screen", (w, h) => {
+  it.each([[390, 600], [390, 664], [390, 844], [430, 932], [768, 1024], [880, 941], [1000, 1010]])("fits between the headline and the buttons on an upright %i × %i screen", (w, h) => {
     const r = noteRect(w, h);
     const g = regions(w, h);
     const half = { w: r.width / 2, h: (r.width * 0.625) / 2 };
     expect(r.cx - half.w).toBeGreaterThanOrEqual(8);
     expect(r.cx + half.w).toBeLessThanOrEqual(w - 8);
     expect(r.cy - half.h).toBeGreaterThanOrEqual(g.textBottom);
-    expect(r.cy + half.h).toBeLessThanOrEqual(g.cardsTop - 44); // room for the stamp
+    expect(r.cy + half.h).toBeLessThanOrEqual(g.cardsTop - 66); // room for the stamp, which hangs below the note
     expect(r.width).toBeGreaterThanOrEqual(260);
   });
   it("widens the camera's view on upright screens", () => {
