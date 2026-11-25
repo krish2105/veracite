@@ -1,96 +1,130 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
-import { Check, X, Eye, EyeOff, Swords, Download } from "lucide-react";
-import AppShell from "@/components/app/AppShell";
-import { Card, Sample, StatusBadge, TrustLabel } from "@/components/app/ui";
-import { BRIEF, QUESTION, RECEIPTS, SOURCES } from "@/components/app/data";
+import { AlertTriangle, RotateCcw, Search } from "lucide-react";
+import AppShell, { autonomyStore } from "@/components/app/AppShell";
+import { Card, TrustLabel } from "@/components/app/ui";
+import { ReferenceList } from "@/components/app/tabs/xray/ReferenceList";
+import { useRefList } from "@/components/app/tabs/xray/refList";
+import "@/components/app/tabs/xray/xray.css";
+import { useStore } from "@/components/lab/store";
+import { STEPS, stepState } from "@/lib/session/machine";
+import { useResearch } from "@/lib/session/useResearch";
+import type { Autonomy } from "@/lib/types";
+import { ClaimLegend, ClaimsCard, PlanCard, SourcesCard } from "./parts";
+import "./research.css";
 
-const MiniMission = dynamic(() => import("@/components/app/three/MiniMission"), { ssr: false });
-
-const STEPS: [string, "done" | "active" | "todo", boolean?][] = [
-  ["You asked", "done"], ["Planner", "done"], ["✋ Approve plan", "done", true], ["Scout", "done"], ["Verifier", "done"],
-  ["✋ Approve sources", "done", true], ["Reader", "done"], ["Skeptic", "done"], ["Scribe", "done"], ["✋ Approve claims", "active", true], ["Integrity Clerk", "todo"],
+const EXAMPLE = "Does generative AI help or hurt student learning?";
+const AUTONOMY: [Autonomy, string, string][] = [
+  ["off", "Off", "No AI: you search, check and approve; nothing is drafted."],
+  ["assist", "Assist", "AI plans, reads and challenges. You write."],
+  ["copilot", "Co-pilot", "AI also drafts a labelled brief from your approved sources."],
 ];
 
 export function ResearchTab() {
-  const [decisions, setDecisions] = useState<Record<string, "accepted" | "rejected" | undefined>>(Object.fromEntries(SOURCES.map((s) => [s.id, s.decision])));
-  const [kept, setKept] = useState<Record<string, "kept" | "dropped" | undefined>>({});
+  const autonomy = useStore(autonomyStore);
+  const { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan } = useResearch(autonomy);
+  const [q, setQ] = useState("");
+  const { receipts } = useRefList();
+  const busy = !!s.busy;
+  const started = s.phase !== "ask";
+  const approved = s.candidates.filter((c) => s.decisions[c.id] === "accepted");
+  const mine = receipts.filter((r) => r.sessionId === s.sessionId);
+
   return (
-    <AppShell title="Research" subtitle="Five agents do the legwork. You approve three times." actions={<Sample>SAMPLE SESSION</Sample>}>
-      <Card title={<>Mission control <Sample /></>} aside={<span className="lbl lbl-reported">Waiting for you · approve claims</span>}>
-        <div className="qbox"><span className="mono muted">Q</span><b>{QUESTION}</b><span className="chips"><span>2015–2026</span><span>peer-reviewed first</span><span>any language</span></span></div>
-        <div className="stepper">
-          {STEPS.map(([t, st, gate], i) => (
-            <span key={t} style={{ display: "contents" }}>
-              <span className={`step ${st} ${gate ? "gate" : ""}`}><i />{t}</span>
-              {i < STEPS.length - 1 && <span className="arrow">→</span>}
-            </span>
-          ))}
-        </div>
-        <div className="mini3d"><MiniMission /><span className="mini3d-cap">3D · signals queue at the gate until you approve</span></div>
-      </Card>
-
-      <div className="g2">
-        <Card title={<>Checkpoint 2 · sources <Sample /></>} aside={<span className="muted mono" style={{ fontSize: 11 }}>62 found · 48 verified · showing 6</span>}>
-          <table className="vx-table">
-            <thead><tr><th>Status</th><th>Source</th><th>Quality facts</th><th>Read</th><th>Decision</th></tr></thead>
-            <tbody>
-              {SOURCES.map((s) => (
-                <tr key={s.id} className={decisions[s.id] === "rejected" ? "rejected" : ""}>
-                  <td><StatusBadge status={s.status} /></td>
-                  <td><div className="t">{s.title}</div><div className="s">{s.authors} ({s.year}) · {s.venue} · <span className="mono">{s.doi}</span></div></td>
-                  <td><div className="chips">
-                    <span className={s.peer ? "on" : "warn"}>{s.peer ? "peer-reviewed" : "preprint"}</span>
-                    {s.doaj && <span className="on">DOAJ</span>}{s.oa && <span>open access</span>}<span>cited {s.cited}</span><span>{s.country}</span>
-                  </div></td>
-                  <td title={s.opened ? "You opened this source" : "Not opened yet"}>{s.opened ? <Eye size={16} /> : <EyeOff size={16} className="muted" />}</td>
-                  <td>
-                    {s.status === "retracted" ? <span className="lbl lbl-notfound">Blocked</span> : (
-                      <span style={{ display: "inline-flex", gap: 6 }}>
-                        <button className={`btn small ${decisions[s.id] === "accepted" ? "ok" : ""}`} onClick={() => setDecisions((d) => ({ ...d, [s.id]: "accepted" }))} aria-label="Accept"><Check size={14} /></button>
-                        <button className={`btn small ${decisions[s.id] === "rejected" ? "no" : ""}`} onClick={() => setDecisions((d) => ({ ...d, [s.id]: "rejected" }))} aria-label="Reject"><X size={14} /></button>
-                      </span>
-                    )}
-                  </td>
-                </tr>
+    <AppShell title="Research" subtitle="Ask a question. The AI plans, reads and challenges; only public registries supply sources; you approve three times.">
+      <div className="xrx rs">
+        <Card title={<>Your question</>}>
+          <form
+            className="rs-ask"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (q.trim().length >= 5 && !busy) void ask(q.trim());
+            }}
+          >
+            <input className="rs-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={EXAMPLE} aria-label="Research question" disabled={started && busy} />
+            <button className="btn primary" type="submit" disabled={busy || q.trim().length < 5}><Search size={15} /> {started ? "Ask again" : "Start"}</button>
+          </form>
+          {!started && <button className="btn small" style={{ marginTop: 8 }} onClick={() => setQ(EXAMPLE)}>Use the example question</button>}
+          <div className="rs-autonomy">
+            <span className="vx-eyebrow" style={{ margin: 0 }}>AI autonomy</span>
+            <div className="vx-seg" role="radiogroup" aria-label="AI autonomy">
+              {AUTONOMY.map(([a, label]) => (
+                <button key={a} role="radio" aria-checked={autonomy === a} onClick={() => autonomyStore.set(a)} disabled={started}>{label}</button>
               ))}
-            </tbody>
-          </table>
-        </Card>
-
-        <Card title={<>Checkpoint 3 · evidence brief <Sample /></>} aside={<button className="btn small"><Swords size={14} /> Debate a claim</button>}>
-          <div className="claims">
-            {BRIEF.map((c) => (
-              <div key={c.id} className={`claim ${c.label}`} style={{ opacity: kept[c.id] === "dropped" ? 0.45 : 1 }}>
-                <p>{c.text}</p>
-                <div className="meta">
-                  <TrustLabel kind={c.label} />
-                  {c.sources.map((s) => <span key={s} className="srcchip">{s}</span>)}
-                  <span style={{ marginLeft: "auto", display: "inline-flex", gap: 6 }}>
-                    <button className={`btn small ${kept[c.id] === "kept" ? "ok" : ""}`} onClick={() => setKept((k) => ({ ...k, [c.id]: "kept" }))}>Keep</button>
-                    <button className="btn small">Edit</button>
-                    <button className={`btn small ${kept[c.id] === "dropped" ? "no" : ""}`} onClick={() => setKept((k) => ({ ...k, [c.id]: "dropped" }))}>Drop</button>
-                  </span>
-                </div>
-                {c.quote && <p className="quote">“{c.quote}” · matched in source text</p>}
-                {c.skeptic && <p className="sk"><Swords size={14} /> Skeptic: {c.skeptic}</p>}
-              </div>
-            ))}
+            </div>
+            <span className="vx-tiny" style={{ margin: 0 }}>{AUTONOMY.find(([a]) => a === autonomy)?.[2]}{started ? " Locked for this session." : ""}</span>
           </div>
+          {started && (
+            <div className="stepper" aria-label="Progress">
+              {STEPS.map((st) => {
+                const state = stepState(st.phase, s.phase, autonomy);
+                return state === "skip" ? null : (
+                  <span key={st.phase} className={`step ${state} ${st.gate ? "gate" : ""}`}><i />{st.label}</span>
+                );
+              })}
+            </div>
+          )}
         </Card>
-      </div>
 
-      <div className="g2">
-        <Card title="Receipts · audit trail" aside={<button className="btn small"><Download size={14} /> JSON</button>}>
-          <div className="receipts">{RECEIPTS.map((r) => <div key={r.t}><time>{r.t}</time><b>{r.who}</b><span>{r.what}</span></div>)}</div>
-        </Card>
-        <Card title="Coach · explain it back" aside={<span className="muted mono" style={{ fontSize: 11 }}>required before export</span>}>
-          <p className="read" style={{ marginTop: 0, fontSize: 15 }}>In one line, in your own words: what did Rahman &amp; Okafor (2021) find?</p>
-          <textarea className="paste" style={{ minHeight: 90 }} placeholder="The AI can't fill this in for you." />
-          <p className="vx-tiny">Socratic mode: “Which of your sources disagrees with C1, and why might that be?”</p>
-        </Card>
+        <div aria-live="polite">
+          {s.busy && <p className="rs-busy">{s.busy}</p>}
+          {s.error && (
+            <div className="banner" role="alert">
+              <AlertTriangle size={16} color="var(--alert)" />
+              <span>{s.error}</span>
+            </div>
+          )}
+          {s.notes.length > 0 && (
+            <ul className="rs-notes" aria-label="What happened">
+              {s.notes.map((n, i) => <li key={i}>{n}</li>)}
+            </ul>
+          )}
+        </div>
+
+        {s.phase === "cp1_plan" && s.plan && <PlanCard key={s.sessionId} plan={s.plan} by={s.planBy} onApprove={(p) => void approvePlan(p)} onRestart={restart} busy={busy} />}
+
+        {(s.phase === "cp2_sources" || (s.phase === "searching" && s.candidates.length > 0)) && (
+          <SourcesCard candidates={s.candidates} decisions={s.decisions} onDecide={decide} onContinue={() => void continueWithSources()} onBack={backToPlan} busy={busy} aiOff={autonomy === "off"} />
+        )}
+
+        {(s.phase === "cp3_claims" || s.phase === "export") && s.claims.length > 0 && (
+          <>
+            {s.phase === "cp3_claims" ? (
+              <ClaimsCard claims={s.claims} sources={approved} blocked={s.blocked.length} onDecide={decideClaim} onFinish={finishClaims} busy={busy} />
+            ) : (
+              <Card title={<>Your evidence notes · {s.claims.filter((c) => c.decision !== "dropped").length} kept</>}>
+                <div className="claims">
+                  {s.claims.filter((c) => c.decision !== "dropped").map((c) => (
+                    <div key={c.id} className={`claim ${c.label}`}>
+                      <p>{c.editedText ?? c.text}</p>
+                      <div className="meta"><TrustLabel kind={c.label} />{c.decision === "edited" && <span className="vx-tiny" style={{ margin: 0 }}>edited by you</span>}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="vx-tiny">Notes for you to write from, not text to submit. Cite the sources, not this page.</p>
+              </Card>
+            )}
+            <ClaimLegend />
+          </>
+        )}
+
+        {s.phase === "export" && (
+          <>
+            <ReferenceList autonomy={autonomy} claims={s.claims} />
+            <Card title={<>Receipts · every step of this session</>} aside={<button className="btn small" onClick={restart}><RotateCcw size={13} /> New question</button>}>
+              <div className="receipts">
+                {mine.map((r) => (
+                  <div key={r.id}>
+                    <time>{new Date(r.at).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</time>
+                    <b>{r.actor}</b>
+                    <span>{r.action.replace(/_/g, " ")}{r.model ? ` · ${r.model}` : ""}{r.detail ? ` · ${r.detail}` : ""}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </>
+        )}
       </div>
     </AppShell>
   );

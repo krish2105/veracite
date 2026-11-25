@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { Check, Copy, Download, ExternalLink, Trash2 } from "lucide-react";
 import { Card, StatusBadge } from "@/components/app/ui";
-import { buildAiUseStatement } from "@/lib/integrity/statement";
-import type { RegistryName } from "@/lib/types";
+import { buildAiUseStatement, type StatementClaim } from "@/lib/integrity/statement";
+import type { Autonomy, RegistryName } from "@/lib/types";
 import { apaList, apaReference } from "./apa";
 import { refList, useRefList } from "./refList";
 
@@ -48,14 +48,14 @@ function CopyButton({ text, html, label }: { text: string; html?: string; label:
   );
 }
 
-export function ReferenceList() {
+export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonomy; claims?: StatementClaim[] } = {}) {
   const { sources, receipts } = useRefList();
   const [ownWork, setOwnWork] = useState("");
   const apa = useMemo(() => apaList(sources), [sources]);
   const statement = useMemo(() => {
     const named = sources.map((s) => ({ ...s, verification: { ...s.verification, registries: s.verification.registries.map((r) => REGISTRY[r]) } }));
-    return buildAiUseStatement({ receipts, autonomy: "off", sources: named, ownWork });
-  }, [receipts, sources, ownWork]);
+    return buildAiUseStatement({ receipts, autonomy, sources: named, claims, ownWork });
+  }, [receipts, sources, ownWork, autonomy, claims]);
   const full = `${statement.text}\n\nReference for the tool:\n${statement.toolReference}`;
 
   return (
