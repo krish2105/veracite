@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 21:40 (Dubai)** · commit `79768c8`
+> Last updated **Wed 25 Nov, 21:54 (Dubai)** · commit `03b518f`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ██████░░░░ **56%** (30/54 tasks) |
+| **Overall progress** | ██████░░░░ **56%** (31/55 tasks) |
 | **P0 demo spine** | ███████░░░ 19/26 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -15,15 +15,15 @@
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **1h 19m** |
-| Deck upload (official, hard) | Thu 09:00 | **11h 19m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **15h 34m** |
-| Phase 2 submissions close | Thu 15:00 | **17h 19m** |
+| Deck upload (team target) | Wed 23:00 | **1h 5m** |
+| Deck upload (official, hard) | Thu 09:00 | **11h 5m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **15h 20m** |
+| Phase 2 submissions close | Thu 15:00 | **17h 5m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 74% | 17 | 0 | 6 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 75% | 18 | 0 | 6 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -35,7 +35,7 @@
 | Research & citation features | 12 | ███████░░░ 74% (14/19) |
 | Honesty & verification in action | 10 | ██████████ 95% (19/20) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | ██████░░░░ 61% (11/18) |
+| User experience | 8 | ██████░░░░ 63% (12/19) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -96,6 +96,7 @@ _Nothing blocked._
 - **K21** X-ray checks web pages (connects Z16): live or archived pages that match the cited title are Partial, never Verified · Krishna Mathur
 - **K22** 3D vault as the home page with buttons into the app; plain cards below 1024 px, with reduced motion or without WebGL (covers A03) · Krishna Mathur
 - **K23** Home page redesign (labelled fake note + three ways in) and effects on every app page: engraved background, torch glow, 3D note banner · Krishna Mathur
+- **K24** Headings fit their boxes; phones in dark mode no longer repaint the daylight theme; 3D vault on upright phones and tablets · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
