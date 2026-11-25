@@ -7,12 +7,12 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Tuesday night · unblock the team (M0)
 - [x] **K00** · P0 · Docs, deck, repo, task system and 3D prototypes in place · `docs/** submissions/** tasks/**` · due Tue 13:00 · #deck
 - [ ] **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · due Tue 22:00 · #mvp
-    - `.env.example` model map already updated in K06. Still to do: paste the keys, confirm the model IDs and whether Prompt Guard 2 is free in the Groq console, Vercel project + env vars.
+    - `.env.example` model map already updated in K06. Vercel project `veracite` created and deployed (K07). Still to do: paste the keys into `.env.local` and Vercel, confirm the model IDs and whether Prompt Guard 2 is free, add Avighna to the repo.
 - [x] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
     - Blocks everyone. Merge to `main` first.
 - [x] **K18** · P0 · Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · `veracite/src/lib/types.ts veracite/src/lib/flags.ts` · due Tue 23:30 · #mvp
     - Everyone codes against these. Interfaces in docs/11 §5.
-- [ ] **K07** · P0 · First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · due Tue 23:59 · #mvp
+- [x] **K07** · P0 · First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · due Tue 23:59 · #mvp
 
 ## Wednesday morning · the Verifier goes live (M1)
 - [x] **K03** · P0 · Registry clients: Crossref (DOI, `query.bibliographic`, retractions via `updated-by`), OpenAlex (DOI, search, abstract), arXiv; polite headers, 24h cache, max 3 concurrent · `veracite/src/lib/registries/**` · due Wed 10:30 · #mvp #honesty #research
