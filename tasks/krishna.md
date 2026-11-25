@@ -37,6 +37,15 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K23** · P1 · Home page redesign (labelled fake note + three ways in) and effects on every app page: engraved background, torch glow, 3D note banner · `veracite/src/components/lab/home/** veracite/src/components/app/ambient/**` · #ux
 - [x] **K24** · P1 · Headings fit their boxes; phones in dark mode no longer repaint the daylight theme; 3D vault on upright phones and tablets · `veracite/src/components/lab/** veracite/src/app/globals.css veracite/src/app/layout.tsx` · #ux
 
+## Wednesday night · plan to 90+ (added Wed 22:30, see `docs/NEXT_SESSION_PROMPT.md`)
+- [x] **K26** · P0 · Submission readiness: secret scan of the whole history (gitleaks: 0 leaks), repo made public, Zedan's prompt-log export merged (PR #37), `submissions/phase2/LIVE_LINK.md` lists everything we submit · `submissions/phase2/LIVE_LINK.md` · #dayof
+- [ ] **K27** · P1 · One-click save: `/save?doi=` or `?url=` verifies before adding, plus a bookmarklet on the Library page (Avighna owns `app/save/**`, A15) · `veracite/src/app/save/**` · #research #ux
+- [ ] **K28** · P1 · Import an existing library: paste or upload `.bib` / `.ris`, X-ray every entry, add only the real ones · `veracite/src/lib/import/**` · #research #honesty
+- [ ] **K29** · P1 · Citation styles: APA 7, MLA 9, Harvard, IEEE, Chicago author-date (citation-js) in Write & cite, X-ray list and Library export · `veracite/src/lib/cite/**` · #research
+- [ ] **K30** · P1 · Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code · `veracite/src/lib/agents/**` · #research #honesty
+- [ ] **K31** · P1 · First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states · #ux
+- [ ] **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · #dayof
+
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
