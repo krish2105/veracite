@@ -15,6 +15,7 @@ import "@/components/app/tabs/research/research.css";
 import { regionOf, summariseBias, type Bar, type BiasFacts } from "@/lib/integrity/bias";
 import type { SourceRecord } from "@/lib/types";
 import { toBibTeX, toCslJson, toRIS } from "./exports";
+import { ImportLibrary } from "./ImportLibrary";
 
 const split = (s: string) => [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))].slice(0, 10);
 
@@ -153,6 +154,10 @@ export function LibraryTab() {
             </Card>
           </>
         )}
+
+        <Card title="Bring your Zotero library · keep only the real references">
+          <ImportLibrary />
+        </Card>
 
         <Card title="Save from any page you are reading">
           <SaveBookmarklet />
