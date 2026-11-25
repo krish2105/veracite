@@ -26,6 +26,6 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [ ] **A10** · P2 · PDF drop: read DOIs and the reference list in the browser (pdf.js) and send them to the X-ray · `veracite/src/lib/pdf/**` · #research
 
 ## Thursday
-- [ ] **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · `docs/08_DEMO_SCRIPT_AND_QA.md submissions/phase2/**` · due Thu 11:00 · #pres
+- [~] **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · `docs/08_DEMO_SCRIPT_AND_QA.md submissions/phase2/**` · due Thu 11:00 · #pres
 - [ ] **A12** · DAY · Phase 2: rewrite demo segment 4:30–5:30 around the new requirement; keep the clock · due Thu 14:50 · #dayof #pres
 - [ ] **A13** · PRES · Rehearse the opening and close with a timer; check outfits, chargers and logins · due Thu 12:30 · #pres
