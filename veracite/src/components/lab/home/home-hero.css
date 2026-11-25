@@ -1,0 +1,34 @@
+/* The first screen. The clamps for padding, card height and label width are mirrored in stage.ts. */
+.hx { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; color: var(--lab-ink); isolation: isolate; --hx-pad: clamp(20px, 5vw, 90px); --hx-cards: clamp(104px, 17vh, 170px); }
+.hx::before { content: ""; position: absolute; z-index: -1; inset: 0 55% 0 0; background: linear-gradient(90deg, color-mix(in srgb, var(--lab-bg) 88%, transparent) 40%, transparent); pointer-events: none; }
+.hx-col { position: absolute; left: var(--hx-pad); top: 72px; bottom: calc(var(--hx-cards) + 66px); width: min(500px, 32vw); display: flex; flex-direction: column; justify-content: center; }
+.hx .lab-eyebrow { margin-bottom: clamp(8px, 1.6vh, 18px); }
+.hx .lab-h.hx-h { font-size: clamp(24px, min(3vw, 6.4vh), 54px); margin-bottom: clamp(10px, 1.8vh, 20px); }
+.hx .lab-p { font-size: clamp(13px, min(1.15vw, 2vh), 17.5px); margin-bottom: clamp(12px, 2.2vh, 24px); }
+.hx .lab-cta a { padding: clamp(8px, 1.3vh, 12px) clamp(12px, 1.1vw, 18px); font-size: clamp(11px, 0.9vw, 12.5px); transition: translate .2s; }
+.hx .lab-cta a:hover { translate: 0 -2px; }
+.hx .lab-cta a.ghost { background: var(--lab-panel); color: var(--lab-ink); }
+.hx .lab-hint { margin: clamp(8px, 1.8vh, 20px) 0 0; }
+
+.hx-ways { position: absolute; left: var(--hx-pad); right: var(--hx-pad); bottom: 52px; height: var(--hx-cards); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; margin: 0; padding: 0; }
+.hx-ways li { min-height: 0; animation: hx-rise .7s cubic-bezier(.2, .8, .2, 1) both; }
+.hx-ways li:nth-child(2) { animation-delay: .1s; } .hx-ways li:nth-child(3) { animation-delay: .2s; }
+.hx-ways a { position: relative; display: flex; flex-direction: column; gap: 8px; height: 100%; overflow: hidden; padding: clamp(14px, 3.2vh, 28px) 24px; border-radius: 12px; background: var(--lab-panel); border: 1px solid var(--lab-line); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); color: inherit; text-decoration: none; transition: translate .25s, border-color .25s, box-shadow .25s; }
+/* a holographic strip, like the foil on the notes, sweeps across on hover */
+.hx-ways a::after { content: ""; position: absolute; top: 0; bottom: 0; left: -30%; width: 18%; skew: -18deg; background: linear-gradient(90deg, transparent, rgba(143, 116, 255, .28), rgba(77, 242, 255, .28), transparent); transition: left .6s ease; pointer-events: none; }
+.hx-ways a:hover, .hx-ways a:focus-visible { translate: 0 -6px; border-color: var(--lab-ink); box-shadow: 0 24px 40px -28px rgba(7, 6, 26, .55); }
+.hx-ways a:hover::after, .hx-ways a:focus-visible::after { left: 115%; }
+.hx-ways h3 { margin: 0; font: 780 clamp(14px, 1.2vw, 21px) var(--lab-display); font-stretch: 125%; text-transform: uppercase; }
+.hx-ways p { margin: 0; font: clamp(12px, 0.9vw, 14.5px)/1.4 var(--lab-body); color: var(--lab-ink2); }
+.hx-ways span { font: 12px var(--lab-mono); color: var(--lab-accent); }
+@keyframes hx-rise { from { opacity: 0; transform: translateY(26px); } }
+@media (max-height: 780px) { .hx .lab-hint, .hx-ways p { display: none; } .hx-ways a { justify-content: center; } }
+
+.hx-pin { width: calc(clamp(170px, 14vw, 250px) + 46px); translate: 0 -50%; display: grid; grid-template-columns: 46px 1fr; align-items: center; pointer-events: none; }
+.hx-pin i { height: 1px; background: var(--lab-alert); position: relative; }
+.hx-pin i::before { content: ""; position: absolute; left: -4px; top: -3.5px; width: 8px; height: 8px; border-radius: 50%; background: var(--lab-alert); box-shadow: 0 0 0 0 var(--lab-alert); animation: hx-ping 2.4s ease-out infinite; }
+.hx-pin div { padding: clamp(5px, 1vh, 10px) 12px; border: 1px solid var(--lab-alert); border-radius: 6px; background: var(--lab-panel); backdrop-filter: blur(8px); color: var(--lab-ink); font: clamp(10.5px, 0.8vw, 12.5px)/1.35 var(--lab-body); }
+.hx-pin b { display: block; font: 600 clamp(9.5px, 0.7vw, 10.5px) var(--lab-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--lab-alert); margin-bottom: 2px; }
+@keyframes hx-ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lab-alert) 70%, transparent); } 70%, 100% { box-shadow: 0 0 0 11px transparent; } }
+.hx-stamp { white-space: nowrap; translate: -50% 0; rotate: -4deg; padding: clamp(5px, 1vh, 8px) 18px; border: 3px double var(--lab-alert); color: var(--lab-alert); font: 800 clamp(13px, 1.1vw, 19px) var(--lab-display); font-stretch: 125%; text-transform: uppercase; background: var(--lab-panel); pointer-events: none; animation: hx-stamp .45s cubic-bezier(.2, 1.6, .4, 1) 1.2s both; }
+@keyframes hx-stamp { from { opacity: 0; scale: 2.2; } }

@@ -1,0 +1,63 @@
+/* K23: depth and motion for the app pages. Nothing here may put a transform, filter or backdrop-filter on a
+   .vx-card at rest: the export dialog is position: fixed inside a card. */
+.vx { position: relative; isolation: isolate; }
+.vx-ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; --px: 70vw; --py: 30vh; }
+.vx-ambient::before { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(60vw 55vh at 100% 0%, color-mix(in srgb, var(--accent) 17%, transparent), transparent 70%),
+  radial-gradient(55vw 60vh at 12% 100%, color-mix(in srgb, var(--ok) 18%, transparent), transparent 70%); }
+.vx-engraving { position: absolute; width: 112vh; height: 112vh; fill: none; stroke-width: .7; animation: vx-turn 180s linear infinite; }
+.vx-engraving.one { top: -46vh; right: -34vh; stroke: var(--accent); opacity: .26; }
+.vx-engraving.two { bottom: -58vh; left: 4vw; stroke: var(--ok); opacity: .28; animation-direction: reverse; }
+.vx-torch { position: absolute; left: var(--px); top: var(--py); width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; background: radial-gradient(closest-side, rgba(122, 92, 255, .2), rgba(122, 92, 255, .07) 55%, transparent); }
+.vx[data-theme="dark"] .vx-torch { background: radial-gradient(closest-side, rgba(143, 116, 255, .34), rgba(77, 242, 255, .08) 55%, transparent); }
+@keyframes vx-turn { to { rotate: 360deg; } }
+
+.vx-side { background: color-mix(in srgb, var(--side) 86%, transparent); }
+.vx-nav a { transition: translate .2s, background-color .2s, color .2s; }
+.vx-nav a:hover { translate: 3px 0; }
+/* the header spans the whole column; the holographic security strip sits under the title */
+.vx-top::after { content: ""; position: absolute; left: var(--vx-inset, 0px); right: var(--vx-inset, 0px); bottom: -2px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--ok), var(--accent), #4df2ff, var(--ok), var(--accent)); background-size: 220% 100%; opacity: .75; animation: vx-foil 9s linear infinite; }
+@keyframes vx-foil { to { background-position: 220% 0; } }
+.vx-main { display: flex; flex-direction: column; }
+@media (min-width: 701px) { .vx-top { --vx-inset: clamp(16px, 2.4vw, 34px); margin-inline: calc(-1 * var(--vx-inset)); padding-inline: var(--vx-inset); } }
+.vx-h1 { font-size: clamp(22px, 2.5vw, 38px); }
+
+/* cards: rise in, then light up under the torch */
+.vx-body > *, .vx-body .xrx > * { animation: vx-rise .6s cubic-bezier(.2, .8, .2, 1) backwards; }
+.vx-body .xrx > :nth-child(2) { animation-delay: .08s; } .vx-body .xrx > :nth-child(3) { animation-delay: .16s; } .vx-body .xrx > :nth-child(n + 4) { animation-delay: .24s; }
+@keyframes vx-rise { from { opacity: 0; transform: translateY(18px); } }
+.vx .vx-card { background: color-mix(in srgb, var(--surface) 90%, transparent); box-shadow: 0 22px 44px -34px rgba(7, 6, 26, .5), var(--glow, 0 0 0 transparent); transition: border-color .25s, box-shadow .25s; }
+.vx[data-theme="dark"] .vx-card { box-shadow: var(--glow); }
+.vx .vx-card:hover { background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0px), color-mix(in srgb, var(--accent) 13%, transparent), transparent 70%), color-mix(in srgb, var(--surface) 94%, transparent); border-color: color-mix(in srgb, var(--accent) 48%, var(--line)); box-shadow: 0 30px 50px -34px rgba(7, 6, 26, .6); }
+.vx .btn { transition: translate .18s, box-shadow .18s, border-color .18s; }
+.vx .btn:not(:disabled):hover { translate: 0 -1px; border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.vx .btn.primary:not(:disabled):hover { box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--accent) 80%, transparent); }
+
+/* the 3D banner */
+.vx-banner { --tx: 0; --ty: 0; padding: 26px 0 6px; }
+.vx-banner :is(ol, ul) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2.4vw, 34px); margin: 0; padding: 0 clamp(0px, 1vw, 18px); list-style: none; perspective: 1100px; }
+.vx-banner li { --turn: 0deg; transform-style: preserve-3d; animation: vx-float 7s ease-in-out infinite; }
+.vx-banner li:nth-child(1) { --turn: 13deg; } .vx-banner li:nth-child(2) { animation-delay: -2.3s; } .vx-banner li:nth-child(3) { --turn: -13deg; animation-delay: -4.6s; }
+@keyframes vx-float { 50% { translate: 0 -9px; } }
+.vx-note { position: relative; height: 100%; min-height: 124px; overflow: hidden; padding: 16px 20px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); background: linear-gradient(115deg, color-mix(in srgb, var(--ok) 13%, var(--surface)), var(--surface) 46%, color-mix(in srgb, var(--accent) 15%, var(--surface))); box-shadow: inset 0 0 0 4px var(--surface), inset 0 0 0 5px color-mix(in srgb, var(--ink) 16%, transparent), calc(var(--tx) * -14px) 24px 34px -24px rgba(7, 6, 26, .55); transform: rotateY(calc(var(--turn) + var(--tx) * 7deg)) rotateX(calc(7deg - var(--ty) * 7deg)); transition: transform .25s ease-out, box-shadow .25s; }
+.vx-note:hover { transform: rotateY(0) rotateX(0) scale(1.04); }
+/* foil strip */
+.vx-note::after { content: ""; position: absolute; top: 0; bottom: 0; right: 24%; width: 14px; background: repeating-linear-gradient(118deg, #9ae6e0, #c9b8ff 12px, #ffd9a8 24px, #9ae6e0 36px); opacity: .5; background-size: 100% 200%; animation: vx-shimmer 6s linear infinite; }
+.vx[data-theme="dark"] .vx-note::after { opacity: .75; box-shadow: 0 0 18px #4df2ff; }
+@keyframes vx-shimmer { to { background-position: 0 200%; } }
+.vx-note svg { position: absolute; right: -18px; top: 50%; width: 120px; height: 120px; translate: 0 -50%; fill: none; stroke: var(--ok); stroke-width: .6; opacity: .65; animation: vx-turn 60s linear infinite; }
+.vx-note span { font: 500 10px var(--f-mono); letter-spacing: .14em; color: var(--alert); }
+.vx-note b { display: block; position: relative; margin: 4px 0 6px; max-width: 74%; font: 780 clamp(13px, 1.25vw, 20px)/1.15 var(--f-display); font-stretch: var(--d-stretch); text-transform: var(--d-case); }
+.vx-note p { position: relative; margin: 0; max-width: 72%; font: 12.5px/1.45 var(--f-read); color: var(--ink2); }
+
+/* closing band */
+.vx-foot { margin-top: auto; padding-top: 44px; overflow: hidden; }
+.vx-foot p { margin: 0 0 6px; font: italic clamp(15px, 1.5vw, 22px)/1.5 var(--f-read); text-align: center; }
+.vx-marquee { display: flex; width: max-content; animation: vx-slide 46s linear infinite; }
+.vx-marquee span { white-space: pre; font: 850 clamp(30px, 5vw, 72px)/1.15 var(--f-display); font-stretch: 125%; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 24%, transparent); }
+@keyframes vx-slide { to { translate: -50% 0; } }
+
+@media (max-width: 900px) { .vx-note b, .vx-note p { max-width: 100%; } .vx-note::after, .vx-note svg { display: none; } }
+@media (max-width: 700px) { .vx-banner { display: none; } .vx-foot { padding-top: 28px; } }
+@media (prefers-reduced-motion: reduce) { .vx *, .vx *::before, .vx *::after { animation: none !important; } .vx-note { transform: none; } .vx-torch { display: none; } }
+@media print { .vx-ambient, .vx-banner, .vx-foot, .vx-top::after { display: none !important; } .vx-body > *, .vx-body .xrx > * { animation: none; } }
