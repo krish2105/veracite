@@ -54,7 +54,7 @@ export function TrustTab() {
     [String(wronglyVerified), "fakes marked Verified (target 0)"],
     [count("real", (r) => r.got === "verified"), "real references verified"],
     [count("retracted", (r) => r.got === "retracted"), "retractions flagged"],
-    [count("web", (r) => r.got === r.expected), "web pages as expected (not yet supported)"],
+    [count("web", (r) => r.got === r.expected), "web pages as expected"],
   ];
 
   return (
@@ -129,7 +129,7 @@ export function TrustTab() {
         <Card title="Known limits">
           <ul className="xrx-warn" style={{ color: "var(--ink2)" }}>
             <li>Only abstracts are read, so a true quote from deeper in a paper shows “not yet checked”.</li>
-            <li>Web pages without a DOI are not reliably verified yet.</li>
+            <li>Web pages without a DOI can only be Partial.</li>
             <li>Registries can be wrong or incomplete; “Verified” means two public registries agree with the reference.</li>
           </ul>
         </Card>
