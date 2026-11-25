@@ -5,7 +5,7 @@
 
 Team 7 · SP Jain AI Club Hackathon 2026 · Krishna Mathur · Zedan Nasir Parol · Avighna Gavhane
 
-> 📊 **Live status:** [`docs/STATUS.md`](docs/STATUS.md) (auto-updated on every push) · 🌐 **Live link:** see [`submissions/phase2/LIVE_LINK.md`](submissions/phase2/LIVE_LINK.md)
+> 📊 **Live status:** [`docs/STATUS.md`](docs/STATUS.md) (auto-updated on every push) · 🌐 **Live site:** https://veracite.vercel.app (start at [/xray](https://veracite.vercel.app/xray))
 
 ## What it does
 Students use AI to find sources, and AI invents references: a real author with the wrong paper, a DOI that doesn't exist. Veracite combines a reference manager with a crew of AI agents (Planner, Scout, Reader, Scribe, Skeptic). They **can only cite records fetched from public registries** (Crossref, OpenAlex, arXiv), and a **code-only Verifier** cross-checks every reference in two registries.
