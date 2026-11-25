@@ -17,6 +17,9 @@
 .xrx-legend dd { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ink2); }
 .xrx-verdict { font-weight: 600; color: var(--ink); }
 .xrx .chim { overflow: hidden; }
+/* Long test-input badges must wrap, or the whole page scrolls sideways on a phone. */
+.xrx .vx-card-h h3 { flex-wrap: wrap; min-width: 0; }
+.xrx .sample { white-space: normal; }
 
 @media (max-width: 640px) {
   .xrx-legend dl { grid-template-columns: minmax(0, 1fr); }

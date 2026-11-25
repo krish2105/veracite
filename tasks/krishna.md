@@ -30,7 +30,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - Interim list store and APA formatter live in `tabs/xray/`; Avighna's A05/A06 can replace them (records use `SourceRecord`).
 
 ## Wednesday evening · deck-promised extras (M3)
-- [ ] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
+- [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
 - [ ] **K11** · P1 · Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · `veracite/src/app/api/sources/snowball/**` · due Wed 22:30 · #research
 - [ ] **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · `veracite/src/app/api/v1/**` · #research
