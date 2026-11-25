@@ -18,6 +18,9 @@ Production URL: https://veracite.vercel.app
 2. **Add to my list** on a verified paper → open **Library** (`/library`) → export **APA 7**. The export gate asks you to confirm before the file downloads, and adds an AI-use statement written from the log.
 3. Open **Trust Center** (`/trust`) for the measured results on 51 test references, and **Certificate** (`/certificate`) for a QR link that re-checks a bibliography live.
 
+## For other tools and AI assistants
+- `GET /api/v1/verify?doi=…` or `?ref=…` returns Veracite's verdict as JSON, and `POST /api/mcp` is an MCP server with one tool, `verify_reference`, so an AI can check a reference before it cites it. Details: [`docs/API.md`](../../docs/API.md).
+
 ## Health and modes
 - `https://veracite.vercel.app/api/health` reports the registries (Crossref, OpenAlex, arXiv) and whether the AI agents are on.
 - **Rules mode:** if no AI key is set, or the AI is switched off or unavailable, every reference check still runs. Those checks are deterministic code; the AI never writes a reference.
