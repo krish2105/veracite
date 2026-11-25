@@ -12,6 +12,7 @@ import type { AgentRun } from "@/lib/agents/agents";
 import { ACTIONS } from "@/lib/integrity/receipts";
 import type { Challenge, Label, SourceRecord } from "@/lib/types";
 import { checkDraft, claimsForSkeptic, lower, type DraftResult } from "./check";
+import { Writer } from "./Writer";
 import "./draft.css";
 
 const cite = (s: SourceRecord) => {
@@ -97,6 +98,7 @@ export function DraftTab() {
             <span>Your reference list is empty. Add verified sources on the <Link href="/xray">X-ray</Link> or <Link href="/research">Research</Link> page first: citations are checked only against them.</span>
           </div>
         )}
+        <Writer onCheck={(t) => { setText(t); setIsExample(false); setResult(undefined); }} />
         <Card
           title={<>Your paragraph {isExample && <Sample>TEST PARAGRAPH · includes a fake citation</Sample>}</>}
           aside={<button className="btn small" disabled={!sources.length} onClick={() => { setText(exampleFor(sources)); setIsExample(true); setResult(undefined); }}><FlaskConical size={14} /> Use a test paragraph</button>}
