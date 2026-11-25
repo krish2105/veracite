@@ -56,7 +56,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
 - [x] **K11** · P1 · Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · `veracite/src/app/api/sources/snowball/**` · due Wed 22:30 · #research
-- [ ] **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · `veracite/src/app/api/v1/**` · #research
+- [x] **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · `veracite/src/app/api/v1/** veracite/src/app/api/mcp/**` · #research
+    - 26 Nov: `/api/v1/verify` (open CORS, edge cache for DOIs) + a working MCP server at `/api/mcp` (tool `verify_reference`, stateless JSON-RPC, no dependencies). 13 tests; docs in `docs/API.md`.
 - [ ] **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds) · `veracite/src/lib/agents/debate*` · #honesty #ux
 
 ## Thursday
