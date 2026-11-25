@@ -81,6 +81,20 @@ body {
   .lab-brand small { display: none; }
 }
 
+/* ---------- 3D home page (K22) ---------- */
+h1.lab-brand { margin: 0; }
+.lab-links a { white-space: nowrap; }
+.lab-links a.primary { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg); }
+.lab-cta a { font-family: var(--lab-mono); font-size: 12.5px; padding: 12px 18px; border-radius: 6px; border: 1px solid var(--lab-ink); background: var(--lab-ink); color: var(--lab-bg); text-decoration: none; }
+.lab-plain { position: fixed; z-index: 30; left: clamp(16px, 3vw, 34px); bottom: 12px; font-family: var(--lab-mono); font-size: 11px; color: var(--lab-ink); }
+.home-loading { position: fixed; inset: 0; display: grid; place-items: center; margin: 0; font-family: var(--font-martian); font-size: 12px; }
+@media (max-width: 1180px) { .lab-links a.more, .lab-bar h1.lab-brand small { display: none; } }
+/* While the browser is still choosing, wide screens stay blank rather than flash the plain page. Without scripts it appears after 4 s. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .home-pending { visibility: hidden; animation: home-reveal 0s linear 4s forwards; }
+}
+@keyframes home-reveal { to { visibility: visible; } }
+
 /* ---------- Neural Crew labels ---------- */
 .nc-label { font-family: var(--lab-body); width: 196px; padding: 8px 11px; border-left: 2px solid var(--lab-accent); background: var(--lab-panel); color: var(--lab-ink); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 2px; }
 .nc-label strong { display: block; font-family: var(--lab-display); font-weight: 760; font-size: 19px; letter-spacing: -0.02em; }

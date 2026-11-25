@@ -1,39 +1,7 @@
-import Link from "next/link";
-import { FlaskConical, PenLine, ScanSearch } from "lucide-react";
-import AppShell from "@/components/app/AppShell";
-import "@/components/app/tabs/xray/xray.css";
+import HomeExperience from "@/components/lab/home/HomeExperience";
 
 export const metadata = { title: "Veracite · Every reference real" };
 
-const START = [
-  { href: "/xray", icon: ScanSearch, title: "Check references", text: "Paste a reference list. Fakes, stitched and retracted papers are caught against Crossref, OpenAlex and arXiv.", cta: "Open the X-ray" },
-  { href: "/research", icon: FlaskConical, title: "Research a question", text: "AI plans, reads and challenges. You approve the plan, the sources and every claim.", cta: "Start researching" },
-  { href: "/draft", icon: PenLine, title: "Check your draft", text: "Every citation in your paragraph is matched to your verified list, and quotes are checked.", cta: "Check a paragraph" },
-];
-
 export default function Home() {
-  return (
-    <AppShell title="Every reference real" subtitle="A reference manager and research assistant that cannot make up a source. You stay in charge.">
-      <div className="xrx">
-        <ul className="home-start">
-          {START.map(({ href, icon: Icon, title, text, cta }) => (
-            <li key={href} className="vx-card">
-              <Icon size={22} strokeWidth={1.6} aria-hidden />
-              <h2>{title}</h2>
-              <p>{text}</p>
-              <Link className="btn primary" href={href}>{cta}</Link>
-            </li>
-          ))}
-        </ul>
-        <section className="vx-card">
-          <header className="vx-card-h"><h3>The rule everything follows</h3></header>
-          <p className="home-rule">The AI may plan, search and explain. Only public registries may cite. Only you may decide.</p>
-          <p className="vx-tiny">
-            Then organise and export in your <Link href="/library">Library</Link>, share a re-checkable <Link href="/certificate">Certificate</Link>, and see what we
-            measured in the <Link href="/trust">Trust Center</Link>. Your list stays on this device.
-          </p>
-        </section>
-      </div>
-    </AppShell>
-  );
+  return <HomeExperience />;
 }
