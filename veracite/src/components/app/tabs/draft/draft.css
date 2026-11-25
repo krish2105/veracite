@@ -1,0 +1,8 @@
+/* K10: Draft Checker (shares the legend, list and phone rules from xray.css). */
+.dr-input { min-height: 150px; font-family: var(--f-read); font-size: 15px; }
+.dr-list { list-style: none; display: grid; gap: 10px; margin: 0; padding: 0; }
+.dr .claim.none { color: var(--ink2); }
+.dr .claim.notfound p { text-decoration: none; }
+.dr .claim p { overflow-wrap: anywhere; }
+.dr-none { color: var(--ink2); }
+.dr-notes { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.5; color: var(--ink2); }

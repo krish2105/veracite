@@ -14,7 +14,7 @@
 
 export const FLAG_DEFAULTS = {
   // P1 · promised in the deck (docs/11 §4)
-  draftChecker: false, // K10
+  draftChecker: true, // K10
   snowball: false, // K11
   certificate: false, // Z08
   paraphraseGuard: false, // Z09
