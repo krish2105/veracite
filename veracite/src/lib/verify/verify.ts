@@ -8,6 +8,7 @@
  *      then OpenAlex/arXiv title search only if Crossref has nothing close (preprints, books).
  *   3. confirm the best search match in a second registry (lookupDoi on its DOI).
  *   4. still nothing: one Crossref author search, to say "these authors are real, this paper is not".
+ *   5. a web link and no DOI, and no registry agreement: is the page live or archived? (web.ts, K21)
  */
 import {
   arxivSearch,
@@ -19,10 +20,12 @@ import {
   type DoiLookup,
   type RegistryResult,
 } from "../registries";
+import { checkWebSource, type WebCheck } from "../../app/api/sources/wayback/check";
 import type { ReferenceInput, RegistryRecord, Verification } from "../types";
 import { parseReference } from "./parse";
 import { decide, rankCandidates, titleScoreFor, type Evidence } from "./rules";
 import { T } from "./text";
+import { applyWebCheck, withDeadline } from "./web";
 
 export interface RegistryDeps {
   lookupDoi: (doi: string) => Promise<DoiLookup>;
@@ -30,9 +33,14 @@ export interface RegistryDeps {
   openalexSearch: (q: string, opts?: { titleOnly?: boolean; perPage?: number }) => Promise<RegistryResult<RegistryRecord[]>>;
   arxivSearch: (title: string, max?: number) => Promise<RegistryResult<RegistryRecord[]>>;
   crossrefByAuthors: (surnames: string[], rows?: number) => Promise<RegistryResult<RegistryRecord[]>>;
+  /** Live + Wayback check for a web reference. Optional, so offline tests need no network. */
+  webCheck?: (url: string) => Promise<WebCheck>;
 }
 
-const LIVE: RegistryDeps = { lookupDoi, crossrefMatchReference, openalexSearch, arxivSearch, crossrefByAuthors };
+const LIVE: RegistryDeps = { lookupDoi, crossrefMatchReference, openalexSearch, arxivSearch, crossrefByAuthors, webCheck: checkWebSource };
+
+/** The web check must never stall a whole bibliography. */
+const WEB_DEADLINE_MS = 8_000;
 
 /** Accepts raw text, or a ReferenceInput whose missing fields are filled in by parsing its raw text. */
 export function toInput(input: ReferenceInput | string): ReferenceInput {
@@ -82,5 +90,10 @@ export async function verifyReference(input: ReferenceInput | string, deps: Regi
   // 4. Nothing matched and no real DOI: are the cited authors real people who wrote a different paper?
   else if (!doiRec && (ref.authors?.length ?? 0) >= 2) ev.authorWorks = await safe(deps.crossrefByAuthors(ref.authors!.map((a) => a.family), 5), [], "crossref");
 
-  return decide(ev);
+  const verdict = decide(ev);
+  // 5. A web page: the registries do not index it, so look at the link itself.
+  if (!deps.webCheck || !ref.url || ref.doi || verdict.status === "verified" || verdict.status === "retracted") return verdict;
+  const check = await withDeadline(deps.webCheck(ref.url), WEB_DEADLINE_MS);
+  if (!check) return verdict;
+  return { ...applyWebCheck(verdict, ref.title, check), ms: Date.now() - ev.startedAt };
 }
