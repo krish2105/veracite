@@ -52,7 +52,7 @@ export const canAdd = (v: Verification) => !!v.matched && (v.status === "verifie
 export const sourceId = (v: Verification) => (v.matched?.doi ? `doi:${v.matched.doi}` : `url:${v.matched?.url ?? v.matched?.id}`);
 
 /** The saved record comes from the REGISTRY, never from the pasted text. */
-function toSource(v: Verification): SourceRecord {
+export function toSource(v: Verification): SourceRecord {
   const m = v.matched!;
   return {
     id: sourceId(v),
@@ -80,6 +80,18 @@ function toSource(v: Verification): SourceRecord {
 }
 
 export const refList = {
+  /** Any step for the Receipts log and Prompt Ledger (agents, the Scout, student decisions). */
+  log(r: Omit<Receipt, "id" | "at" | "sessionId"> & { sessionId?: string }) {
+    const s = read();
+    const full: Receipt = { ...r, id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, at: new Date().toISOString(), sessionId: r.sessionId ?? SESSION };
+    write({ ...s, receipts: [...s.receipts, full] });
+  },
+  /** Approve from a research session: same rules as the X-ray, logged as a student decision. */
+  approveSource(src: SourceRecord) {
+    const s = read();
+    if (!canAdd(src.verification) || s.sources.some((x) => x.id === src.id)) return;
+    write({ sources: [...s.sources, { ...src, addedVia: "research" }], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, src.id)] });
+  },
   logCheck(total: number, byStatus: Record<RefStatus, number>) {
     const s = read();
     const detail = `${total} checked: ${Object.entries(byStatus).filter(([, n]) => n).map(([k, n]) => `${n} ${k}`).join(", ")}`;

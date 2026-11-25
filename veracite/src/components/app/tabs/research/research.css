@@ -1,0 +1,20 @@
+/* K09: research session page (works with xray.css for the shared list, legend and phone rules). */
+.rs-ask { display: flex; gap: 8px; }
+.rs-q { flex: 1; min-width: 0; font: 15px var(--f-read); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); }
+.rs-autonomy { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.rs-busy { margin: 0; padding: 10px 14px; border-radius: 8px; background: var(--surface2); font-size: 13.5px; }
+.rs-busy::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--accent); animation: vxpulse 1.2s infinite; }
+.rs-notes { margin: 8px 0 0; padding: 10px 14px 10px 30px; border-radius: 8px; border: 1px dashed var(--line); font-size: 12.5px; line-height: 1.5; color: var(--ink2); }
+.rs-sub { margin: 8px 0 12px; padding-left: 18px; font-family: var(--f-read); font-size: 14px; line-height: 1.5; }
+.rs-queries { min-height: 96px; }
+.rs-year { width: 64px; margin-left: 4px; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); font: 13px var(--f-mono); }
+.rs-sources li.rs-rejected { opacity: .5; }
+.rs-edit { min-height: 70px; margin-bottom: 8px; }
+
+@media (max-width: 640px) {
+  .rs-ask { flex-direction: column; }
+  .rs .stepper { gap: 4px; }
+  .rs .step { font-size: 11px; padding: 4px 8px; }
+  .rs .receipts div { grid-template-columns: 62px minmax(0, 1fr); }
+  .rs .receipts span { grid-column: 1 / -1; overflow-wrap: anywhere; }
+}
