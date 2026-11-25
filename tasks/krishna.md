@@ -22,7 +22,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 
 ## Wednesday afternoon · the research session goes live (M2)
 - [x] **K06** · P0 · LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · `veracite/src/lib/llm/**` · due Wed 14:30 · #mvp #honesty
-- [ ] **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · `veracite/src/lib/agents/**` · due Wed 16:30 · #mvp #research #honesty
+- [x] **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · `veracite/src/lib/agents/**` · due Wed 16:30 · #mvp #research #honesty
 - [ ] **K09** · P0 · Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · `veracite/src/lib/session/** veracite/src/components/app/tabs/research/**` · due Wed 19:00 · #mvp #research #ux
 
 ## Day-of path (added Wed 14:15)
