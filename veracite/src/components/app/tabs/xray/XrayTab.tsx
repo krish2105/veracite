@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle, Download, FlaskConical, ScanSearch, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { AlertTriangle, Download, FileText, FlaskConical, ScanSearch, X } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
 import { Card, Sample, StatusBadge } from "@/components/app/ui";
 import type { RefStatus } from "@/lib/types";
@@ -13,6 +13,7 @@ import { refList } from "./refList";
 import { ResultRow } from "./ResultRow";
 import { TEST_LIST } from "./testList";
 import { useXray } from "./useXray";
+import { pdfToXrayInput } from "@/lib/import/pdftext";
 import "./xray.css";
 
 const ORDER: RefStatus[] = ["verified", "partial", "mismatch", "chimera", "retracted", "notfound"];
@@ -21,6 +22,29 @@ export function XrayTab() {
   const [text, setText] = useState("");
   const [chimeraN, setChimeraN] = useState<number | undefined>();
   const { state, run, reset } = useXray();
+  // PDF drop (K37): read the PDF in this browser, fill the box, let the student check it before the X-ray.
+  const pdfRef = useRef<HTMLInputElement>(null);
+  const [pdfNote, setPdfNote] = useState("");
+  const [dragging, setDragging] = useState(false);
+  const readPdf = async (file: File | undefined) => {
+    if (!file) return;
+    if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") return setPdfNote("That is not a PDF. Paste the reference list instead.");
+    const { readPdfText, MAX_PDF_BYTES } = await import("@/lib/import/pdfread");
+    if (file.size > MAX_PDF_BYTES) return setPdfNote("That PDF is larger than 20 MB. Paste the reference list instead.");
+    setPdfNote(`Reading ${file.name} in your browser…`);
+    try {
+      const r = await readPdfText(file, (d, t) => setPdfNote(`Reading ${file.name} in your browser: page ${d} of ${t}…`));
+      const got = pdfToXrayInput(r.text);
+      if (got.source === "none") return setPdfNote(r.text.trim() ? "No reference list or DOI found in this PDF. Paste the references instead." : "This PDF has no text layer (it may be scanned). Paste the references instead.");
+      reset();
+      setText(got.text);
+      setPdfNote(`${got.source === "references" ? `Found the reference list: ${got.count} reference${got.count === 1 ? "" : "s"}` : `No reference heading, so the ${got.count} DOI${got.count === 1 ? "" : "s"} in the text are listed`}${got.count > MAX_REFERENCES ? ` (the first ${MAX_REFERENCES} are checked)` : ""}. PDF text can merge or split lines: check the box, then press X-ray.${r.read < r.pages ? ` Only the first ${r.read} of ${r.pages} pages were read.` : ""}`);
+    } catch {
+      setPdfNote("This PDF could not be read. It may be protected or damaged. Paste the references instead.");
+    } finally {
+      if (pdfRef.current) pdfRef.current.value = "";
+    }
+  };
   const count = useMemo(() => splitBibliography(text).length, [text]);
   const isTestList = text.trim() === TEST_LIST.trim();
 
@@ -65,6 +89,10 @@ export function XrayTab() {
               <button className="btn small" onClick={() => setText(TEST_LIST)} disabled={state.running}>
                 <FlaskConical size={14} /> Load test list
               </button>
+              <button className="btn small" onClick={() => pdfRef.current?.click()} disabled={state.running}>
+                <FileText size={14} /> Read a PDF
+              </button>
+              <input ref={pdfRef} type="file" accept="application/pdf,.pdf" hidden aria-label="PDF file" onChange={(e) => void readPdf(e.target.files?.[0])} />
               {text && (
                 <button
                   className="btn small"
@@ -85,15 +113,19 @@ export function XrayTab() {
           </label>
           <textarea
             id="xray-input"
-            className="paste"
+            className={`paste${dragging ? " drop" : ""}`}
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onDragOver={(e) => { if ([...e.dataTransfer.items].some((i) => i.kind === "file")) { e.preventDefault(); setDragging(true); } }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={(e) => { const f = e.dataTransfer.files?.[0]; if (f) { e.preventDefault(); setDragging(false); void readPdf(f); } }}
             spellCheck={false}
             placeholder={"1. Author, A., & Author, B. (2025). Title of the paper. Journal Name, 12(3), 45–67. https://doi.org/…\n2. …"}
           />
+          {pdfNote && <p className="xr-note" role="status" style={{ margin: "6px 0 0" }}>{pdfNote}</p>}
           <p className="vx-tiny">
-            {count ? `${count} reference${count === 1 ? "" : "s"} detected.` : "Nothing to check yet."} Only titles, authors and DOIs are sent to the public
-            registries. Nothing is stored.
+            {count ? `${count} reference${count === 1 ? "" : "s"} detected.` : "Nothing to check yet. Paste references, or drop a PDF on the box."} Only titles, authors and DOIs are sent to the public
+            registries. Nothing is stored; a PDF is read in your browser.
           </p>
         </Card>
 

@@ -61,7 +61,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: Library card re-checks every saved DOI (3 at a time), applies only NEW notices, keeps the original checks, shows the last check time; Write & cite marks RETRACTED and warns. 6 tests.
 - [x] **K36** · P1 · "Does this source say this?": the closest sentence in the source's abstract for each cited claim, code only · `veracite/src/components/app/tabs/draft/support*` · #honesty #research
     - 26 Nov: Draft Checker shows the nearest abstract sentence and the share of key words (86 % vs 22 % on the test claims); evidence only, the label never goes up. 6 tests.
-- [ ] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · #research #ux
+- [x] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · `veracite/src/lib/import/pdf*` · #research #ux
+    - 26 Nov: Read a PDF / drop on the box; pdf.js reads it in the browser (nothing uploaded), finds the last References heading (stops at appendices), re-joins hyphen and DOI line breaks, else lists the DOIs; the student edits, then X-rays. 11 tests; generated test paper → 3 Verified + 1 Chimera.
 
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty

@@ -85,5 +85,6 @@
 | 70 | 26 Nov 2026, ~01:05 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K34: "How this was decided" (`lib/verify/explain.ts`, 6 tests): registry trace and the rule behind each verdict on X-ray rows and the save page | Kept |
 | 71 | 26 Nov 2026, ~01:15 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K35: re-check my library (`lib/verify/recheck.ts`, 6 tests) + RETRACTED warning in Write & cite; tested with Wang & Fan 2025, retracted in April 2026 | Kept |
 | 72 | 26 Nov 2026, ~01:25 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K36: "Does this source say this?" in the Draft Checker (`tabs/draft/support.ts`, 6 tests): closest abstract sentence + shared key words, code only | Kept |
+| 73 | 26 Nov 2026, ~01:45 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) + "Yes, add pdfjs-dist" | K37: PDF drop on the X-ray page (`lib/import/pdftext.ts` 11 tests, `pdfread.ts` with pdfjs-dist 6.5.438), reading in the browser; fixed DOIs broken across lines after testing | Kept |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*
