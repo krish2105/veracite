@@ -1,24 +1,24 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 20:47 (Dubai)** · commit `21f9a00`
+> Last updated **Wed 25 Nov, 20:49 (Dubai)** · commit `6702078`
 
 ## At a glance
 | | |
 |---|---|
 | **Overall progress** | █████░░░░░ **50%** (26/52 tasks) |
 | **P0 demo spine** | ███████░░░ 17/26 |
-| **Build** | Type-check 🟢 passing · Production build 🟢 passing · 25 Nov, 20:47 local |
+| **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
 | **In progress / blocked** | 1 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **2h 12m** |
-| Deck upload (official, hard) | Thu 09:00 | **12h 12m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **16h 27m** |
-| Phase 2 submissions close | Thu 15:00 | **18h 12m** |
+| Deck upload (team target) | Wed 23:00 | **2h 10m** |
+| Deck upload (official, hard) | Thu 09:00 | **12h 10m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **16h 25m** |
+| Phase 2 submissions close | Thu 15:00 | **18h 10m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
