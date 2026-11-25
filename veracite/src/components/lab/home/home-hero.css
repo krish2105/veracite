@@ -32,3 +32,25 @@
 @keyframes hx-ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lab-alert) 70%, transparent); } 70%, 100% { box-shadow: 0 0 0 11px transparent; } }
 .hx-stamp { white-space: nowrap; translate: -50% 0; rotate: -4deg; padding: clamp(5px, 1vh, 8px) 18px; border: 3px double var(--lab-alert); color: var(--lab-alert); font: 800 clamp(13px, 1.1vw, 19px) var(--lab-display); font-stretch: 125%; text-transform: uppercase; background: var(--lab-panel); pointer-events: none; animation: hx-stamp .45s cubic-bezier(.2, 1.6, .4, 1) 1.2s both; }
 @keyframes hx-stamp { from { opacity: 0; scale: 2.2; } }
+
+/* Upright phones and tablets: headline, note, then the three ways in. Mirrors the upright regions in stage.ts. */
+@media (max-width: 1023px) and (orientation: portrait) {
+  .hx { height: 100dvh; }
+  .hx::before { inset: 0 0 auto 0; height: calc(64px + clamp(150px, 26vh, 260px)); background: linear-gradient(180deg, color-mix(in srgb, var(--lab-bg) 92%, transparent) 70%, transparent); }
+  .hx-col { left: 16px; right: 16px; top: 60px; bottom: auto; width: auto; height: clamp(150px, 26vh, 260px); justify-content: center; }
+  .hx .lab-eyebrow { margin-bottom: 10px; font-size: 9.5px; }
+  .hx .lab-h.hx-h { font-size: clamp(24px, min(8.2vw, 5vh), 52px); margin: 0; }
+  .hx .lab-p, .hx .lab-cta, .hx .lab-hint { display: none; }
+  .hx-ways { left: 12px; right: 12px; bottom: 40px; height: 76px; gap: 8px; }
+  .hx-ways a { justify-content: center; align-items: center; text-align: center; gap: 4px; padding: 6px; }
+  .hx-ways a:hover { translate: 0 0; }
+  .hx-ways h3 { font-size: clamp(9.5px, 2.7vw, 15px); font-stretch: 105%; line-height: 1.25; }
+  .hx-ways p, .hx-ways span { display: none; }
+  .hx-ways li:first-child a { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg); }
+  .hx-pin { display: none; }
+  .hx-stamp { font-size: 12px; padding: 5px 12px; }
+}
+/* tablets have room for the sentence under the headline */
+@media (max-width: 1023px) and (orientation: portrait) and (min-width: 700px) {
+  .hx .lab-p { display: block; margin: 14px 0 0; font-size: 15px; max-width: 56ch; }
+}

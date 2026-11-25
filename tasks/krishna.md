@@ -35,6 +35,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K21** · P1 · X-ray checks web pages (connects Z16): live or archived pages that match the cited title are Partial, never Verified · `veracite/src/lib/verify/**` · #research #honesty
 - [x] **K22** · P1 · 3D vault as the home page with buttons into the app; plain cards below 1024 px, with reduced motion or without WebGL (covers A03) · `veracite/src/app/page.tsx veracite/src/components/lab/**` · #ux
 - [x] **K23** · P1 · Home page redesign (labelled fake note + three ways in) and effects on every app page: engraved background, torch glow, 3D note banner · `veracite/src/components/lab/home/** veracite/src/components/app/ambient/**` · #ux
+- [x] **K24** · P1 · Headings fit their boxes; phones in dark mode no longer repaint the daylight theme; 3D vault on upright phones and tablets · `veracite/src/components/lab/** veracite/src/app/globals.css veracite/src/app/layout.tsx` · #ux
 
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty

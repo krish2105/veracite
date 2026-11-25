@@ -29,7 +29,7 @@ function subscribe(onChange: () => void) {
   };
 }
 const current = (): HomeView =>
-  pickHome({ width: window.innerWidth, reducedMotion: window.matchMedia(REDUCED).matches, webgl: hasWebGL(), search: window.location.search });
+  pickHome({ width: window.innerWidth, height: window.innerHeight, reducedMotion: window.matchMedia(REDUCED).matches, webgl: hasWebGL(), search: window.location.search });
 /* The server cannot know the screen, so it says "pending" and the browser decides. */
 const onServer = () => "pending" as const;
 

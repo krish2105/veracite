@@ -13,7 +13,7 @@ import { archivo, literata, martian } from "@/app/fonts";
 import { themeStore } from "@/components/app/AppShell";
 import HomeBar from "../home/HomeBar";
 import HomeHero, { SPECIMEN } from "../home/HomeHero";
-import { noteRect } from "../home/stage";
+import { fovFor, noteRect } from "../home/stage";
 import LabBar from "../LabBar";
 import { labPortal } from "../labPortal";
 import { createStore, useStore } from "../store";
@@ -234,13 +234,13 @@ function onScreen(cam: THREE.PerspectiveCamera, x: number, y: number, width: num
 }
 
 /** Home page: the counterfeit note, large and labelled, fitted to the free space. It slides away on scroll. */
-function HomeSpecimen({ kit }: { kit: Kit }) {
+function HomeSpecimen({ kit, phone }: { kit: Kit; phone: boolean }) {
   const { width, height } = useThree((s) => s.size);
   const scroll = useScroll();
   const group = useRef<THREE.Group>(null!);
   const items = useRef<(HTMLDivElement | null)[]>([]);
   const fit = useMemo(() => {
-    const cam = new THREE.PerspectiveCamera(CAMERA.fov, width / height, CAMERA.near, CAMERA.far);
+    const cam = new THREE.PerspectiveCamera(fovFor(width / height), width / height, CAMERA.near, CAMERA.far);
     cam.position.set(0, 0, 10);
     cam.lookAt(1, -0.1, 0);
     cam.updateMatrixWorld();
@@ -257,7 +257,8 @@ function HomeSpecimen({ kit }: { kit: Kit }) {
   });
   return (
     <group ref={group} scale={fit.scale}>
-      <PresentationControls global={false} cursor snap speed={1.6} polar={[-0.4, 0.4]} azimuth={[-0.8, 0.8]}>
+      {/* dragging is off on touch screens, where a drag means "scroll" */}
+      <PresentationControls enabled={!phone} global={false} cursor snap speed={1.6} polar={[-0.4, 0.4]} azimuth={[-0.8, 0.8]}>
         <SplitNote kit={kit} mat={kit.fakes[0]} position={[0, 0, 0]} rotation={[-0.03, -0.14, -0.035]} />
         <group rotation={[-0.03, -0.14, -0.035]}>
           {SPECIMEN.map((p, i) => (
@@ -296,7 +297,7 @@ function Rig() {
   return null;
 }
 
-function Torch({ mode }: { mode: Mode }) {
+function Torch({ mode, phone }: { mode: Mode; phone: boolean }) {
   const body = useRef<THREE.Group>(null!);
   const spot = useRef<THREE.SpotLight>(null!);
   const v = useMemo(() => ({ ray: new THREE.Raycaster(), tgt: new THREE.Vector3(), head: new THREE.Vector3(), right: new THREE.Vector3(), up: new THREE.Vector3(), dir: new THREE.Vector3() }), []);
@@ -316,7 +317,8 @@ function Torch({ mode }: { mode: Mode }) {
   const uv = mode === "uv";
   return (
     <>
-      <group ref={body}>
+      {/* on phones only the light shows: the torch itself would sit on top of the note */}
+      <group ref={body} visible={!phone}>
         <mesh rotation-x={Math.PI / 2} position-z={-0.45}>
           <cylinderGeometry args={[0.075, 0.085, 0.8, 32]} />
           <meshStandardMaterial color="#1b1f24" metalness={0.8} roughness={0.35} />
@@ -389,7 +391,7 @@ function Overlay({ home, onExplode }: { home: boolean; onExplode: () => void }) 
     <Scroll html style={{ width: "100%" }}>
       {home && <HomeHero />}
       {SECTIONS.map((s, i) => (home && i === 0 ? null :
-        <section key={i} className="lab-section" style={{ top: `${i * 100}vh` }}>
+        <section key={i} className="lab-section" style={{ top: `${i * 100}dvh` }}>
           <div className={i ? "lab-card" : undefined}>
             <p className="lab-eyebrow">{s.eyebrow}</p>
             <h2 className="lab-h">{s.h}</h2>
@@ -408,7 +410,29 @@ function Overlay({ home, onExplode }: { home: boolean; onExplode: () => void }) 
   );
 }
 
-function Scene({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
+/**
+ * Upright screens get a wider camera, and once the visitor scrolls (text boxes then sit at the foot) the scene is
+ * drawn higher so it stays visible above them. Widest at the inspection bay, where the note comes apart.
+ */
+function FitCamera() {
+  const scroll = useScroll();
+  useFrame((state) => {
+    const camera = state.camera as THREE.PerspectiveCamera;
+    const { width, height } = state.size;
+    const upright = width < height;
+    const bay = upright ? THREE.MathUtils.smoothstep(scroll.offset, 0.72, 0.92) : 0;
+    const lift = upright ? Math.round(height * (0.15 * THREE.MathUtils.smoothstep(scroll.offset, 0.03, 0.18) + 0.07 * bay)) : 0;
+    const fov = fovFor(width / height) + 14 * bay;
+    if (Math.abs(camera.fov - fov) < 0.01 && (camera.view?.enabled ? camera.view.offsetY : 0) === lift) return;
+    camera.fov = fov;
+    if (lift) camera.setViewOffset(width, height, 0, lift, width, height);
+    else camera.clearViewOffset();
+    camera.updateProjectionMatrix();
+  });
+  return null;
+}
+
+function Scene({ fonts, home, phone }: { fonts: CanvasFonts; home: boolean; phone: boolean }) {
   const mode = useStore(vaultMode);
   const kit = useKit(fonts);
   const uv = mode === "uv";
@@ -417,14 +441,15 @@ function Scene({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
       <ModeLighting mode={mode} kit={kit} />
       <ScrollControls pages={SECTIONS.length} damping={0.22}>
         <Rig />
-        <Torch mode={mode} />
-        {home ? <HomeSpecimen kit={kit} /> : <Hero kit={kit} />}
+        <FitCamera />
+        <Torch mode={mode} phone={phone} />
+        {home ? <HomeSpecimen kit={kit} phone={phone} /> : <Hero kit={kit} />}
         <Vault kit={kit} />
         <Bay kit={kit} />
         {uv && <Sparkles count={420} scale={[10, 6, 100]} position={[0, 0, -42]} size={2.2} speed={0.25} color="#4DF2FF" opacity={0.8} />}
         <Overlay home={home} onExplode={() => { story.explodeManual = story.explodeManual ? 0 : 1; }} />
       </ScrollControls>
-      <EffectComposer multisampling={4}>
+      <EffectComposer multisampling={phone ? 0 : 4}>
         <Bloom mipmapBlur intensity={uv ? 1.5 : 0.35} luminanceThreshold={uv ? 0.32 : 0.85} luminanceSmoothing={0.2} />
         <Noise opacity={0.025} premultiply />
         <Vignette darkness={uv ? 0.55 : 0.28} offset={0.3} />
@@ -433,19 +458,21 @@ function Scene({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
   );
 }
 
-function AdaptiveQuality() {
+function AdaptiveQuality({ high }: { high: number }) {
   const setDpr = useThree((st) => st.setDpr);
-  return <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(1.75)} />;
+  return <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(high)} />;
 }
 const GL = { antialias: false, powerPreference: "high-performance" as const };
 const CAMERA = { position: [0, 0, 10] as THREE.Vector3Tuple, fov: 42, near: 0.1, far: 160 };
 
 /** Mounted once and never re-rendered (see store.ts): the theme reaches the scene through a store. */
-const VaultCanvas = memo(function VaultCanvas({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
+const VaultCanvas = memo(function VaultCanvas({ fonts, home, phone }: { fonts: CanvasFonts; home: boolean; phone: boolean }) {
+  // Phones draw fewer pixels: their screens are dense and their graphics chips small.
+  const dpr = phone ? 1.4 : 1.75;
   return (
-    <Canvas dpr={1.75} gl={GL} camera={CAMERA}>
-      <AdaptiveQuality />
-      <Scene fonts={fonts} home={home} />
+    <Canvas dpr={dpr} gl={GL} camera={CAMERA}>
+      <AdaptiveQuality high={dpr} />
+      <Scene fonts={fonts} home={home} phone={phone} />
     </Canvas>
   );
 });
@@ -462,6 +489,8 @@ export default function VaultExperience({ home = false, onPlain }: { home?: bool
     vaultMode.set(forced || localStorage.getItem("vx-theme") === "dark" ? "uv" : "day");
   }, [home]);
   // Next.js keeps a left page hidden instead of unmounting it, which kills its WebGL context: start a fresh canvas.
+  // Decided once per mount, so the Canvas never re-renders for it.
+  const [phone] = useState(() => window.matchMedia("(pointer: coarse)").matches);
   const [visit, setVisit] = useState(0);
   useLayoutEffect(() => () => setVisit((v) => v + 1), []);
   const mode = useStore(vaultMode);
@@ -485,7 +514,7 @@ export default function VaultExperience({ home = false, onPlain }: { home?: bool
   return (
     <div className="lab" style={vars}>
       <div ref={(el) => { if (el) labPortal.current = el; }} className="lab-portal" />
-      {ready ? <VaultCanvas key={visit} fonts={fonts} home={home} /> : <div className="lab-loading">Printing security notes…</div>}
+      {ready ? <VaultCanvas key={visit} fonts={fonts} home={home} phone={phone} /> : <div className="lab-loading">Printing security notes…</div>}
       {home ? (
         <HomeBar modeLabel={modeLabel} pressed={uv} onToggle={toggle} onPlain={onPlain} />
       ) : (
