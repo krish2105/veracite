@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { AlertTriangle, RotateCcw, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AlertTriangle, ClipboardCopy, FlaskConical, RotateCcw, Search } from "lucide-react";
 import AppShell, { autonomyStore } from "@/components/app/AppShell";
-import { Card, TrustLabel } from "@/components/app/ui";
+import { Card, Sample, TrustLabel } from "@/components/app/ui";
 import { ReferenceList } from "@/components/app/tabs/xray/ReferenceList";
 import { useRefList } from "@/components/app/tabs/xray/refList";
 import "@/components/app/tabs/xray/xray.css";
@@ -12,6 +12,7 @@ import { STEPS, stepState } from "@/lib/session/machine";
 import { useResearch } from "@/lib/session/useResearch";
 import type { Autonomy } from "@/lib/types";
 import { ClaimLegend, ClaimsCard, PlanCard, SourcesCard } from "./parts";
+import { SAMPLE_SESSION } from "./sampleSession";
 import "./research.css";
 
 const EXAMPLE = "Does generative AI help or hurt student learning?";
@@ -23,13 +24,28 @@ const AUTONOMY: [Autonomy, string, string][] = [
 
 export function ResearchTab() {
   const autonomy = useStore(autonomyStore);
-  const { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan } = useResearch(autonomy);
+  const { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan, retry, loadSample } = useResearch(autonomy);
   const [q, setQ] = useState("");
+  const [recording, setRecording] = useState(false);
+  const [copied, setCopied] = useState("");
   const { receipts } = useRefList();
   const busy = !!s.busy;
   const started = s.phase !== "ask";
   const approved = s.candidates.filter((c) => s.decisions[c.id] === "accepted");
-  const mine = receipts.filter((r) => r.sessionId === s.sessionId);
+  const mine = s.sample ? s.sample.receipts : receipts.filter((r) => r.sessionId === s.sessionId);
+  const mode = s.sample?.autonomy ?? autonomy;
+  // ?record=1 shows a button that copies a finished LIVE session, to be pasted into sampleSession.ts (K32).
+  useEffect(() => setRecording(new URLSearchParams(window.location.search).get("record") === "1"), []);
+  const record = async () => {
+    const { busy: _b, error: _e, failed: _f, sample: _s, ...state } = s;
+    const rec = { ...state, recordedAt: new Date().toISOString(), autonomy, receipts: mine };
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(rec));
+      setCopied("Copied. Paste it into tabs/research/sampleSession.ts.");
+    } catch {
+      setCopied("Could not copy. Allow clipboard access and try again.");
+    }
+  };
 
   return (
     <AppShell title="Research" subtitle="Ask a question. The AI plans, reads and challenges; only public registries supply sources; you approve three times.">
@@ -45,7 +61,12 @@ export function ResearchTab() {
             <input className="rs-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={EXAMPLE} aria-label="Research question" disabled={started && busy} />
             <button className="btn primary" type="submit" disabled={busy || q.trim().length < 5}><Search size={15} /> {started ? "Ask again" : "Start"}</button>
           </form>
-          {!started && <button className="btn small" style={{ marginTop: 8 }} onClick={() => setQ(EXAMPLE)}>Use the example question</button>}
+          {!started && (
+            <div className="xrx-row">
+              <button className="btn small" onClick={() => setQ(EXAMPLE)}>Use the example question</button>
+              {SAMPLE_SESSION && <button className="btn small" onClick={() => loadSample(SAMPLE_SESSION!)}><FlaskConical size={13} /> No Wi-Fi or AI? Show the SAMPLE session</button>}
+            </div>
+          )}
           <div className="rs-autonomy">
             <span className="vx-eyebrow" style={{ margin: 0 }}>AI autonomy</span>
             <div className="vx-seg" role="radiogroup" aria-label="AI autonomy">
@@ -58,7 +79,7 @@ export function ResearchTab() {
           {started && (
             <div className="stepper" aria-label="Progress">
               {STEPS.map((st) => {
-                const state = stepState(st.phase, s.phase, autonomy);
+                const state = stepState(st.phase, s.phase, mode);
                 return state === "skip" ? null : (
                   <span key={st.phase} className={`step ${state} ${st.gate ? "gate" : ""}`}><i />{st.label}</span>
                 );
@@ -67,12 +88,24 @@ export function ResearchTab() {
           )}
         </Card>
 
+        {s.sample && (
+          <div className="banner rs-sample" role="status">
+            <FlaskConical size={16} />
+            <span>
+              <Sample>SAMPLE</Sample> A real session on this question, recorded on {new Date(s.sample.recordedAt).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Dubai" })} (Dubai) with autonomy {s.sample.autonomy}. Nothing on this page is running now, and your list is not changed.
+            </span>
+            <button className="btn small" onClick={restart}><RotateCcw size={13} /> Leave the SAMPLE</button>
+          </div>
+        )}
+
         <div aria-live="polite">
           {s.busy && <p className="rs-busy">{s.busy}</p>}
           {s.error && (
             <div className="banner" role="alert">
               <AlertTriangle size={16} color="var(--alert)" />
               <span>{s.error}</span>
+              {s.failed && <button className="btn small" onClick={retry}><RotateCcw size={13} /> Try again</button>}
+              {SAMPLE_SESSION && <button className="btn small" onClick={() => loadSample(SAMPLE_SESSION!)}><FlaskConical size={13} /> Show the SAMPLE session</button>}
             </div>
           )}
           {s.notes.length > 0 && (
@@ -109,9 +142,22 @@ export function ResearchTab() {
           </>
         )}
 
+        {recording && !s.sample && (s.phase === "cp3_claims" || s.phase === "export") && (
+          <div className="xrx-row">
+            <button className="btn small" onClick={() => void record()}><ClipboardCopy size={13} /> Copy this session for the SAMPLE fallback</button>
+            {copied && <span className="vx-tiny" role="status">{copied}</span>}
+          </div>
+        )}
+
         {s.phase === "export" && (
           <>
-            <ReferenceList autonomy={autonomy} claims={s.claims} />
+            {s.sample ? (
+              <Card title="Your reference list">
+                <p className="xr-note">In a live session, the sources you approved and your AI-use statement appear here. This SAMPLE does not touch your list.</p>
+              </Card>
+            ) : (
+              <ReferenceList autonomy={autonomy} claims={s.claims} />
+            )}
             <Card title={<>Receipts · every step of this session</>} aside={<button className="btn small" onClick={restart}><RotateCcw size={13} /> New question</button>}>
               <div className="receipts">
                 {mine.map((r) => (

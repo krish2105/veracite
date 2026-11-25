@@ -18,3 +18,7 @@
   .rs .receipts div { grid-template-columns: 62px minmax(0, 1fr); }
   .rs .receipts span { grid-column: 1 / -1; overflow-wrap: anywhere; }
 }
+/* K32: banners carry buttons (Try again, SAMPLE), so they wrap on narrow screens */
+.rs .banner { flex-wrap: wrap; }
+.rs .banner > span { flex: 1 1 220px; min-width: 0; }
+.rs-sample { border-color: color-mix(in srgb, var(--warn) 55%, transparent); background: color-mix(in srgb, var(--warn) 9%, transparent); }

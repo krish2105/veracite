@@ -22,6 +22,12 @@ Production URL: https://veracite.vercel.app
 - `https://veracite.vercel.app/api/health` reports the registries (Crossref, OpenAlex, arXiv) and whether the AI agents are on.
 - **Rules mode:** if no AI key is set, or the AI is switched off or unavailable, every reference check still runs. Those checks are deterministic code; the AI never writes a reference.
 
+## Demo safety (Thursday)
+- **Before 11:00 and again at ~12:20:** `node scripts/prewarm.mjs` opens every page and runs the exact demo checks once (X-ray test list, research searches, one-click save, web check). 13/13 on Wed 25 Nov, 23:40.
+- **If Wi-Fi or the AI is slow during the demo:** Research → **No Wi-Fi or AI? Show the SAMPLE session**. It replays a real recorded session under a SAMPLE banner and never touches the list. *Record it once the AI keys are in:* run the demo question live, open `/research?record=1`, press **Copy this session for the SAMPLE fallback**, paste it into `veracite/src/components/app/tabs/research/sampleSession.ts`.
+- **If a step fails:** the banner says which step, what happened and what to do, with **Try again**. Setting AI autonomy to Off keeps every reference check running.
+- **Measured on the live site** (Wed 25 Nov, 23:50): same results as the committed run: 11/11 fakes caught, 0 fakes marked Verified, 30/30 real, 5/5 retractions, web 3/5; median 0.66 s per reference with network latency (0.46 s locally). File: `veracite/tests/results/live-site.md`.
+
 ## Deploy notes (team)
 - Vercel project root directory: `veracite`. Every merge to `main` deploys to production.
 - Environment variables on Vercel: everything in `veracite/.env.example` (values only in your own `.env.local`, never in the repo).

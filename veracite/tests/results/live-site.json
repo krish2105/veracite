@@ -1,0 +1,457 @@
+{
+  "sample": true,
+  "adapter": "Veracite Reference X-ray (https://veracite.vercel.app/api/sources/xray)",
+  "label": null,
+  "ranAt": "2026-11-25T19:50:47.950Z",
+  "sets": [
+    "real",
+    "fabricated",
+    "chimeras",
+    "retracted",
+    "web"
+  ],
+  "proofLine": "Tested on 51 references (30 real, 1 fabricated, 10 chimeras, 5 retracted, 5 web) · 11/11 fakes caught · 0 fakes marked Verified · 100% of real references verified · 5/5 retractions flagged · median 0.7 s per reference",
+  "summary": {
+    "total": 51,
+    "errors": 0,
+    "fakes": {
+      "total": 11,
+      "checked": 11,
+      "caught": 11,
+      "caughtPct": 100
+    },
+    "falseVerified": {
+      "count": 0,
+      "ids": []
+    },
+    "real": {
+      "total": 30,
+      "checked": 30,
+      "verified": 30,
+      "verifiedPct": 100,
+      "missed": []
+    },
+    "retracted": {
+      "total": 5,
+      "flagged": 5,
+      "missed": []
+    },
+    "web": {
+      "total": 5,
+      "matched": 3
+    },
+    "exactAgreement": {
+      "count": 48,
+      "pct": 94.1
+    },
+    "timeMs": {
+      "median": 657,
+      "p95": 3381,
+      "total": 59484
+    },
+    "perSet": {
+      "real": {
+        "total": 30,
+        "errors": 0,
+        "exact": 30,
+        "confusion": {
+          "verified→verified": 30
+        }
+      },
+      "fabricated": {
+        "total": 1,
+        "errors": 0,
+        "exact": 1,
+        "confusion": {
+          "chimera→chimera": 1
+        }
+      },
+      "chimeras": {
+        "total": 10,
+        "errors": 0,
+        "exact": 9,
+        "confusion": {
+          "chimera→chimera": 9,
+          "chimera→mismatch": 1
+        }
+      },
+      "retracted": {
+        "total": 5,
+        "errors": 0,
+        "exact": 5,
+        "confusion": {
+          "retracted→retracted": 5
+        }
+      },
+      "web": {
+        "total": 5,
+        "errors": 0,
+        "exact": 3,
+        "confusion": {
+          "partial→partial": 3,
+          "partial→chimera": 1,
+          "notfound→mismatch": 1
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "real-001",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1220
+    },
+    {
+      "id": "real-002",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1395
+    },
+    {
+      "id": "real-003",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 1385
+    },
+    {
+      "id": "real-004",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 720
+    },
+    {
+      "id": "real-005",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 513
+    },
+    {
+      "id": "real-006",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 624
+    },
+    {
+      "id": "real-007",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 846
+    },
+    {
+      "id": "real-008",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 593
+    },
+    {
+      "id": "real-009",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 328
+    },
+    {
+      "id": "real-010",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 396
+    },
+    {
+      "id": "real-011",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 357
+    },
+    {
+      "id": "real-012",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 324
+    },
+    {
+      "id": "real-013",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 371
+    },
+    {
+      "id": "real-014",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 490
+    },
+    {
+      "id": "real-015",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 488
+    },
+    {
+      "id": "real-016",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 645
+    },
+    {
+      "id": "real-017",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 594
+    },
+    {
+      "id": "real-018",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 671
+    },
+    {
+      "id": "real-019",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 663
+    },
+    {
+      "id": "real-020",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 678
+    },
+    {
+      "id": "real-021",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 622
+    },
+    {
+      "id": "real-022",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 637
+    },
+    {
+      "id": "real-023",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 657
+    },
+    {
+      "id": "real-024",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 676
+    },
+    {
+      "id": "real-025",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 687
+    },
+    {
+      "id": "real-026",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 658
+    },
+    {
+      "id": "real-027",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 664
+    },
+    {
+      "id": "real-028",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 651
+    },
+    {
+      "id": "real-029",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 664
+    },
+    {
+      "id": "real-030",
+      "set": "real",
+      "expected": "verified",
+      "got": "verified",
+      "ms": 641
+    },
+    {
+      "id": "fab-001",
+      "set": "fabricated",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 1670
+    },
+    {
+      "id": "chim-001",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 631
+    },
+    {
+      "id": "chim-002",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "mismatch",
+      "ms": 657
+    },
+    {
+      "id": "chim-003",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 1930
+    },
+    {
+      "id": "chim-004",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 2672
+    },
+    {
+      "id": "chim-005",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 3381
+    },
+    {
+      "id": "chim-006",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 2904
+    },
+    {
+      "id": "chim-007",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 239
+    },
+    {
+      "id": "chim-008",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 3049
+    },
+    {
+      "id": "chim-009",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 258
+    },
+    {
+      "id": "chim-010",
+      "set": "chimeras",
+      "expected": "chimera",
+      "got": "chimera",
+      "ms": 2562
+    },
+    {
+      "id": "ret-001",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "retracted",
+      "ms": 363
+    },
+    {
+      "id": "ret-002",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "retracted",
+      "ms": 403
+    },
+    {
+      "id": "ret-003",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "retracted",
+      "ms": 254
+    },
+    {
+      "id": "ret-004",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "retracted",
+      "ms": 459
+    },
+    {
+      "id": "ret-005",
+      "set": "retracted",
+      "expected": "retracted",
+      "got": "retracted",
+      "ms": 321
+    },
+    {
+      "id": "web-001",
+      "set": "web",
+      "expected": "partial",
+      "got": "partial",
+      "ms": 4862
+    },
+    {
+      "id": "web-002",
+      "set": "web",
+      "expected": "partial",
+      "got": "chimera",
+      "ms": 3094
+    },
+    {
+      "id": "web-003",
+      "set": "web",
+      "expected": "partial",
+      "got": "partial",
+      "ms": 3249
+    },
+    {
+      "id": "web-004",
+      "set": "web",
+      "expected": "partial",
+      "got": "partial",
+      "ms": 4426
+    },
+    {
+      "id": "web-005",
+      "set": "web",
+      "expected": "notfound",
+      "got": "mismatch",
+      "ms": 2242
+    }
+  ]
+}
