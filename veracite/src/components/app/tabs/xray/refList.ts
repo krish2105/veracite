@@ -70,7 +70,7 @@ export function toSource(v: Verification): SourceRecord {
     url: m.url,
     oaUrl: m.oaUrl,
     verification: v,
-    quality: { preprint: m.type === "preprint", citedBy: m.citedBy, openAccess: m.openAccess, countries: m.countries, publisher: m.publisher },
+    quality: { preprint: m.type === "preprint", citedBy: m.citedBy, openAccess: m.openAccess, countries: m.countries, publisher: m.publisher, inDOAJ: m.journal?.inDoaj, coreJournal: m.journal?.core, listedIn: m.journal?.listedIn },
     tags: [],
     collections: [],
     notes: "",

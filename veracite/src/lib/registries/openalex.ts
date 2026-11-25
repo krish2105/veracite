@@ -28,7 +28,7 @@ export interface OpenAlexWork {
   }[];
   primary_location?: {
     landing_page_url?: string | null;
-    source?: { display_name?: string | null; host_organization_name?: string | null } | null;
+    source?: { display_name?: string | null; host_organization_name?: string | null; is_in_doaj?: boolean | null; is_core?: boolean | null; listed_in?: string[] | null } | null;
   } | null;
   abstract_inverted_index?: Record<string, number[]> | null;
   open_access?: { is_oa?: boolean; oa_url?: string | null } | null;
@@ -89,6 +89,7 @@ export function parseOpenAlexWork(w: OpenAlexWork, fetchedAt = new Date().toISOS
     updates,
     countries: countries.size ? [...countries] : undefined,
     publisher: w.primary_location?.source?.host_organization_name ?? undefined,
+    journal: w.primary_location?.source ? { inDoaj: w.primary_location.source.is_in_doaj ?? undefined, core: w.primary_location.source.is_core ?? undefined, listedIn: w.primary_location.source.listed_in ?? undefined } : undefined,
     language: w.language ?? undefined,
     volume: b?.volume ?? undefined,
     issue: b?.issue ?? undefined,
