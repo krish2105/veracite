@@ -15,7 +15,7 @@ import { isArxivDoi, normalizeDoi } from "./normalize";
 import { openalexByDoi } from "./openalex";
 
 export { crossrefByAuthors, crossrefByDoi, crossrefMatchReference, crossrefSearch, parseCrossrefWork } from "./crossref";
-export { openalexByDoi, openalexSearch, parseOpenAlexWork } from "./openalex";
+export { openalexByDoi, openalexRelated, openalexSearch, parseOpenAlexWork, type CitationDirection } from "./openalex";
 export { arxivById, arxivSearch, parseArxivFeed } from "./arxiv";
 export { RegistryError, type RegistryResult } from "./http";
 export { normalizeDoi, isArxivDoi, arxivIdFromString, stripMarkup } from "./normalize";

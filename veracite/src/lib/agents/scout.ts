@@ -64,6 +64,12 @@ export async function scout(queries: string[], opts: ScoutOptions = {}): Promise
   }
 
   const ranked = [...pool.values()].sort((a, b) => b.hits - a.hits || (b.record.citedBy ?? 0) - (a.record.citedBy ?? 0)).slice(0, opts.max ?? 10);
+  const candidates = await verifyRecords(ranked, opts.deps as RegistryDeps | undefined);
+  return { candidates, searched, problems: [...problems] };
+}
+
+/** Every registry record goes through the Verifier before a student sees it (also used by snowballing, K11). */
+export async function verifyRecords(ranked: { record: RegistryRecord; hits: number }[], deps?: RegistryDeps): Promise<Candidate[]> {
   const candidates: Candidate[] = new Array(ranked.length);
   let next = 0;
   const worker = async () => {
@@ -72,11 +78,11 @@ export async function scout(queries: string[], opts: ScoutOptions = {}): Promise
       const { record, hits } = ranked[i];
       const verification = await verifyReference(
         { raw: asReference(record), doi: record.doi, title: record.title, authors: record.authors, year: record.year, venue: record.venue },
-        opts.deps as RegistryDeps | undefined,
+        deps,
       );
       candidates[i] = { record: verification.matched ?? record, verification, hits };
     }
   };
   await Promise.all(Array.from({ length: Math.min(3, ranked.length) }, worker));
-  return { candidates, searched, problems: [...problems] };
+  return candidates;
 }
