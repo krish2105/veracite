@@ -83,7 +83,7 @@ pres.addSection({ title: "Overview" });
   T(s, "The AI research assistant that can't make up a reference", { x: 0.6, y: 2.05, w: 6.2, h: 0.8, fontFace: F.read, fontSize: 20, italic: true, color: K.uvInk2 });
   const stats = [
     ["78–90%", K.magenta, "of GPT-4o's citations to recent research were fabricated", "Nature, Feb 2026"],
-    ["100+", K.cyan, "hallucinated citations in papers accepted at NeurIPS 2025", "GPTZero / Fortune, Jan 2026"],
+    ["100", K.cyan, "hallucinated citations found in 51 papers accepted at NeurIPS 2025", "GPTZero / TechCrunch, Jan 2026"],
     ["§h(ix)", K.gold, "SP Jain's integrity policy now warns of AI references built from real parts", "Policy v2, Feb 2026"],
   ];
   stats.forEach(([n, c, l, src], i) => {
@@ -144,11 +144,12 @@ pres.addSection({ title: "Workflow" });
   [2, 3, 4, 5].forEach((i) => s.addShape(pres.shapes.LINE, { x: ax(i) + BW / 2, y: AY + AH, w: 0, h: 0.44, line: { color: K.teal, width: 0.75, dashType: "sysDot" } }));
   // bottom row
   frame(s, 0.6, 5.42, 3.95, 1.3);
-  T(s, "SIDE DOORS (NO FULL SESSION NEEDED)", { x: 0.78, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
+  T(s, "YOUR LIBRARY AND TWO SIDE DOORS", { x: 0.78, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
   T(s, [
-    { text: "Reference X-ray: ", options: { bold: true } }, { text: "paste any bibliography; each line is checked field by field.", options: { breakLine: true } },
-    { text: "Draft Checker: ", options: { bold: true } }, { text: "paste a paragraph; each cited claim is checked against its source." },
-  ], { x: 0.78, y: 5.8, w: 3.65, h: 0.85, fontSize: 10.5, color: K.ink, paraSpaceAfter: 4 });
+    { text: "Library: ", options: { bold: true } }, { text: "save, organise and cite while you write (APA 7).", options: { breakLine: true } },
+    { text: "Reference X-ray: ", options: { bold: true } }, { text: "paste a bibliography; every line is checked.", options: { breakLine: true } },
+    { text: "Draft Checker: ", options: { bold: true } }, { text: "each cited claim is checked against its source." },
+  ], { x: 0.78, y: 5.79, w: 3.7, h: 0.88, fontSize: 9.5, color: K.ink, paraSpaceAfter: 3 });
   frame(s, 4.75, 5.42, 4.0, 1.3);
   T(s, "EVERY SENTENCE GETS A LABEL (SET BY CODE)", { x: 4.93, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
   [["verified", "Verified"], ["reported", "Reported, not checked"], ["ai", "AI reasoning"], ["notfound", "Not found"]].forEach(([k, t], i) => {
@@ -170,8 +171,8 @@ pres.addSection({ title: "Architecture" });
   const cols = [
     ["WEBSITE", "in your browser", K.teal, ["Next.js app with a 3D landing (React Three Fiber)", "Workflow state machine with 3 checkpoints", "Receipts: every step logged with time"]],
     ["SERVERLESS TOOLS", "Vercel, stateless", K.teal, ["Agent endpoints and the Verifier", "Citation formatter (official CSL styles)", "LLM gateway: schema check, PII scrub, injection shield, budget caps"]],
-    ["AI", "Groq, free tier", K.violet, ["A different open model per agent (gpt-oss, Llama, Qwen)", "Fallback model if one is busy", "Rules mode: every check still runs with no AI"]],
-    ["SOURCES", "open registries", K.teal, ["Crossref + Retraction Watch", "OpenAlex · arXiv · Semantic Scholar", "DOAJ · Unpaywall / Europe PMC · Wayback"]],
+    ["AI", "Groq, free tier", K.violet, ["A different open model per agent (gpt-oss, Qwen)", "Fallback model if one is busy", "Rules mode: every check still runs with no AI"]],
+    ["SOURCES", "open registries", K.teal, ["Crossref + Retraction Watch", "OpenAlex · arXiv", "Optional: Semantic Scholar · DOAJ · Unpaywall · Wayback"]],
     ["REFERENCE STORAGE", "on your device", K.teal, ["Library in IndexedDB: no account, no server copy", "Export BibTeX / RIS / CSL-JSON for Zotero, Mendeley", "Certificate data travels inside its own link"]],
   ];
   const W = 2.23, G = 0.245, Y = 1.95, H = 3.35;
@@ -206,7 +207,7 @@ pres.addSection({ title: "Ethics" });
     ["Plagiarism", "Pasting AI summaries, or copying a source too closely.", "Paraphrase guard flags close copying. The AI writes a labelled brief, never an essay. You explain each source in your own words."],
     ["Privacy", "Drafts and identities sent to AI providers or stored on servers.", "No accounts. The library stays on your device. Personal data is scrubbed before any AI call; Groq doesn't train on API data."],
     ["Biased sources", "One-country, outdated or paywalled evidence quietly shapes the answer.", "Bias lens on country, year, open access and publisher, with plain warnings. Quality facts, never opaque scores."],
-    ["Over-reliance on AI", "The student stops thinking (MIT Media Lab, 2025).", "AI-autonomy dial (AI can be off), three approval checkpoints, read-before-you-cite and a Socratic coach."],
+    ["Over-reliance on AI", "The student stops thinking (MIT Media Lab, 2025).", "AI-autonomy dial (AI can be off), three approval checkpoints, read-before-you-cite and explain-it-back."],
     ["False accusation", "AI-writing detectors flagged 61% of non-native English essays (Stanford, 2023).", "We verify sources, not people. Veracite never claims to 'detect AI' in a student's writing."],
   ];
   risks.forEach(([h, r, d], i) => {
@@ -278,16 +279,17 @@ pres.addSection({ title: "Guardrails" });
     T(s, sub, { x: 1.1, y: y + 0.42, w: 1.75, h: 0.22, fontFace: F.mono, fontSize: 7.5, color: c });
     T(s, t, { x: 2.9, y: y + 0.06, w: 5.12, h: 0.66, fontSize: 9.5, color: K.uvInk, valign: "middle" });
   });
-  s.addImage({ path: IMG("s6-xray-uv.jpg"), x: 8.45, y: 1.88, w: 4.28, h: 2.98, altText: "Prototype: a fabricated reference taken apart in 3D, its title and authors traced to real papers and its DOI marked VOID" });
-  s.addShape(pres.shapes.RECTANGLE, { x: 8.405, y: 1.835, w: 4.37, h: 3.07, fill: { color: K.uv, transparency: 100 }, line: { color: K.cyan, width: 0.75 } });
-  T(s, "Reference X-ray: a fabricated reference taken apart · prototype, SAMPLE", { x: 8.45, y: 4.92, w: 4.28, h: 0.22, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
-  frame(s, 8.45, 5.32, 4.28, 0.98, { fill: K.uvCard, line: K.uvLine, double: false });
+  s.addImage({ path: IMG("s6-xray-uv.jpg"), x: 8.45, y: 1.88, w: 4.28, h: 2.75, altText: "Screenshot of the working Reference X-ray: a stitched reference taken apart, with a real paper title next to authors who never wrote it" });
+  s.addShape(pres.shapes.RECTANGLE, { x: 8.405, y: 1.835, w: 4.37, h: 2.84, fill: { color: K.uv, transparency: 100 }, line: { color: K.cyan, width: 0.75 } });
+  T(s, "Working X-ray, live registries · team test input with deliberate fakes", { x: 8.45, y: 4.72, w: 4.28, h: 0.22, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
+  frame(s, 8.45, 5.02, 4.28, 1.28, { fill: K.uvCard, line: K.uvLine, double: false });
   T(s, [
     { text: "HOW WE PROVE IT  ", options: { fontFace: F.monoM, fontSize: 8, color: K.gold, breakLine: true } },
-    { text: "70-reference test set (30 real · 20 AI-fabricated · 10 chimeras · 5 retracted · 5 web). Pass bar: zero fakes marked Verified. Results go live on our Trust Center.", options: { fontSize: 9.5, color: K.uvInk } },
-  ], { x: 8.6, y: 5.4, w: 4.0, h: 0.85 });
+    { text: "0 fakes marked Verified", options: { fontFace: F.head2, fontSize: 13, bold: true, color: K.cyan, breakLine: true } },
+    { text: "Live run, 25 Nov, 46 references: 30/30 real verified · 5/5 retractions caught · 10/11 stitched fakes named (the 11th flagged Mismatch). Full set: 51, incl. 5 web pages not yet run.", options: { fontSize: 8.5, color: K.uvInk } },
+  ], { x: 8.6, y: 5.1, w: 4.0, h: 1.15 });
   T(s, "Every reference real. Every claim traceable. You stay in charge.", { x: 0.6, y: 6.33, w: 12.13, h: 0.45, fontFace: F.head2, fontSize: 17, bold: true, color: K.cyan });
-  s.addNotes("Guardrails grouped strongest-first. The proof line describes the test set and pass bar; the measured results are published on the live Trust Center (no numbers are claimed here before testing).");
+  s.addNotes("Guardrails grouped strongest-first. Proof numbers: Verifier run on 25 Nov 2026 against live Crossref, OpenAlex and arXiv over 46 test references (30 real, 10 hand-built chimeras, 1 AI-fabricated, 5 retracted). The 5 web records are not yet run. The screenshot is the working X-ray on a team-written test list.");
 }
 
 (async () => {
