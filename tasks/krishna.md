@@ -79,6 +79,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Thursday 02:00 · fixes from the evidence-based rescore
 - [x] **K44** · P1 · Library: core journey first (Sources → Export → Bias lens → Import), extra tools behind "More tools", Export ↓ shortcut; flags.ts matches what is live · `veracite/src/components/app/tabs/library/LibraryTab.tsx veracite/src/lib/flags.ts` · #ux
 - [x] **K45** · P1 · Save checked web pages to the library (Partial, never Verified, retrieval date kept) · `veracite/src/lib/verify/websource*` · #research #honesty
+- [x] **K46** · P1 · Deck brought up to date with the live site (PPTX + PDF rebuilt, 6 slides) and a humanised 3-person demo script PDF · `submissions/phase1/deck/build-deck.cjs`, `submissions/phase1/Team7_Veracite_Phase1_Deck.*`, `submissions/phase2/demo-script/**`, `submissions/phase2/Team7_Demo_Script.pdf` · due Thu 09:00 · #deck #pres
     - 26 Nov: verdicts keep the web evidence; Add as web page on the X-ray and the save page; record from the live/Wayback check + the student's own author/date; Library shows retrieval date + archive link; exports and certificates include it. 8 new tests.
 
 ## Wednesday evening · deck-promised extras (M3)
