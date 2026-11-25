@@ -50,7 +50,7 @@ export function ChimeraPanel({ n, parts }: { n?: number; parts?: ChimeraPart[] }
       </p>
       <div
         className={`chim ${open ? "open" : ""}`}
-        style={{ marginTop: 24 }}
+        style={{ marginTop: 64 }}
         onClick={() => setOpen((o) => !o)}
         role="button"
         tabIndex={0}
