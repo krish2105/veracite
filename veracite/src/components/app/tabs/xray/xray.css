@@ -89,3 +89,8 @@
 .imp-head .lbl { flex: none; }
 .imp-ref { font-size: 12.5px; line-height: 1.45; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
 @media (max-width: 640px) { .imp-head { flex-direction: column; gap: 4px; } }
+/* Citation styles (K29) */
+.vx-style { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.vx-style select { font: 13px var(--f-ui); padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); max-width: 100%; }
+.xrx-apa .csl-left-margin { display: inline; margin-right: 6px; }
+.xrx-apa .csl-right-inline { display: inline; }

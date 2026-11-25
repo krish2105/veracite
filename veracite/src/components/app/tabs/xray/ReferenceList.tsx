@@ -6,8 +6,11 @@ import { Card, StatusBadge } from "@/components/app/ui";
 import { buildAiUseStatement, type StatementClaim } from "@/lib/integrity/statement";
 import type { Autonomy, RegistryName } from "@/lib/types";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
-import { apaList, apaReference } from "./apa";
+import { listOutput, STYLES } from "@/lib/cite/styles";
+import { useCiteStyle } from "@/lib/cite/styleStore";
 import { refList, useRefList } from "./refList";
+import { StyleSelect } from "./StyleSelect";
+import { useStyledEntries } from "./useStyled";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
 
@@ -52,7 +55,12 @@ function CopyButton({ text, html, label }: { text: string; html?: string; label:
 export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonomy; claims?: StatementClaim[] } = {}) {
   const { sources, receipts } = useRefList();
   const [ownWork, setOwnWork] = useState("");
-  const apa = useMemo(() => apaList(sources), [sources]);
+  const style = useCiteStyle();
+  const styled = useStyledEntries(style, sources);
+  const effective = styled.failed ? "apa" : style;
+  const list = useMemo(() => listOutput(effective, styled.entries), [effective, styled.entries]);
+  const byId = useMemo(() => new Map(sources.map((s) => [s.id, s])), [sources]);
+  const { label, heading, file } = STYLES[effective];
   const statement = useMemo(() => {
     const named = sources.map((s) => ({ ...s, verification: { ...s.verification, registries: s.verification.registries.map((r) => REGISTRY[r]) } }));
     return buildAiUseStatement({ receipts, autonomy, sources: named, claims, ownWork });
@@ -62,18 +70,26 @@ export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonom
   return (
     <>
       <Card
-        title={<>My reference list · APA 7 · {sources.length}</>}
+        title={<>My reference list · {label} · {sources.length}</>}
         aside={sources.length ? <button className="btn small" onClick={() => refList.clear()}><Trash2 size={13} /> Clear list</button> : undefined}
       >
         {sources.length === 0 ? (
           <p className="xr-note">Empty. Nothing is added automatically: press <b>Add to my list</b> on a checked reference above.</p>
         ) : (
           <>
+            <div className="xrx-row" style={{ marginTop: 0, marginBottom: 8 }}>
+              <StyleSelect id="xrx-style" />
+              {styled.loading && <span className="vx-tiny" aria-live="polite">Formatting in {label}…</span>}
+              {styled.failed && <span className="vx-tiny" role="alert">{label} could not load, so APA 7 is shown.</span>}
+            </div>
             <ul className="xrx-list">
-              {[...sources].sort((a, b) => apaReference(a).text.localeCompare(apaReference(b).text, "en")).map((s) => (
+              {styled.entries.map((e) => {
+                const s = byId.get(e.id);
+                if (!s) return null;
+                return (
                 <li key={s.id}>
-                  {/* Built by code from the registry record; every value is HTML-escaped in apa.ts. */}
-                  <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: apaReference(s).html }} />
+                  {/* Built by code from the registry record; values are HTML-escaped (apa.ts / citeproc). */}
+                  <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: e.html }} />
                   <div className="xrx-row">
                     <StatusBadge status={s.verification.status} />
                     {s.verification.status !== "verified" && <span className="vx-tiny">Registry version. Not yet verified: check it before you submit.</span>}
@@ -86,21 +102,25 @@ export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonom
                   </div>
                   {s.doi && <RelatedPapers doi={s.doi} />}
                 </li>
-              ))}
+                );
+              })}
             </ul>
             <div className="xrx-row">
-              <CopyButton text={apa.text} html={apa.html} label="Copy APA 7 list" />
+              <CopyButton text={list.text} html={list.html} label={`Copy ${label} list`} />
               <button
                 className="btn small"
-                onClick={() => download("references-apa7.doc", `<!doctype html><meta charset="utf-8"><body style="font-family:'Times New Roman',serif;font-size:12pt"><p style="text-align:center"><b>References</b></p>${apa.html}</body>`, "application/msword")}
+                disabled={styled.loading}
+                onClick={() => download(file.replace(/\.txt$/, ".doc"), `<!doctype html><meta charset="utf-8"><body style="font-family:'Times New Roman',serif;font-size:12pt">${list.html.replace(/<p style="margin:0 0 12px;font-weight:600">[^<]*<\/p>/, `<p style="text-align:center"><b>${heading}</b></p>`)}</body>`, "application/msword")}
               >
                 <Download size={13} /> Download for Word
               </button>
-              <button className="btn small" onClick={() => download("references-apa7.txt", `References\n\n${apa.text}\n`, "text/plain;charset=utf-8")}>
+              <button className="btn small" disabled={styled.loading} onClick={() => download(file, `${list.text}\n`, "text/plain;charset=utf-8")}>
                 <Download size={13} /> Download text
               </button>
             </div>
-            <p className="vx-tiny">Formatted by code from registry records. Check title capitalisation (APA uses sentence case).</p>
+            <p className="vx-tiny">
+              Formatted by code from registry records{style === "apa" ? "" : ", with the official CSL style"}. {style === "apa" ? "Check title capitalisation (APA uses sentence case)." : "Check capitalisation and details against your course's guide before you submit."}
+            </p>
           </>
         )}
       </Card>

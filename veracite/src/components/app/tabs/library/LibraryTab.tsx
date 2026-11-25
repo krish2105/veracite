@@ -8,7 +8,11 @@ import { SaveBookmarklet } from "@/app/save/Bookmarklet";
 import { ExportGate, type ExportFormat } from "@/components/app/ExportGate";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
-import { apaList, apaReference } from "@/components/app/tabs/xray/apa";
+import { apaReference } from "@/components/app/tabs/xray/apa";
+import { StyleSelect } from "@/components/app/tabs/xray/StyleSelect";
+import { useStyledEntries } from "@/components/app/tabs/xray/useStyled";
+import { listOutput, STYLES, type CiteStyle } from "@/lib/cite/styles";
+import { useCiteStyle } from "@/lib/cite/styleStore";
 import { refList, useRefList } from "@/components/app/tabs/xray/refList";
 import "@/components/app/tabs/xray/xray.css";
 import "@/components/app/tabs/research/research.css";
@@ -21,8 +25,8 @@ const split = (s: string) => [...new Set(s.split(",").map((t) => t.trim()).filte
 
 const TEXT = "text/plain;charset=utf-8";
 /** Every download goes through the export gate (Z15). */
-const formats = (shown: SourceRecord[]): ExportFormat[] => [
-  { label: "APA 7", filename: "references-apa7.txt", mime: TEXT, build: () => `References\n\n${apaList(shown).text}\n`, canIncludeStatement: true },
+const formats = (shown: SourceRecord[], style: CiteStyle, styledText: string): ExportFormat[] => [
+  { label: STYLES[style].label, filename: STYLES[style].file, mime: TEXT, build: () => `${styledText}\n`, canIncludeStatement: true },
   { label: "BibTeX", filename: "library.bib", mime: TEXT, build: () => toBibTeX(shown), canIncludeStatement: false },
   { label: "RIS", filename: "library.ris", mime: TEXT, build: () => toRIS(shown), canIncludeStatement: false },
   { label: "CSL-JSON", filename: "library.json", mime: "application/json", build: () => toCslJson(shown), canIncludeStatement: false },
@@ -33,11 +37,11 @@ const facts = (s: SourceRecord): BiasFacts => {
   return { id: s.id, year: s.year ?? null, countries, regions: [...new Set(countries.map(regionOf))], openAccess: s.quality.openAccess ?? null, oaStatus: null, publisher: s.quality.publisher ?? null, venue: s.venue ?? null, language: null };
 };
 
-function Item({ s }: { s: SourceRecord }) {
+function Item({ s, html }: { s: SourceRecord; html?: string }) {
   return (
     <li>
-      {/* Built by code from the registry record; every value is HTML-escaped in apa.ts. */}
-      <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: apaReference(s).html }} />
+      {/* Built by code from the registry record; values are HTML-escaped (apa.ts / citeproc). */}
+      <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: html ?? apaReference(s).html }} />
       <div className="xrx-row">
         <StatusBadge status={s.verification.status} />
         {s.url && (
@@ -97,6 +101,11 @@ export function LibraryTab() {
   );
   // Computed only once there are sources, so the clock is never read while the page is prerendered.
   const bias = useMemo(() => (sources.length ? summariseBias(sources.map(facts)) : undefined), [sources]);
+  const style = useCiteStyle();
+  const styled = useStyledEntries(style, shown);
+  const styledHtml = useMemo(() => new Map(styled.entries.map((e) => [e.id, e.html])), [styled.entries]);
+  const effective: CiteStyle = styled.failed ? "apa" : style;
+  const styledText = useMemo(() => listOutput(effective, styled.entries).text, [effective, styled.entries]);
   const unread = shown.filter((s) => !s.opened).length;
   const unexplained = shown.filter((s) => !s.explainBack?.trim()).length;
 
@@ -122,7 +131,7 @@ export function LibraryTab() {
                 </select>
               </div>
               <ul className="xrx-list">
-                {shown.map((s) => <Item key={s.id} s={s} />)}
+                {shown.map((s) => <Item key={s.id} s={s} html={styledHtml.get(s.id)} />)}
               </ul>
             </Card>
 
@@ -134,8 +143,13 @@ export function LibraryTab() {
                 </ul>
               )}
               <div className="xrx-row">
-                {formats(shown).map((f, i) => (
-                  <button key={f.label} className={`btn small${i === 0 ? " primary" : ""}`} disabled={!shown.length} onClick={() => setGate(f)}><Download size={13} /> {f.label}</button>
+                <StyleSelect id="lib-style" />
+                {styled.loading && <span className="vx-tiny" aria-live="polite">Formatting in {STYLES[style].label}…</span>}
+                {styled.failed && <span className="vx-tiny" role="alert">{STYLES[style].label} could not load; the export uses APA 7.</span>}
+              </div>
+              <div className="xrx-row">
+                {formats(shown, effective, styledText).map((f, i) => (
+                  <button key={f.label} className={`btn small${i === 0 ? " primary" : ""}`} disabled={!shown.length || (i === 0 && styled.loading)} onClick={() => setGate(f)}><Download size={13} /> {f.label}</button>
                 ))}
               </div>
               <p className="vx-tiny">Each download first shows a short check: unread sources, your own explanations and the AI-use statement. BibTeX, RIS and CSL-JSON open in Zotero and Mendeley.</p>
