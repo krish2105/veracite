@@ -20,6 +20,11 @@ export default function PlainHome({ onShow3d }: { onShow3d?: () => void }) {
       actions={onShow3d && <button className="vx-chip" onClick={onShow3d}><Box size={14} /> 3D vault</button>}
     >
       <div className="xrx">
+        <section className="vx-card home-journey">
+          <header className="vx-card-h"><h3>New here? Try the full journey</h3></header>
+          <p className="xr-note">Three steps, about two minutes: check a test list with deliberate fakes, keep two real sources and cite one, then export and make a certificate. A small guide shows the way and hides with one click.</p>
+          <Link className="btn primary" href="/xray?journey=1">Start the journey</Link>
+        </section>
         <ul className="home-start">
           {START.map(({ href, icon: Icon, title, text, cta }) => (
             <li key={href} className="vx-card">

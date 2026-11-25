@@ -1,0 +1,15 @@
+/* First-visit guide (K31): a slim strip under the page header. Never fixed, never on top of the page. */
+.jg { margin: 14px 0 0; padding: 10px 14px; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--surface); min-width: 0; }
+.jg-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--ink); }
+.jg-count { font-size: 12px; color: var(--ink2); }
+.jg-hide { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font: 12px var(--f-ui); color: var(--ink2); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; cursor: pointer; }
+.jg-hide:hover { color: var(--ink); }
+.jg-steps { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink2); }
+.jg-steps li { display: inline-flex; align-items: center; gap: 6px; }
+.jg-steps li[data-state="now"] { color: var(--ink); font-weight: 600; }
+.jg-steps li[data-state="done"] { color: var(--ok); }
+.jg-n { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid currentColor; font-size: 11px; flex: none; }
+.jg-steps li[data-state="done"] .jg-n { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.jg-next { margin: 8px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ink); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.jg-go { flex: none; }
+.jg .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
