@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertTriangle, Check, Pencil, Scale, Swords, X } from "lucide-react";
 import { Card, StatusBadge, TrustLabel } from "@/components/app/ui";
 import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
+import { JournalChips } from "@/components/app/tabs/xray/JournalChips";
 import { canAdd } from "@/components/app/tabs/xray/refList";
 import { linesToList } from "@/lib/session/machine";
 import { RelatedPapers } from "./RelatedPapers";
@@ -93,6 +94,7 @@ export function SourcesCard({ candidates, decisions, onDecide, onContinue, onBac
                 {s.quality.citedBy ? <span>cited {s.quality.citedBy}</span> : null}
                 <span className={s.abstract ? "on" : "warn"}>{s.abstract ? "abstract available" : "no abstract: claims can't be checked"}</span>
               </div>
+              <JournalChips facts={{ inDoaj: s.quality.inDOAJ, core: s.quality.coreJournal, listedIn: s.quality.listedIn }} />
               {s.verification.status !== "verified" && <p className="xr-note">{s.verification.reasons.join(" ")}</p>}
               <div className="xrx-row">
                 {canAdd(s.verification) ? (

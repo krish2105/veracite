@@ -95,6 +95,7 @@ function merge(primary: RegistryRecord, others: RegistryRecord[], updates: Updat
     m.abstract ??= o.abstract;
     m.openAccess ??= o.openAccess;
     m.oaUrl ??= o.oaUrl;
+    m.journal ??= o.journal;
     m.countries ??= o.countries;
     m.citedBy = Math.max(m.citedBy ?? 0, o.citedBy ?? 0) || undefined;
     m.volume ??= o.volume;

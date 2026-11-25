@@ -67,7 +67,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 ## Thursday 01:10 · remaining ideas ("Merge and do all")
 - [x] **K39** · P2 · Paste a chatbot answer: keep its reference list + DOIs from the prose, flag author–year mentions with no full reference · `veracite/src/lib/import/chatanswer*` · #honesty #ux
     - 26 Nov: banner "This looks like a chatbot answer" → Check only its references; "Smith and Lee (2023)" flagged as uncheckable. 7 tests.
-- [ ] **K40** · P2 · Journal-index chips (DOAJ, indexed in), labelled Reported, not checked · #research
+- [x] **K40** · P2 · Journal-index chips (DOAJ, indexed in), labelled Reported, not checked · `veracite/src/lib/registries/journal*` · #research
+    - 26 Nov: OpenAlex `is_in_doaj` / `is_core` / `listed_in` kept on records and saved sources; chips on X-ray, Library, research sources (e.g. "DOAJ · MEDLINE · CWTS core list · +10 national lists"); never shown as a score, nothing hidden. 3 tests.
 - [ ] **K41** · P2 · New citations since you saved (OpenAlex cited-by, newer than the save date) · #research
 - [ ] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · #research #ux
 - [ ] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · #ux

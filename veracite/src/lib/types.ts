@@ -74,6 +74,8 @@ export interface RegistryRecord {
   /** ISO-3166 alpha-2 codes of author institutions (bias lens, Z10). */
   countries?: string[];
   publisher?: string;
+  /** Which indexes list the journal, from OpenAlex (K40). Facts, not a score. */
+  journal?: import("./registries/journal").JournalFacts;
   language?: string;
   /** CSL-JSON for citation-js (A06), when the registry provides it. */
   csl?: Record<string, unknown>;
@@ -160,6 +162,9 @@ export interface QualityFacts {
   peerReviewed?: boolean;
   preprint?: boolean;
   inDOAJ?: boolean;
+  /** Indexes that list the journal (OpenAlex listed_in), K40. */
+  listedIn?: string[];
+  coreJournal?: boolean;
   citedBy?: number;
   openAccess?: boolean;
   countries?: string[];
