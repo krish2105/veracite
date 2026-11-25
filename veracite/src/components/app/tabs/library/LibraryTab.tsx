@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Download, ExternalLink, Trash2 } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
+import { ExportGate, type ExportFormat } from "@/components/app/ExportGate";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
 import { apaList, apaReference } from "@/components/app/tabs/xray/apa";
@@ -16,11 +17,14 @@ import { toBibTeX, toCslJson, toRIS } from "./exports";
 
 const split = (s: string) => [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))].slice(0, 10);
 
-function download(name: string, content: string, type = "text/plain;charset=utf-8") {
-  const url = URL.createObjectURL(new Blob([content], { type }));
-  Object.assign(document.createElement("a"), { href: url, download: name }).click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
+const TEXT = "text/plain;charset=utf-8";
+/** Every download goes through the export gate (Z15). */
+const formats = (shown: SourceRecord[]): ExportFormat[] => [
+  { label: "APA 7", filename: "references-apa7.txt", mime: TEXT, build: () => `References\n\n${apaList(shown).text}\n`, canIncludeStatement: true },
+  { label: "BibTeX", filename: "library.bib", mime: TEXT, build: () => toBibTeX(shown), canIncludeStatement: false },
+  { label: "RIS", filename: "library.ris", mime: TEXT, build: () => toRIS(shown), canIncludeStatement: false },
+  { label: "CSL-JSON", filename: "library.json", mime: "application/json", build: () => toCslJson(shown), canIncludeStatement: false },
+];
 
 const facts = (s: SourceRecord): BiasFacts => {
   const countries = s.quality.countries ?? [];
@@ -76,7 +80,8 @@ function Bars({ title, bars }: { title: string; bars: Bar[] }) {
 }
 
 export function LibraryTab() {
-  const { sources } = useRefList();
+  const { sources, receipts } = useRefList();
+  const [gate, setGate] = useState<ExportFormat | null>(null);
   const [text, setText] = useState("");
   const [collection, setCollection] = useState("");
   const [tag, setTag] = useState("");
@@ -127,12 +132,12 @@ export function LibraryTab() {
                 </ul>
               )}
               <div className="xrx-row">
-                <button className="btn small primary" disabled={!shown.length} onClick={() => download("references-apa7.txt", `References\n\n${apaList(shown).text}\n`)}><Download size={13} /> APA 7</button>
-                <button className="btn small" disabled={!shown.length} onClick={() => download("library.bib", toBibTeX(shown))}><Download size={13} /> BibTeX</button>
-                <button className="btn small" disabled={!shown.length} onClick={() => download("library.ris", toRIS(shown))}><Download size={13} /> RIS</button>
-                <button className="btn small" disabled={!shown.length} onClick={() => download("library.json", toCslJson(shown), "application/json")}><Download size={13} /> CSL-JSON</button>
+                {formats(shown).map((f, i) => (
+                  <button key={f.label} className={`btn small${i === 0 ? " primary" : ""}`} disabled={!shown.length} onClick={() => setGate(f)}><Download size={13} /> {f.label}</button>
+                ))}
               </div>
-              <p className="vx-tiny">BibTeX, RIS and CSL-JSON open in Zotero and Mendeley. Your AI-use statement is on the <Link href="/xray">X-ray</Link> page.</p>
+              <p className="vx-tiny">Each download first shows a short check: unread sources, your own explanations and the AI-use statement. BibTeX, RIS and CSL-JSON open in Zotero and Mendeley.</p>
+              {gate && <ExportGate sources={shown} receipts={receipts} format={gate} onClose={() => setGate(null)} />}
             </Card>
 
             <Card title="Bias lens · facts about your sources, not scores">
