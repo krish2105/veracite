@@ -22,6 +22,7 @@ import { regionOf, summariseBias, type Bar, type BiasFacts } from "@/lib/integri
 import type { SourceRecord } from "@/lib/types";
 import { toBibTeX, toCslJson, toRIS } from "./exports";
 import { ImportLibrary } from "./ImportLibrary";
+import { RecheckLibrary } from "./RecheckLibrary";
 
 const split = (s: string) => [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))].slice(0, 10);
 
@@ -139,6 +140,10 @@ export function LibraryTab() {
               <ul className="xrx-list">
                 {shown.map((s) => <Item key={s.id} s={s} html={styledHtml.get(s.id)} />)}
               </ul>
+            </Card>
+
+            <Card title="Re-check for retractions and corrections">
+              <RecheckLibrary sources={sources} />
             </Card>
 
             <Card title={<>Export · {shown.length} source{shown.length === 1 ? "" : "s"} shown</>}>

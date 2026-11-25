@@ -38,7 +38,7 @@ async function copyText(text: string, html?: string): Promise<boolean> {
 
 const optionLabel = (s: SourceRecord) => {
   const shortTitle = s.title.length > 56 ? `${s.title.slice(0, 54)}…` : s.title;
-  return `${inText(s)} — ${shortTitle}`;
+  return `${s.verification.status === "retracted" ? "RETRACTED · " : ""}${inText(s)} — ${shortTitle}`;
 };
 
 export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
@@ -188,6 +188,11 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
         </div>
       )}
 
+      {activeSource?.verification.status === "retracted" && (
+        <p className="xrx-warn" role="alert" style={{ margin: "0 0 8px", listStyle: "none" }}>
+          This paper was retracted after you saved it. {activeSource.verification.reasons[0]} Cite it only to discuss the retraction, never as evidence.
+        </p>
+      )}
       <textarea
         ref={textareaRef}
         className="paste dr-input"

@@ -57,7 +57,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: shown only when a registry reports a free copy, never on retracted/chimera/not-found rows; opening it counts as reading. 4 tests.
 - [x] **K34** · P1 · Registry trace + "why this label": per-registry results and the rule that set each verdict, on every X-ray row · `veracite/src/lib/verify/explain*` · #honesty #ux
     - 26 Nov: "How this was decided" on every X-ray row and the save page: what Crossref, OpenAlex and arXiv returned, the field checks and the rule in one sentence. Reads the verdict, never changes it. 6 tests.
-- [ ] **K35** · P1 · Re-check my library for retractions and corrections since saving; warn in Write & cite before citing a retracted source · #honesty
+- [x] **K35** · P1 · Re-check my library for retractions and corrections since saving; warn in Write & cite before citing a retracted source · `veracite/src/lib/verify/recheck*` · #honesty
+    - 26 Nov: Library card re-checks every saved DOI (3 at a time), applies only NEW notices, keeps the original checks, shows the last check time; Write & cite marks RETRACTED and warns. 6 tests.
 - [ ] **K36** · P1 · "Does this source say this?": the closest sentence in the source's abstract for each cited claim, code only · #honesty #research
 - [ ] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · #research #ux
 
