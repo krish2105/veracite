@@ -5,6 +5,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { FlaskConical, ScanSearch, PenLine, Library, ShieldCheck, BadgeCheck, Moon, Sun } from "lucide-react";
 import { createStore, useStore } from "../lab/store";
+import Ambient from "./ambient/Ambient";
+import FootBand from "./ambient/FootBand";
+import PageBanner from "./ambient/PageBanner";
+import { PAGE_STEPS } from "./ambient/pageSteps";
+import "./ambient/ambient.css";
 
 export type Skin = "watermark" | "neural";
 export type Theme = "light" | "dark";
@@ -37,8 +42,10 @@ export default function AppShell({ title, subtitle, actions, children }: { title
   }, []);
   useEffect(() => { localStorage.setItem("vx-theme", theme); }, [theme]);
   const dark = theme === "dark";
+  const steps = PAGE_STEPS[path];
   return (
     <div className="vx" data-skin={skin} data-theme={theme}>
+      <Ambient />
       <aside className="vx-side">
         <Link href="/" className="vx-brand">Veracite<small>Every reference real</small></Link>
         <nav className="vx-nav" aria-label="Main">
@@ -73,7 +80,9 @@ export default function AppShell({ title, subtitle, actions, children }: { title
             </button>
           </div>
         </header>
+        {steps && <PageBanner steps={steps} />}
         <div className="vx-body">{children}</div>
+        <FootBand />
       </main>
     </div>
   );

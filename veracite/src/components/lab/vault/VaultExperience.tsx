@@ -12,6 +12,8 @@ import { easing } from "maath";
 import { archivo, literata, martian } from "@/app/fonts";
 import { themeStore } from "@/components/app/AppShell";
 import HomeBar from "../home/HomeBar";
+import HomeHero, { SPECIMEN } from "../home/HomeHero";
+import { noteRect } from "../home/stage";
 import LabBar from "../LabBar";
 import { labPortal } from "../labPortal";
 import { createStore, useStore } from "../store";
@@ -225,6 +227,53 @@ function Hero({ kit }: { kit: Kit }) {
   );
 }
 
+/** The world point on the plane z = `depth` that the opening camera shows at screen pixel (x, y). */
+function onScreen(cam: THREE.PerspectiveCamera, x: number, y: number, width: number, height: number, depth: number) {
+  const ray = new THREE.Vector3((x / width) * 2 - 1, 1 - (y / height) * 2, 0.5).unproject(cam).sub(cam.position);
+  return cam.position.clone().addScaledVector(ray, (depth - cam.position.z) / ray.z);
+}
+
+/** Home page: the counterfeit note, large and labelled, fitted to the free space. It slides away on scroll. */
+function HomeSpecimen({ kit }: { kit: Kit }) {
+  const { width, height } = useThree((s) => s.size);
+  const scroll = useScroll();
+  const group = useRef<THREE.Group>(null!);
+  const items = useRef<(HTMLDivElement | null)[]>([]);
+  const fit = useMemo(() => {
+    const cam = new THREE.PerspectiveCamera(CAMERA.fov, width / height, CAMERA.near, CAMERA.far);
+    cam.position.set(0, 0, 10);
+    cam.lookAt(1, -0.1, 0);
+    cam.updateMatrixWorld();
+    const r = noteRect(width, height);
+    const at = (x: number) => onScreen(cam, x, r.cy, width, height, 1.2);
+    return { position: at(r.cx), scale: at(r.cx - r.width / 2).distanceTo(at(r.cx + r.width / 2)) / W };
+  }, [width, height]);
+  useFrame(() => {
+    const away = THREE.MathUtils.smoothstep(scroll.offset, 0.03, 0.16);
+    group.current.position.set(fit.position.x + away * 8, fit.position.y + away * 1.5, fit.position.z);
+    group.current.visible = away < 0.99;
+    const label = String(1 - THREE.MathUtils.smoothstep(scroll.offset, 0.008, 0.05));
+    items.current.forEach((el) => { if (el) el.style.opacity = label; });
+  });
+  return (
+    <group ref={group} scale={fit.scale}>
+      <PresentationControls global={false} cursor snap speed={1.6} polar={[-0.4, 0.4]} azimuth={[-0.8, 0.8]}>
+        <SplitNote kit={kit} mat={kit.fakes[0]} position={[0, 0, 0]} rotation={[-0.03, -0.14, -0.035]} />
+        <group rotation={[-0.03, -0.14, -0.035]}>
+          {SPECIMEN.map((p, i) => (
+            <Html key={p.part} portal={labPortal} position={p.at} zIndexRange={[20, 10]} style={{ pointerEvents: "none" }}>
+              <div ref={(el) => { items.current[i] = el; }}><div className="hx-pin"><i /><div><b>{p.part}</b>{p.finding}</div></div></div>
+            </Html>
+          ))}
+          <Html portal={labPortal} position={[0, -1.14, 0]} zIndexRange={[20, 10]} style={{ pointerEvents: "none" }}>
+            <div ref={(el) => { items.current[SPECIMEN.length] = el; }}><div className="hx-stamp">Chimera · do not cite</div></div>
+          </Html>
+        </group>
+      </PresentationControls>
+    </group>
+  );
+}
+
 /* ------------------------------------------------------------------ camera, torch, lighting */
 function Rig() {
   const scroll = useScroll();
@@ -335,14 +384,11 @@ const SECTIONS = [
   { eyebrow: "04 · Reference X-ray", h: "Real parts. Wrong combination.", p: "SP Jain policy §h(ix) warns that AI builds references from components of real ones. Veracite traces every piece back to its source, and says Not found where there is none.", cta: true },
 ];
 
-/** The home page says what the product does instead of naming a design concept. */
-const HOME_HERO = { ...SECTIONS[0], eyebrow: "The research assistant that cannot invent a source", p: "Veracite checks citations against Crossref, OpenAlex and arXiv and shows what it searched. Your cursor is a UV torch. Drag the counterfeit to turn it over. Scroll to enter the vault." };
-const HOME_SECTIONS = [HOME_HERO, ...SECTIONS.slice(1)];
-
 function Overlay({ home, onExplode }: { home: boolean; onExplode: () => void }) {
   return (
     <Scroll html style={{ width: "100%" }}>
-      {(home ? HOME_SECTIONS : SECTIONS).map((s, i) => (
+      {home && <HomeHero />}
+      {SECTIONS.map((s, i) => (home && i === 0 ? null :
         <section key={i} className="lab-section" style={{ top: `${i * 100}vh` }}>
           <div className={i ? "lab-card" : undefined}>
             <p className="lab-eyebrow">{s.eyebrow}</p>
@@ -372,7 +418,7 @@ function Scene({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
       <ScrollControls pages={SECTIONS.length} damping={0.22}>
         <Rig />
         <Torch mode={mode} />
-        <Hero kit={kit} />
+        {home ? <HomeSpecimen kit={kit} /> : <Hero kit={kit} />}
         <Vault kit={kit} />
         <Bay kit={kit} />
         {uv && <Sparkles count={420} scale={[10, 6, 100]} position={[0, 0, -42]} size={2.2} speed={0.25} color="#4DF2FF" opacity={0.8} />}
