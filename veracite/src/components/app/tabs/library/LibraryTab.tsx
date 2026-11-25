@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Download, ExternalLink, Trash2 } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
+import { SaveBookmarklet } from "@/app/save/Bookmarklet";
 import { ExportGate, type ExportFormat } from "@/components/app/ExportGate";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
@@ -103,7 +104,7 @@ export function LibraryTab() {
       <div className="xrx">
         {sources.length === 0 ? (
           <Card title="Your library is empty">
-            <p className="xr-note">Add verified sources from the <Link href="/xray">X-ray</Link> or a <Link href="/research">Research</Link> session. Nothing is added without your click.</p>
+            <p className="xr-note">Add verified sources from the <Link href="/xray">X-ray</Link>, a <Link href="/research">Research</Link> session or <Link href="/save">Save a source</Link>. Nothing is added without your click.</p>
           </Card>
         ) : (
           <>
@@ -152,6 +153,10 @@ export function LibraryTab() {
             </Card>
           </>
         )}
+
+        <Card title="Save from any page you are reading">
+          <SaveBookmarklet />
+        </Card>
       </div>
     </AppShell>
   );

@@ -97,10 +97,10 @@ export const refList = {
     const detail = `${total} checked: ${Object.entries(byStatus).filter(([, n]) => n).map(([k, n]) => `${n} ${k}`).join(", ")}`;
     write({ ...s, receipts: [...s.receipts, receipt("verifier", "checked_references", detail)] });
   },
-  approve(v: Verification) {
+  approve(v: Verification, via: SourceRecord["addedVia"] = "xray") {
     const s = read();
     if (!canAdd(v) || s.sources.some((x) => x.id === sourceId(v))) return;
-    const src = toSource(v);
+    const src = { ...toSource(v), addedVia: via };
     write({ sources: [...s.sources, src], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, src.id)] });
   },
   /** Organise: tags, collections, notes and the student's own explanation. */
