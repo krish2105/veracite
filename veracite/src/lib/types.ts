@@ -183,6 +183,8 @@ export interface SourceRecord {
   /** What text we could read to check quotes against. */
   textAvailable: "full" | "abstract" | "none";
   url?: string;
+  /** A free, legal full text reported by a registry (K33). */
+  oaUrl?: string;
   archivedUrl?: string;
   /** Retrieval date for web sources (APA 7). */
   accessedAt?: string;

@@ -68,6 +68,7 @@ export function toSource(v: Verification): SourceRecord {
     abstract: m.abstract,
     textAvailable: m.abstract ? "abstract" : "none",
     url: m.url,
+    oaUrl: m.oaUrl,
     verification: v,
     quality: { preprint: m.type === "preprint", citedBy: m.citedBy, openAccess: m.openAccess, countries: m.countries, publisher: m.publisher },
     tags: [],

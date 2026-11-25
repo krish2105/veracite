@@ -10,6 +10,7 @@ import { canAdd, refList, sourceId, useRefList } from "@/components/app/tabs/xra
 import { verifyInputFor, type SaveTarget } from "@/lib/library/bookmarklet";
 import type { RefStatus, Verification } from "@/lib/types";
 import type { WebCheck } from "@/app/api/sources/wayback/check";
+import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
 import { SaveBookmarklet } from "./Bookmarklet";
 import "@/components/app/tabs/xray/xray.css";
 import "./save.css";
@@ -144,6 +145,7 @@ function VerifyResult({ v }: { v: Verification }) {
               {added ? <Check size={14} /> : <Plus size={14} />} {added ? "In my list" : v.status === "mismatch" ? "Add the registry's version" : "Add to my list"}
             </button>
             {added && <Link className="btn" href="/library">Open my Library</Link>}
+            {m && <FullTextLink doi={m.doi} oaUrl={m.oaUrl} openAccess={m.openAccess} />}
           </>
         ) : (
           <span className="vx-tiny">

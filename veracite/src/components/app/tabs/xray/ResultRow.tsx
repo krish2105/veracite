@@ -3,6 +3,7 @@
 import { Check, ExternalLink, Plus, Scissors } from "lucide-react";
 import { StatusBadge } from "@/components/app/ui";
 import type { RefStatus, RegistryName, Verification } from "@/lib/types";
+import { FullTextLink } from "./FullTextLink";
 import { canAdd, refList, sourceId, useRefList } from "./refList";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
@@ -82,6 +83,7 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
                 <ExternalLink size={13} /> Open record
               </a>
             )}
+            {canAdd(v) && v.matched && <FullTextLink doi={v.matched.doi} oaUrl={v.matched.oaUrl} openAccess={v.matched.openAccess} />}
             {notice?.noticeDoi && (
               <a className="btn small" href={`https://doi.org/${notice.noticeDoi}`} target="_blank" rel="noopener noreferrer">
                 <ExternalLink size={13} /> {notice.kind} notice
