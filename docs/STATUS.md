@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 00:00 (Dubai)** · commit `54c1fd4`
+> Last updated **Thu 26 Nov, 00:21 (Dubai)** · commit `8d3e8a6`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ██████░░░░ **60%** (37/62 tasks) |
+| **Overall progress** | ██████░░░░ **63%** (39/62 tasks) |
 | **P0 demo spine** | ███████░░░ 20/28 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -16,14 +16,14 @@
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **8h 59m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **13h 14m** |
-| Phase 2 submissions close | Thu 15:00 | **14h 59m** |
+| Deck upload (official, hard) | Thu 09:00 | **8h 38m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **12h 53m** |
+| Phase 2 submissions close | Thu 15:00 | **14h 38m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 77% | 24 | 1 | 6 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 84% | 26 | 1 | 4 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -32,10 +32,10 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ████████░░ 78% (18/23) |
-| Honesty & verification in action | 10 | ██████████ 95% (21/22) |
+| Research & citation features | 12 | ████████░░ 83% (19/23) |
+| Honesty & verification in action | 10 | ██████████ 100% (22/22) |
 | Day-of requirements | 8 | █░░░░░░░░░ 14% (1/7) |
-| User experience | 8 | ███████░░░ 67% (14/21) |
+| User experience | 8 | ███████░░░ 71% (15/21) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -52,8 +52,6 @@ _Nothing blocked._
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
 - 🔨 **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
-- ⬜ **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server)
-- ⬜ **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds)
 - ⬜ **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · _due Thu 11:00_
 - ⬜ **K16** · DAY · Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · _due Thu 14:40_
 - ⬜ **K17** · PRES · Rehearse demo segment 2:00–5:30 three times with a timer · _due Thu 12:30_
@@ -107,6 +105,8 @@ _Nothing blocked._
 - **K31** First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
+- **K13** Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · Krishna Mathur
+- **K14** Debate mode (Advocate vs Skeptic, student judges, 2 rounds) · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
 - **Z05** PII scrubber + prompt-injection detector (pure functions + tests). Krishna's LLM gateway calls them. Start Tuesday night if Z01 is done · Zedan Nasir Parol
 - **Z04** Integrity library: AI-use statement generator from the Receipts log (APA 2025 + SP Jain §h(viii)), Prompt Ledger export. Build against the `Receipt` type in `src/lib/types.ts` · Zedan Nasir Parol
