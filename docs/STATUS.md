@@ -1,46 +1,47 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 21:32 (Dubai)** · commit `f1474fd`
+> Last updated **Wed 25 Nov, 21:40 (Dubai)** · commit `79768c8`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | █████░░░░░ **52%** (28/54 tasks) |
-| **P0 demo spine** | ███████░░░ 17/26 |
+| **Overall progress** | ██████░░░░ **56%** (30/54 tasks) |
+| **P0 demo spine** | ███████░░░ 19/26 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
-| **In progress / blocked** | 1 🔨 · 0 ⛔ |
+| **In progress / blocked** | 2 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **1h 27m** |
-| Deck upload (official, hard) | Thu 09:00 | **11h 27m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **15h 42m** |
-| Phase 2 submissions close | Thu 15:00 | **17h 27m** |
+| Deck upload (team target) | Wed 23:00 | **1h 19m** |
+| Deck upload (official, hard) | Thu 09:00 | **11h 19m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **15h 34m** |
+| Phase 2 submissions close | Thu 15:00 | **17h 19m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
 | [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 74% | 17 | 0 | 6 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
-| [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
+| [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
 ## 🎯 Readiness by judging criterion (out of 100)
 *Share of tasks tagged with each criterion that are done. A progress signal, not a predicted score.*
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ███████░░░ 68% (13/19) |
-| Honesty & verification in action | 10 | █████████░ 85% (17/20) |
+| Research & citation features | 12 | ███████░░░ 74% (14/19) |
+| Honesty & verification in action | 10 | ██████████ 95% (19/20) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | █████░░░░░ 50% (9/18) |
+| User experience | 8 | ██████░░░░ 61% (11/18) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
 
 ## 🔨 Doing now
+- **A11** Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · Avighna Gavhane · due Thu 11:00
 - **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol · due Wed 22:00
 
 ## ⛔ Blocked
@@ -68,18 +69,18 @@ _Nothing blocked._
 - ⬜ **A05** · P0 · Library store on the device (IndexedDB via Dexie): collections, tags, notes, "opened" flag; Library tab reads real items. API in docs/11 §5 (Krishna, Zedan and A14 use it) · _due Wed 12:00_
 - ⬜ **A04** · P0 · Design-system basics: Watermark tokens everywhere, light/UV toggle on every page, remove the A/B skin switch, focus states, reduced motion, list view for every 3D view · _due Wed 13:00_
 - ⬜ **A06** · P0 · Export with citation-js + official CSL: APA 7, BibTeX, RIS first (MLA 9, Harvard, IEEE, Chicago in the evening); import BibTeX/RIS · _due Wed 15:00_
-- ⬜ **A14** · P0 · Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · _due Wed 18:00_
-- ⬜ **A03** · P0 · Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · _due Wed 19:00_
 - ⬜ **A15** · P1 · One-click "Save to Veracite" bookmarklet: reads the page's DOI meta tag, opens Veracite's `/save` page, verifies via `/api/sources/verify`, saves to the library (like Zotero's browser button) · _due Wed 21:00_
 - ⬜ **A07** · P2 · Mission Control 3D = the Neural network (from `/lab/neural`) in Watermark colours inside the Research tab, wired to Krishna's real session state (the current MiniMission stays until then)
 - ⬜ **A08** · P2 · Arabic / English toggle (nav + key labels, RTL)
 - ⬜ **A09** · P2 · ⌘K command palette (search library, run X-ray, export, theme)
 - ⬜ **A10** · P2 · PDF drop: read DOIs and the reference list in the browser (pdf.js) and send them to the X-ray
-- ⬜ **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · _due Thu 11:00_
+- 🔨 **A11** · PRES · Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · _due Thu 11:00_
 - ⬜ **A12** · DAY · Phase 2: rewrite demo segment 4:30–5:30 around the new requirement; keep the clock · _due Thu 14:50_
 - ⬜ **A13** · PRES · Rehearse the opening and close with a timer; check outfits, chargers and logins · _due Thu 12:30_
 
 ## ✅ Done
+- **A14** Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · Avighna Gavhane
+- **A03** Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · Avighna Gavhane
 - **K00** Docs, deck, repo, task system and 3D prototypes in place · Krishna Mathur
 - **K01** Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · Krishna Mathur
 - **K18** Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · Krishna Mathur
