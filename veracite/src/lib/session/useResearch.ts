@@ -7,6 +7,7 @@
 import { useCallback, useRef, useState } from "react";
 import { refList, toSource } from "@/components/app/tabs/xray/refList";
 import type { AgentRun, ScribeResult } from "@/lib/agents/agents";
+import type { DebateResult, DebateTurn } from "@/lib/agents/debate";
 import type { Candidate } from "@/lib/agents/scout";
 import { ACTIONS } from "@/lib/integrity/receipts";
 import type { Autonomy, BlockedFabrication, Challenge, Claim, EvidenceCard, Phase, Plan, Receipt, SourceRecord } from "@/lib/types";
@@ -25,6 +26,8 @@ export interface ResearchState {
   evidence: EvidenceCard[];
   claims: Claim[];
   blocked: BlockedFabrication[];
+  /** Debate mode (K14): Advocate vs Skeptic turns per claim id, at most two rounds. */
+  debates?: Record<string, DebateTurn[]>;
   /** Plain-English notes: Rules mode, what code removed, registry problems. */
   notes: string[];
   busy?: string;
@@ -184,6 +187,31 @@ export function useResearch(autonomy: Autonomy) {
     patch({ phase: "export" });
   }, [patch]);
 
+  /** Debate mode (K14): one more round (at most two) on one claim; the student still decides. */
+  const debateClaim = useCallback(async (claimId: string) => {
+    const x = ref.current;
+    if (x.sample) return patch((y) => ({ notes: [...y.notes, "This is a SAMPLE session: the debate does not run. Ask a question to run a live one."] }));
+    const claim = x.claims.find((c) => c.id === claimId);
+    const so = x.debates?.[claimId] ?? [];
+    if (!claim || so.length >= 4) return;
+    const round = (so.length ? 2 : 1) as 1 | 2;
+    const approved = x.candidates.filter((c) => x.decisions[c.id] === "accepted");
+    patch({ busy: `Round ${round}: the Advocate and the Skeptic are debating this claim…`, error: undefined, failed: undefined });
+    try {
+      const run = await post<AgentRun<DebateResult>>("/api/agents/debate", { sessionId: x.sessionId, sources: approved, claims: [claim], round, transcript: so });
+      logRun(x.sessionId, "scribe", "debated_claim", run);
+      for (const b of run.data.blocked) refList.log({ sessionId: x.sessionId, actor: b.agent, action: ACTIONS.blockedCitation, aiUsed: false, ms: 0, ok: true, detail: `${b.citedId}: ${b.claimText.slice(0, 80)}` });
+      patch((y) => ({
+        busy: undefined,
+        debates: { ...y.debates, [claimId]: [...so, ...run.data.turns] },
+        blocked: [...y.blocked, ...run.data.blocked],
+        notes: [...y.notes, ...notesFrom(run, "Debate")],
+      }));
+    } catch (e) {
+      fail("agents", e, () => void debateClaim(claimId));
+    }
+  }, [patch, fail]);
+
   const restart = useCallback(() => replace(fresh()), [replace]);
   const retry = useCallback(() => {
     const r = retryRef.current;
@@ -198,5 +226,5 @@ export function useResearch(autonomy: Autonomy) {
   }, [replace]);
   const backToPlan = useCallback(() => patch({ phase: "cp1_plan", candidates: [], decisions: {}, error: undefined }), [patch]);
 
-  return { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan, retry, loadSample };
+  return { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan, retry, loadSample, debateClaim };
 }

@@ -48,6 +48,13 @@ export const ExplainOut = z.object({
   answer: z.object({ found: z.boolean(), text: z.string().max(400), quote: z.string().max(400).nullable() }).nullable(),
 });
 
+/** Debate mode (K14): one turn, by the Advocate or the Skeptic. */
+export const DebateTurnOut = z.object({
+  argument: z.string().min(10).max(500),
+  sourceId: id.nullable(),
+  quote: z.string().max(400).nullable(),
+});
+
 export const SKEPTIC_RULES = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"] as const;
 
 export const SkepticOut = z.object({

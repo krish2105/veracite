@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AlertTriangle, Check, Pencil, Swords, X } from "lucide-react";
+import { AlertTriangle, Check, Pencil, Scale, Swords, X } from "lucide-react";
 import { Card, StatusBadge, TrustLabel } from "@/components/app/ui";
 import { canAdd } from "@/components/app/tabs/xray/refList";
 import { linesToList } from "@/lib/session/machine";
 import { RelatedPapers } from "./RelatedPapers";
+import type { DebateTurn } from "@/lib/agents/debate";
 import type { Claim, Label, Plan, SourceRecord } from "@/lib/types";
 
 const short = (s: SourceRecord) => `${s.authors[0]?.family ?? "Unknown"}${s.authors.length > 1 ? " et al." : ""}, ${s.year ?? "n.d."}`;
@@ -120,7 +121,23 @@ export function SourcesCard({ candidates, decisions, onDecide, onContinue, onBac
   );
 }
 
-function ClaimRow({ c, sources, onDecide, busy }: { c: Claim; sources: Map<string, SourceRecord>; onDecide: (id: string, d: "kept" | "dropped" | "edited", t?: string) => void; busy: boolean }) {
+/** Debate mode (K14): the turns so far, labelled by code, then the student decides. */
+function Debate({ turns, sources }: { turns: DebateTurn[]; sources: Map<string, SourceRecord> }) {
+  return (
+    <ol className="debate">
+      {turns.map((t, i) => (
+        <li key={i} data-side={t.side}>
+          <span className="debate-who">{t.side === "advocate" ? "Advocate" : "Skeptic"} · round {t.round}</span>
+          <TrustLabel kind={t.label} />
+          <span className="debate-text">{t.text}</span>
+          {t.quote && <span className="debate-quote">“{t.quote}” · {t.sourceId && sources.get(t.sourceId) ? short(sources.get(t.sourceId)!) : t.sourceId} · found in its text</span>}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function ClaimRow({ c, sources, onDecide, busy, debate, onDebate }: { c: Claim; sources: Map<string, SourceRecord>; onDecide: (id: string, d: "kept" | "dropped" | "edited", t?: string) => void; busy: boolean; debate?: DebateTurn[]; onDebate?: (id: string) => void }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(c.editedText ?? c.text);
   return (
@@ -139,7 +156,14 @@ function ClaimRow({ c, sources, onDecide, busy }: { c: Claim; sources: Map<strin
       {c.skeptic && (c.skeptic.rules.length > 0 || c.skeptic.reasons.length > 0) && (
         <p className="sk"><Swords size={14} /> Skeptic ({c.skeptic.verdict}{c.skeptic.rules.length ? ` · ${c.skeptic.rules.join(", ")}` : ""}): {c.skeptic.reasons.join(" ") || "no reason given"}</p>
       )}
+      {debate && debate.length > 0 && <Debate turns={debate} sources={sources} />}
       <div className="xrx-row">
+        {onDebate && (debate?.length ?? 0) < 4 && !editing && (
+          <button className="btn small" onClick={() => onDebate(c.id)} disabled={busy}>
+            <Scale size={13} /> {debate?.length ? "Debate round 2" : "Debate this claim"}
+          </button>
+        )}
+        {debate && debate.length >= 4 && <span className="vx-tiny" style={{ margin: 0 }}>Debate finished. You decide:</span>}
         {editing ? (
           <button className="btn small primary" onClick={() => { onDecide(c.id, "edited", text); setEditing(false); }} disabled={busy || text.trim().length < 5}>Save edit</button>
         ) : (
@@ -154,13 +178,16 @@ function ClaimRow({ c, sources, onDecide, busy }: { c: Claim; sources: Map<strin
   );
 }
 
-export function ClaimsCard({ claims, sources, blocked, onDecide, onFinish, busy }: {
+export function ClaimsCard({ claims, sources, blocked, onDecide, onFinish, busy, debates, onDebate }: {
   claims: Claim[];
   sources: SourceRecord[];
   blocked: number;
   onDecide: (id: string, d: "kept" | "dropped" | "edited", t?: string) => void;
   onFinish: () => void;
   busy: boolean;
+  debates?: Record<string, DebateTurn[]>;
+  /** Present only when AI is on: two rounds of Advocate vs Skeptic for one claim. */
+  onDebate?: (id: string) => void;
 }) {
   const map = new Map(sources.map((s) => [s.id, s]));
   const pending = claims.filter((c) => c.decision === "pending").length;
@@ -173,7 +200,7 @@ export function ClaimsCard({ claims, sources, blocked, onDecide, onFinish, busy 
         </div>
       )}
       <div className="claims">
-        {claims.map((c) => <ClaimRow key={c.id} c={c} sources={map} onDecide={onDecide} busy={busy} />)}
+        {claims.map((c) => <ClaimRow key={c.id} c={c} sources={map} onDecide={onDecide} busy={busy} debate={debates?.[c.id]} onDebate={onDebate} />)}
       </div>
       <div className="xrx-row">
         <button className="btn primary" onClick={onFinish} disabled={busy || pending > 0}>

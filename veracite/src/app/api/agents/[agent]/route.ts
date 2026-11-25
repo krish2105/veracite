@@ -1,5 +1,5 @@
 /**
- * POST /api/agents/[agent] (K08): planner | reader | scribe | skeptic | explain (K30: one saved source, optional question).
+ * POST /api/agents/[agent] (K08): planner | reader | scribe | skeptic | explain (K30) | debate (K14: one claim, a round, the transcript).
  * Stateless: the browser's orchestrator (K09) sends what the agent needs and logs the returned receipt fields.
  * When AI is off, unconfigured or busy, the answer is a rules-mode result with a reason, never an error page.
  *
@@ -8,7 +8,8 @@
  * the certificate (Z08) re-verifies every reference live.
  */
 import { z } from "zod";
-import { runExplainer, runPlanner, runReader, runScribe, runSkeptic, applyChallenges } from "@/lib/agents";
+import { runDebateRound, runExplainer, runPlanner, runReader, runScribe, runSkeptic, applyChallenges } from "@/lib/agents";
+import type { DebateTurn } from "@/lib/agents";
 import type { ApiError, Claim, EvidenceCard, SourceRecord } from "@/lib/types";
 
 export const maxDuration = 60;
@@ -22,6 +23,7 @@ const Body = z.object({
   evidence: z.array(z.record(z.string(), z.unknown())).max(40).optional(),
   claims: z.array(z.record(z.string(), z.unknown())).max(12).optional(),
   round: z.union([z.literal(1), z.literal(2)]).optional(),
+  transcript: z.array(z.record(z.string(), z.unknown())).max(8).optional(),
 });
 
 const bad = (error: string, status = 400) => Response.json({ ok: false, error, code: "bad_input" } satisfies ApiError, { status });
@@ -54,6 +56,11 @@ export async function POST(request: Request, ctx: RouteContext<"/api/agents/[age
       case "explain":
         if (sources.length !== 1) return bad("Send exactly one saved source to explain.");
         return Response.json({ ok: true, ...(await runExplainer(sources[0], question || undefined, run)) });
+      case "debate": {
+        const claims = (b.claims ?? []) as unknown as Claim[];
+        if (claims.length !== 1 || !sources.length) return bad("Send one claim and its approved sources.");
+        return Response.json({ ok: true, ...(await runDebateRound(claims[0], sources, (b.transcript ?? []) as unknown as DebateTurn[], b.round ?? 1, run)) });
+      }
       case "scribe":
         return Response.json({ ok: true, ...(await runScribe(question, (b.evidence ?? []) as unknown as EvidenceCard[], sources, run)) });
       case "skeptic": {

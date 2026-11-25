@@ -58,7 +58,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K11** · P1 · Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · `veracite/src/app/api/sources/snowball/**` · due Wed 22:30 · #research
 - [x] **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · `veracite/src/app/api/v1/** veracite/src/app/api/mcp/**` · #research
     - 26 Nov: `/api/v1/verify` (open CORS, edge cache for DOIs) + a working MCP server at `/api/mcp` (tool `verify_reference`, stateless JSON-RPC, no dependencies). 13 tests; docs in `docs/API.md`.
-- [ ] **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds) · `veracite/src/lib/agents/debate*` · #honesty #ux
+- [x] **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds) · `veracite/src/lib/agents/debate*` · #honesty #ux
+    - 26 Nov: "Debate this claim" at checkpoint 3 (AI on): Advocate on the Scribe's chain, Skeptic on Qwen with no shared memory; code blocks unapproved sources and fake quotes, sets labels; 6 tests + UI wiring test with stand-in AI answers. **Not yet run on a real model (no key).**
 
 ## Thursday
 - [ ] **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · due Thu 11:00 · #dayof
