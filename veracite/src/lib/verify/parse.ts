@@ -79,7 +79,7 @@ export function parseReference(rawInput: string): ReferenceInput {
   const doi = normalizeDoi(text);
   const arxivId = /arxiv/i.test(text) ? arxivIdFromString(text.match(/arxiv[^\s,;]*\s*[:/.]?\s*\d{4}\.\d{4,5}/i)?.[0]) : undefined;
   const url = text.match(/https?:\/\/(?!(?:dx\.)?doi\.org)[^\s,;]+/i)?.[0]?.replace(/[.)]+$/, "");
-  const body = text.replace(/https?:\/\/\S+/gi, " ").replace(/\bdoi:\s*\S+/gi, " ").replace(/\s+/g, " ").trim();
+  const body = text.replace(/https?:\/\/\S+/gi, " ").replace(/\bdoi:\s*\S+/gi, " ").replace(/\b10\.\d{4,9}\/\S+/g, " ").replace(/\s+/g, " ").trim();
 
   const out: ReferenceInput = { raw: rawInput, doi: doi ?? (arxivId ? arxivDoi(arxivId) : undefined), url };
   out.etAl = /\bet al\b/i.test(body);
@@ -119,6 +119,8 @@ export function parseReference(rawInput: string): ReferenceInput {
     if (parts.length > 1) {
       out.authors = parseAuthors(parts[0]);
       out.title = cleanTitle(parts.slice(1).sort((a, b) => b.length - a.length)[0]);
+    } else if (/\p{L}{3}/u.test(body)) {
+      out.title = cleanTitle(body); // only a title was typed
     }
     if (!nd) out.year = [...body.matchAll(/\b(19|20)\d{2}\b/g)].map((m) => Number(m[0])).find((y) => y <= new Date().getFullYear() + 1);
   }

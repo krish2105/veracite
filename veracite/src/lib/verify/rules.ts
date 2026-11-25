@@ -299,6 +299,12 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
     );
   }
 
+  // Only a DOI was given: it exists, but there is nothing to compare it with.
+  const typed = input.raw.replace(/https?:\/\/\S+|\bdoi:\s*\S+|10\.\d{4,9}\/\S+/gi, "");
+  if (doiMatch === "exact" && !/\p{L}{3}/u.test(typed)) {
+    return result("partial", [`This DOI exists: ${cite(work)}.`, "Only a DOI was given, so the title, authors and year could not be compared. Paste the full reference to verify it.", ...correctionNotes]);
+  }
+
   const wrong: string[] = [];
   if (!titleIsReal) wrong.push(`The title is worded differently from the record (similarity ${tScore.toFixed(2)}): “${work.title}”.`);
   if (au.match === "different" || au.strangers.length) {

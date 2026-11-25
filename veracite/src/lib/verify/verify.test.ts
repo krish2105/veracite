@@ -12,6 +12,7 @@ import { RegistryError } from "../registries/http";
 import { arxivIdFromString, isArxivDoi } from "../registries/normalize";
 import { parseOpenAlexWork, type OpenAlexWork } from "../registries/openalex";
 import type { RegistryName, RegistryRecord } from "../types";
+import { splitBibliography } from "./split";
 import { verifyReference, type RegistryDeps } from "./verify";
 
 const fx = (n: string) => readFileSync(new URL(`../registries/__fixtures__/${n}`, import.meta.url), "utf8");
@@ -237,5 +238,22 @@ describe("traps found while testing", () => {
       [KESTIN(2019), world()],
     ] as const;
     for (const [ref, w] of fakes) expect((await verifyReference(ref, w)).status).not.toBe("verified");
+  });
+});
+
+describe("the judges' fake reference test", () => {
+  it.each([
+    ["a made-up title", "The Dubai effect of robot tutors"],
+    ["a made-up author", "Fakerson, Q. Z. (2031)."],
+    ["a made-up DOI", "10.9999/veracite.fake.2026"],
+  ])("never verifies %s", async (_n, input) => {
+    expect(splitBibliography(input)).toHaveLength(1);
+    expect((await verifyReference(input, world({ bib: [bastaniCr, kestinCr] }))).status).toBe("notfound");
+  });
+
+  it("a real DOI on its own is Not yet verified (partial), not a mismatch", async () => {
+    const v = await verifyReference("10.1073/pnas.2422633122", world());
+    expect(v.status).toBe("partial");
+    expect(v.reasons[0]).toMatch(/This DOI exists/);
   });
 });
