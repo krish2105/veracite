@@ -1,0 +1,5 @@
+/* /save page (A15, built in K27). Reuses the X-ray styles; only the registry record block is new. */
+.save-record { margin: 10px 0 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface2); display: grid; gap: 4px; min-width: 0; }
+.save-title { margin: 0; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+.save-record a { color: inherit; }
+.save-record svg, .xrx .vx-tiny a svg { display: inline; vertical-align: -1px; }
