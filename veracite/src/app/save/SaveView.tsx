@@ -11,6 +11,7 @@ import { verifyInputFor, type SaveTarget } from "@/lib/library/bookmarklet";
 import type { RefStatus, Verification } from "@/lib/types";
 import type { WebCheck } from "@/app/api/sources/wayback/check";
 import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
+import { HowDecided } from "@/components/app/tabs/xray/HowDecided";
 import { SaveBookmarklet } from "./Bookmarklet";
 import "@/components/app/tabs/xray/xray.css";
 import "./save.css";
@@ -128,6 +129,7 @@ function VerifyResult({ v }: { v: Verification }) {
         <span className="vx-tiny">{v.ms < 1000 ? `${v.ms} ms` : `${(v.ms / 1000).toFixed(1)} s`} · no AI used</span>
       </div>
       <p className="xr-note"><span className="xrx-verdict">{VERDICT[v.status]}</span> {v.reasons.join(" ")}</p>
+      <HowDecided v={v} />
       {m && (
         <div className="save-record">
           <p className="vx-tiny" style={{ margin: 0 }}>The registry&apos;s record. This is what would be saved, not the text of the page:</p>
