@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 22:42 (Dubai)** · commit `46be343`
+> Last updated **Wed 25 Nov, 22:45 (Dubai)** · commit `650bd64`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ██████░░░░ **56%** (31/55 tasks) |
-| **P0 demo spine** | ███████░░░ 19/26 |
+| **Overall progress** | █████░░░░░ **52%** (32/62 tasks) |
+| **P0 demo spine** | ███████░░░ 20/28 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
 | **In progress / blocked** | 2 🔨 · 0 ⛔ |
@@ -15,15 +15,15 @@
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **0h 17m** |
-| Deck upload (official, hard) | Thu 09:00 | **10h 17m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **14h 32m** |
-| Phase 2 submissions close | Thu 15:00 | **16h 17m** |
+| Deck upload (team target) | Wed 23:00 | **0h 14m** |
+| Deck upload (official, hard) | Thu 09:00 | **10h 14m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **14h 29m** |
+| Phase 2 submissions close | Thu 15:00 | **16h 14m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ████████░░ 75% | 18 | 0 | 6 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ██████░░░░ 61% | 19 | 0 | 12 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -32,10 +32,10 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ███████░░░ 74% (14/19) |
-| Honesty & verification in action | 10 | ██████████ 95% (19/20) |
-| Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | ██████░░░░ 63% (12/19) |
+| Research & citation features | 12 | ██████░░░░ 61% (14/23) |
+| Honesty & verification in action | 10 | █████████░ 86% (19/22) |
+| Day-of requirements | 8 | █░░░░░░░░░ 14% (1/7) |
+| User experience | 8 | ██████░░░░ 57% (12/21) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -50,6 +50,12 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
+- ⬜ **K27** · P1 · One-click save: `/save?doi=` or `?url=` verifies before adding, plus a bookmarklet on the Library page (Avighna owns `app/save/**`, A15)
+- ⬜ **K28** · P1 · Import an existing library: paste or upload `.bib` / `.ris`, X-ray every entry, add only the real ones
+- ⬜ **K29** · P1 · Citation styles: APA 7, MLA 9, Harvard, IEEE, Chicago author-date (citation-js) in Write & cite, X-ray list and Library export
+- ⬜ **K30** · P1 · Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code
+- ⬜ **K31** · P1 · First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states
+- ⬜ **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
 - ⬜ **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server)
 - ⬜ **K14** · P2 · Debate mode (Advocate vs Skeptic, student judges, 2 rounds)
 - ⬜ **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · _due Thu 11:00_
@@ -97,6 +103,7 @@ _Nothing blocked._
 - **K22** 3D vault as the home page with buttons into the app; plain cards below 1024 px, with reduced motion or without WebGL (covers A03) · Krishna Mathur
 - **K23** Home page redesign (labelled fake note + three ways in) and effects on every app page: engraved background, torch glow, 3D note banner · Krishna Mathur
 - **K24** Headings fit their boxes; phones in dark mode no longer repaint the daylight theme; 3D vault on upright phones and tablets · Krishna Mathur
+- **K26** Submission readiness: secret scan of the whole history (gitleaks: 0 leaks), repo made public, Zedan's prompt-log export merged (PR #37), `submissions/phase2/LIVE_LINK.md` lists everything we submit · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
