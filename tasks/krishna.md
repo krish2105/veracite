@@ -59,7 +59,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: "How this was decided" on every X-ray row and the save page: what Crossref, OpenAlex and arXiv returned, the field checks and the rule in one sentence. Reads the verdict, never changes it. 6 tests.
 - [x] **K35** · P1 · Re-check my library for retractions and corrections since saving; warn in Write & cite before citing a retracted source · `veracite/src/lib/verify/recheck*` · #honesty
     - 26 Nov: Library card re-checks every saved DOI (3 at a time), applies only NEW notices, keeps the original checks, shows the last check time; Write & cite marks RETRACTED and warns. 6 tests.
-- [ ] **K36** · P1 · "Does this source say this?": the closest sentence in the source's abstract for each cited claim, code only · #honesty #research
+- [x] **K36** · P1 · "Does this source say this?": the closest sentence in the source's abstract for each cited claim, code only · `veracite/src/components/app/tabs/draft/support*` · #honesty #research
+    - 26 Nov: Draft Checker shows the nearest abstract sentence and the share of key words (86 % vs 22 % on the test claims); evidence only, the label never goes up. 6 tests.
 - [ ] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · #research #ux
 
 ## Wednesday evening · deck-promised extras (M3)

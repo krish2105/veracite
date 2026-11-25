@@ -8,6 +8,7 @@ import { checkAgainstSources } from "@/lib/integrity/paraphrase";
 import type { Challenge, Claim, Label, SourceRecord } from "@/lib/types";
 import { sameSurname } from "@/lib/verify/text";
 import { splitSentences, type Citation, type Sentence } from "./citations";
+import { closestSentence, type Support } from "./support";
 
 export interface CitationMatch {
   citation: Citation;
@@ -25,6 +26,8 @@ export interface SentenceResult {
   quote?: string;
   quoteFound?: boolean;
   notes: string[];
+  /** K36: the closest abstract sentence to an unquoted claim, by shared key words. Evidence, never a verdict. */
+  support?: Support & { sourceId: string };
 }
 
 export interface DraftResult {
@@ -82,7 +85,14 @@ export function checkSentence(sentence: Sentence, id: string, sources: SourceRec
     const p = checkAgainstSources(sentence.text, withText);
     if (p.verdict !== "ok") notes.push(p.results[0].message);
   }
-  return { id, sentence, matches, quote, quoteFound, label, notes };
+  let support: SentenceResult["support"];
+  if (!quoteFound) {
+    for (const s of cited) {
+      const c = closestSentence(sentence.text, s.abstract);
+      if (c && (!support || c.share > support.share)) support = { ...c, sourceId: s.id };
+    }
+  }
+  return { id, sentence, matches, quote, quoteFound, label, notes, support };
 }
 
 export function checkDraft(text: string, sources: SourceRecord[]): DraftResult {
