@@ -1,8 +1,8 @@
 {
   "sample": true,
-  "adapter": "Veracite Reference X-ray (http://localhost:3000/api/sources/xray)",
+  "adapter": "Veracite Reference X-ray (http://localhost:3100/api/sources/xray)",
   "label": null,
-  "ranAt": "2026-11-25T10:58:23.755Z",
+  "ranAt": "2026-11-25T17:06:39.868Z",
   "sets": [
     "real",
     "fabricated",
@@ -10,7 +10,7 @@
     "retracted",
     "web"
   ],
-  "proofLine": "Tested on 51 references (30 real, 1 fabricated, 10 chimeras, 5 retracted, 5 web) · 11/11 fakes caught · 0 fakes marked Verified · 100% of real references verified · 5/5 retractions flagged · median 0.4 s per reference",
+  "proofLine": "Tested on 51 references (30 real, 1 fabricated, 10 chimeras, 5 retracted, 5 web) · 11/11 fakes caught · 0 fakes marked Verified · 100% of real references verified · 5/5 retractions flagged · median 0.5 s per reference",
   "summary": {
     "total": 51,
     "errors": 0,
@@ -38,16 +38,16 @@
     },
     "web": {
       "total": 5,
-      "matched": 0
+      "matched": 3
     },
     "exactAgreement": {
-      "count": 45,
-      "pct": 88.2
+      "count": 48,
+      "pct": 94.1
     },
     "timeMs": {
-      "median": 441,
-      "p95": 6883,
-      "total": 91197
+      "median": 460,
+      "p95": 2711,
+      "total": 45860
     },
     "perSet": {
       "real": {
@@ -86,12 +86,10 @@
       "web": {
         "total": 5,
         "errors": 0,
-        "exact": 0,
+        "exact": 3,
         "confusion": {
-          "verified→mismatch": 1,
-          "verified→chimera": 1,
-          "verified→notfound": 1,
-          "partial→notfound": 1,
+          "partial→partial": 3,
+          "partial→chimera": 1,
           "notfound→mismatch": 1
         }
       }
@@ -103,357 +101,357 @@
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 86
+      "ms": 2239
     },
     {
       "id": "real-002",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 894
+      "ms": 2224
     },
     {
       "id": "real-003",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 1045
+      "ms": 291
     },
     {
       "id": "real-004",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 271
+      "ms": 439
     },
     {
       "id": "real-005",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 267
+      "ms": 391
     },
     {
       "id": "real-006",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 421
+      "ms": 448
     },
     {
       "id": "real-007",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 405
+      "ms": 442
     },
     {
       "id": "real-008",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 433
+      "ms": 462
     },
     {
       "id": "real-009",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 430
+      "ms": 461
     },
     {
       "id": "real-010",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 421
+      "ms": 483
     },
     {
       "id": "real-011",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 532
+      "ms": 455
     },
     {
       "id": "real-012",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 441
+      "ms": 442
     },
     {
       "id": "real-013",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 363
+      "ms": 468
     },
     {
       "id": "real-014",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 471
+      "ms": 478
     },
     {
       "id": "real-015",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 457
+      "ms": 467
     },
     {
       "id": "real-016",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 430
+      "ms": 441
     },
     {
       "id": "real-017",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 439
+      "ms": 433
     },
     {
       "id": "real-018",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 429
+      "ms": 438
     },
     {
       "id": "real-019",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 447
+      "ms": 647
     },
     {
       "id": "real-020",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 475
+      "ms": 895
     },
     {
       "id": "real-021",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 437
+      "ms": 287
     },
     {
       "id": "real-022",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 1224
+      "ms": 367
     },
     {
       "id": "real-023",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 508
+      "ms": 278
     },
     {
       "id": "real-024",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 333
+      "ms": 302
     },
     {
       "id": "real-025",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 273
+      "ms": 471
     },
     {
       "id": "real-026",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 293
+      "ms": 448
     },
     {
       "id": "real-027",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 394
+      "ms": 420
     },
     {
       "id": "real-028",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 420
+      "ms": 460
     },
     {
       "id": "real-029",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 464
+      "ms": 443
     },
     {
       "id": "real-030",
       "set": "real",
       "expected": "verified",
       "got": "verified",
-      "ms": 465
+      "ms": 466
     },
     {
       "id": "fab-001",
       "set": "fabricated",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 11464
+      "ms": 2729
     },
     {
       "id": "chim-001",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 202
+      "ms": 247
     },
     {
       "id": "chim-002",
       "set": "chimeras",
       "expected": "chimera",
       "got": "mismatch",
-      "ms": 221
+      "ms": 231
     },
     {
       "id": "chim-003",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 6000
+      "ms": 1094
     },
     {
       "id": "chim-004",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 6883
+      "ms": 2052
     },
     {
       "id": "chim-005",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 5119
+      "ms": 2711
     },
     {
       "id": "chim-006",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 6958
+      "ms": 1947
     },
     {
       "id": "chim-007",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 10
+      "ms": 11
     },
     {
       "id": "chim-008",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 6773
+      "ms": 2138
     },
     {
       "id": "chim-009",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 219
+      "ms": 230
     },
     {
       "id": "chim-010",
       "set": "chimeras",
       "expected": "chimera",
       "got": "chimera",
-      "ms": 5743
+      "ms": 2304
     },
     {
       "id": "ret-001",
       "set": "retracted",
       "expected": "retracted",
       "got": "retracted",
-      "ms": 6
+      "ms": 624
     },
     {
       "id": "ret-002",
       "set": "retracted",
       "expected": "retracted",
       "got": "retracted",
-      "ms": 1615
+      "ms": 389
     },
     {
       "id": "ret-003",
       "set": "retracted",
       "expected": "retracted",
       "got": "retracted",
-      "ms": 1412
+      "ms": 396
     },
     {
       "id": "ret-004",
       "set": "retracted",
       "expected": "retracted",
       "got": "retracted",
-      "ms": 390
+      "ms": 364
     },
     {
       "id": "ret-005",
       "set": "retracted",
       "expected": "retracted",
       "got": "retracted",
-      "ms": 379
+      "ms": 353
     },
     {
       "id": "web-001",
       "set": "web",
-      "expected": "verified",
-      "got": "mismatch",
-      "ms": 4645
+      "expected": "partial",
+      "got": "partial",
+      "ms": 2010
     },
     {
       "id": "web-002",
       "set": "web",
-      "expected": "verified",
+      "expected": "partial",
       "got": "chimera",
-      "ms": 6215
+      "ms": 3173
     },
     {
       "id": "web-003",
       "set": "web",
-      "expected": "verified",
-      "got": "notfound",
-      "ms": 3679
+      "expected": "partial",
+      "got": "partial",
+      "ms": 1798
     },
     {
       "id": "web-004",
       "set": "web",
       "expected": "partial",
-      "got": "notfound",
-      "ms": 4155
+      "got": "partial",
+      "ms": 1751
     },
     {
       "id": "web-005",
       "set": "web",
       "expected": "notfound",
       "got": "mismatch",
-      "ms": 5141
+      "ms": 2322
     }
   ]
 }
