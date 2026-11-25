@@ -1,0 +1,21 @@
+/* Export gate (Z15). Uses the app's theme tokens, so light and UV modes both work. */
+.xg-overlay { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 16px; background: color-mix(in srgb, var(--ink) 45%, transparent); }
+.xg { width: min(640px, 100%); max-height: min(88vh, 900px); overflow: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--glow); padding: 18px; display: grid; gap: 12px; }
+.xg-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.xg-head h2 { margin: 0; font: 600 17px var(--f-ui); outline: none; }
+.xg-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.xg-checks li { display: flex; gap: 8px; align-items: flex-start; font: 14px/1.4 var(--f-ui); }
+.xg-checks li svg { flex: none; margin-top: 2px; }
+.xg-checks li[data-level="ok"] svg { color: var(--ok, #2f7d4f); }
+.xg-checks li[data-level="warn"] svg { color: var(--warn, #b7791f); }
+.xg-checks li[data-level="block"] svg { color: var(--alert, #c0392b); }
+.xg-sec { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.xg-sec summary { cursor: pointer; font: 500 13px var(--f-ui); }
+.xg-sec ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; }
+.xg-explain { display: grid; gap: 4px; margin-top: 8px; font-size: 13px; }
+.xg-explain textarea { width: 100%; font: 13px var(--f-ui); padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface2); color: var(--ink); resize: vertical; }
+.xg-statement { white-space: pre-wrap; font-size: 13px; line-height: 1.5; margin: 8px 0 0; color: var(--ink2); }
+.xg-tick { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; margin-top: 8px; }
+.xg-ack { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); }
+.xg-foot { display: flex; justify-content: flex-end; gap: 8px; }
+@media (max-width: 480px) { .xg { padding: 14px; } .xg-foot { flex-direction: column-reverse; } .xg-foot .btn { justify-content: center; } }
