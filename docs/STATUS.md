@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 14:29 (Dubai)** · commit `7f31263`
+> Last updated **Wed 25 Nov, 14:35 (Dubai)** · commit `391e85c`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███░░░░░░░ **30%** (15/50 tasks) |
-| **P0 demo spine** | █████░░░░░ 12/25 |
+| **Overall progress** | ███░░░░░░░ **32%** (16/50 tasks) |
+| **P0 demo spine** | █████░░░░░ 13/25 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
 | **In progress / blocked** | 3 🔨 · 0 ⛔ |
@@ -15,15 +15,15 @@
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **8h 30m** |
-| Deck upload (official, hard) | Thu 09:00 | **18h 30m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **22h 45m** |
+| Deck upload (team target) | Wed 23:00 | **8h 24m** |
+| Deck upload (official, hard) | Thu 09:00 | **18h 24m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **22h 39m** |
 | Phase 2 submissions close | Thu 15:00 | **1d 0h** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████░░░░░ 47% | 9 | 0 | 10 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █████░░░░░ 53% | 10 | 0 | 9 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ████░░░░░░ 38% | 6 | 3 | 7 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
@@ -31,9 +31,9 @@
 *Share of tasks tagged with each criterion that are done. A progress signal, not a predicted score.*
 | Criterion | Points | Readiness |
 |---|---|---|
-| Working MVP | 15 | ██████░░░░ 60% (6/10) |
-| Research & citation features | 12 | ███░░░░░░░ 29% (5/17) |
-| Honesty & verification in action | 10 | █████░░░░░ 50% (9/18) |
+| Working MVP | 15 | ███████░░░ 70% (7/10) |
+| Research & citation features | 12 | ████░░░░░░ 35% (6/17) |
+| Honesty & verification in action | 10 | ██████░░░░ 56% (10/18) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
 | User experience | 8 | ██░░░░░░░░ 20% (3/15) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
@@ -51,7 +51,6 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
-- ⬜ **K08** · P0 · Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · _due Wed 16:30_
 - ⬜ **K09** · P0 · Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · _due Wed 19:00_
 - ⬜ **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · _due Wed 21:00_
 - ⬜ **K11** · P1 · Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · _due Wed 22:30_
@@ -99,6 +98,7 @@ _Nothing blocked._
 - **K04** Verifier (code only): title normaliser and similarity, author match, year rule, DOI→title consistency, chimera detector, status rules + unit tests on Zedan's golden set · Krishna Mathur
 - **K05** `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · Krishna Mathur
 - **K06** LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · Krishna Mathur
+- **K08** Agents: Planner, Reader (quotes + string match), Scribe (approved-ID whitelist, max 8 abstracts), Skeptic (Qwen, rules S1–S8, 2 rounds) · Krishna Mathur
 - **K19** Five-requirement path on the X-ray page: fake-reference check, labels + legend, approve to list, APA 7 copy/download, AI-use statement, phone layout · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
 - **Z05** PII scrubber + prompt-injection detector (pure functions + tests). Krishna's LLM gateway calls them. Start Tuesday night if Z01 is done · Zedan Nasir Parol
