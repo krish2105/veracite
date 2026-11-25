@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 14:06 (Dubai)** · commit `aee5b4b`
+> Last updated **Wed 25 Nov, 14:14 (Dubai)** · commit `b4172ce`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███░░░░░░░ **27%** (13/49 tasks) |
-| **P0 demo spine** | ████░░░░░░ 10/24 |
+| **Overall progress** | ███░░░░░░░ **28%** (14/50 tasks) |
+| **P0 demo spine** | ████░░░░░░ 11/25 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | not deployed yet |
 | **In progress / blocked** | 3 🔨 · 0 ⛔ |
@@ -15,15 +15,15 @@
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **8h 53m** |
-| Deck upload (official, hard) | Thu 09:00 | **18h 53m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **23h 8m** |
+| Deck upload (team target) | Wed 23:00 | **8h 45m** |
+| Deck upload (official, hard) | Thu 09:00 | **18h 45m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **23h 0m** |
 | Phase 2 submissions close | Thu 15:00 | **1d 0h** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ████░░░░░░ 39% | 7 | 0 | 11 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ████░░░░░░ 42% | 8 | 0 | 11 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ████░░░░░░ 38% | 6 | 3 | 7 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
@@ -31,11 +31,11 @@
 *Share of tasks tagged with each criterion that are done. A progress signal, not a predicted score.*
 | Criterion | Points | Readiness |
 |---|---|---|
-| Working MVP | 15 | ████░░░░░░ 44% (4/9) |
-| Research & citation features | 12 | ███░░░░░░░ 25% (4/16) |
-| Honesty & verification in action | 10 | █████░░░░░ 47% (8/17) |
+| Working MVP | 15 | █████░░░░░ 50% (5/10) |
+| Research & citation features | 12 | ███░░░░░░░ 29% (5/17) |
+| Honesty & verification in action | 10 | █████░░░░░ 50% (9/18) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | █░░░░░░░░░ 14% (2/14) |
+| User experience | 8 | ██░░░░░░░░ 20% (3/15) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -99,6 +99,7 @@ _Nothing blocked._
 - **K04** Verifier (code only): title normaliser and similarity, author match, year rule, DOI→title consistency, chimera detector, status rules + unit tests on Zedan's golden set · Krishna Mathur
 - **K05** `/api/sources/verify` + `/api/sources/xray` (streams results line by line) + wire the X-ray tab (real results, no SAMPLE) · Krishna Mathur
 - **K06** LLM gateway: Groq with zod schemas, model per agent (docs/11 §6), fallback → Rules mode, budget caps, calls Zedan's PII scrubber + injection check · Krishna Mathur
+- **K19** Five-requirement path on the X-ray page: fake-reference check, labels + legend, approve to list, APA 7 copy/download, AI-use statement, phone layout · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
 - **Z05** PII scrubber + prompt-injection detector (pure functions + tests). Krishna's LLM gateway calls them. Start Tuesday night if Z01 is done · Zedan Nasir Parol
 - **Z04** Integrity library: AI-use statement generator from the Receipts log (APA 2025 + SP Jain §h(viii)), Prompt Ledger export. Build against the `Receipt` type in `src/lib/types.ts` · Zedan Nasir Parol
