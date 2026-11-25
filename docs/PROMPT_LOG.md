@@ -84,5 +84,6 @@
 | 69 | 26 Nov 2026, ~00:50 | Krishna | Claude Code · Claude Opus 5.5 | "Do all" (build the quick wins from the rescore: free full text, registry trace, library re-check, claim-support check, PDF drop) + "Yes, add pdfjs-dist" | K33: free full-text links (`lib/registries/fulltext.ts`, 4 tests) on X-ray, Library, save page and research sources | Kept |
 | 70 | 26 Nov 2026, ~01:05 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K34: "How this was decided" (`lib/verify/explain.ts`, 6 tests): registry trace and the rule behind each verdict on X-ray rows and the save page | Kept |
 | 71 | 26 Nov 2026, ~01:15 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K35: re-check my library (`lib/verify/recheck.ts`, 6 tests) + RETRACTED warning in Write & cite; tested with Wang & Fan 2025, retracted in April 2026 | Kept |
+| 72 | 26 Nov 2026, ~01:25 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K36: "Does this source say this?" in the Draft Checker (`tabs/draft/support.ts`, 6 tests): closest abstract sentence + shared key words, code only | Kept |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*

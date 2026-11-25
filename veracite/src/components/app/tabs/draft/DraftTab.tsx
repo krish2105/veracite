@@ -12,6 +12,7 @@ import type { AgentRun } from "@/lib/agents/agents";
 import { ACTIONS } from "@/lib/integrity/receipts";
 import type { Challenge, Label, SourceRecord } from "@/lib/types";
 import { checkDraft, claimsForSkeptic, lower, type DraftResult } from "./check";
+import { supportNote } from "./support";
 import { Writer } from "./Writer";
 import "./draft.css";
 
@@ -129,6 +130,14 @@ export function DraftTab() {
                       <ul className="dr-notes">
                         {s.notes.map((n) => <li key={n}>{n}</li>)}
                       </ul>
+                    )}
+                    {s.support && (
+                      <div className="dr-support">
+                        <span className="vx-eyebrow" style={{ margin: 0 }}>Does this source say this?</span>
+                        <p className="vx-tiny" style={{ margin: "2px 0" }}>{supportNote(s.support)}</p>
+                        <blockquote>“{s.support.sentence}”</blockquote>
+                        {s.support.words.length > 0 && <p className="vx-tiny" style={{ margin: 0 }}>Shared key words: {s.support.words.join(", ")}. Matched by code, not AI; only the abstract was read.</p>}
+                      </div>
                     )}
                     {challenge && (
                       <p className="sk"><Swords size={14} /> AI suggestion from the Skeptic ({challenge.verdict}{challenge.rules.length ? ` · ${challenge.rules.join(", ")}` : ""}): {challenge.reasons.join(" ") || "no reason given"}</p>

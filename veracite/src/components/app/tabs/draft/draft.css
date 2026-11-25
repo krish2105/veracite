@@ -6,3 +6,6 @@
 .dr .claim p { overflow-wrap: anywhere; }
 .dr-none { color: var(--ink2); }
 .dr-notes { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.5; color: var(--ink2); }
+/* "Does this source say this?" (K36) */
+.dr-support { margin-top: 8px; padding: 8px 10px; border: 1px dashed var(--line); border-radius: 8px; min-width: 0; }
+.dr-support blockquote { margin: 4px 0; padding-left: 8px; border-left: 2px solid var(--line); font-size: 13px; color: var(--ink); overflow-wrap: anywhere; }
