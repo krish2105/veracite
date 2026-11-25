@@ -1,5 +1,7 @@
 # 10 · AI quiz prep (3:15 PM, ≤ 5 minutes, one answer per question per team)
 
+*Checked again on 26 Nov 2026: EU AI Act dates and Turing Award years corrected. Drill 100 practice questions in the team's rehearsal pack.*
+
 **Tactics:** Avighna writes the answers. The **specialist decides in ≤ 20 seconds** (Krishna: tech/models · Zedan: ethics/regulation/UAE · Avighna: history/companies). If unsure, eliminate options out loud, then go with the specialist. Never leave a blank.
 
 ## 1. Core terms (expect definition questions)
@@ -54,15 +56,17 @@
 | 2014 | GANs (Ian Goodfellow) |
 | 2016 | DeepMind's AlphaGo beats Lee Sedol at Go |
 | 2017 | Transformer paper, "Attention Is All You Need" |
-| 2018 | BERT (Google), GPT-1 (OpenAI); Turing Award to Bengio, Hinton, LeCun |
+| 2018 | BERT (Google), GPT-1 (OpenAI); the **2018** Turing Award (announced March 2019) to Bengio, Hinton, LeCun |
 | 2020 | GPT-3 (175B parameters); AlphaFold 2 solves protein-structure prediction |
 | 30 Nov 2022 | ChatGPT launches |
 | 2023 | GPT-4, Claude, Llama, Gemini (Dec); Bletchley AI Safety Summit (UK) |
 | 2024 | Nobel Physics: Hopfield & Hinton; Nobel Chemistry: Hassabis, Jumper (AlphaFold) & Baker; EU AI Act enters into force (1 Aug); MCP released |
 | Jan 2025 | DeepSeek-R1: open-weights reasoning model from China shocks markets |
+| Mar 2025 | **2024** Turing Award to Andrew Barto and Richard Sutton (reinforcement learning) |
+| Mar 2026 | **2025** Turing Award to Charles Bennett and Gilles Brassard (quantum information), *not* an AI award: a likely trick question |
 
 ## 3. Regulation and ethics
-- **EU AI Act**: risk-based tiers (unacceptable / high / limited / minimal). Prohibited practices applied from Feb 2025; general-purpose AI rules Aug 2025; **Art. 50 transparency Aug 2026**.
+- **EU AI Act**: risk-based tiers (unacceptable / high / limited / minimal). Prohibited practices applied from Feb 2025; general-purpose AI rules Aug 2025; **Art. 50 transparency Aug 2026**. *Changed in 2026:* the "AI Omnibus" (in force 27 Jul 2026) moved the high-risk rules to **2 Dec 2027** for stand-alone (Annex III) systems and **2 Aug 2028** for AI built into regulated products (source: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai).
 - **UNESCO Recommendation on the Ethics of AI** (Nov 2021, adopted by all member states); **UNESCO GenAI in education guidance** (2023).
 - **OECD AI Principles** (2019) · **NIST AI Risk Management Framework** (2023) · **ISO/IEC 42001** (2023, AI management systems).
 - **Core principles everywhere:** fairness, accountability, transparency, privacy, safety, human oversight ("human-in-the-loop").

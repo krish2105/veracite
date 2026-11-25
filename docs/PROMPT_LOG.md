@@ -86,5 +86,6 @@
 | 71 | 26 Nov 2026, ~01:15 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K35: re-check my library (`lib/verify/recheck.ts`, 6 tests) + RETRACTED warning in Write & cite; tested with Wang & Fan 2025, retracted in April 2026 | Kept |
 | 72 | 26 Nov 2026, ~01:25 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | K36: "Does this source say this?" in the Draft Checker (`tabs/draft/support.ts`, 6 tests): closest abstract sentence + shared key words, code only | Kept |
 | 73 | 26 Nov 2026, ~01:45 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) + "Yes, add pdfjs-dist" | K37: PDF drop on the X-ray page (`lib/import/pdftext.ts` 11 tests, `pdfread.ts` with pdfjs-dist 6.5.438), reading in the browser; fixed DOIs broken across lines after testing | Kept |
+| 74 | 26 Nov 2026, ~01:50 | Krishna | Claude Code · Claude Opus 5.5 | (same "Do all" prompt) | Quiz notes: EU AI Act 2026 "AI Omnibus" dates and the 2018/2024/2025 Turing Awards corrected in `docs/10_AI_QUIZ_PREP.md`, from a fact-checked 100-question practice set (research agent, sources checked 26 Nov) | Kept |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*
