@@ -1,5 +1,5 @@
 /**
- * POST /api/agents/[agent] (K08): planner | reader | scribe | skeptic.
+ * POST /api/agents/[agent] (K08): planner | reader | scribe | skeptic | explain (K30: one saved source, optional question).
  * Stateless: the browser's orchestrator (K09) sends what the agent needs and logs the returned receipt fields.
  * When AI is off, unconfigured or busy, the answer is a rules-mode result with a reason, never an error page.
  *
@@ -8,7 +8,7 @@
  * the certificate (Z08) re-verifies every reference live.
  */
 import { z } from "zod";
-import { runPlanner, runReader, runScribe, runSkeptic, applyChallenges } from "@/lib/agents";
+import { runExplainer, runPlanner, runReader, runScribe, runSkeptic, applyChallenges } from "@/lib/agents";
 import type { ApiError, Claim, EvidenceCard, SourceRecord } from "@/lib/types";
 
 export const maxDuration = 60;
@@ -51,6 +51,9 @@ export async function POST(request: Request, ctx: RouteContext<"/api/agents/[age
       case "reader":
         if (!sources.length) return bad("Approve at least one source first.");
         return Response.json({ ok: true, ...(await runReader(question, sources, run)) });
+      case "explain":
+        if (sources.length !== 1) return bad("Send exactly one saved source to explain.");
+        return Response.json({ ok: true, ...(await runExplainer(sources[0], question || undefined, run)) });
       case "scribe":
         return Response.json({ ok: true, ...(await runScribe(question, (b.evidence ?? []) as unknown as EvidenceCard[], sources, run)) });
       case "skeptic": {

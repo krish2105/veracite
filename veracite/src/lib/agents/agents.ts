@@ -35,13 +35,13 @@ export interface AgentRun<T> {
   dropped: string[];
 }
 
-interface Ctx {
+export interface Ctx {
   sessionId: string;
   aiOff?: boolean;
   gateway?: Gateway;
 }
 
-function meta<T, R>(r: AgentResult<R>, data: T, dropped: string[]): AgentRun<T> {
+export function meta<T, R>(r: AgentResult<R>, data: T, dropped: string[]): AgentRun<T> {
   if (!r.ok) return { data, mode: "rules", reason: r.reason, ms: r.ms, prompt: r.prompt, dropped };
   return {
     data,

@@ -94,3 +94,10 @@
 .vx-style select { font: 13px var(--f-ui); padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); max-width: 100%; }
 .xrx-apa .csl-left-margin { display: inline; margin-right: 6px; }
 .xrx-apa .csl-right-inline { display: inline; }
+/* Explain this paper (K30) */
+.ex-box { margin-top: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface2); min-width: 0; }
+.ex-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+.ex-list li { display: grid; gap: 3px; min-width: 0; }
+.ex-list .lbl { justify-self: start; }
+.ex-quote { display: block; font-size: 12px; color: var(--ink2); border-left: 2px solid var(--line); padding-left: 8px; overflow-wrap: anywhere; }
+.ex-answer { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }

@@ -7,6 +7,7 @@ import AppShell from "@/components/app/AppShell";
 import { SaveBookmarklet } from "@/app/save/Bookmarklet";
 import { ExportGate, type ExportFormat } from "@/components/app/ExportGate";
 import { Card, StatusBadge } from "@/components/app/ui";
+import { ExplainPaper } from "@/components/app/tabs/research/ExplainPaper";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
 import { apaReference } from "@/components/app/tabs/xray/apa";
 import { StyleSelect } from "@/components/app/tabs/xray/StyleSelect";
@@ -50,6 +51,9 @@ function Item({ s, html }: { s: SourceRecord; html?: string }) {
           </a>
         )}
         <button className="btn small" onClick={() => refList.remove(s.id)}><Trash2 size={13} /> Remove</button>
+      </div>
+      <div style={{ marginTop: 6 }}>
+        <ExplainPaper source={s} />
       </div>
       <details className="lib-org">
         <summary>Organise: collection, tags, notes</summary>

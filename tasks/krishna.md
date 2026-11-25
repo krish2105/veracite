@@ -45,7 +45,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 25 Nov: hand-written BibTeX + RIS parser (LaTeX accents, arXiv eprints, organisations, Zotero/biblatex fields), 19 tests; checked 30 at a time through the X-ray; SAMPLE file gets 3 verified · 1 retracted · 1 chimera · 1 not found on the live registries.
 - [x] **K29** · P1 · Citation styles: APA 7, MLA 9, Harvard, IEEE, Chicago author-date (citation-js) in Write & cite, X-ray list and Library export · `veracite/src/lib/cite/**` · #research
     - 25 Nov: APA 7 stays on our formatter; the other four use the official CSL styles (CC BY-SA 3.0) through @citation-js/core + plugin-csl, loaded only when picked. One shared choice; switching rewrites citations inserted in Write & cite. 24 tests on LeCun 2015, Bastani 2025, an arXiv preprint and a WHO web page.
-- [ ] **K30** · P1 · Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code · `veracite/src/lib/agents/**` · #research #honesty
+- [x] **K30** · P1 · Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code · `veracite/src/lib/agents/**` · #research #honesty
+    - 26 Nov: `lib/agents/explain.ts` + `POST /api/agents/explain` + a button on every Library source. Verified only when the quote is in the abstract; made-up quotes removed; answers need a real quote or say Not found. Rules mode shows the abstract's sentences and matches questions without AI. 11 tests. Not yet run against a real model (no key).
 - [ ] **K31** · P1 · First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states · #ux
 - [ ] **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · #dayof
 

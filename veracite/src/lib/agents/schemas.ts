@@ -39,6 +39,15 @@ export const ScribeOut = z.object({
     .max(8),
 });
 
+/** "Explain this paper" (K30): plain-English sentences, each with the abstract words it rests on, or null. */
+export const ExplainOut = z.object({
+  sentences: z
+    .array(z.object({ text: z.string().min(5).max(300), quote: z.string().max(400).nullable() }))
+    .min(1)
+    .max(6),
+  answer: z.object({ found: z.boolean(), text: z.string().max(400), quote: z.string().max(400).nullable() }).nullable(),
+});
+
 export const SKEPTIC_RULES = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"] as const;
 
 export const SkepticOut = z.object({
