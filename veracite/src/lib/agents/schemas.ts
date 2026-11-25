@@ -64,7 +64,9 @@ export const SkepticOut = z.object({
         claimId: id,
         verdict: z.enum(["supported", "partial", "unsupported"]),
         rules: z.array(z.enum(SKEPTIC_RULES)).max(8),
-        reasons: z.array(z.string().max(240)).max(4),
+        // A generous bound: the readable length is clamped in code at a word boundary (reasons.ts), because a schema
+        // cap made Groq stop the model mid-word (K02).
+        reasons: z.array(z.string().max(1000)).max(4),
         counterSourceIds: z.array(id).max(4),
       }),
     )

@@ -116,6 +116,13 @@ describe("Scribe", () => {
     expect(r.dropped[0]).toMatch(/blocked 2 citations/);
   });
 
+  it("cites each source once, even when the model repeats it (K02 live session)", async () => {
+    const r = await runScribe("q", evidence, SOURCES, ctx(gw({ claims: [
+      { text: "Unrestricted AI access can lower later exam performance.", kind: "finding", sourceIds: ["S1", "S1"], quote: realQuote },
+    ] })));
+    expect(r.data.claims[0].sourceIds).toEqual(["S1"]);
+  });
+
   it("never sends evidence from unapproved sources to the model", async () => {
     const seen: string[] = [];
     await runScribe("q", [...evidence, { ...evidence[0], id: "E9", sourceId: "S5" }], SOURCES, ctx(gw({ claims: [{ text: "Some claim text here.", kind: "reasoning", sourceIds: ["S1"], quote: null }] }, seen)));
