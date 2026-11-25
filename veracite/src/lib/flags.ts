@@ -17,21 +17,21 @@ export const FLAG_DEFAULTS = {
   draftChecker: true, // K10
   snowball: true, // K11
   certificate: true, // Z08
-  paraphraseGuard: false, // Z09
+  paraphraseGuard: true, // Z09 · live in the Draft Checker
   biasLens: true, // Z10
-  exportGate: false, // Z15
-  oneClickSave: false, // A15
-  moreCitationStyles: false, // A06 evening: MLA, Harvard, IEEE, Chicago
+  exportGate: true, // Z15 · live on every Library export
+  oneClickSave: true, // A15 · built in K27 (/save + bookmarklet)
+  moreCitationStyles: true, // A06 · built in K29: MLA 9, Harvard, IEEE, Chicago
 
   // P2 · stretch
   missionControl3d: false, // A07
   arabic: true, // A08 · built in K43 (menus, titles, trust labels, badges)
   commandPalette: false, // A09
-  pdfDrop: false, // A10
+  pdfDrop: true, // A10 · built in K37
   galaxyRealData: false, // A05 stretch
-  debate: false, // K14
-  publicVerifyApi: false, // K13
-  webSources: false, // Z16
+  debate: true, // K14 · shown only when AI is on
+  publicVerifyApi: true, // K13 · /api/v1/verify + /api/mcp
+  webSources: true, // Z16 + K21 · live and archived web pages, max Partial
 
   // Phase 2 (Thursday): add one flag per new requirement here.
 } as const;

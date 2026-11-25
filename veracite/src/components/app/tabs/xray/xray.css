@@ -126,3 +126,11 @@
 .pmap-node { cursor: pointer; outline: none; }
 .pmap-node:focus-visible circle { stroke: var(--ink); stroke-width: 3; }
 .pmap-pick { margin-top: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); min-width: 0; }
+/* Library "More tools" (K44): extras one click away, so the core journey reads first */
+.lib-more { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.lib-more > summary { cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 14px 18px; list-style: none; }
+.lib-more > summary::-webkit-details-marker { display: none; }
+.lib-more > summary::before { content: "▸"; color: var(--ink2); }
+.lib-more[open] > summary::before { content: "▾"; }
+.lib-more-t { font: 600 12px var(--f-mono, ui-monospace); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+.lib-more-body { display: grid; gap: 18px; padding: 0 12px 12px; }

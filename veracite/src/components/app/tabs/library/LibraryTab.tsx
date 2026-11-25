@@ -128,7 +128,7 @@ export function LibraryTab() {
           </Card>
         ) : (
           <>
-            <Card title={<>Sources · {shown.length} of {sources.length}</>}>
+            <Card title={<>Sources · {shown.length} of {sources.length}</>} aside={<a className="btn small" href="#lib-export"><Download size={13} /> Export ↓</a>}>
               <div className="lib-filters">
                 <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Search titles, authors, notes" aria-label="Search your library" />
                 <select value={collection} onChange={(e) => setCollection(e.target.value)} aria-label="Collection">
@@ -145,14 +145,7 @@ export function LibraryTab() {
               </ul>
             </Card>
 
-            <Card title="Re-check for retractions and corrections">
-              <RecheckLibrary sources={sources} />
-            </Card>
-
-            <Card title="New papers citing your sources">
-              <NewCitations sources={sources} />
-            </Card>
-
+            <div id="lib-export" style={{ scrollMarginTop: 90 }} />
             <Card title={<>Export · {shown.length} source{shown.length === 1 ? "" : "s"} shown</>}>
               {(unread > 0 || unexplained > 0) && (
                 <ul className="xrx-warn" aria-label="Before you export">
@@ -191,9 +184,30 @@ export function LibraryTab() {
           <ImportLibrary />
         </Card>
 
-        <Card title="Save from any page you are reading">
-          <SaveBookmarklet />
-        </Card>
+        {sources.length === 0 ? (
+          <Card title="Save from any page you are reading">
+            <SaveBookmarklet />
+          </Card>
+        ) : (
+          // K44: the core journey (sources → export) comes first; the extra tools wait one click away.
+          <details className="lib-more">
+            <summary>
+              <span className="lib-more-t">More tools</span>
+              <span className="vx-tiny" style={{ margin: 0 }}>Re-check for retractions · new papers citing yours · save from any page</span>
+            </summary>
+            <div className="lib-more-body">
+              <Card title="Re-check for retractions and corrections">
+                <RecheckLibrary sources={sources} />
+              </Card>
+              <Card title="New papers citing your sources">
+                <NewCitations sources={sources} />
+              </Card>
+              <Card title="Save from any page you are reading">
+                <SaveBookmarklet />
+              </Card>
+            </div>
+          </details>
+        )}
       </div>
     </AppShell>
   );

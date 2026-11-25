@@ -76,6 +76,10 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · `veracite/src/lib/i18n/**` · #ux
     - 26 Nov: العربية / English chip in the header (flag `arabic` on): menus, page titles, AI-autonomy, trust labels and verdict badges in Arabic with lang="ar" dir="rtl"; results and references stay English and a beta note says so; layout not mirrored. 5 tests.
 
+## Thursday 02:00 · fixes from the evidence-based rescore
+- [x] **K44** · P1 · Library: core journey first (Sources → Export → Bias lens → Import), extra tools behind "More tools", Export ↓ shortcut; flags.ts matches what is live · `veracite/src/components/app/tabs/library/LibraryTab.tsx veracite/src/lib/flags.ts` · #ux
+- [ ] **K45** · P1 · Save checked web pages to the library (Partial, never Verified, retrieval date kept) · #research #honesty
+
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
