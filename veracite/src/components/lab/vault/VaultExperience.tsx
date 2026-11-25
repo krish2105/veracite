@@ -1,7 +1,7 @@
 "use client";
 
 import * as THREE from "three";
-import { memo, useMemo, useRef, useState, type CSSProperties } from "react";
+import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   ScrollControls, Scroll, useScroll, Environment, Lightformer, SpotLight, Html,
@@ -10,6 +10,8 @@ import {
 import { EffectComposer, Bloom, Vignette, Noise } from "@react-three/postprocessing";
 import { easing } from "maath";
 import { archivo, literata, martian } from "@/app/fonts";
+import { themeStore } from "@/components/app/AppShell";
+import HomeBar from "../home/HomeBar";
 import LabBar from "../LabBar";
 import { labPortal } from "../labPortal";
 import { createStore, useStore } from "../store";
@@ -333,16 +335,25 @@ const SECTIONS = [
   { eyebrow: "04 · Reference X-ray", h: "Real parts. Wrong combination.", p: "SP Jain policy §h(ix) warns that AI builds references from components of real ones. Veracite traces every piece back to its source, and says Not found where there is none.", cta: true },
 ];
 
-function Overlay({ onExplode }: { onExplode: () => void }) {
+/** The home page says what the product does instead of naming a design concept. */
+const HOME_HERO = { ...SECTIONS[0], eyebrow: "The research assistant that cannot invent a source", p: "Veracite checks citations against Crossref, OpenAlex and arXiv and shows what it searched. Your cursor is a UV torch. Drag the counterfeit to turn it over. Scroll to enter the vault." };
+const HOME_SECTIONS = [HOME_HERO, ...SECTIONS.slice(1)];
+
+function Overlay({ home, onExplode }: { home: boolean; onExplode: () => void }) {
   return (
     <Scroll html style={{ width: "100%" }}>
-      {SECTIONS.map((s, i) => (
+      {(home ? HOME_SECTIONS : SECTIONS).map((s, i) => (
         <section key={i} className="lab-section" style={{ top: `${i * 100}vh` }}>
           <div className={i ? "lab-card" : undefined}>
             <p className="lab-eyebrow">{s.eyebrow}</p>
             <h2 className="lab-h">{s.h}</h2>
             <p className="lab-p">{s.p}</p>
-            {s.cta && <div className="lab-cta"><button onClick={onExplode}>Reassemble / take apart</button></div>}
+            {s.cta && (
+              <div className="lab-cta">
+                {home && <a href="/xray">Check your own references</a>}
+                <button className={home ? "ghost" : undefined} onClick={onExplode}>Reassemble / take apart</button>
+              </div>
+            )}
             {s.hint && <p className="lab-hint">{s.hint}</p>}
           </div>
         </section>
@@ -351,7 +362,7 @@ function Overlay({ onExplode }: { onExplode: () => void }) {
   );
 }
 
-function Scene({ fonts }: { fonts: CanvasFonts }) {
+function Scene({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
   const mode = useStore(vaultMode);
   const kit = useKit(fonts);
   const uv = mode === "uv";
@@ -365,7 +376,7 @@ function Scene({ fonts }: { fonts: CanvasFonts }) {
         <Vault kit={kit} />
         <Bay kit={kit} />
         {uv && <Sparkles count={420} scale={[10, 6, 100]} position={[0, 0, -42]} size={2.2} speed={0.25} color="#4DF2FF" opacity={0.8} />}
-        <Overlay onExplode={() => { story.explodeManual = story.explodeManual ? 0 : 1; }} />
+        <Overlay home={home} onExplode={() => { story.explodeManual = story.explodeManual ? 0 : 1; }} />
       </ScrollControls>
       <EffectComposer multisampling={4}>
         <Bloom mipmapBlur intensity={uv ? 1.5 : 0.35} luminanceThreshold={uv ? 0.32 : 0.85} luminanceSmoothing={0.2} />
@@ -384,19 +395,29 @@ const GL = { antialias: false, powerPreference: "high-performance" as const };
 const CAMERA = { position: [0, 0, 10] as THREE.Vector3Tuple, fov: 42, near: 0.1, far: 160 };
 
 /** Mounted once and never re-rendered (see store.ts): the theme reaches the scene through a store. */
-const VaultCanvas = memo(function VaultCanvas({ fonts }: { fonts: CanvasFonts }) {
+const VaultCanvas = memo(function VaultCanvas({ fonts, home }: { fonts: CanvasFonts; home: boolean }) {
   return (
     <Canvas dpr={1.75} gl={GL} camera={CAMERA}>
       <AdaptiveQuality />
-      <Scene fonts={fonts} />
+      <Scene fonts={fonts} home={home} />
     </Canvas>
   );
 });
 
-export default function VaultExperience() {
+/** `home` and `onPlain` serve the front page (K22); /lab/vault renders this without them. `home` never changes. */
+export default function VaultExperience({ home = false, onPlain }: { home?: boolean; onPlain?: () => void }) {
   useMemo(() => {
     vaultMode.set(new URLSearchParams(window.location.search).get("mode") === "uv" ? "uv" : "day");
   }, []);
+  // The front page shares the app's UV-lamp setting; this runs again each time the visitor comes back.
+  useEffect(() => {
+    if (!home) return;
+    const forced = new URLSearchParams(window.location.search).get("mode") === "uv";
+    vaultMode.set(forced || localStorage.getItem("vx-theme") === "dark" ? "uv" : "day");
+  }, [home]);
+  // Next.js keeps a left page hidden instead of unmounting it, which kills its WebGL context: start a fresh canvas.
+  const [visit, setVisit] = useState(0);
+  useLayoutEffect(() => () => setVisit((v) => v + 1), []);
   const mode = useStore(vaultMode);
   const fonts = useMemo<CanvasFonts>(() => ({ display: archivo.style.fontFamily, body: literata.style.fontFamily, mono: martian.style.fontFamily }), []);
   const ready = useFontsReady([`800 30px ${fonts.display}`, `600 33px ${fonts.body}`, `italic 400 25px ${fonts.body}`, `500 15px ${fonts.mono}`]);
@@ -408,11 +429,22 @@ export default function VaultExperience() {
     "--lab-display": "var(--font-archivo)", "--lab-body": "var(--font-literata)", "--lab-mono": "var(--font-martian)",
     "--lab-stretch": "125%", "--lab-case": "uppercase", "--lab-track": "0.01em", "--lab-dw": "780", "--lab-hsize": "clamp(28px, 3.3vw, 54px)",
   } as CSSProperties;
+  const modeLabel = uv ? "Back to daylight" : "Switch on UV lamp";
+  const toggle = () => {
+    vaultMode.set(uv ? "day" : "uv");
+    if (!home) return;
+    themeStore.set(uv ? "light" : "dark");
+    localStorage.setItem("vx-theme", uv ? "light" : "dark");
+  };
   return (
     <div className="lab" style={vars}>
       <div ref={(el) => { if (el) labPortal.current = el; }} className="lab-portal" />
-      {ready ? <VaultCanvas fonts={fonts} /> : <div className="lab-loading">Printing security notes…</div>}
-      <LabBar current="vault" modeLabel={uv ? "Back to daylight" : "Switch on UV lamp"} pressed={uv} onToggle={() => vaultMode.set(uv ? "day" : "uv")} />
+      {ready ? <VaultCanvas key={visit} fonts={fonts} home={home} /> : <div className="lab-loading">Printing security notes…</div>}
+      {home ? (
+        <HomeBar modeLabel={modeLabel} pressed={uv} onToggle={toggle} onPlain={onPlain} />
+      ) : (
+        <LabBar current="vault" modeLabel={modeLabel} pressed={uv} onToggle={toggle} />
+      )}
     </div>
   );
 }

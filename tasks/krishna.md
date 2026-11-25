@@ -33,6 +33,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K20** · P0 · Replace sample pages with real ones: front page, shell, Library (organise, BibTeX/RIS/CSL, bias lens), Trust Center (measured results, Prompt Ledger), Certificate (QR + live re-check), eval runner reads NDJSON · due Wed 18:00 · #mvp #research #honesty #ux
     - Done in files owned by Avighna and Zedan (with Krishna's go-ahead). Their tasks A03-A06, Z06-Z08, Z10: review, then tick what you accept.
 - [x] **K21** · P1 · X-ray checks web pages (connects Z16): live or archived pages that match the cited title are Partial, never Verified · `veracite/src/lib/verify/**` · #research #honesty
+- [x] **K22** · P1 · 3D vault as the home page with buttons into the app; plain cards below 1024 px, with reduced motion or without WebGL (covers A03) · `veracite/src/app/page.tsx veracite/src/components/lab/**` · #ux
 
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
