@@ -104,9 +104,9 @@ pres.addSection({ title: "Overview" });
     { text: "veracite.vercel.app/xray", options: { color: K.cyan, hyperlink: { url: "https://veracite.vercel.app/xray", tooltip: "Open the live Reference X-ray" } } },
   ], { x: 0.6, y: 6.45, w: 6.4, h: 0.22, fontFace: F.monoM, fontSize: 11 });
   T(s, "Slides 2–6: Workflow · Architecture · Ethics · Governance · Guardrails", { x: 0.6, y: 6.73, w: 6.5, h: 0.18, fontFace: F.mono, fontSize: 8, color: K.uvInk2 });
-  s.addImage({ path: IMG("s1-vault-uv.jpg"), x: 7.25, y: 0.5, w: 5.48, h: 5.86, altText: "3D concept page in UV-lamp mode: a vault of glowing sample reference cards" });
+  s.addImage({ path: IMG("s1-home-uv.jpg"), x: 7.25, y: 0.5, w: 5.48, h: 5.86, altText: "Screenshot of the live home page in UV-lamp mode: a fictional AI-written reference shows VOID and is stamped Chimera, do not cite" });
   s.addShape(pres.shapes.RECTANGLE, { x: 7.2, y: 0.45, w: 5.58, h: 5.96, fill: { color: K.uv, transparency: 100 }, line: { color: K.cyan, width: 0.75 } });
-  T(s, "3D concept page, UV-lamp mode: genuine references glow VERIFIED, counterfeits show VOID · SAMPLE data", { x: 7.25, y: 6.45, w: 5.48, h: 0.4, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
+  T(s, "The live home page under the UV lamp: a fictional AI-written reference shows VOID · SAMPLE data", { x: 7.25, y: 6.45, w: 5.48, h: 0.4, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
   s.addNotes("Pre-read deck. Slide 1: problem + promise. Stats: Asai et al., Nature (Feb 2026); GPTZero NeurIPS analysis via TechCrunch (21 Jan 2026); SP Jain Academic Integrity Policy and Procedures v2 (24 Feb 2026) clause h(ix).");
 }
 
@@ -152,7 +152,7 @@ pres.addSection({ title: "Workflow" });
   T(s, [
     { text: "Library: ", options: { bold: true } }, { text: "save, organise and export (APA 7).", options: { breakLine: true } },
     { text: "Reference X-ray: ", options: { bold: true } }, { text: "paste a bibliography; every line is checked.", options: { breakLine: true } },
-    { text: "Draft Checker: ", options: { bold: true } }, { text: "each cited claim is checked against its source." },
+    { text: "Write & cite: ", options: { bold: true } }, { text: "insert verified citations; the Draft Checker tests them." },
   ], { x: 0.78, y: 5.79, w: 3.7, h: 0.88, fontSize: 9.5, color: K.ink, paraSpaceAfter: 3 });
   frame(s, 4.75, 5.42, 4.0, 1.3);
   T(s, "EVERY SENTENCE GETS A LABEL (SET BY CODE)", { x: 4.93, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
@@ -173,10 +173,10 @@ pres.addSection({ title: "Architecture" });
   s.addText("2 · ARCHITECTURE · THE PARTS AND HOW THEY CONNECT", { placeholder: "eyebrow" });
   s.addText("AI suggests, registries prove, your browser keeps your data", { placeholder: "title" });
   const cols = [
-    ["WEBSITE", "in your browser", K.teal, ["Next.js app, usable on a phone; 3D concept pages", "Workflow state machine with 3 checkpoints", "Receipts: every step logged with time"]],
+    ["WEBSITE", "in your browser", K.teal, ["Next.js app with a 3D home page; works on a phone", "Workflow state machine with 3 checkpoints", "Receipts: every step logged with time"]],
     ["SERVERLESS TOOLS", "Vercel, stateless", K.teal, ["Agent endpoints and the Verifier", "Citation formatter: APA 7, BibTeX, RIS, CSL-JSON", "LLM gateway: schema check, PII scrub, injection shield, budget caps"]],
     ["AI", "Groq, free tier", K.violet, ["Open models by role: gpt-oss; Qwen for the Skeptic", "Fallback model if one is busy", "Rules mode: every check still runs with no AI"]],
-    ["SOURCES", "open registries", K.teal, ["Crossref + Retraction Watch", "OpenAlex · arXiv", "Records are fetched live from these, never written by AI"]],
+    ["SOURCES", "open registries", K.teal, ["Crossref + Retraction Watch", "OpenAlex · arXiv", "Wayback Machine for web pages", "Records are fetched live, never written by AI"]],
     ["REFERENCE STORAGE", "on your device", K.teal, ["Library kept in your browser: no account, no server copy", "Export BibTeX / RIS / CSL-JSON for Zotero, Mendeley", "Certificate data travels inside its own link"]],
   ];
   const W = 2.23, G = 0.245, Y = 1.95, H = 3.35;
@@ -290,7 +290,7 @@ pres.addSection({ title: "Guardrails" });
   T(s, [
     { text: "HOW WE PROVE IT  ", options: { fontFace: F.monoM, fontSize: 8, color: K.gold, breakLine: true } },
     { text: "0 fakes marked Verified", options: { fontFace: F.head2, fontSize: 13, bold: true, color: K.cyan, breakLine: true } },
-    { text: "51 test references, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions flagged. Limit: web pages 0/5, not yet supported.", options: { fontSize: 8.5, color: K.uvInk } },
+    { text: "51 test references, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions flagged. Weakest: web pages 3/5, never marked Verified.", options: { fontSize: 8.5, color: K.uvInk } },
   ], { x: 8.6, y: 5.1, w: 4.0, h: 1.15 });
   T(s, "Every reference real. Every claim traceable. You stay in charge.", { x: 0.6, y: 6.33, w: 12.13, h: 0.45, fontFace: F.head2, fontSize: 17, bold: true, color: K.cyan });
   s.addNotes("Guardrails grouped strongest-first. Proof numbers: golden-set evaluation of 25 Nov 2026 (veracite/tests/results/latest.json) against live Crossref, OpenAlex and arXiv: 51 test references (30 real, 10 hand-built chimeras, 1 AI-fabricated, 5 retracted, 5 web pages). The screenshot is the working X-ray on a team-written test list.");
