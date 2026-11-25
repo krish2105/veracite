@@ -8,6 +8,7 @@ import { createStore, useStore } from "../lab/store";
 import Ambient from "./ambient/Ambient";
 import FootBand from "./ambient/FootBand";
 import PageBanner from "./ambient/PageBanner";
+import { JourneyGuide } from "./journey/JourneyGuide";
 import { PAGE_STEPS } from "./ambient/pageSteps";
 import "./ambient/ambient.css";
 
@@ -80,6 +81,7 @@ export default function AppShell({ title, subtitle, actions, children }: { title
             </button>
           </div>
         </header>
+        <JourneyGuide />
         {steps && <PageBanner steps={steps} />}
         <div className="vx-body">{children}</div>
         <FootBand />

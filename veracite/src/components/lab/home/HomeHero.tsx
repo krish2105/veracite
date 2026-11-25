@@ -25,8 +25,8 @@ export default function HomeHero() {
         <h2 className="lab-h hx-h">Every reference, held to the light.</h2>
         <p className="lab-p">This reference was written to look perfect. Veracite takes it apart and shows which parts are real, which are borrowed and which are invented.</p>
         <div className="lab-cta">
-          <a href="/xray">Check your references</a>
-          <a href="/research" className="ghost">Research a question</a>
+          <a href="/xray?journey=1">Try the full journey</a>
+          <a href="/xray" className="ghost">Check your references</a>
         </div>
         <p className="lab-hint">Drag the note · scroll to enter the vault</p>
       </div>

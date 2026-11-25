@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Copy, Printer, RefreshCw } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
 import { Card, StatusBadge } from "@/components/app/ui";
+import { journey } from "@/components/app/journey/journeyStore";
 import { useRefList } from "@/components/app/tabs/xray/refList";
 import "@/components/app/tabs/xray/xray.css";
 import { certificateFromSources, certificateLink, certificateQR, decodeCertificate, reverifyCertificate, type Certificate, type ReverifyResult } from "@/lib/integrity/certificate";
@@ -60,6 +61,7 @@ export function CertificateTab() {
       setResult(undefined);
       setShown({ cert: d.cert, hash: d.hash, url: link.url, qr: link.fitsQr ? await certificateQR(link.url) : undefined });
       window.history.replaceState(null, "", link.url);
+      journey.mark("certificate");
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "The certificate could not be created.");
     } finally {

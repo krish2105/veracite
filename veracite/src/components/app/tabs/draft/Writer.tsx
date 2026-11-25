@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, Check, Copy, Plus } from "lucide-react";
 import { Card, StatusBadge } from "@/components/app/ui";
+import { journey } from "@/components/app/journey/journeyStore";
 import { useRefList } from "@/components/app/tabs/xray/refList";
 import { StyleSelect } from "@/components/app/tabs/xray/StyleSelect";
 import { useStyledEntries } from "@/components/app/tabs/xray/useStyled";
@@ -84,6 +85,7 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
     const next = insertAtCursor(draft, sel.start, sel.end, tag);
     setDraft(next.text);
     setTracked((t) => (t.some((x) => x.id === activeSource.id) ? t : [...t, { id: activeSource.id, tag }]));
+    journey.mark("cited");
     setSent(false);
     selectionRef.current = { start: next.cursor, end: next.cursor };
 
