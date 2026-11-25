@@ -7,6 +7,7 @@ import { canAdd, refList, sourceId, toSource, useRefList } from "@/components/ap
 import type { Candidate } from "@/lib/agents/scout";
 import { isOn } from "@/lib/flags";
 import type { CitationDirection } from "@/lib/registries/openalex";
+import { PaperMap } from "./PaperMap";
 
 const LABEL: Record<CitationDirection, string> = { references: "Papers it cites", cited_by: "Papers that cite it" };
 
@@ -34,6 +35,7 @@ async function fetchRelated(doi: string, direction: CitationDirection): Promise<
  */
 export function RelatedPapers({ doi }: { doi: string }) {
   const [state, setState] = useState<State>();
+  const [map, setMap] = useState(false);
   const { sources } = useRefList();
   if (!isOn("snowball")) return null;
 
@@ -51,12 +53,14 @@ export function RelatedPapers({ doi }: { doi: string }) {
       <div className="xrx-row">
         <GitBranch size={13} aria-hidden />
         {(["references", "cited_by"] as const).map((d) => (
-          <button key={d} className={`btn small ${state?.direction === d ? "ok" : ""}`} onClick={() => void load(d)} disabled={state?.loading}>
+          <button key={d} className={`btn small ${state?.direction === d ? "ok" : ""}`} onClick={() => { setMap(false); void load(d); }} disabled={state?.loading}>
             {LABEL[d]}
           </button>
         ))}
-        {state && <button className="btn small" onClick={() => setState(undefined)} disabled={state.loading}>Hide</button>}
+        <button className={`btn small ${map ? "ok" : ""}`} onClick={() => { setMap(!map); setState(undefined); }} aria-pressed={map}>Map</button>
+        {(state || map) && <button className="btn small" onClick={() => { setState(undefined); setMap(false); }} disabled={state?.loading}>Hide</button>}
       </div>
+      {map && <PaperMap doi={doi} />}
       <div aria-live="polite">
         {state?.loading && <p className="vx-tiny">Looking up citations and verifying each one…</p>}
         {state?.error && <p className="vx-tiny" role="alert">{state.error}</p>}
