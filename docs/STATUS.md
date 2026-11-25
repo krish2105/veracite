@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 01:24 (Dubai)** · commit `90f86af`
+> Last updated **Thu 26 Nov, 01:43 (Dubai)** · commit `cb7e76c`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███████░░░ **68%** (49/72 tasks) |
+| **Overall progress** | ███████░░░ **69%** (51/74 tasks) |
 | **P0 demo spine** | ███████░░░ 20/28 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -16,14 +16,14 @@
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **7h 35m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **11h 50m** |
-| Phase 2 submissions close | Thu 15:00 | **13h 35m** |
+| Deck upload (official, hard) | Thu 09:00 | **7h 16m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **11h 31m** |
+| Phase 2 submissions close | Thu 15:00 | **13h 16m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████████░ 88% | 36 | 1 | 4 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █████████░ 88% | 38 | 1 | 4 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -32,10 +32,10 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | █████████░ 86% (25/29) |
-| Honesty & verification in action | 10 | ██████████ 100% (26/26) |
+| Research & citation features | 12 | █████████░ 87% (26/30) |
+| Honesty & verification in action | 10 | ██████████ 100% (27/27) |
 | Day-of requirements | 8 | █░░░░░░░░░ 14% (1/7) |
-| User experience | 8 | ████████░░ 77% (20/26) |
+| User experience | 8 | ████████░░ 78% (21/27) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
@@ -113,6 +113,8 @@ _Nothing blocked._
 - **K41** New citations since you saved (OpenAlex cited-by, newer than the save date) · Krishna Mathur
 - **K42** Related-papers map (2D, from snowball data; click-to-add through the Verifier) · Krishna Mathur
 - **K43** Arabic / English toggle for the main labels, right-to-left (covers A08) · Krishna Mathur
+- **K44** Library: core journey first (Sources → Export → Bias lens → Import), extra tools behind "More tools", Export ↓ shortcut; flags.ts matches what is live · Krishna Mathur
+- **K45** Save checked web pages to the library (Partial, never Verified, retrieval date kept) · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **K13** Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · Krishna Mathur
