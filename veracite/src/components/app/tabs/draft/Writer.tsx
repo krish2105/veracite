@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, Check, Copy, Plus } from "lucide-react";
 import { Card, StatusBadge } from "@/components/app/ui";
-import { apaList, apaReference } from "@/components/app/tabs/xray/apa";
 import { useRefList } from "@/components/app/tabs/xray/refList";
+import { StyleSelect } from "@/components/app/tabs/xray/StyleSelect";
+import { useStyledEntries } from "@/components/app/tabs/xray/useStyled";
 import { citedSources, insertAtCursor, inText } from "@/lib/cite/insert";
+import { formatInText, listOutput, STYLES } from "@/lib/cite/styles";
+import { useCiteStyle } from "@/lib/cite/styleStore";
 import type { SourceRecord } from "@/lib/types";
 
 async function copyText(text: string, html?: string): Promise<boolean> {
@@ -44,6 +47,11 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
   const [copied, setCopied] = useState<"draft" | "apa" | "">("");
   const [sent, setSent] = useState(false);
 
+  const style = useCiteStyle();
+  const { label } = STYLES[style];
+  /** Citations inserted here, per source, in the order first inserted (IEEE numbers follow it). */
+  const [tracked, setTracked] = useState<{ id: string; tag: string }[]>([]);
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const selectionRef = useRef<{ start: number; end: number }>({ start: 0, end: 0 });
 
@@ -59,16 +67,23 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
     };
   };
 
-  const handleInsert = () => {
+  const trackedSources = useMemo(
+    () => tracked.map((t) => sources.find((s) => s.id === t.id)).filter((s): s is SourceRecord => !!s),
+    [tracked, sources],
+  );
+
+  const handleInsert = async () => {
     if (!activeSource) return;
+    const tag = await formatInText(style, activeSource, trackedSources);
     const el = textareaRef.current;
     const sel =
       el && document.activeElement === el
         ? { start: el.selectionStart ?? draft.length, end: el.selectionEnd ?? draft.length }
         : selectionRef.current;
 
-    const next = insertAtCursor(draft, sel.start, sel.end, inText(activeSource));
+    const next = insertAtCursor(draft, sel.start, sel.end, tag);
     setDraft(next.text);
+    setTracked((t) => (t.some((x) => x.id === activeSource.id) ? t : [...t, { id: activeSource.id, tag }]));
     setSent(false);
     selectionRef.current = { start: next.cursor, end: next.cursor };
 
@@ -80,12 +95,52 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
     });
   };
 
-  const cited = useMemo(() => citedSources(draft, sources), [draft, sources]);
-  const apa = useMemo(() => apaList(cited), [cited]);
-  const sortedCited = useMemo(
-    () => [...cited].sort((a, b) => apaReference(a).text.localeCompare(apaReference(b).text, "en")),
-    [cited],
+  // Switching style rewrites the citations inserted here (via placeholders, so no two can collide).
+  const prevStyle = useRef(style);
+  useEffect(() => {
+    if (prevStyle.current === style) return;
+    prevStyle.current = style;
+    if (!tracked.length) return;
+    let live = true;
+    void Promise.all(tracked.map(async (t) => {
+      const src = trackedSources.find((s) => s.id === t.id);
+      return { id: t.id, tag: src ? await formatInText(style, src, trackedSources) : t.tag };
+    })).then((next) => {
+      if (!live) return;
+      setDraft((d) => {
+        const held = tracked.reduce((acc, t, i) => acc.split(t.tag).join(`\u0000${i}\u0000`), d);
+        return next.reduce((acc, t, i) => acc.split(`\u0000${i}\u0000`).join(t.tag), held);
+      });
+      setTracked(next);
+    });
+    return () => {
+      live = false;
+    };
+    // Runs only when the style changes; `tracked` is read as it was at that moment.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [style]);
+
+  const cited = useMemo(() => {
+    const found = citedSources(draft, sources);
+    const ids = new Set(found.map((s) => s.id));
+    for (const t of tracked) {
+      const src = sources.find((s) => s.id === t.id);
+      if (src && !ids.has(src.id) && draft.includes(t.tag)) {
+        ids.add(src.id);
+        found.push(src);
+      }
+    }
+    return found;
+  }, [draft, sources, tracked]);
+  // IEEE keeps every number it handed out, so the list is built from all inserted sources and then filtered.
+  const listRecords = useMemo(
+    () => (style === "ieee" ? [...trackedSources, ...cited.filter((c) => !tracked.some((t) => t.id === c.id))] : cited),
+    [style, trackedSources, cited, tracked],
   );
+  const styled = useStyledEntries(style, listRecords);
+  const citedIds = useMemo(() => new Set(cited.map((s) => s.id)), [cited]);
+  const shownEntries = styled.entries.filter((e) => citedIds.has(e.id));
+  const list = useMemo(() => listOutput(styled.failed ? "apa" : style, shownEntries), [style, styled.failed, shownEntries]);
 
   const handleCopy = async (kind: "draft" | "apa", text: string, html?: string) => {
     if (await copyText(text, html)) {
@@ -125,7 +180,7 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
               </option>
             ))}
           </select>
-          <button type="button" className="btn primary small" onClick={handleInsert} disabled={!activeSource}>
+          <button type="button" className="btn primary small" onClick={() => void handleInsert()} disabled={!activeSource}>
             <Plus size={14} /> Insert citation
           </button>
         </div>
@@ -172,27 +227,32 @@ export function Writer({ onCheck }: { onCheck?: (text: string) => void }) {
       </div>
 
       <div style={{ marginTop: 14, paddingTop: 12, borderTop: "1px dashed var(--line)" }}>
-        <p className="vx-eyebrow">References (APA 7, live) · {cited.length}</p>
+        <div className="xrx-row" style={{ marginTop: 0, marginBottom: 6, justifyContent: "space-between" }}>
+          <p className="vx-eyebrow" style={{ margin: 0 }}>References ({label}, live) · {cited.length}</p>
+          <StyleSelect id="dr-style" />
+        </div>
+        {style !== "apa" && <p className="vx-tiny" style={{ marginTop: 0 }}>New citations and this list use {label}; citations you inserted change with the style. The Draft Checker reads APA-style (Author, Year) citations.</p>}
         {cited.length === 0 ? (
           <p className="vx-tiny" style={{ marginTop: 0 }}>
-            Insert a citation above to build your APA 7 reference list live. Only works you cite appear here.
+            Insert a citation above to build your {label} reference list live. Only works you cite appear here.
           </p>
         ) : (
           <>
             <ul className="xrx-list">
-              {sortedCited.map((s) => (
-                <li key={s.id}>
-                  {/* Built by code from the registry record; every value is HTML-escaped in apa.ts. */}
-                  <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: apaReference(s).html }} />
-                  <div className="xrx-row">
-                    <StatusBadge status={s.verification.status} />
-                  </div>
-                </li>
-              ))}
+              {shownEntries.map((e) => {
+                const s = cited.find((c) => c.id === e.id);
+                return (
+                  <li key={e.id}>
+                    {/* Built by code from the registry record; values are HTML-escaped (apa.ts / citeproc). */}
+                    <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: e.html }} />
+                    <div className="xrx-row">{s && <StatusBadge status={s.verification.status} />}</div>
+                  </li>
+                );
+              })}
             </ul>
             <div className="xrx-row">
-              <button type="button" className="btn primary small" onClick={() => void handleCopy("apa", apa.text, apa.html)}>
-                {copied === "apa" ? <Check size={13} /> : <Copy size={13} />} {copied === "apa" ? "Copied" : "Copy APA 7 list"}
+              <button type="button" className="btn primary small" disabled={styled.loading} onClick={() => void handleCopy("apa", list.text, list.html)}>
+                {copied === "apa" ? <Check size={13} /> : <Copy size={13} />} {copied === "apa" ? "Copied" : `Copy ${label} list`}
               </button>
             </div>
           </>

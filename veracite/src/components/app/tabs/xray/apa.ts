@@ -62,9 +62,13 @@ export function apaReference(r: SourceRecord): Formatted {
 }
 
 /** Alphabetical by first author, then year, as APA 7 requires. */
-export function apaList(records: SourceRecord[]): Formatted {
+export function apaSorted(records: SourceRecord[]): SourceRecord[] {
   const key = (r: SourceRecord) => `${r.authors.length ? apaAuthors(r.authors) : r.title} ${r.year ?? ""}`.toLowerCase();
-  const items = [...records].sort((a, b) => key(a).localeCompare(key(b), "en")).map(apaReference);
+  return [...records].sort((a, b) => key(a).localeCompare(key(b), "en"));
+}
+
+export function apaList(records: SourceRecord[]): Formatted {
+  const items = apaSorted(records).map(apaReference);
   return {
     text: items.map((i) => i.text).join("\n\n"),
     html: items.map((i) => `<p style="margin:0 0 12px;padding-left:36px;text-indent:-36px;line-height:2">${i.html}</p>`).join(""),
