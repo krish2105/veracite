@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 23:41 (Dubai)** · commit `7f13792`
+> Last updated **Wed 25 Nov, 23:49 (Dubai)** · commit `86452f1`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ██████░░░░ **56%** (35/62 tasks) |
+| **Overall progress** | ██████░░░░ **58%** (36/62 tasks) |
 | **P0 demo spine** | ███████░░░ 20/28 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -16,14 +16,14 @@
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **9h 18m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **13h 33m** |
-| Phase 2 submissions close | Thu 15:00 | **15h 18m** |
+| Deck upload (official, hard) | Thu 09:00 | **9h 10m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **13h 25m** |
+| Phase 2 submissions close | Thu 15:00 | **15h 10m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 71% | 22 | 0 | 9 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 74% | 23 | 0 | 8 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -32,8 +32,8 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ███████░░░ 74% (17/23) |
-| Honesty & verification in action | 10 | █████████░ 91% (20/22) |
+| Research & citation features | 12 | ████████░░ 78% (18/23) |
+| Honesty & verification in action | 10 | ██████████ 95% (21/22) |
 | Day-of requirements | 8 | █░░░░░░░░░ 14% (1/7) |
 | User experience | 8 | ██████░░░░ 62% (13/21) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
@@ -50,7 +50,6 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
-- ⬜ **K30** · P1 · Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code
 - ⬜ **K31** · P1 · First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states
 - ⬜ **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
 - ⬜ **K13** · P2 · Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server)
@@ -104,6 +103,7 @@ _Nothing blocked._
 - **K27** One-click save: `/save?doi=` or `?url=` verifies before adding, plus a bookmarklet on the Library page (Avighna owns `app/save/**`, A15) · Krishna Mathur
 - **K28** Import an existing library: paste or upload `.bib` / `.ris`, X-ray every entry, add only the real ones · Krishna Mathur
 - **K29** Citation styles: APA 7, MLA 9, Harvard, IEEE, Chicago author-date (citation-js) in Write & cite, X-ray list and Library export · Krishna Mathur
+- **K30** Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
