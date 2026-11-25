@@ -69,7 +69,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: banner "This looks like a chatbot answer" → Check only its references; "Smith and Lee (2023)" flagged as uncheckable. 7 tests.
 - [x] **K40** · P2 · Journal-index chips (DOAJ, indexed in), labelled Reported, not checked · `veracite/src/lib/registries/journal*` · #research
     - 26 Nov: OpenAlex `is_in_doaj` / `is_core` / `listed_in` kept on records and saved sources; chips on X-ray, Library, research sources (e.g. "DOAJ · MEDLINE · CWTS core list · +10 national lists"); never shown as a score, nothing hidden. 3 tests.
-- [ ] **K41** · P2 · New citations since you saved (OpenAlex cited-by, newer than the save date) · #research
+- [x] **K41** · P2 · New citations since you saved (OpenAlex cited-by, newer than the save date) · `veracite/src/components/app/tabs/library/NewCitations.tsx` · #research
+    - 26 Nov: snowball route takes `since` + `perPage`; Library card checks up to 10 sources, 5 each, 2 at a time, since saved or last 12 months; every result verified, one-click add. 3 tests.
 - [ ] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · #research #ux
 - [ ] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · #ux
 

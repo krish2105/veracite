@@ -114,3 +114,4 @@
 /* Journal-index chips (K40) */
 .jx { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
 .jx-chip { font: 500 11px var(--f-ui); padding: 1px 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink2); background: var(--surface2); }
+.xrx #nc-window { font: 13px var(--f-ui); padding: 7px 9px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); max-width: 100%; min-width: 0; }
