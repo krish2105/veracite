@@ -1,7 +1,7 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 01:06 (Dubai)** · commit `c7d6fae`
+> Last updated **Wed 25 Nov, 13:53 (Dubai)** · commit `0b2f1ec`
 
 ## At a glance
 | | |
@@ -15,10 +15,10 @@
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **21h 53m** |
-| Deck upload (official, hard) | Thu 09:00 | **1d 7h** |
-| Arrive at the Simulation Lab | Thu 13:15 | **1d 12h** |
-| Phase 2 submissions close | Thu 15:00 | **1d 13h** |
+| Deck upload (team target) | Wed 23:00 | **9h 6m** |
+| Deck upload (official, hard) | Thu 09:00 | **19h 6m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **23h 21m** |
+| Phase 2 submissions close | Thu 15:00 | **1d 1h** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
