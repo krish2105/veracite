@@ -38,6 +38,7 @@
     - 24 Nov: `bias.ts`, tested on live OpenAlex data for the 30 golden references.
 - [~] **Z11** · PRES · Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · `docs/08_DEMO_SCRIPT_AND_QA.md` · due Wed 22:00 · #pres
     - 24 Nov: Q9–Q16 final answers written in docs/08 (facts checked). **Left: memorise the pitch + rehearse aloud, then tick.**
+    - 25 Nov: memory card for the pitch is in chat; cue card for the segment is `submissions/phase2/ZEDAN_DEMO_CUES.md`. **Left: say it aloud 3× with a timer, then tick.**
 - [x] **Z16** · P2 · Web sources: URL live check + Wayback snapshot + APA retrieval date (moved from K12; a likely Phase-2 ask) · `veracite/src/app/api/sources/wayback/**` · #research
     - 25 Nov: `GET /api/sources/wayback?url=` (live + Wayback + APA retrieval, SSRF-safe), 5/5 on the golden web set; golden web expectations corrected to `partial` (PR #25). X-ray integration is Krishna's.
 - [x] **Z03** · P2 · Apply for a Semantic Scholar API key (optional; Semantic Scholar is not in the demo spine) · #research
@@ -45,5 +46,8 @@
 
 ## Thursday
 - [ ] **Z12** · DAY · Phase 2: underline every "must"; write 3 acceptance checks per requirement; test the live link in incognito at 14:40 · due Thu 14:50 · #dayof
+    - 25 Nov prep: `submissions/phase2/ACCEPTANCE_CHECKS.md` (3 ready checks for each of the 17 likely requirements) + `node submissions/phase2/smoke.mjs` (15 live checks; 15/15 on Wed night). Thursday: copy the requirements, adapt the checks, run smoke at 14:40.
 - [ ] **Z13** · DAY · Update the Trust Center and prompt log for anything Phase 2 changed; export the prompt log to `submissions/prompt-log/` · due Thu 14:55 · #dayof #deck
+    - 25 Nov prep: `node submissions/prompt-log/export.mjs` runs the PII scrubber over the log, then writes HTML + PDF (58 entries, passed). Thursday: add Phase 2 prompts, re-run.
 - [ ] **Z14** · PRES · Rehearse segment 5:30–7:00 (export → statement → certificate → Rules mode) · due Thu 12:30 · #pres
+    - 25 Nov prep: timed cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` (export gate → statement → certificate → Trust Center → Rules mode).
