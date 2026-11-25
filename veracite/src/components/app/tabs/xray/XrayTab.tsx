@@ -14,6 +14,7 @@ import { ResultRow } from "./ResultRow";
 import { TEST_LIST } from "./testList";
 import { useXray } from "./useXray";
 import { pdfToXrayInput } from "@/lib/import/pdftext";
+import { readChatAnswer } from "@/lib/import/chatanswer";
 import "./xray.css";
 
 const ORDER: RefStatus[] = ["verified", "partial", "mismatch", "chimera", "retracted", "notfound"];
@@ -26,6 +27,14 @@ export function XrayTab() {
   const pdfRef = useRef<HTMLInputElement>(null);
   const [pdfNote, setPdfNote] = useState("");
   const [dragging, setDragging] = useState(false);
+  // K39: a pasted chatbot answer (prose + "Sources") → check only its real references, flag bare mentions.
+  const chat = useMemo(() => readChatAnswer(text), [text]);
+  const [dangling, setDangling] = useState<string[]>([]);
+  const useChatRefs = () => {
+    reset();
+    setDangling(chat.unmatched);
+    setText([...chat.refs, ...chat.dois].join("\n\n"));
+  };
   const readPdf = async (file: File | undefined) => {
     if (!file) return;
     if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") return setPdfNote("That is not a PDF. Paste the reference list instead.");
@@ -98,6 +107,7 @@ export function XrayTab() {
                   className="btn small"
                   onClick={() => {
                     setText("");
+                    setDangling([]);
                     reset();
                   }}
                   disabled={state.running}
@@ -123,6 +133,21 @@ export function XrayTab() {
             placeholder={"1. Author, A., & Author, B. (2025). Title of the paper. Journal Name, 12(3), 45–67. https://doi.org/…\n2. …"}
           />
           {pdfNote && <p className="xr-note" role="status" style={{ margin: "6px 0 0" }}>{pdfNote}</p>}
+          {chat.looksLikeProse && (
+            <div className="banner xr-chat" role="status">
+              <span>
+                <b>This looks like a chatbot answer, not a reference list.</b> Only full references can be checked: {chat.refs.length} reference{chat.refs.length === 1 ? "" : "s"}
+                {chat.dois.length ? ` and ${chat.dois.length} DOI${chat.dois.length === 1 ? "" : "s"} from the text` : ""}.
+                {chat.unmatched.length > 0 && ` ${chat.unmatched.length} mention${chat.unmatched.length === 1 ? " has" : "s have"} no full reference.`}
+              </span>
+              <button className="btn small primary" onClick={useChatRefs} disabled={state.running || chat.refs.length + chat.dois.length === 0}>Check only its references</button>
+            </div>
+          )}
+          {dangling.length > 0 && !chat.looksLikeProse && (
+            <p className="xrx-warn" role="note" style={{ margin: "6px 0 0", listStyle: "none" }}>
+              Cannot be checked, no full reference given: {dangling.join(" · ")}. Ask the chatbot for the full reference, or leave {dangling.length === 1 ? "it" : "them"} out.
+            </p>
+          )}
           <p className="vx-tiny">
             {count ? `${count} reference${count === 1 ? "" : "s"} detected.` : "Nothing to check yet. Paste references, or drop a PDF on the box."} Only titles, authors and DOIs are sent to the public
             registries. Nothing is stored; a PDF is read in your browser.

@@ -64,6 +64,14 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · `veracite/src/lib/import/pdf*` · #research #ux
     - 26 Nov: Read a PDF / drop on the box; pdf.js reads it in the browser (nothing uploaded), finds the last References heading (stops at appendices), re-joins hyphen and DOI line breaks, else lists the DOIs; the student edits, then X-rays. 11 tests; generated test paper → 3 Verified + 1 Chimera.
 
+## Thursday 01:10 · remaining ideas ("Merge and do all")
+- [x] **K39** · P2 · Paste a chatbot answer: keep its reference list + DOIs from the prose, flag author–year mentions with no full reference · `veracite/src/lib/import/chatanswer*` · #honesty #ux
+    - 26 Nov: banner "This looks like a chatbot answer" → Check only its references; "Smith and Lee (2023)" flagged as uncheckable. 7 tests.
+- [ ] **K40** · P2 · Journal-index chips (DOAJ, indexed in), labelled Reported, not checked · #research
+- [ ] **K41** · P2 · New citations since you saved (OpenAlex cited-by, newer than the save date) · #research
+- [ ] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · #research #ux
+- [ ] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · #ux
+
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
