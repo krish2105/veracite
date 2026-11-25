@@ -48,6 +48,15 @@ describe("applyWebCheck", () => {
     expect(v.reasons.join(" ")).toContain("web.archive.org");
   });
 
+  it("keeps the web evidence on a Partial verdict, so the page can be saved (K45)", () => {
+    const v = applyWebCheck(base("notfound"), title, page(url, { live: true, title: "UAE Strategy for Artificial Intelligence | u.ae", archived: true }));
+    expect(v.web).toEqual({ url, pageTitle: "UAE Strategy for Artificial Intelligence | u.ae", live: true, archiveUrl: `https://web.archive.org/web/2026/${url}`, accessedAt: "2026-11-25T00:00:00Z", retrieval: `Retrieved November 25, 2026, from ${url}` });
+  });
+
+  it("adds no web evidence when the link does not replace the verdict", () => {
+    expect(applyWebCheck(base("notfound"), title, page(url, { live: false, archived: false })).web).toBeUndefined();
+  });
+
   it("replaces a Mismatch against another registry record, and drops that record", () => {
     const v = applyWebCheck(base("mismatch", { matched, registries: ["crossref"] }), title, page(url));
     expect(v.status).toBe("partial");

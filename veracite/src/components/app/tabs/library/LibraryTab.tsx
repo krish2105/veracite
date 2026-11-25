@@ -58,6 +58,12 @@ function Item({ s, html }: { s: SourceRecord; html?: string }) {
         <JournalChips facts={{ inDoaj: s.quality.inDOAJ, core: s.quality.coreJournal, listedIn: s.quality.listedIn }} />
         <button className="btn small" onClick={() => refList.remove(s.id)}><Trash2 size={13} /> Remove</button>
       </div>
+      {s.type === "web" && (
+        <p className="vx-tiny" style={{ margin: "4px 0 0" }}>
+          Web page · Partial, never Verified{s.accessedAt ? ` · retrieved ${new Date(s.accessedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Dubai" })}` : ""}
+          {s.archivedUrl && <> · <a href={s.archivedUrl} target="_blank" rel="noopener noreferrer">archived copy</a></>}
+        </p>
+      )}
       <div style={{ marginTop: 6 }}>
         <ExplainPaper source={s} />
       </div>

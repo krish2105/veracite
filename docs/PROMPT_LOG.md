@@ -93,5 +93,6 @@
 | 78 | 26 Nov 2026, ~01:45 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K42: related-papers map (`mapLayout.ts` 4 tests, `PaperMap.tsx`); fixed an oversized map and a CSS rule that enlarged badge icons after the screenshot check | Kept |
 | 79 | 26 Nov 2026, ~02:00 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K43: Arabic / English toggle (`lib/i18n/strings.ts`, `lang.ts`, 5 tests): menus, titles, trust labels and badges; results stay English with a beta note | Kept; Arabic wording to be read once by an Arabic speaker |
 | 80 | 26 Nov 2026, ~02:05 | Krishna | Claude Code · Claude Opus 5.5 | "rescore e2e" then "Yes, fix both" | Evidence-based rescore (rubric, problem statement, deck, live e2e 32/32, first-time-judge walkthrough); K44: Library order (Export second, More tools), flags aligned with live features | Kept |
+| 81 | 26 Nov 2026, ~02:20 | Krishna | Claude Code · Claude Opus 5.5 | (same "Yes, fix both" prompt) | K45: save checked web pages (`lib/verify/websource.ts`, web evidence on verdicts, 8 tests); Add as web page on the X-ray and save page | Kept |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*

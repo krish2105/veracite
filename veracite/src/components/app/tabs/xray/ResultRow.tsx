@@ -7,6 +7,7 @@ import { FullTextLink } from "./FullTextLink";
 import { HowDecided } from "./HowDecided";
 import { JournalChips } from "./JournalChips";
 import { canAdd, refList, sourceId, useRefList } from "./refList";
+import { canAddWeb, toWebSource } from "@/lib/verify/websource";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
 /** The plain verdict, said first, so nobody has to know what a label means. */
@@ -26,6 +27,7 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
   const notice = v?.updates.find((u) => u.noticeDoi);
   const { sources } = useRefList();
   const added = !!v?.matched && sources.some((s) => s.id === sourceId(v));
+  const webAdded = !!v?.web && sources.some((s) => s.id === `url:${v.web!.url}`);
   return (
     <div className="xr">
       <div className="xr-head">
@@ -71,6 +73,13 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
               <button className={`btn small ${added ? "ok" : "primary"}`} onClick={() => refList.approve(v)} disabled={added}>
                 {added ? <Check size={13} /> : <Plus size={13} />} {added ? "In my list" : v.status === "mismatch" ? "Add the registry's version" : "Add to my list"}
               </button>
+            ) : canAddWeb(v) ? (
+              <>
+                <button className={`btn small ${webAdded ? "ok" : ""}`} onClick={() => refList.addWeb(toWebSource(v, raw))} disabled={webAdded}>
+                  {webAdded ? <Check size={13} /> : <Plus size={13} />} {webAdded ? "In my list (web page)" : "Add as web page"}
+                </button>
+                <span className="vx-tiny" style={{ margin: 0 }}>Saved as Partial, never Verified: a web page has no registry record. Author and date as you typed them; retrieval date kept.</span>
+              </>
             ) : (
               <span className="vx-tiny" style={{ margin: 0 }}>Cannot be added to your list.</span>
             )}

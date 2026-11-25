@@ -138,6 +138,18 @@ export interface SearchReceipt {
   hits: number;
 }
 
+/** A web page checked live and in the Wayback Machine (K21/K45). Never makes anything Verified. */
+export interface WebEvidence {
+  url: string;
+  /** The page's own title, when it loaded. */
+  pageTitle?: string;
+  live: boolean;
+  archiveUrl?: string;
+  /** The retrieval date (APA 7). */
+  accessedAt: string;
+  retrieval: string;
+}
+
 export interface Verification {
   status: RefStatus;
   checks: FieldCheck[];
@@ -151,6 +163,8 @@ export interface Verification {
   /** Plain-English "why" lines, generated from templates (not by AI). */
   reasons: string[];
   searched: SearchReceipt[];
+  /** K45: what the web check found, when a web page (not a registry record) made this verdict Partial. */
+  web?: WebEvidence;
   checkedAt: string; // ISO
   ms: number;
 }
