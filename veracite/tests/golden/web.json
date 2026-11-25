@@ -3,25 +3,25 @@
     "id": "web-001",
     "sample": true,
     "raw": "McAdoo, T. (2023, April 7). How to cite ChatGPT. APA Style. https://apastyle.apa.org/blog/how-to-cite-chatgpt",
-    "expected": "verified",
+    "expected": "partial",
     "url": "https://apastyle.apa.org/blog/how-to-cite-chatgpt",
-    "notes": "24 Nov 2026: HTTP 200. Page is rendered by JavaScript, so the raw HTML has no title: the checker needs og:title / metadata or a fallback. Author and date confirmed from the Wayback copy 20261110004129 (publish_date 2023-04-07, updated 2025-09-15)."
+    "notes": "24 Nov 2026: HTTP 200. Page is rendered by JavaScript, so the raw HTML has no title: the checker needs og:title / metadata or a fallback. Author and date confirmed from the Wayback copy 20261110004129 (publish_date 2023-04-07, updated 2025-09-15). Expected changed verified → partial on 25 Nov 2026: per docs/03 §3 a web page without a DOI can be at most Partial (found as a live/archived URL only)."
   },
   {
     "id": "web-002",
     "sample": true,
     "raw": "UNESCO. (2023). Guidance for generative AI in education and research. https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
-    "expected": "verified",
+    "expected": "partial",
     "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
-    "notes": "24 Nov 2026: HTTP 200, title 'Guidance for generative AI in education and research | UNESCO'. Wayback 20261115003429. Year from the guidance publication; not checked against the page."
+    "notes": "24 Nov 2026: HTTP 200, title 'Guidance for generative AI in education and research | UNESCO'. Wayback 20261115003429. Year from the guidance publication; not checked against the page. Expected changed verified → partial on 25 Nov 2026: per docs/03 §3 a web page without a DOI can be at most Partial (found as a live/archived URL only)."
   },
   {
     "id": "web-003",
     "sample": true,
     "raw": "Crossref. (n.d.). REST API. Retrieved November 24, 2026, from https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
-    "expected": "verified",
+    "expected": "partial",
     "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
-    "notes": "24 Nov 2026: HTTP 200, title 'REST API - Crossref'. Wayback 20261117212219. Undated page: APA needs the retrieval date, which this citation includes."
+    "notes": "24 Nov 2026: HTTP 200, title 'REST API - Crossref'. Wayback 20261117212219. Undated page: APA needs the retrieval date, which this citation includes. Expected changed verified → partial on 25 Nov 2026: per docs/03 §3 a web page without a DOI can be at most Partial (found as a live/archived URL only)."
   },
   {
     "id": "web-004",
