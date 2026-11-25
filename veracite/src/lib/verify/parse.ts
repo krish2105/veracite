@@ -79,18 +79,17 @@ export function parseReference(rawInput: string): ReferenceInput {
   const doi = normalizeDoi(text);
   const arxivId = /arxiv/i.test(text) ? arxivIdFromString(text.match(/arxiv[^\s,;]*\s*[:/.]?\s*\d{4}\.\d{4,5}/i)?.[0]) : undefined;
   const url = text.match(/https?:\/\/(?!(?:dx\.)?doi\.org)[^\s,;]+/i)?.[0]?.replace(/[.)]+$/, "");
-  const body = text.replace(/https?:\/\/\S+/gi, " ").replace(/\bdoi:\s*\S+/gi, " ").replace(/\b10\.\d{4,9}\/\S+/g, " ").replace(/\s+/g, " ").trim();
+  const body = text.replace(/https?:\/\/\S+/gi, " ").replace(/\bdoi:\s*\S+/gi, " ").replace(/\b10\.\d{4,9}\/\S+/g, " ").replace(/\bRetrieved\s[^.]*?\bfrom\b/gi, " ").replace(/\s+/g, " ").trim();
 
   const out: ReferenceInput = { raw: rawInput, doi: doi ?? (arxivId ? arxivDoi(arxivId) : undefined), url };
   out.etAl = /\bet al\b/i.test(body);
 
   const quoted = body.match(/[“"]([^”"]{8,})[”"]/);
-  const apaYear = body.match(/\((\d{4})[a-z]?(?:,[^)]*)?\)/);
-  const nd = /\(n\.\s?d\.\)/i.test(body);
+  const apaYear = body.match(/\((\d{4}|n\.\s?d\.)[a-z]?(?:,[^)]*)?\)/i);
 
   if (apaYear && apaYear.index! > 0) {
     // APA / Harvard: Authors (Year). Title. Venue, vol(issue), pages.
-    out.year = Number(apaYear[1]);
+    if (/^\d/.test(apaYear[1])) out.year = Number(apaYear[1]);
     out.authors = parseAuthors(body.slice(0, apaYear.index));
     const after = body.slice(apaYear.index! + apaYear[0].length).replace(/^[\s.,:]+/, "");
     const harvard = after.match(/^[‘']([\s\S]{8,}?)[’']\s*[,.]\s/); // Harvard: 'Title', Venue
@@ -122,7 +121,7 @@ export function parseReference(rawInput: string): ReferenceInput {
     } else if (/\p{L}{3}/u.test(body)) {
       out.title = cleanTitle(body); // only a title was typed
     }
-    if (!nd) out.year = [...body.matchAll(/\b(19|20)\d{2}\b/g)].map((m) => Number(m[0])).find((y) => y <= new Date().getFullYear() + 1);
+    out.year = [...body.matchAll(/\b(19|20)\d{2}\b/g)].map((m) => Number(m[0])).find((y) => y <= new Date().getFullYear() + 1);
   }
   if (out.authors && !out.authors.length) delete out.authors;
   if (!out.title) delete out.title;

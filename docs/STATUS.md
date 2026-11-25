@@ -1,29 +1,29 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 20:40 (Dubai)** · commit `0f9821c`
+> Last updated **Wed 25 Nov, 20:47 (Dubai)** · commit `21f9a00`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | █████░░░░░ **49%** (25/51 tasks) |
+| **Overall progress** | █████░░░░░ **50%** (26/52 tasks) |
 | **P0 demo spine** | ███████░░░ 17/26 |
-| **Build** | Type-check 🟢 passing · Production build 🟢 passing |
+| **Build** | Type-check 🟢 passing · Production build 🟢 passing · 25 Nov, 20:47 local |
 | **Live link** | https://veracite.vercel.app |
 | **In progress / blocked** | 1 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **2h 19m** |
-| Deck upload (official, hard) | Thu 09:00 | **12h 19m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **16h 34m** |
-| Phase 2 submissions close | Thu 15:00 | **18h 19m** |
+| Deck upload (team target) | Wed 23:00 | **2h 12m** |
+| Deck upload (official, hard) | Thu 09:00 | **12h 12m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **16h 27m** |
+| Phase 2 submissions close | Thu 15:00 | **18h 12m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 70% | 14 | 0 | 6 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 71% | 15 | 0 | 6 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
@@ -32,8 +32,8 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ███████░░░ 67% (12/18) |
-| Honesty & verification in action | 10 | ████████░░ 84% (16/19) |
+| Research & citation features | 12 | ███████░░░ 68% (13/19) |
+| Honesty & verification in action | 10 | █████████░ 85% (17/20) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
 | User experience | 8 | ████░░░░░░ 44% (7/16) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
@@ -92,6 +92,7 @@ _Nothing blocked._
 - **K09** Research orchestrator: state machine, 3 checkpoints, autonomy dial (Off / Assist / Co-pilot), Receipts log, approved sources saved to the library; wire the Research tab end to end · Krishna Mathur
 - **K19** Five-requirement path on the X-ray page: fake-reference check, labels + legend, approve to list, APA 7 copy/download, AI-use statement, phone layout · Krishna Mathur
 - **K20** Replace sample pages with real ones: front page, shell, Library (organise, BibTeX/RIS/CSL, bias lens), Trust Center (measured results, Prompt Ledger), Certificate (QR + live re-check), eval runner reads NDJSON · Krishna Mathur
+- **K21** X-ray checks web pages (connects Z16): live or archived pages that match the cited title are Partial, never Verified · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol

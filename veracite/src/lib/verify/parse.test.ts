@@ -137,3 +137,14 @@ describe("text checks", () => {
     expect(venueMatch(venueSimilarity("Journal of Educational Psychology", "Scientific Reports"), true)).toBe("different");
   });
 });
+
+describe("web references (K21)", () => {
+  const url = "https://www.crossref.org/documentation/retrieve-metadata/rest-api/";
+  it("reads the title of an undated page and ignores the retrieval sentence", () => {
+    const r = parseReference(`Crossref. (n.d.). REST API. Retrieved November 24, 2026, from ${url}`);
+    expect(r.title).toBe("REST API");
+    expect(r.url).toBe(url);
+    expect(r.year).toBeUndefined();
+    expect(r.authors?.[0]?.family).toBe("Crossref");
+  });
+});
