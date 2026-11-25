@@ -71,7 +71,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: OpenAlex `is_in_doaj` / `is_core` / `listed_in` kept on records and saved sources; chips on X-ray, Library, research sources (e.g. "DOAJ · MEDLINE · CWTS core list · +10 national lists"); never shown as a score, nothing hidden. 3 tests.
 - [x] **K41** · P2 · New citations since you saved (OpenAlex cited-by, newer than the save date) · `veracite/src/components/app/tabs/library/NewCitations.tsx` · #research
     - 26 Nov: snowball route takes `since` + `perPage`; Library card checks up to 10 sources, 5 each, 2 at a time, since saved or last 12 months; every result verified, one-click add. 3 tests.
-- [ ] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · #research #ux
+- [x] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · `veracite/src/components/app/tabs/research/PaperMap.tsx mapLayout*` · #research #ux
+    - 26 Nov: Map button beside Papers it cites / Papers that cite it: deterministic SVG (no physics), cites left / cited-by right, oldest at top, size = citations, colour = verdict; tap a dot to add. 4 tests; phones scroll inside the map.
 - [ ] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · #ux
 
 ## Wednesday evening · deck-promised extras (M3)

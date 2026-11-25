@@ -90,5 +90,6 @@
 | 75 | 26 Nov 2026, ~01:10 | Krishna | Claude Code · Claude Opus 5.5 | "Merge and do all" (build the remaining ideas: journal chips, new-citation alerts, related-papers map, Arabic toggle; plus the chatbot-answer mode) | K39: paste a chatbot answer (`lib/import/chatanswer.ts`, 7 tests); fixed a numbering merge found in the browser test | Kept |
 | 76 | 26 Nov 2026, ~01:20 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K40: journal-index chips from OpenAlex (`lib/registries/journal.ts`, 3 tests) on X-ray, Library and research sources | Kept |
 | 77 | 26 Nov 2026, ~01:30 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K41: new papers citing your sources (`relatedQuery` with `since`, 3 tests; Library card) | Kept |
+| 78 | 26 Nov 2026, ~01:45 | Krishna | Claude Code · Claude Opus 5.5 | (same "Merge and do all" prompt) | K42: related-papers map (`mapLayout.ts` 4 tests, `PaperMap.tsx`); fixed an oversized map and a CSS rule that enlarged badge icons after the screenshot check | Kept |
 
 *(Zedan and Avighna: add your own prompts below, e.g. ChatGPT prompts used to generate the fabricated test references for the golden set. Those are especially important to log.)*
