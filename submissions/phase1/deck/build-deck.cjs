@@ -99,11 +99,15 @@ pres.addSection({ title: "Overview" });
     { text: "Only public registries may cite. ", options: { color: K.cyan } },
     { text: "Only the student may decide.", options: { color: K.magenta } },
   ], { x: 0.8, y: 5.45, w: 5.9, h: 0.78, fontFace: F.read, fontSize: 15.5, valign: "middle" });
-  T(s, "Slides 2–6 follow the judging criteria: Workflow · Architecture · Ethics · Governance · Guardrails", { x: 0.6, y: 6.5, w: 6.4, h: 0.3, fontFace: F.mono, fontSize: 8.5, color: K.uvInk2 });
+  T(s, [
+    { text: "TRY IT LIVE  ", options: { color: K.gold } },
+    { text: "veracite.vercel.app/xray", options: { color: K.cyan, hyperlink: { url: "https://veracite.vercel.app/xray", tooltip: "Open the live Reference X-ray" } } },
+  ], { x: 0.6, y: 6.45, w: 6.4, h: 0.22, fontFace: F.monoM, fontSize: 11 });
+  T(s, "Slides 2–6: Workflow · Architecture · Ethics · Governance · Guardrails", { x: 0.6, y: 6.73, w: 6.5, h: 0.18, fontFace: F.mono, fontSize: 8, color: K.uvInk2 });
   s.addImage({ path: IMG("s1-vault-uv.jpg"), x: 7.25, y: 0.5, w: 5.48, h: 5.86, altText: "Prototype: Veracite's 3D landing page in UV-lamp mode, a vault of glowing reference cards" });
   s.addShape(pres.shapes.RECTANGLE, { x: 7.2, y: 0.45, w: 5.58, h: 5.96, fill: { color: K.uv, transparency: 100 }, line: { color: K.cyan, width: 0.75 } });
   T(s, "Working prototype · 3D landing in UV-lamp mode: genuine references glow VERIFIED, counterfeits show VOID · SAMPLE data", { x: 7.25, y: 6.45, w: 5.48, h: 0.4, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
-  s.addNotes("Pre-read deck. Slide 1: problem + promise. Stats: Asai et al., Nature (Feb 2026); GPTZero NeurIPS analysis via Fortune (21 Jan 2026); SP Jain Academic Integrity Policy and Procedures v2 (24 Feb 2026) clause h(ix).");
+  s.addNotes("Pre-read deck. Slide 1: problem + promise. Stats: Asai et al., Nature (Feb 2026); GPTZero NeurIPS analysis via TechCrunch (21 Jan 2026); SP Jain Academic Integrity Policy and Procedures v2 (24 Feb 2026) clause h(ix).");
 }
 
 /* ================= Slide 2 · Workflow ================= */
