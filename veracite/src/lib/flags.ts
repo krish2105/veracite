@@ -16,9 +16,9 @@ export const FLAG_DEFAULTS = {
   // P1 · promised in the deck (docs/11 §4)
   draftChecker: true, // K10
   snowball: true, // K11
-  certificate: false, // Z08
+  certificate: true, // Z08
   paraphraseGuard: false, // Z09
-  biasLens: false, // Z10
+  biasLens: true, // Z10
   exportGate: false, // Z15
   oneClickSave: false, // A15
   moreCitationStyles: false, // A06 evening: MLA, Harvard, IEEE, Chicago

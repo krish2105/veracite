@@ -64,9 +64,9 @@ const ADAPTERS = {
         body: JSON.stringify({ text: rec.raw }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const j = await res.json();
-      // Accept the likely shapes; K05 decides the final one.
-      const status = j?.results?.[0]?.status ?? j?.verdicts?.[0]?.status ?? j?.references?.[0]?.status ?? j?.status;
+      // K05 streams NDJSON: one {"type":"line", verification} per reference, between a start and a summary line.
+      const lines = (await res.text()).split("\n").filter((l) => l.trim()).map((l) => JSON.parse(l));
+      const status = lines.find((l) => l.type === "line")?.verification?.status;
       if (typeof status !== "string") throw new Error("no status in X-ray response");
       return status;
     },

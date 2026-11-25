@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
-import { FlaskConical, ScanSearch, PenLine, Library, ShieldCheck, BadgeCheck, Command, Languages, Moon, Sun } from "lucide-react";
+import { FlaskConical, ScanSearch, PenLine, Library, ShieldCheck, BadgeCheck, Moon, Sun } from "lucide-react";
 import { createStore, useStore } from "../lab/store";
 
 export type Skin = "watermark" | "neural";
@@ -16,7 +16,7 @@ const NAV = [
   { href: "/research", label: "Research", icon: FlaskConical, hint: "Agents + checkpoints" },
   { href: "/xray", label: "Reference X-ray", icon: ScanSearch, hint: "Paste any bibliography" },
   { href: "/draft", label: "Draft Checker", icon: PenLine, hint: "Check claims in your text" },
-  { href: "/library", label: "Library", icon: Library, hint: "Sources · Galaxy · export" },
+  { href: "/library", label: "Library", icon: Library, hint: "Organise · export" },
   { href: "/trust", label: "Trust Center", icon: ShieldCheck, hint: "Governance · model card" },
   { href: "/certificate", label: "Certificate", icon: BadgeCheck, hint: "For your professor" },
 ];
@@ -32,11 +32,10 @@ export default function AppShell({ title, subtitle, actions, children }: { title
   const theme = useStore(themeStore);
   const autonomy = useStore(autonomyStore);
   useEffect(() => {
-    const s = localStorage.getItem("vx-skin"); const t = localStorage.getItem("vx-theme");
-    if (s === "watermark" || s === "neural") skinStore.set(s);
+    const t = localStorage.getItem("vx-theme");
     if (t === "light" || t === "dark") themeStore.set(t);
   }, []);
-  useEffect(() => { localStorage.setItem("vx-skin", skin); localStorage.setItem("vx-theme", theme); }, [skin, theme]);
+  useEffect(() => { localStorage.setItem("vx-theme", theme); }, [theme]);
   const dark = theme === "dark";
   return (
     <div className="vx" data-skin={skin} data-theme={theme}>
@@ -59,12 +58,7 @@ export default function AppShell({ title, subtitle, actions, children }: { title
           </div>
           <p className="vx-tiny">{autonomy === "off" ? "Pure reference manager. Checks still run, with no AI." : autonomy === "assist" ? "AI plans and checks. You write." : "AI also drafts a labelled brief."} Recorded in your AI-use statement.</p>
         </div>
-        <div className="vx-side-block">
-          <p className="vx-eyebrow">AI budget today</p>
-          <div className="vx-meter"><i style={{ width: "14%" }} /></div>
-          <p className="vx-tiny">14 / 1,000 Groq calls · Rules mode ready</p>
-        </div>
-        <p className="vx-side-foot">Preview · all data is SAMPLE</p>
+        <p className="vx-side-foot">Sources come only from Crossref, OpenAlex and arXiv</p>
       </aside>
       <main className="vx-main">
         <header className="vx-top">
@@ -74,12 +68,6 @@ export default function AppShell({ title, subtitle, actions, children }: { title
           </div>
           <div className="vx-top-a">
             {actions}
-            <button className="vx-chip" title="Command palette"><Command size={14} /> K</button>
-            <button className="vx-chip" title="Arabic / English"><Languages size={14} /> عربي</button>
-            <div className="vx-seg vx-skin" role="radiogroup" aria-label="Design direction">
-              <button role="radio" aria-checked={skin === "watermark"} onClick={() => skinStore.set("watermark")}>A · Watermark</button>
-              <button role="radio" aria-checked={skin === "neural"} onClick={() => skinStore.set("neural")}>B · Neural</button>
-            </div>
             <button className="vx-chip vx-theme" aria-pressed={dark} onClick={() => themeStore.set(dark ? "light" : "dark")}>
               {dark ? <Sun size={14} /> : <Moon size={14} />} {THEME_NAMES[skin][dark ? "light" : "dark"]}
             </button>

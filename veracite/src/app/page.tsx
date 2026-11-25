@@ -1,28 +1,39 @@
 import Link from "next/link";
+import { FlaskConical, PenLine, ScanSearch } from "lucide-react";
+import AppShell from "@/components/app/AppShell";
+import "@/components/app/tabs/xray/xray.css";
 
-const LINKS = [
-  ["/lab/vault", "Concept A · Watermark Vault", "3D fly-through landing (UV lamp, counterfeit X-ray)"],
-  ["/lab/neural", "Concept B · Neural Crew", "3D agent nervous system (approval gates, pruning)"],
-  ["/research", "Research", "Mission control · sources · evidence brief"],
-  ["/xray", "Reference X-ray", "Paste a bibliography, catch the fakes"],
-  ["/draft", "Draft Checker", "Claims in your paragraph vs their sources"],
-  ["/library", "Library", "3D Evidence Galaxy · bias lens · export"],
-  ["/trust", "Trust Center", "Governance · model card · data flow"],
-  ["/certificate", "Certificate", "Re-verifiable proof for faculty"],
+export const metadata = { title: "Veracite · Every reference real" };
+
+const START = [
+  { href: "/xray", icon: ScanSearch, title: "Check references", text: "Paste a reference list. Fakes, stitched and retracted papers are caught against Crossref, OpenAlex and arXiv.", cta: "Open the X-ray" },
+  { href: "/research", icon: FlaskConical, title: "Research a question", text: "AI plans, reads and challenges. You approve the plan, the sources and every claim.", cta: "Start researching" },
+  { href: "/draft", icon: PenLine, title: "Check your draft", text: "Every citation in your paragraph is matched to your verified list, and quotes are checked.", cta: "Check a paragraph" },
 ];
 
 export default function Home() {
   return (
-    <main style={{ maxWidth: 880, margin: "0 auto", padding: "64px 24px", fontFamily: "var(--font-archivo)" }}>
-      <p style={{ fontFamily: "var(--font-martian)", fontSize: 11, letterSpacing: ".14em", color: "#5B4BC4", textTransform: "uppercase" }}>Team 7 · preview build · SAMPLE data</p>
-      <h1 style={{ fontStretch: "125%", fontWeight: 800, fontSize: 44, textTransform: "uppercase", margin: "8px 0 28px" }}>Veracite</h1>
-      <div style={{ display: "grid", gap: 10 }}>
-        {LINKS.map(([href, t, d]) => (
-          <Link key={href} href={href} style={{ display: "flex", justifyContent: "space-between", gap: 16, padding: "16px 18px", border: "1px solid rgba(14,42,35,.16)", borderRadius: 8, textDecoration: "none", color: "#0E2A23", background: "#F7FAF7" }}>
-            <b>{t}</b><span style={{ fontFamily: "var(--font-literata)", color: "#41574F" }}>{d}</span>
-          </Link>
-        ))}
+    <AppShell title="Every reference real" subtitle="A reference manager and research assistant that cannot make up a source. You stay in charge.">
+      <div className="xrx">
+        <ul className="home-start">
+          {START.map(({ href, icon: Icon, title, text, cta }) => (
+            <li key={href} className="vx-card">
+              <Icon size={22} strokeWidth={1.6} aria-hidden />
+              <h2>{title}</h2>
+              <p>{text}</p>
+              <Link className="btn primary" href={href}>{cta}</Link>
+            </li>
+          ))}
+        </ul>
+        <section className="vx-card">
+          <header className="vx-card-h"><h3>The rule everything follows</h3></header>
+          <p className="home-rule">The AI may plan, search and explain. Only public registries may cite. Only you may decide.</p>
+          <p className="vx-tiny">
+            Then organise and export in your <Link href="/library">Library</Link>, share a re-checkable <Link href="/certificate">Certificate</Link>, and see what we
+            measured in the <Link href="/trust">Trust Center</Link>. Your list stays on this device.
+          </p>
+        </section>
       </div>
-    </main>
+    </AppShell>
   );
 }

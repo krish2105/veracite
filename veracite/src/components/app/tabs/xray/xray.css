@@ -47,3 +47,36 @@
   .xrx .chim { height: 300px; }
   .xrx .chim-card { width: 190px; }
 }
+
+/* Front page */
+.home-start { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.home-start li { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.home-start h2 { margin: 0; font: 750 18px var(--f-display); font-stretch: var(--d-stretch); text-transform: var(--d-case); }
+.home-start p { margin: 0; flex: 1; font-family: var(--f-read); font-size: 14.5px; line-height: 1.55; }
+.home-start .btn, .xrx a.btn { text-decoration: none; }
+.home-rule { margin: 0; font: italic 18px/1.5 var(--f-read); }
+@media (max-width: 900px) { .home-start { grid-template-columns: minmax(0, 1fr); } }
+
+/* Library */
+.lib-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.lib-filters input { flex: 1 1 220px; }
+.lib-filters input, .lib-filters select, .lib-org input, .lib-org textarea { min-width: 0; font: 13.5px var(--f-ui); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); }
+.lib-org { margin-top: 8px; }
+.lib-org summary { cursor: pointer; font-size: 12.5px; color: var(--ink2); }
+.lib-org label { display: grid; gap: 4px; margin-top: 8px; font-size: 12px; color: var(--ink2); }
+.lib-org textarea { min-height: 56px; resize: vertical; }
+.lib-lens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.lib-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 12px; }
+.lib-bars li { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr) 24px; gap: 8px; align-items: center; }
+.lib-bars li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lib-bars i { display: block; height: 8px; border-radius: 4px; background: var(--ok); }
+.lib-notes { margin-top: 14px; }
+@media (max-width: 900px) { .lib-lens { grid-template-columns: minmax(0, 1fr); } }
+
+/* Trust Center + certificate */
+.trust-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.trust-agents { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 13px; line-height: 1.5; }
+.xrx .cert { max-width: 100%; }
+.xrx .cert li { overflow-wrap: anywhere; margin-bottom: 8px; }
+.xrx .cert-hash { overflow-wrap: anywhere; }
+@media (max-width: 640px) { .xrx .cert { padding: 22px 16px; } .xrx .cert h2 { font-size: 20px; } .xrx .cert-meta { display: block; } .xrx .cert-qr { margin-top: 12px; } }
