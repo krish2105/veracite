@@ -5,6 +5,7 @@ import { Check, Copy, Download, ExternalLink, Trash2 } from "lucide-react";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { buildAiUseStatement, type StatementClaim } from "@/lib/integrity/statement";
 import type { Autonomy, RegistryName } from "@/lib/types";
+import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
 import { apaList, apaReference } from "./apa";
 import { refList, useRefList } from "./refList";
 
@@ -83,6 +84,7 @@ export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonom
                     )}
                     <button className="btn small" onClick={() => refList.remove(s.id)}><Trash2 size={13} /> Remove</button>
                   </div>
+                  {s.doi && <RelatedPapers doi={s.doi} />}
                 </li>
               ))}
             </ul>

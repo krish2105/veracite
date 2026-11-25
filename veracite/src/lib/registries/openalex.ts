@@ -139,3 +139,20 @@ export async function openalexSearch(query: string, opts: OpenAlexSearchOptions 
   const items = (json?.results ?? []).map((w) => parseOpenAlexWork(w)).filter((r) => !r.noticeFor);
   return { data: items, receipt: receipt("openalex", opts.titleOnly ? `title:${q}` : q, items.length) };
 }
+
+export type CitationDirection = "references" | "cited_by";
+
+/**
+ * Citation snowballing (K11). "references" = works this paper cites (OpenAlex filter `cited_by:W…`);
+ * "cited_by" = works that cite it (filter `cites:W…`). Most-cited first. `data` is null when OpenAlex has no
+ * record for the DOI. `total` is how many OpenAlex knows about, not how many are returned.
+ */
+export async function openalexRelated(doiInput: string, direction: CitationDirection, perPage = 8): Promise<RegistryResult<{ works: RegistryRecord[]; total: number } | null>> {
+  const base = await openalexByDoi(doiInput);
+  if (!base.data) return { data: null, receipt: base.receipt };
+  const filter = `${direction === "references" ? "cited_by" : "cites"}:${base.data.id}`;
+  const params = new URLSearchParams({ filter, per_page: String(perPage), sort: "cited_by_count:desc", select: SELECT.replace(",relevance_score", "") });
+  const json = await getJson<{ meta?: { count?: number }; results: OpenAlexWork[] }>("openalex", `${BASE}/works?${auth(params)}`, limiter);
+  const works = (json?.results ?? []).map((w) => parseOpenAlexWork(w)).filter((r) => r.title && !r.noticeFor);
+  return { data: { works, total: json?.meta?.count ?? works.length }, receipt: receipt("openalex", filter, works.length) };
+}

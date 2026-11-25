@@ -5,6 +5,7 @@ import { AlertTriangle, Check, Pencil, Swords, X } from "lucide-react";
 import { Card, StatusBadge, TrustLabel } from "@/components/app/ui";
 import { canAdd } from "@/components/app/tabs/xray/refList";
 import { linesToList } from "@/lib/session/machine";
+import { RelatedPapers } from "./RelatedPapers";
 import type { Claim, Label, Plan, SourceRecord } from "@/lib/types";
 
 const short = (s: SourceRecord) => `${s.authors[0]?.family ?? "Unknown"}${s.authors.length > 1 ? " et al." : ""}, ${s.year ?? "n.d."}`;
@@ -104,6 +105,7 @@ export function SourcesCard({ candidates, decisions, onDecide, onContinue, onBac
                 </button>
                 {s.url && <a className="btn small" href={s.url} target="_blank" rel="noopener noreferrer">Open</a>}
               </div>
+              {d === "accepted" && s.doi && <RelatedPapers doi={s.doi} />}
             </li>
           );
         })}

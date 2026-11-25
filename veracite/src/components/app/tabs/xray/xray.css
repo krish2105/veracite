@@ -17,6 +17,12 @@
 .xrx-legend dd { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ink2); }
 .xrx-verdict { font-weight: 600; color: var(--ink); }
 .xrx .chim { overflow: hidden; }
+/* K11: related papers through citations. */
+.rel { margin-top: 4px; }
+.rel-list { list-style: none; margin: 8px 0 0; padding: 0 0 0 12px; border-left: 2px solid var(--line); }
+.rel-list li { padding: 8px 0; border: 0; }
+.rel-title { display: block; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+.rel-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 6px; }
 /* Long test-input badges must wrap, or the whole page scrolls sideways on a phone. */
 .xrx .vx-card-h h3 { flex-wrap: wrap; min-width: 0; }
 .xrx .sample { white-space: normal; }
