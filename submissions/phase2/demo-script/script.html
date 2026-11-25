@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veracite Demo Script</title>
+<!-- Team 7 · demo script for the 8-minute Phase 2 presentation + 2-minute Q&A.
+     Print to PDF: node submissions/phase2/demo-script/print.mjs  (headless Chrome, A4, brand fonts from the local install). -->
+<style>
+  /* The brand fonts are installed as separate families per weight; map them onto weights. */
+  @font-face { font-family: "Archivo"; font-weight: 400; src: local("Archivo Regular"), local("Archivo"); }
+  @font-face { font-family: "Archivo"; font-weight: 600 700; src: local("Archivo SemiBold"); }
+  @font-face { font-family: "Archivo Expanded"; font-weight: 700; src: local("Archivo Expanded Bold"); }
+  @font-face { font-family: "Archivo Expanded"; font-weight: 800 900; src: local("Archivo Expanded ExtraBold"); }
+  @font-face { font-family: "Literata"; font-weight: 400; font-style: normal; src: local("Literata Regular"); }
+  @font-face { font-family: "Literata"; font-weight: 400; font-style: italic; src: local("Literata Italic"); }
+  @font-face { font-family: "Literata"; font-weight: 600 700; font-style: normal; src: local("Literata SemiBold"); }
+  @font-face { font-family: "Martian Mono"; font-weight: 400; src: local("Martian Mono Regular"); }
+  @font-face { font-family: "Martian Mono"; font-weight: 500 700; src: local("Martian Mono Medium"); }
+  :root {
+    --paper: #ffffff; --tint: #EDF1EE; --card: #F7FAF7; --ink: #0E2A23; --ink2: #4A5F57; --line: #C9D5CD;
+    --teal: #1F6F68; --violet: #5B4BC4; --red: #C3263B; --amber: #A8701F; --magenta: #B8329A;
+    --k: #1F6F68; --z: #5B4BC4; --a: #B8329A;
+  }
+  @page { size: A4; margin: 12mm 14mm 12mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 10pt/1.45 "Archivo", "Helvetica Neue", Arial, sans-serif; }
+  h1, h2, h3 { font-family: "Archivo Expanded", "Archivo", sans-serif; font-weight: 800; margin: 0; line-height: 1.15; }
+  h1 { font-size: 30pt; letter-spacing: .02em; }
+  h2 { font-size: 16pt; margin: 0 0 3mm; }
+  h3 { font-size: 11.5pt; margin: 0 0 1.5mm; }
+  p { margin: 0 0 1.8mm; }
+  .mono, .eyebrow, .t, .click { font-family: "Martian Mono", Menlo, monospace; }
+  .eyebrow { font-size: 7.5pt; letter-spacing: .14em; text-transform: uppercase; color: var(--violet); margin-bottom: 2mm; }
+  .page { break-before: page; }
+  .muted { color: var(--ink2); }
+  .small { font-size: 8.7pt; }
+  .chip { display: inline-block; font: 600 7.5pt/1 "Martian Mono", monospace; letter-spacing: .06em; text-transform: uppercase; padding: 1.3mm 2.2mm; border-radius: 99px; color: #fff; vertical-align: middle; }
+  .chip.k { background: var(--k); } .chip.z { background: var(--z); } .chip.a { background: var(--a); } .chip.all { background: var(--ink); }
+  .say { font-family: "Literata", Georgia, serif; font-size: 10.2pt; line-height: 1.45; margin: 1.2mm 0 1.5mm; padding-left: 3.5mm; border-left: 0; }
+  .say p { margin: 0 0 1.2mm; }
+  .say em { font-style: italic; }
+  .stage { font-family: "Archivo", sans-serif; font-size: 8.5pt; color: var(--violet); font-weight: 600; font-style: normal; letter-spacing: .02em; }
+  .click { font-size: 7.9pt; background: var(--tint); border-radius: 2mm; padding: 1.6mm 2.6mm; margin: 1.2mm 0 1.5mm; line-height: 1.6; }
+  .click b { color: var(--teal); font-weight: 500; }
+  .why, .risk { font-size: 8.5pt; line-height: 1.4; }
+  .why b, .risk b { font-weight: 600; }
+  .risk { color: var(--ink2); }
+  .seg { border: .6pt solid var(--line); border-radius: 3mm; padding: 2.8mm 3.6mm 1.6mm; margin: 0 0 3mm; break-inside: avoid; }
+  .seg-h { display: flex; align-items: center; gap: 3mm; margin-bottom: 1.5mm; }
+  .seg-h .t { font-size: 9pt; color: var(--ink2); min-width: 22mm; }
+  .seg-h h3 { margin: 0; flex: 1; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 5mm; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .box { background: var(--card); border: .6pt solid var(--line); border-radius: 3mm; padding: 3mm 3.5mm; break-inside: avoid; }
+  .box h3 { font-size: 10pt; }
+  ul, ol { margin: 0 0 2mm; padding-left: 5mm; }
+  li { margin: 0 0 1mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  th, td { text-align: left; vertical-align: top; padding: 1.3mm 2mm; border-bottom: .5pt solid var(--line); }
+  th { font: 600 7.5pt/1.3 "Martian Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink2); }
+  .timeline { display: flex; height: 13mm; border-radius: 2mm; overflow: hidden; margin: 3mm 0 1.5mm; }
+  .timeline div { color: #fff; font: 600 7pt/1.2 "Martian Mono", monospace; padding: 1.6mm 1.4mm; overflow: hidden; border-right: 1.2pt solid #fff; }
+  .timeline .k { background: var(--k); } .timeline .z { background: var(--z); } .timeline .a { background: var(--a); }
+  .ticks { display: flex; justify-content: space-between; font: 7pt "Martian Mono", monospace; color: var(--ink2); }
+  .cover { padding-top: 8mm; }
+  .cover .tag { font-family: "Literata", serif; font-style: italic; font-size: 14pt; color: var(--ink2); margin: 2mm 0 7mm; }
+  .big { font-family: "Archivo Expanded", sans-serif; font-weight: 800; font-size: 19pt; color: var(--teal); line-height: 1; }
+  .num { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 2mm 0 4mm; }
+  .num .box { padding: 3mm; }
+  .num .box div:last-child { font-size: 8.3pt; color: var(--ink2); margin-top: 1mm; line-height: 1.35; }
+  .quote-line { font-family: "Literata", serif; font-size: 13pt; line-height: 1.45; padding: 4mm 5mm; background: var(--tint); border-radius: 3mm; margin: 4mm 0; }
+  .check li { list-style: none; position: relative; padding-left: 1mm; }
+  .check li::before { content: "☐"; position: absolute; left: -5mm; color: var(--teal); }
+  .qa { break-inside: avoid; margin: 0 0 3mm; }
+  .qa .q { font-weight: 600; }
+  .qa .a { font-family: "Literata", serif; font-size: 10pt; margin: .8mm 0 0; }
+  .qa .show { font-size: 8.5pt; color: var(--teal); font-family: "Martian Mono", monospace; }
+  .card-page h1 { font-size: 22pt; }
+  .cue { border-top: .6pt solid var(--line); padding: 2.5mm 0 1.5mm; break-inside: avoid; }
+  .cue .t { font-size: 8.5pt; color: var(--ink2); }
+  .foot { font-size: 8pt; color: var(--ink2); margin-top: 4mm; }
+  .warn { border: 1pt solid var(--amber); background: #FBF5EA; border-radius: 3mm; padding: 3mm 4mm; margin: 3mm 0; break-inside: avoid; }
+  .warn h3 { color: var(--amber); }
+  .label { display: inline-block; font: 600 8pt/1 "Archivo", sans-serif; padding: 1mm 2mm; border-radius: 1.5mm; border: .8pt solid currentColor; white-space: nowrap; }
+  .l-ver { color: var(--teal); } .l-par { color: var(--amber); } .l-mis { color: var(--amber); } .l-chi { color: var(--red); } .l-ret { color: var(--red); } .l-nf { color: var(--red); } .l-ai { color: #2F5BD3; }
+  @media screen { body { max-width: 210mm; margin: 0 auto; padding: 12mm 15mm; } .page { margin-top: 14mm; border-top: 1px dashed var(--line); padding-top: 10mm; } }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="eyebrow">Team 7 · SP Jain AI Club Hackathon 2026 · Phase 2 presentation</div>
+  <h1>VERACITE</h1>
+  <div class="tag">The demo script: who says what, what to click, and why it matters</div>
+
+  <div class="grid3" style="margin-bottom:5mm">
+    <div class="box"><span class="chip a">Avighna</span><p class="small" style="margin-top:2mm">Opens, explains the UV-lamp idea, shows Write &amp; cite, closes. <b>About 1 min 45 s</b>, three short turns.</p></div>
+    <div class="box"><span class="chip k">Krishna</span><p class="small" style="margin-top:2mm">The X-ray, the research session with its three checkpoints, and the day-of feature. <b>About 4 min</b>.</p></div>
+    <div class="box"><span class="chip z">Zedan</span><p class="small" style="margin-top:2mm">Library, export with the AI-use statement, the certificate, the Trust Center and AI off. <b>About 1 min 40 s</b>.</p></div>
+  </div>
+
+  <h3>The 8 minutes at a glance</h3>
+  <div class="timeline">
+    <div class="a" style="flex:60">Hook +<br>UV lamp</div>
+    <div class="k" style="flex:60">X-ray</div>
+    <div class="k" style="flex:135">Research · 3 checkpoints</div>
+    <div class="a" style="flex:30">Write<br>&amp; cite</div>
+    <div class="k" style="flex:50">Day-of<br>feature</div>
+    <div class="z" style="flex:60">Library →<br>certificate</div>
+    <div class="z" style="flex:40">Trust +<br>AI off</div>
+    <div class="a" style="flex:45">Close</div>
+  </div>
+  <div class="ticks"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span><span>4:00</span><span>5:00</span><span>6:00</span><span>7:00</span><span>8:00</span></div>
+
+  <div class="quote-line">“The AI may plan, search and explain. Only public registries may cite. Only the student may decide.”<br><span class="small muted" style="font-family:Archivo">If a judge remembers one sentence, make it this one. Everything in the demo proves one part of it.</span></div>
+
+  <h3>Numbers to know cold (say them exactly; never round up)</h3>
+  <div class="num">
+    <div class="box"><div class="big">0</div><div>fakes marked Verified, out of 51 test references</div></div>
+    <div class="box"><div class="big">11/11</div><div>fakes caught (1 AI-fabricated + 10 hand-built chimeras)</div></div>
+    <div class="box"><div class="big">30/30</div><div>real references verified · 5/5 retractions flagged</div></div>
+    <div class="box"><div class="big">3/5</div><div>web pages as expected: our weakest set, and we say so</div></div>
+  </div>
+  <p class="small muted">Same results on the live site, run 25 Nov at 23:50 Dubai: median 0.7 s per reference. The research stats: <i>Nature</i>, Feb 2026, 78–90 % of GPT-4o’s citations to recent research were fabricated · GPTZero via TechCrunch, Jan 2026, 100 hallucinated citations in 51 NeurIPS 2025 papers · SP Jain Academic Integrity Policy v2, 24 Feb 2026, clause h(ix).</p>
+
+  <table style="margin-top:3mm">
+    <tr><th style="width:24%">Present from</th><td><b>https://veracite.vercel.app</b>, the live link (rule 15). Desktop browser, zoom 125 %, daylight mode, notifications off.</td></tr>
+    <tr><th>How to use this</th><td>Page 2: the checklist. Pages 3–6: the full walkthrough with explanations. Page 7: Q&amp;A. Page 8: how Veracite works, in plain words. Pages 9–11: <b>one cue card per person</b>; print yours and keep it in your hand.</td></tr>
+  </table>
+</section>
+
+<!-- ============ BEFORE ============ -->
+<section class="page">
+  <div class="eyebrow">Thursday 26 Nov · before you walk up</div>
+  <h2>Getting ready: the checklist</h2>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>Morning (by 11:00)</h3>
+      <ul class="check small">
+        <li><b>Krishna:</b> decide AI on or off. If the Groq key is on Vercel and <span class="mono">/api/health</span> says AI is available, run one real research session and record it with <span class="mono">/research?record=1</span>. If not, the research segment runs in Rules mode (page 4 has the lines).</li>
+        <li><b>Krishna:</b> run <span class="mono">node scripts/prewarm.mjs</span> from the repo root. Every line should pass.</li>
+        <li><b>Everyone:</b> read your cue card twice, out loud, with a timer.</li>
+        <li><b>Avighna:</b> upload the deck (<span class="mono">Team7_Veracite_Phase1_Deck.pptx</span>) by <b>09:00</b>.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>12:20 · final run-through</h3>
+      <ul class="check small">
+        <li>Run <span class="mono">prewarm.mjs</span> again, so the server functions are warm.</li>
+        <li>One full rehearsal with the clock. Note which segment ran long and use its “if behind” line.</li>
+        <li>Practise every handover sentence. A clean handover saves 5 seconds each.</li>
+        <li>Charge the laptop; bring the charger and a phone hotspot.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:4mm">Browser set-up (one window, tabs in this order)</h3>
+  <table>
+    <tr><th style="width:8%">Tab</th><th style="width:30%">Page</th><th>Why it’s open</th></tr>
+    <tr><td>1</td><td><span class="mono">veracite.vercel.app/</span></td><td>The home page and the UV lamp. Make sure daylight mode is on, so the lamp has something to switch.</td></tr>
+    <tr><td>2</td><td><span class="mono">/xray</span></td><td>Opened once so it loads instantly. Nothing pasted yet.</td></tr>
+    <tr><td>3</td><td><span class="mono">/research</span></td><td>AI autonomy on <b>Assist</b>. The question box empty.</td></tr>
+    <tr><td>4</td><td><span class="mono">/library</span></td><td>Zedan’s segment. The Library should hold the sources Krishna adds during the demo; if a rehearsal left old ones, that’s fine.</td></tr>
+    <tr><td>5</td><td><span class="mono">/trust</span></td><td>The test results. They come from a committed file, so they show even without Wi-Fi.</td></tr>
+  </table>
+
+  <div class="warn">
+    <h3>Two rules that keep us honest on stage</h3>
+    <p class="small" style="margin:0">1. <b>Never call a recording live.</b> If we show the SAMPLE session, say “this is a recording from this morning”; the SAMPLE banner says the same on screen. 2. <b>If something fails, say so and show the honest failure.</b> Veracite says “could not be checked” rather than guessing. That is the product working, and judges score honesty.</p>
+  </div>
+
+  <h3>What judges are scoring while we talk</h3>
+  <table class="small">
+    <tr><th style="width:38%">Rubric line (points)</th><th>Where we prove it</th></tr>
+    <tr><td>Working MVP (15)</td><td>Everything runs on the live link: X-ray, research, Write &amp; cite, export, certificate.</td></tr>
+    <tr><td>Research &amp; citation features (12)</td><td>Live registry checks, five citation styles, import, the certificate.</td></tr>
+    <tr><td>Honesty &amp; verification in action (10)</td><td>Chimera taken apart, retraction caught, “How this was decided”, labels set by code, AI off.</td></tr>
+    <tr><td>Day-of requirements (8)</td><td>Krishna’s 4:45 segment.</td></tr>
+    <tr><td>UX (8)</td><td>One clear journey: check → research → cite → export. Works on a phone.</td></tr>
+    <tr><td>Presentation &amp; Q&amp;A (12)</td><td>Every member speaks; on time; 20-second answers with a number or a click.</td></tr>
+  </table>
+</section>
+
+<!-- ============ WALKTHROUGH 1 ============ -->
+<section class="page">
+  <div class="eyebrow">The walkthrough · 0:00 – 2:00</div>
+  <h2>Part 1: the problem, and the X-ray</h2>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">0:00–0:40</span><h3>The hook</h3><span class="chip a">Avighna</span></div>
+    <div class="click">Tab 1 · <b>home page</b>, daylight mode · stand where the judges can see you and the screen</div>
+    <div class="say">
+      <p>Hi, we’re Team 7. <span class="stage">(beat)</span> Hands up if you’ve ever asked ChatGPT for sources. <span class="stage">(half a second)</span> In February, <em>Nature</em> reported that when GPT-4o cites recent research, between 78 and 90 per cent of those citations are made up.</p>
+      <p>At NeurIPS last year, a hundred fake citations got past reviewers in 51 accepted papers. And our own integrity policy, clause h(ix), now warns about references stitched together from parts of real papers.</p>
+      <p>If that happens in your essay, it’s your name on it, not the chatbot’s. So we built <b>Veracite</b>.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> three facts, each with its source, then the stakes for the student. It frames the whole demo around honesty, which is what the problem statement asks for.</p>
+    <p class="risk"><b>If behind:</b> drop the NeurIPS sentence.</p>
+  </div>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">0:40–1:00</span><h3>The UV lamp</h3><span class="chip a">Avighna</span></div>
+    <div class="click">Click <b>Switch on UV lamp</b> (top right) → move the lamp over the note → click <b>Check your references</b></div>
+    <div class="say">
+      <p>Think of a bank teller holding a note under a UV lamp. A real note shows its hidden watermark; a fake one doesn’t. <span class="stage">(lamp on)</span> This reference was written by a chatbot, and under the lamp it says <em>void</em>. The title is reworded from a real review, the authors are real but never wrote together, and the DOI doesn’t exist.</p>
+      <p>That’s called a chimera. Krishna’s going to show you how Veracite catches one on real references.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> the metaphor explains the product in one image, and the 3D scene says on screen that it is fictional SAMPLE data (hackathon rule 9).</p>
+    <p class="risk"><b>If the 3D is slow:</b> skip the lamp and click <i>Check your references</i>. <b>Handover:</b> the last sentence is the handover; Krishna takes the mouse.</p>
+  </div>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">1:00–2:00</span><h3>The Reference X-ray</h3><span class="chip k">Krishna</span></div>
+    <div class="click">Tab 2 · <b>/xray</b> → <b>Load test list</b> → <b>X-ray 8 references</b> → point at the <b>Chimera</b> row → point at the <b>Retracted</b> row → open <b>How this was decided</b> on one row → <b>Add to my list</b> on Bastani et al. (2025)</div>
+    <div class="say">
+      <p>This is the Reference X-ray. I’ve loaded a test list our team wrote, with a few fakes hidden in it; it says so right there. <span class="stage">(click X-ray)</span> Every line is now being checked live against Crossref, OpenAlex and arXiv. There’s no AI in this step. It’s plain code.</p>
+      <p><span class="stage">(point)</span> This one looks perfect. Veracite has taken it apart: the title is from Bastani’s 2025 paper, and these authors never wrote it. <span class="stage">(point)</span> This meta-analysis was real. It was retracted in April, and Veracite knows.</p>
+      <p><span class="stage">(open How this was decided)</span> And you never have to trust a label blindly: it shows which registries it searched, what came back, and the exact rule. The real ones go into my list with one click.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> this is “honesty and verification in action” (10 points) in 60 seconds. The key idea for judges: the AI <i>cannot</i> write a reference, because references only ever come from registry records.</p>
+    <p class="risk"><b>If a registry is slow:</b> keep talking about the rows already shown. <b>If a row says “could not be checked”:</b> “The registry didn’t answer, so Veracite says so instead of guessing. That’s the honest failure.” <b>If behind:</b> show only the chimera and the retraction.</p>
+  </div>
+</section>
+
+<!-- ============ WALKTHROUGH 2 ============ -->
+<section class="page">
+  <div class="eyebrow">The walkthrough · 2:00 – 4:15</div>
+  <h2>Part 2: a research session with three checkpoints</h2>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">2:00–4:15</span><h3>Research: the student approves three times</h3><span class="chip k">Krishna</span></div>
+    <div class="click">Tab 3 · <b>/research</b> → <b>Use the example question</b> (“Does generative AI help or hurt student learning?”) → AI autonomy <b>Assist</b> → <b>Start</b><br>
+    Checkpoint 1: <b>Approve plan and search</b> → Checkpoint 2: <b>Add to my list</b> on 3–4 verified sources → <b>Continue with N approved sources</b><br>
+    Checkpoint 3: point at the labels and a Skeptic challenge → <b>Keep / Edit / Drop</b> each claim → <b>Approve claims and export</b></div>
+
+    <h3 style="margin-top:2mm; font-size:10pt">When the AI is live</h3>
+    <div class="say">
+      <p>Now the AI part. I’ll ask a real question: does generative AI help or hurt student learning? <span class="stage">(Start)</span> The Planner proposes a search plan, and nothing happens until I approve it. <span class="stage">(approve)</span> That’s checkpoint one.</p>
+      <p>The Scout searches the registries, and every source has already been through the same Verifier you just saw. <span class="stage">(add three)</span> I choose which ones go in. Checkpoint two.</p>
+      <p>Now the Reader pulls exact quotes from the abstracts, and the Scribe writes claims, but only from the sources I approved. Look at the labels. <span class="stage">(point)</span> Green means the quote really is in the abstract. Half-filled means the source says it, but we couldn’t check it. The diamond means this is the AI’s own reasoning. Code sets these labels, not the AI.</p>
+      <p><span class="stage">(point at a challenge)</span> And this is the Skeptic: a different model family, with no shared memory, whose only job is to disagree. I keep, edit or drop each claim. <span class="stage">(approve)</span> Checkpoint three. The student stays in charge the whole way.</p>
+    </div>
+
+    <h3 style="margin-top:2mm; font-size:10pt">When the AI is off (no key, or Groq is down)</h3>
+    <div class="say">
+      <p>The AI is switched off right now, and I want to show you that on purpose. <span class="stage">(Start)</span> In Rules mode, the plan is my question as I typed it. The searching and checking still run, because they’re code, not AI. I still approve the plan and choose the sources. The only thing missing is the AI drafting, and Veracite tells you that plainly instead of faking it.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> it shows the workflow from the deck live (plan → sources → claims) and the two separations that matter: the Verifier is code, and the Skeptic is a different model. The labels are the honesty system the judges asked for.</p>
+    <p class="risk"><b>If it is slow:</b> narrate what each agent is doing while it works; it usually takes 10–20 seconds. <b>If it fails:</b> press <i>Try again</i> once; if it fails again, say so and switch to Rules mode (above). <b>If we recorded a session this morning:</b> <i>Show the SAMPLE session</i>, and say “this is a recording from this morning”. <b>If behind at 3:30:</b> skip the Skeptic and approve the claims.</p>
+    <p class="risk"><b>Optional, only if ahead (10 s):</b> on a claim, <i>Debate this claim</i>: the Skeptic and the Scribe argue for one round and the student decides. Don’t risk it if the clock is tight.</p>
+  </div>
+
+  <div class="box small">
+    <h3>What to say if a judge asks “which models?” mid-demo</h3>
+    Open-weight models on Groq’s free tier: gpt-oss-20b for planning and reading, gpt-oss-120b for writing, and Qwen for the Skeptic, so it doesn’t share the writer’s blind spots. Checking a reference uses zero AI calls.
+  </div>
+</section>
+
+<!-- ============ WALKTHROUGH 3 ============ -->
+<section class="page">
+  <div class="eyebrow">The walkthrough · 4:15 – 6:35</div>
+  <h2>Part 3: writing, the day-of feature, and export</h2>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">4:15–4:45</span><h3>Write &amp; cite</h3><span class="chip a">Avighna</span></div>
+    <div class="click"><b>Check draft</b> in the menu (<span class="mono">/draft</span>) → type a sentence in Write &amp; cite → <b>Choose a verified source to cite</b> → <b>Insert citation</b> → <b>Citation style</b> → Harvard → <b>Send to Draft Checker</b> → <b>Check paragraph</b></div>
+    <div class="say">
+      <p>Now the student writes; the AI doesn’t write the essay. I type my own sentence, pick a source, and the only sources I can pick are verified ones. <span class="stage">(insert)</span> The citation goes in at the cursor and the reference list builds itself. <span class="stage">(switch to Harvard)</span> Your module wants Harvard? One click: APA, MLA, Chicago, Harvard or IEEE, from the official style files. <span class="stage">(check)</span> And the Draft Checker tests every citation in the paragraph.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> it shows the student doing the writing (over-reliance answered) and a citation feature judges can use themselves.</p>
+    <p class="risk"><b>If behind:</b> insert one citation and skip the style switch and the checker. <b>Handover:</b> “Krishna, what changed this morning?”</p>
+  </div>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">4:45–5:35</span><h3>The day-of requirement</h3><span class="chip k">Krishna</span></div>
+    <div class="click">Fill this in at 13:30, once the requirement is announced. Keep it to three sentences and one click path.</div>
+    <div class="say">
+      <p>This morning’s new requirement was <span class="stage">[say it in one line]</span>. We built it in the last 90 minutes, on top of the same guardrails: <span class="stage">[what it does, in one sentence]</span>. <span class="stage">(show it working on the live link)</span> And it still can’t invent a reference, because <span class="stage">[which check covers it]</span>.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> day-of requirements are 8 points. Judges want to see that it works live and that the honesty rules still hold.</p>
+    <p class="risk"><b>If it isn’t finished:</b> show what works and say plainly what doesn’t yet. A half-feature shown honestly scores better than a claim.</p>
+  </div>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">5:35–6:35</span><h3>Library, export and the certificate</h3><span class="chip z">Zedan</span></div>
+    <div class="click">Tab 4 · <b>/library</b> → point at <b>Bias lens</b> → <b>Export ↓</b> → the export gate: warnings, AI-use statement → tick <b>I have read the warnings above…</b> → <b>Download</b> → open <b>/certificate</b> → <b>Create certificate</b> → show the QR<br>
+    <span class="muted">Optional if ahead (15 s): Import → <b>Load sample file</b> → <b>Check only its references</b>: a Zotero-style library, with its fakes caught.</span></div>
+    <div class="say">
+      <p>Everything Krishna approved is in the Library, kept in the browser: no account, nothing on our server. <span class="stage">(point)</span> The bias lens shows where the authors are based, how old the evidence is and how much is open access. Facts, never a score.</p>
+      <p><span class="stage">(Export)</span> Before anything leaves, the student sees this: a source they never opened, a source with no note in their own words. Read before you cite. And this AI-use statement is written from the session log: which models, what each one did, what the student decided. It won’t write “I wrote this myself” for you. The student types that line.</p>
+      <p><span class="stage">(certificate)</span> And a professor scans this QR code. The whole bibliography is inside the link, and Veracite checks every reference again, live. That’s SP Jain clause g(vi), faculty verifying references, in one scan.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> it covers governance and disclosure (APA 2025 guidance, SP Jain h(viii)) and gives faculty a way to check, without anyone taking our word for it.</p>
+    <p class="risk"><b>If behind:</b> skip the bias lens and go straight to Export → Certificate.</p>
+  </div>
+</section>
+
+<!-- ============ WALKTHROUGH 4 ============ -->
+<section class="page">
+  <div class="eyebrow">The walkthrough · 6:35 – 8:00</div>
+  <h2>Part 4: the proof, AI off, and the close</h2>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">6:35–7:15</span><h3>Trust Center and AI off</h3><span class="chip z">Zedan</span></div>
+    <div class="click">Tab 5 · <b>/trust</b> → point at the results card → switch <b>AI autonomy</b> (left sidebar) to <b>Off</b> → point at the status line</div>
+    <div class="say">
+      <p>We don’t ask you to trust us; we measured it. Fifty-one test references, including fakes we built to be hard: zero fakes marked Verified. Eleven out of eleven fakes caught, thirty out of thirty real references verified, five out of five retractions flagged. We ran it again on the live site last night: same result. Our weakest set is web pages, three out of five, and we publish that too.</p>
+      <p><span class="stage">(AI off)</span> And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server.</p>
+    </div>
+    <p class="why"><b>Why this works:</b> it backs every claim with a number and shows the strongest guardrail: the checks don’t depend on the AI being right.</p>
+    <p class="risk"><b>If behind:</b> drop the API and MCP sentence. <b>Handover:</b> turn to Avighna.</p>
+  </div>
+
+  <div class="seg">
+    <div class="seg-h"><span class="t">7:15–8:00</span><h3>The close</h3><span class="chip a">Avighna</span></div>
+    <div class="click">Tab 1 · back to the <b>home page</b> · face the judges, not the screen</div>
+    <div class="say">
+      <p>Zotero organises references. ChatGPT is fast. Veracite gives you both, without ever inventing a reference. It’s free, it keeps your library on your own device, and it’s built on SP Jain’s own integrity rules.</p>
+      <p>The AI may plan, search and explain. Only public registries may cite. Only the student may decide.</p>
+      <p><b>Every reference real. Every claim traceable. You stay in charge.</b> Thank you.</p>
+    </div>
+    <p class="risk"><b>If behind:</b> say only the last line.</p>
+  </div>
+
+  <h3 style="margin-top:4mm">Handovers: say these exactly</h3>
+  <table class="small">
+    <tr><th style="width:12%">At</th><th style="width:22%">From → to</th><th>Line</th></tr>
+    <tr><td>1:00</td><td>Avighna → Krishna</td><td>“Krishna’s going to show you how Veracite catches one on real references.”</td></tr>
+    <tr><td>4:15</td><td>Krishna → Avighna</td><td>“Now Avighna writes with these sources.”</td></tr>
+    <tr><td>4:45</td><td>Avighna → Krishna</td><td>“Krishna, what changed this morning?”</td></tr>
+    <tr><td>5:35</td><td>Krishna → Zedan</td><td>“Zedan, what happens when it leaves Veracite?”</td></tr>
+    <tr><td>7:15</td><td>Zedan → Avighna</td><td>“Avighna?” (a nod is enough)</td></tr>
+  </table>
+
+  <h3 style="margin-top:4mm">The clock: where you must be</h3>
+  <table class="small">
+    <tr><th style="width:14%">At</th><th>You should be…</th><th style="width:40%">If you’re late</th></tr>
+    <tr><td>1:00</td><td>on the X-ray, test list loaded</td><td>Avighna skips the lamp</td></tr>
+    <tr><td>2:00</td><td>pressing Start on Research</td><td>X-ray: only the chimera and the retraction</td></tr>
+    <tr><td>4:15</td><td>on Write &amp; cite</td><td>skip the Skeptic; skip the style switch</td></tr>
+    <tr><td>5:35</td><td>Zedan on the Library</td><td>skip the bias lens</td></tr>
+    <tr><td>7:15</td><td>Avighna closing</td><td>last line only</td></tr>
+  </table>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section class="page">
+  <div class="eyebrow">Two minutes · three or four questions · 20 seconds each</div>
+  <h2>Q&amp;A: who answers, and what to say</h2>
+  <p class="small">The owner answers first. If someone else built it, hand over in one sentence: “Zedan built that part.” Give a number or a click wherever you can. If you don’t know: “We haven’t measured that yet. What we have measured is…”</p>
+
+  <div class="grid2">
+    <div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> How do you stop the AI inventing references?</div><div class="a">It can’t output one. Its answer format only accepts IDs of records we fetched from Crossref, OpenAlex or arXiv. An invented ID is blocked by code and logged. Prompts aren’t the guardrail; code is.</div></div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> What if Crossref and OpenAlex disagree?</div><div class="a">Then it isn’t Verified. It says Mismatch or Partial, and the table shows what you typed against what each registry says.</div><div class="show">Show: X-ray → the Kestin year-mismatch row</div></div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> What if the AI goes down during the demo?</div><div class="a">A fallback model first, then Rules mode, which still verifies every reference. Want to see? I’ll switch AI off now.</div></div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> Can it read paywalled papers?</div><div class="a">No, and it says so. Quotes are checked against abstracts only, so anything deeper stays “Reported, not checked”, never Verified. When a registry lists a free legal copy, we link to it.</div></div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> What’s the weakest part?</div><div class="a">Web pages: three out of five in our tests, so they’re capped at Partial with the date retrieved. And reports written by organisations, like UNESCO, can trip the chimera check. We publish both.</div></div>
+      <div class="qa"><div class="q"><span class="chip k">K</span> Did you use AI to build this?</div><div class="a">Yes, AI coding tools, under our direction. Every prompt is in our prompt log, as rule 8 requires. The honesty decisions are ours.</div></div>
+    </div>
+    <div>
+      <div class="qa"><div class="q"><span class="chip z">Z</span> Where does student data go?</div><div class="a">Nowhere we store it. No accounts; the library lives in your browser. Code strips emails, phone numbers and IDs before anything reaches the AI. A certificate carries its data inside the link.</div></div>
+      <div class="qa"><div class="q"><span class="chip z">Z</span> Who is accountable if a citation is wrong?</div><div class="a">The student is the author: they approve the plan, the sources and every claim. We’re accountable for our checks: they’re plain code, and we publish the test results. Faculty can re-check any list from the certificate.</div></div>
+      <div class="qa"><div class="q"><span class="chip z">Z</span> Doesn’t this make students lazier?</div><div class="a">It’s built for the opposite: three approvals, an AI dial that goes to Off, read-before-you-cite, and the student writes every word in Write &amp; cite.</div></div>
+      <div class="qa"><div class="q"><span class="chip z">Z</span> Why not detect AI-written essays?</div><div class="a">Detectors falsely accuse people. A Stanford study found they flagged 61 % of essays by non-native English writers. We check sources, not people.</div></div>
+      <div class="qa"><div class="q"><span class="chip a">A</span> Why would a student switch from Zotero?</div><div class="a">They don’t have to. Import your Zotero file, keep only the references that are real, and export back to Zotero or Mendeley.</div></div>
+      <div class="qa"><div class="q"><span class="chip a">A</span> Why 3D? Isn’t it decoration?</div><div class="a">The 3D is the idea: a UV lamp shows what’s real. Every check also has a plain table, and <i>Plain view</i> turns the 3D off.</div></div>
+      <div class="qa"><div class="q"><span class="chip a">A</span> How would SP Jain roll this out?</div><div class="a">It’s free, there are no accounts, and it works in a browser, even on a phone. Faculty accept the QR certificate with a submission. We could pilot it with one cohort in a week.</div></div>
+    </div>
+  </div>
+  <p class="foot">The full 30-question bank with scoring is in the rehearsal pack. Practise in pairs: one asks, one answers, the third times 20 seconds.</p>
+</section>
+
+<!-- ============ EXPLAINER ============ -->
+<section class="page">
+  <div class="eyebrow">So any of us can answer anything</div>
+  <h2>How Veracite works, in plain words</h2>
+
+  <h3>The six verdicts (code sets them; no AI)</h3>
+  <table class="small">
+    <tr><th style="width:20%">Label</th><th>What it means</th><th style="width:34%">How code decides</th></tr>
+    <tr><td><span class="label l-ver">Verified</span></td><td>This paper exists and matches what you typed.</td><td>Crossref and OpenAlex both have it; DOI, title, first author and year agree.</td></tr>
+    <tr><td><span class="label l-par">Partial</span></td><td>It probably exists, but we can’t confirm everything.</td><td>Only one registry has it, or only a DOI was given, or it’s a web page.</td></tr>
+    <tr><td><span class="label l-mis">Mismatch</span></td><td>The paper exists, but a detail you typed is wrong.</td><td>A field differs from the registry, e.g. the year 2021 against 2025.</td></tr>
+    <tr><td><span class="label l-chi">Chimera</span></td><td>Stitched from real parts that don’t belong together.</td><td>The title, authors and DOI point to different records.</td></tr>
+    <tr><td><span class="label l-ret">Retracted</span></td><td>The paper was withdrawn. Don’t cite it.</td><td>A retraction notice is linked to it (Retraction Watch, via Crossref).</td></tr>
+    <tr><td><span class="label l-nf">Not found</span></td><td>No registry has anything like it.</td><td>Every search came back empty; the searches are listed as receipts.</td></tr>
+  </table>
+
+  <h3 style="margin-top:4mm">The labels on AI sentences</h3>
+  <p class="small"><span class="label l-ver">● Verified</span> the quoted words really are in the source’s abstract · <span class="label l-par">◐ Reported, not checked</span> the source says it, but we couldn’t confirm the quote · <span class="label l-ai">◆ AI reasoning</span> the AI’s own words, with no source behind them · <span class="label l-nf">⊘ Not found</span> no source supports it. Shapes as well as colours, so the labels work for colour-blind users too.</p>
+
+  <div class="grid2" style="margin-top:3mm">
+    <div class="box">
+      <h3>The seven agents</h3>
+      <p class="small" style="margin:0"><b>Planner</b> (AI) turns your question into searches · <b>Scout</b> (code) searches the registries · <b>Verifier</b> (code, no AI) checks every record · <b>Reader</b> (AI) pulls exact quotes from abstracts · <b>Scribe</b> (AI) drafts claims from approved sources only · <b>Skeptic</b> (AI, a different model) challenges each claim · <b>Integrity Clerk</b> (code) builds the reference list, AI-use statement and certificate.</p>
+    </div>
+    <div class="box">
+      <h3>What’s AI, and what’s code</h3>
+      <p class="small" style="margin:0"><b>AI may:</b> suggest search terms, explain abstracts, draft labelled claims, argue against them. <b>Only code may:</b> write a reference, set a label, decide Verified, format a citation, add anything to your list (and only after your click). That split is the whole design.</p>
+    </div>
+    <div class="box">
+      <h3>The side doors</h3>
+      <p class="small" style="margin:0">Paste a chatbot’s answer (uncited author–year claims are flagged) · drop a PDF (read in the browser, never uploaded) · import a .bib or .ris library · save a page from any site with the bookmarklet (web pages are Partial, with the date retrieved) · re-check the library for retractions since you saved. All go through the same Verifier.</p>
+    </div>
+    <div class="box">
+      <h3>When things fail</h3>
+      <p class="small" style="margin:0">Model busy → a fallback model. AI down or off → <b>Rules mode</b>: every check still runs, nothing is drafted, and a banner says so. A registry doesn’t answer → “could not be checked”, never a guess. Test and sample data are always labelled SAMPLE.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:4mm">Words judges might use</h3>
+  <p class="small"><b>DOI</b>: a permanent ID for a paper, like 10.1038/nature14539. <b>Crossref</b>: the registry publishers use to register DOIs. <b>OpenAlex</b>: a free, open index of hundreds of millions of scholarly works. <b>arXiv</b>: a preprint server. <b>CSL</b>: Citation Style Language, the open style files Zotero uses too. <b>MCP</b>: Model Context Protocol, a standard way for AI tools to call other tools. <b>Hallucination</b>: when a model states something false with confidence.</p>
+</section>
+
+<!-- ============ CUE CARD: AVIGHNA ============ -->
+<section class="page card-page">
+  <div class="eyebrow">Cue card · print this page · keep it in your hand</div>
+  <h1><span class="chip a" style="font-size:9pt; vertical-align:middle">Avighna</span>&nbsp; Opening, writing, closing</h1>
+  <p class="muted small">Three turns, about 1 min 45 s in total. You set the tone, so speak slowly and look at the judges, not the screen.</p>
+
+  <div class="cue"><span class="t">0:00–0:40 · home page</span>
+    <div class="say"><p>Hi, we’re Team 7. Hands up if you’ve ever asked ChatGPT for sources. In February, <em>Nature</em> reported that when GPT-4o cites recent research, between 78 and 90 per cent of those citations are made up. At NeurIPS last year, a hundred fake citations got past reviewers in 51 accepted papers. And our own integrity policy, clause h(ix), now warns about references stitched together from real papers. If that happens in your essay, it’s your name on it. So we built <b>Veracite</b>.</p></div>
+    <p class="risk small">Behind? Drop the NeurIPS sentence.</p></div>
+
+  <div class="cue"><span class="t">0:40–1:00 · Switch on UV lamp → Check your references</span>
+    <div class="say"><p>Think of a bank teller holding a note under a UV lamp. A real note shows its watermark; a fake one doesn’t. This reference was written by a chatbot, and under the lamp it says <em>void</em>: reworded title, real authors who never wrote together, a DOI that doesn’t exist. That’s a chimera. <b>Krishna’s going to show you how Veracite catches one on real references.</b></p></div></div>
+
+  <div class="cue"><span class="t">4:15–4:45 · Check draft → Write &amp; cite → Insert citation → Citation style: Harvard → Send to Draft Checker → Check paragraph</span>
+    <div class="say"><p>Now the student writes; the AI doesn’t write the essay. I type my own sentence and pick a source, and I can only pick verified ones. The citation goes in at the cursor and the reference list builds itself. Your module wants Harvard? One click: APA, MLA, Chicago, Harvard or IEEE. And the Draft Checker tests every citation. <b>Krishna, what changed this morning?</b></p></div>
+    <p class="risk small">Behind? One citation, no style switch.</p></div>
+
+  <div class="cue"><span class="t">7:15–8:00 · back to the home page · face the judges</span>
+    <div class="say"><p>Zotero organises references. ChatGPT is fast. Veracite gives you both, without ever inventing a reference. It’s free, it keeps your library on your own device, and it’s built on SP Jain’s own integrity rules. The AI may plan, search and explain. Only public registries may cite. Only the student may decide. <b>Every reference real. Every claim traceable. You stay in charge.</b> Thank you.</p></div></div>
+
+  <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> users and Zotero, why 3D, rollout at SP Jain, design and accessibility. <b>Your numbers:</b> 78–90 % (<i>Nature</i>, Feb 2026) · 100 citations in 51 NeurIPS papers · policy clause h(ix).</div>
+</section>
+
+<!-- ============ CUE CARD: KRISHNA ============ -->
+<section class="page card-page">
+  <div class="eyebrow">Cue card · print this page · keep it in your hand</div>
+  <h1><span class="chip k" style="font-size:9pt; vertical-align:middle">Krishna</span>&nbsp; X-ray, research, day-of</h1>
+  <p class="muted small">Three turns, about 4 minutes. You hold the mouse for most of the demo, so narrate what’s happening while things load; never leave silence.</p>
+
+  <div class="cue"><span class="t">1:00–2:00 · /xray → Load test list → X-ray 8 references → Chimera row → Retracted row → How this was decided → Add to my list</span>
+    <div class="say"><p>This is the Reference X-ray. A test list our team wrote, with fakes hidden in it; it says so right there. Every line is checked live against Crossref, OpenAlex and arXiv. No AI in this step: it’s plain code. This one looks perfect, but Veracite has taken it apart: Bastani’s title, authors who never wrote it. This meta-analysis was real; it was retracted in April, and Veracite knows. And you never trust a label blindly: it shows what it searched and the exact rule. The real ones go into my list with one click.</p></div>
+    <p class="risk small">Behind? Chimera and retraction only. A row says “could not be checked”? “It says so instead of guessing.”</p></div>
+
+  <div class="cue"><span class="t">2:00–4:15 · /research → Use the example question → Assist → Start → Approve plan and search → Add to my list ×3 → Continue → labels, Skeptic → Keep / Edit / Drop → Approve claims and export</span>
+    <div class="say"><p><b>AI live:</b> The Planner proposes a plan; nothing happens until I approve it. Checkpoint one. Every source has been through the same Verifier; I choose which go in. Checkpoint two. The Reader quotes the abstracts and the Scribe writes only from what I approved. Green: the quote really is in the abstract. Half-filled: reported, not checked. Diamond: the AI’s own reasoning. Code sets these labels, not the AI. This is the Skeptic, a different model family with no shared memory, whose job is to disagree. I keep, edit or drop each claim. Checkpoint three.</p>
+    <p><b>AI off:</b> The AI is off right now, and I want to show you that on purpose. The searching and checking still run, because they’re code. I still approve the plan and choose the sources. The only thing missing is AI drafting, and Veracite says so instead of faking it.</p></div>
+    <p class="risk small">Fails twice? Rules mode. Recorded this morning? <i>Show the SAMPLE session</i>, and call it a recording. Behind at 3:30? Skip the Skeptic. <b>Handover:</b> “Now Avighna writes with these sources.”</p></div>
+
+  <div class="cue"><span class="t">4:45–5:35 · the day-of feature</span>
+    <div class="say"><p>This morning’s new requirement was ___. We built it in 90 minutes on the same guardrails: ___. It still can’t invent a reference, because ___. <b>Zedan, what happens when it leaves Veracite?</b></p></div></div>
+
+  <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> the guardrails, registries, models and cost, AI failure, paywalls, the weakest part, the API and MCP server. <b>Your numbers:</b> 0 AI calls to verify · about 4 per research session · gpt-oss-20b / gpt-oss-120b / Qwen · median 0.7 s per reference.</div>
+</section>
+
+<!-- ============ CUE CARD: ZEDAN ============ -->
+<section class="page card-page">
+  <div class="eyebrow">Cue card · print this page · keep it in your hand</div>
+  <h1><span class="chip z" style="font-size:9pt; vertical-align:middle">Zedan</span>&nbsp; Export, certificate, proof</h1>
+  <p class="muted small">Two turns, about 1 min 40 s. You make the governance and ethics part of the deck real, so slow down on the numbers.</p>
+
+  <div class="cue"><span class="t">5:35–6:35 · /library → Bias lens → Export ↓ → warnings + AI-use statement → tick “I have read the warnings…” → Download → /certificate → Create certificate → QR</span>
+    <div class="say"><p>Everything Krishna approved is in the Library, kept in the browser: no account, nothing on our server. The bias lens shows where the authors are based, how old the evidence is, how much is open access. Facts, never a score.</p>
+    <p>Before anything leaves, the student sees this: a source they never opened, a source with no note in their own words. Read before you cite. This AI-use statement is written from the session log: which models, what each did, what the student decided. It won’t write “I wrote this myself”; the student types that line.</p>
+    <p>And a professor scans this QR. The whole bibliography is inside the link, and Veracite checks every reference again, live. That’s SP Jain clause g(vi), faculty verifying references, in one scan.</p></div>
+    <p class="risk small">Behind? Skip the bias lens. Ahead? Import → <i>Load sample file</i> → <i>Check only its references</i>: “Bring your Zotero library; keep only what’s real.”</p></div>
+
+  <div class="cue"><span class="t">6:35–7:15 · /trust → results card → AI autonomy: Off</span>
+    <div class="say"><p>We don’t ask you to trust us; we measured it. Fifty-one test references, with fakes built to be hard: zero fakes marked Verified. Eleven of eleven fakes caught, thirty of thirty real ones verified, five of five retractions flagged. Same result on the live site last night. Our weakest set is web pages, three of five, and we publish that too.</p>
+    <p>And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server. <b>Avighna?</b></p></div>
+    <p class="risk small">Behind? Drop the API and MCP sentence. No Wi-Fi? The Trust numbers still show: they’re from a committed file.</p></div>
+
+  <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> privacy, accountability, laziness and over-reliance, AI detectors, bias, policies (SP Jain h(vi), h(viii), h(ix), g(vi); APA 2025; UNESCO; UAE AI Charter; UAE PDPL; EU AI Act Art. 50), prompt injection. <b>Your numbers:</b> 51 · 0 · 11/11 · 30/30 · 5/5 · web 3/5 · detectors flagged 61 % of non-native essays (Stanford, 2023).</div>
+  <p class="foot">Team 7 · Krishna Mathur · Zedan Nasir Parol · Avighna Gavhane · script version 26 Nov 2026. Update the day-of segment at 13:30.</p>
+</section>
+
+</body>
+</html>
