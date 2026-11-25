@@ -4,6 +4,7 @@ import { Check, ExternalLink, Plus, Scissors } from "lucide-react";
 import { StatusBadge } from "@/components/app/ui";
 import type { RefStatus, RegistryName, Verification } from "@/lib/types";
 import { FullTextLink } from "./FullTextLink";
+import { HowDecided } from "./HowDecided";
 import { canAdd, refList, sourceId, useRefList } from "./refList";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
@@ -95,6 +96,7 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
               </button>
             )}
           </div>
+          <HowDecided v={v} />
         </>
       )}
     </div>
