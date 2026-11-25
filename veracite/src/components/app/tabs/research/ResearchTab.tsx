@@ -24,7 +24,7 @@ const AUTONOMY: [Autonomy, string, string][] = [
 
 export function ResearchTab() {
   const autonomy = useStore(autonomyStore);
-  const { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan, retry, loadSample } = useResearch(autonomy);
+  const { s, ask, approvePlan, decide, continueWithSources, decideClaim, finishClaims, restart, backToPlan, retry, loadSample, debateClaim } = useResearch(autonomy);
   const [q, setQ] = useState("");
   const [recording, setRecording] = useState(false);
   const [copied, setCopied] = useState("");
@@ -124,7 +124,7 @@ export function ResearchTab() {
         {(s.phase === "cp3_claims" || s.phase === "export") && s.claims.length > 0 && (
           <>
             {s.phase === "cp3_claims" ? (
-              <ClaimsCard claims={s.claims} sources={approved} blocked={s.blocked.length} onDecide={decideClaim} onFinish={finishClaims} busy={busy} />
+              <ClaimsCard claims={s.claims} sources={approved} blocked={s.blocked.length} onDecide={decideClaim} onFinish={finishClaims} busy={busy} debates={s.debates} onDebate={s.sample || mode === "off" ? undefined : (id) => void debateClaim(id)} />
             ) : (
               <Card title={<>Your evidence notes · {s.claims.filter((c) => c.decision !== "dropped").length} kept</>}>
                 <div className="claims">
