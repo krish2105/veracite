@@ -8,6 +8,7 @@ import AppShell from "@/components/app/AppShell";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { canAdd, refList, sourceId, useRefList } from "@/components/app/tabs/xray/refList";
 import { verifyInputFor, type SaveTarget } from "@/lib/library/bookmarklet";
+import { canAddWeb, toWebSource, webVerification } from "@/lib/verify/websource";
 import type { RefStatus, Verification } from "@/lib/types";
 import type { WebCheck } from "@/app/api/sources/wayback/check";
 import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
@@ -99,7 +100,7 @@ export function SaveView({ target, pending = false }: { target: SaveTarget; pend
                 <button className="btn small" onClick={run}><RotateCcw size={13} /> Try again</button>
               </div>
             )}
-            {state.phase === "done" && state.result.kind === "verify" && <VerifyResult v={state.result.v} />}
+            {state.phase === "done" && state.result.kind === "verify" && <VerifyResult v={state.result.v} typed={target.kind === "url" && target.title ? `${target.title}. ${target.url}` : undefined} />}
             {state.phase === "done" && state.result.kind === "web" && <WebResult c={state.result.check} />}
           </Card>
         )}
@@ -117,7 +118,23 @@ export function SaveView({ target, pending = false }: { target: SaveTarget; pend
   );
 }
 
-function VerifyResult({ v }: { v: Verification }) {
+/** K45: "Add as web page" for a checked page: saved as Partial from the page check, never Verified. */
+function AddWebPage({ v, typed }: { v: Verification; typed?: string }) {
+  const { sources } = useRefList();
+  if (!canAddWeb(v) || !v.web) return null;
+  const added = sources.some((s) => s.id === `url:${v.web!.url}`);
+  return (
+    <div className="xrx-row">
+      <button className={`btn ${added ? "ok" : "primary"}`} onClick={() => refList.addWeb(toWebSource(v, typed, "save"))} disabled={added}>
+        {added ? <Check size={14} /> : <Plus size={14} />} {added ? "In my list (web page)" : "Add as web page"}
+      </button>
+      {added && <Link className="btn" href="/library">Open my Library</Link>}
+      <span className="vx-tiny">Saved as Partial, never Verified, with today&apos;s retrieval date{v.web.archiveUrl ? " and the archived copy" : ""}.</span>
+    </div>
+  );
+}
+
+function VerifyResult({ v, typed }: { v: Verification; typed?: string }) {
   const { sources } = useRefList();
   const m = v.matched;
   const added = !!m && sources.some((s) => s.id === sourceId(v));
@@ -149,14 +166,11 @@ function VerifyResult({ v }: { v: Verification }) {
             {added && <Link className="btn" href="/library">Open my Library</Link>}
             {m && <FullTextLink doi={m.doi} oaUrl={m.oaUrl} openAccess={m.openAccess} />}
           </>
-        ) : (
-          <span className="vx-tiny">
-            {v.status === "partial" && !m
-              ? "A web page has no registry record, so it is not added to your list. Use the retrieval line above to cite it."
-              : "Cannot be added to your list."}
-          </span>
+        ) : canAddWeb(v) ? null : (
+          <span className="vx-tiny">Cannot be added to your list.</span>
         )}
       </div>
+      <AddWebPage v={v} typed={typed} />
     </>
   );
 }
@@ -171,7 +185,8 @@ function WebResult({ c }: { c: WebCheck }) {
       <p className="xr-note"><span className="xrx-verdict">{c.status === "partial" ? "The page exists." : "The page could not be found."}</span> {c.reasons.join(" ")}</p>
       {c.status === "partial" && <p className="xr-note">APA 7 retrieval line: <span className="mono">{c.retrieval}</span></p>}
       {c.archive.url && <p className="vx-tiny"><a href={c.archive.url} target="_blank" rel="noreferrer">Archived copy <ExternalLink size={11} /></a></p>}
-      <p className="vx-tiny">A web page has no registry record, so it is not added to your list, and it is never marked Verified. Add the page&apos;s title to check it against the registries too.</p>
+      <AddWebPage v={webVerification(c)} />
+      <p className="vx-tiny">A web page has no registry record, so it is never marked Verified. Add the page&apos;s title to check it against the registries too.</p>
     </>
   );
 }

@@ -56,6 +56,7 @@ export function applyWebCheck(verdict: Verification, claimedTitle: string | unde
       ...linkNotes,
       `APA 7 retrieval line: ${check.retrieval}`,
     ],
+    web: { url: check.url, pageTitle: check.live.ok ? check.live.title : undefined, live: check.live.ok, archiveUrl: check.archive.url, accessedAt: check.accessedAt, retrieval: check.retrieval },
   };
 }
 

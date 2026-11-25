@@ -8,6 +8,7 @@
 import { useSyncExternalStore } from "react";
 import { ACTIONS } from "@/lib/integrity/receipts";
 import type { Receipt, RefStatus, SourcePatch, SourceRecord, Verification } from "@/lib/types";
+import { canAddWeb } from "@/lib/verify/websource";
 
 const KEY = "vx-reflist-v1";
 const SESSION = "xray";
@@ -92,6 +93,12 @@ export const refList = {
     const s = read();
     if (!canAdd(src.verification) || s.sources.some((x) => x.id === src.id)) return;
     write({ sources: [...s.sources, { ...src, addedVia: "research" }], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, src.id)] });
+  },
+  /** K45: a checked web page (Partial, never Verified), built by toWebSource from the page check. */
+  addWeb(src: SourceRecord) {
+    const s = read();
+    if (src.type !== "web" || !canAddWeb(src.verification) || s.sources.some((x) => x.id === src.id)) return;
+    write({ sources: [...s.sources, src], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, `${src.id} (web page, Partial)`)] });
   },
   logCheck(total: number, byStatus: Record<RefStatus, number>) {
     const s = read();
