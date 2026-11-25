@@ -1,57 +1,152 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import { AlertTriangle, Archive, Upload, FileText } from "lucide-react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { Download, ExternalLink, Trash2 } from "lucide-react";
 import AppShell from "@/components/app/AppShell";
-import { Card, Sample, StatusBadge } from "@/components/app/ui";
-import { SOURCES } from "@/components/app/data";
+import { Card, StatusBadge } from "@/components/app/ui";
+import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
+import { apaList, apaReference } from "@/components/app/tabs/xray/apa";
+import { refList, useRefList } from "@/components/app/tabs/xray/refList";
+import "@/components/app/tabs/xray/xray.css";
+import "@/components/app/tabs/research/research.css";
+import { regionOf, summariseBias, type Bar, type BiasFacts } from "@/lib/integrity/bias";
+import type { SourceRecord } from "@/lib/types";
+import { toBibTeX, toCslJson, toRIS } from "./exports";
 
-const Galaxy = dynamic(() => import("@/components/app/three/Galaxy"), { ssr: false });
+const split = (s: string) => [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))].slice(0, 10);
+
+function download(name: string, content: string, type = "text/plain;charset=utf-8") {
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  Object.assign(document.createElement("a"), { href: url, download: name }).click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+const facts = (s: SourceRecord): BiasFacts => {
+  const countries = s.quality.countries ?? [];
+  return { id: s.id, year: s.year ?? null, countries, regions: [...new Set(countries.map(regionOf))], openAccess: s.quality.openAccess ?? null, oaStatus: null, publisher: s.quality.publisher ?? null, venue: s.venue ?? null, language: null };
+};
+
+function Item({ s }: { s: SourceRecord }) {
+  return (
+    <li>
+      {/* Built by code from the registry record; every value is HTML-escaped in apa.ts. */}
+      <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: apaReference(s).html }} />
+      <div className="xrx-row">
+        <StatusBadge status={s.verification.status} />
+        {s.url && (
+          <a className="btn small" href={s.url} target="_blank" rel="noopener noreferrer" onClick={() => refList.opened(s.id)}>
+            <ExternalLink size={13} /> {s.opened ? "Opened" : "Open and read"}
+          </a>
+        )}
+        <button className="btn small" onClick={() => refList.remove(s.id)}><Trash2 size={13} /> Remove</button>
+      </div>
+      <details className="lib-org">
+        <summary>Organise: collection, tags, notes</summary>
+        <label>Collection (folder)
+          <input defaultValue={s.collections[0] ?? ""} onBlur={(e) => refList.update(s.id, { collections: split(e.target.value).slice(0, 1) })} placeholder="e.g. Thesis" />
+        </label>
+        <label>Tags, separated by commas
+          <input defaultValue={s.tags.join(", ")} onBlur={(e) => refList.update(s.id, { tags: split(e.target.value) })} placeholder="e.g. RCT, schools" />
+        </label>
+        <label>Notes
+          <textarea defaultValue={s.notes} onBlur={(e) => refList.update(s.id, { notes: e.target.value.slice(0, 2000) })} />
+        </label>
+        <label>Explain it back: what does this source show, in your own words? (the AI never fills this)
+          <textarea defaultValue={s.explainBack ?? ""} onBlur={(e) => refList.update(s.id, { explainBack: e.target.value.slice(0, 600) })} />
+        </label>
+      </details>
+      {s.doi && <RelatedPapers doi={s.doi} />}
+    </li>
+  );
+}
+
+function Bars({ title, bars }: { title: string; bars: Bar[] }) {
+  if (!bars.length) return null;
+  return (
+    <div>
+      <p className="vx-eyebrow">{title}</p>
+      <ul className="lib-bars">
+        {bars.map((b) => (
+          <li key={b.key}><span>{b.label}</span><i style={{ width: `${Math.max(4, b.pct)}%` }} /><span className="mono muted">{b.count}</span></li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function LibraryTab() {
-  const [view, setView] = useState<"galaxy" | "list">("galaxy");
+  const { sources } = useRefList();
+  const [text, setText] = useState("");
+  const [collection, setCollection] = useState("");
+  const [tag, setTag] = useState("");
+  const collections = [...new Set(sources.flatMap((s) => s.collections))].sort();
+  const tags = [...new Set(sources.flatMap((s) => s.tags))].sort();
+  const shown = sources.filter(
+    (s) =>
+      (!collection || s.collections.includes(collection)) &&
+      (!tag || s.tags.includes(tag)) &&
+      (!text || `${apaReference(s).text} ${s.notes} ${s.tags.join(" ")}`.toLowerCase().includes(text.toLowerCase())),
+  );
+  // Computed only once there are sources, so the clock is never read while the page is prerendered.
+  const bias = useMemo(() => (sources.length ? summariseBias(sources.map(facts)) : undefined), [sources]);
+  const unread = shown.filter((s) => !s.opened).length;
+  const unexplained = shown.filter((s) => !s.explainBack?.trim()).length;
+
   return (
-    <AppShell title="Library" subtitle="Stored on this device. Every item verified on the way in, and re-checked when you open the library."
-      actions={<div className="vx-seg"><button aria-checked={view === "galaxy"} role="radio" onClick={() => setView("galaxy")}>3D Galaxy</button><button aria-checked={view === "list"} role="radio" onClick={() => setView("list")}>List</button></div>}>
-      <div className="banner"><AlertTriangle size={16} color="var(--alert)" /><span><b>Watchdog:</b> “Social media at night and adolescent wellbeing” (2018) was retracted after you saved it. It's now marked and excluded from exports. <Sample /></span></div>
-      <div className="g-side">
-        <Card title="Collections">
-          <div className="coll">
-            {[["Thesis · sleep & screens", 18, true], ["Methods reading", 7], ["To read", 11], ["Group project (shared)", 9]].map(([n, c, on]) => (
-              <button key={n as string} aria-pressed={!!on}><span>{n}</span><span className="mono muted">{c}</span></button>
-            ))}
-          </div>
-          <p className="vx-eyebrow" style={{ marginTop: 16 }}>Tags</p>
-          <div className="chips"><span>cohort</span><span>RCT</span><span>MENA</span><span>null result</span><span>to cite</span></div>
-          <p className="vx-eyebrow" style={{ marginTop: 16 }}>Import</p>
-          <div className="exports"><button className="btn small"><Upload size={13} /> BibTeX / RIS</button><button className="btn small"><FileText size={13} /> Drop PDF</button></div>
-        </Card>
-        {view === "galaxy" ? (
-          <Card title={<>Evidence Galaxy · drag to rotate <Sample /></>} aside={<span className="muted mono" style={{ fontSize: 11 }}>shape = type · colour = status</span>}>
-            <div className="galaxy"><Galaxy /><div className="galaxy-legend"><span className="lbl lbl-verified">● verified</span><span className="lbl lbl-reported">◆ preprint / partial</span><span className="lbl lbl-notfound">■ retracted</span></div></div>
+    <AppShell title="Library" subtitle="Your approved sources, kept on this device. Organise them, read them, then export.">
+      <div className="xrx">
+        {sources.length === 0 ? (
+          <Card title="Your library is empty">
+            <p className="xr-note">Add verified sources from the <Link href="/xray">X-ray</Link> or a <Link href="/research">Research</Link> session. Nothing is added without your click.</p>
           </Card>
         ) : (
-          <Card title={<>Sources <Sample /></>}>
-            <table className="vx-table"><thead><tr><th>Status</th><th>Reference</th><th>Facts</th></tr></thead>
-              <tbody>{SOURCES.map((s) => <tr key={s.id}><td><StatusBadge status={s.status} /></td><td><div className="t">{s.title}</div><div className="s">{s.authors} ({s.year}) · {s.venue}</div></td><td><div className="chips"><span>{s.peer ? "peer-reviewed" : "preprint"}</span><span>{s.country}</span></div></td></tr>)}</tbody></table>
-          </Card>
+          <>
+            <Card title={<>Sources · {shown.length} of {sources.length}</>}>
+              <div className="lib-filters">
+                <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Search titles, authors, notes" aria-label="Search your library" />
+                <select value={collection} onChange={(e) => setCollection(e.target.value)} aria-label="Collection">
+                  <option value="">All collections</option>
+                  {collections.map((c) => <option key={c}>{c}</option>)}
+                </select>
+                <select value={tag} onChange={(e) => setTag(e.target.value)} aria-label="Tag">
+                  <option value="">All tags</option>
+                  {tags.map((t) => <option key={t}>{t}</option>)}
+                </select>
+              </div>
+              <ul className="xrx-list">
+                {shown.map((s) => <Item key={s.id} s={s} />)}
+              </ul>
+            </Card>
+
+            <Card title={<>Export · {shown.length} source{shown.length === 1 ? "" : "s"} shown</>}>
+              {(unread > 0 || unexplained > 0) && (
+                <ul className="xrx-warn" aria-label="Before you export">
+                  {unread > 0 && <li>You have not opened {unread} of these sources. Read before you cite.</li>}
+                  {unexplained > 0 && <li>{unexplained} still need your own one-line explanation (Organise → Explain it back).</li>}
+                </ul>
+              )}
+              <div className="xrx-row">
+                <button className="btn small primary" disabled={!shown.length} onClick={() => download("references-apa7.txt", `References\n\n${apaList(shown).text}\n`)}><Download size={13} /> APA 7</button>
+                <button className="btn small" disabled={!shown.length} onClick={() => download("library.bib", toBibTeX(shown))}><Download size={13} /> BibTeX</button>
+                <button className="btn small" disabled={!shown.length} onClick={() => download("library.ris", toRIS(shown))}><Download size={13} /> RIS</button>
+                <button className="btn small" disabled={!shown.length} onClick={() => download("library.json", toCslJson(shown), "application/json")}><Download size={13} /> CSL-JSON</button>
+              </div>
+              <p className="vx-tiny">BibTeX, RIS and CSL-JSON open in Zotero and Mendeley. Your AI-use statement is on the <Link href="/xray">X-ray</Link> page.</p>
+            </Card>
+
+            <Card title="Bias lens · facts about your sources, not scores">
+              <div className="lib-lens">
+                <Bars title="Author countries" bars={bias?.countries.bars ?? []} />
+                <Bars title="Publication years" bars={bias?.years.bars ?? []} />
+                <Bars title="Publishers" bars={bias?.publishers.bars ?? []} />
+              </div>
+              <ul className="rs-notes lib-notes">
+                {bias?.notes.map((n) => <li key={n.text}>{n.text}</li>)}
+              </ul>
+            </Card>
+          </>
         )}
-      </div>
-      <div className="g3">
-        <Card title="Bias lens · countries">
-          <div className="bars">{[["UK", 34], ["US", 28], ["CN", 14], ["AE", 9], ["JP", 8], ["other", 7]].map(([c, v]) => <div key={c}><span className="mono">{c}</span><i style={{ width: `${(v as number) * 2.4}%` }} /><span className="mono muted">{v}%</span></div>)}</div>
-          <p className="vx-tiny">62% of your sources come from two countries. Consider regional studies (e.g. MENA).</p>
-        </Card>
-        <Card title="Bias lens · years">
-          <div className="bars">{[["≤2015", 6], ["2016–19", 31], ["2020–22", 42], ["2023–26", 21]].map(([c, v]) => <div key={c}><span className="mono">{c}</span><i style={{ width: `${(v as number) * 2}%`, background: "var(--ok)" }} /><span className="mono muted">{v}%</span></div>)}</div>
-          <p className="vx-tiny">Good recency. 21% from the last 3 years.</p>
-        </Card>
-        <Card title="Export">
-          <div className="exports">{["APA 7", "MLA 9", "Harvard", "IEEE", "Chicago", "BibTeX", "RIS", "CSL-JSON"].map((e) => <button key={e} className={`btn small ${e === "APA 7" ? "primary" : ""}`}>{e}</button>)}</div>
-          <p className="vx-tiny">Formatted with the official CSL style files (the same family Zotero uses). The AI-use statement and Prompt Ledger are attached automatically.</p>
-          <p className="vx-tiny"><Archive size={12} /> Web sources include a Wayback Machine snapshot link.</p>
-        </Card>
       </div>
     </AppShell>
   );

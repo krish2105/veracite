@@ -23,7 +23,7 @@
 .vx-tiny { font-size: 11.5px; line-height: 1.45; color: var(--ink2); margin: 8px 0 0; }
 .vx-meter { height: 6px; border-radius: 99px; background: var(--surface2); overflow: hidden; }
 .vx-meter i { display: block; height: 100%; background: var(--ok); }
-.vx-side-foot { margin-top: auto; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; color: var(--alert); padding: 0 8px; }
+.vx-side-foot { margin-top: auto; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; color: var(--ink2); padding: 0 8px; }
 .vx-seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface2); border: 1px solid var(--line); }
 .vx-seg button { border: 0; background: transparent; color: var(--ink2); font: 500 12px var(--f-ui); padding: 6px 11px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .vx-seg button[aria-checked="true"] { background: var(--ink); color: var(--bg); }

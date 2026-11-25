@@ -29,6 +29,10 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K19** · P0 · Five-requirement path on the X-ray page: fake-reference check, labels + legend, approve to list, APA 7 copy/download, AI-use statement, phone layout · `veracite/src/components/app/tabs/xray/**` · due Wed 16:00 · #mvp #research #honesty #ux
     - Interim list store and APA formatter live in `tabs/xray/`; Avighna's A05/A06 can replace them (records use `SourceRecord`).
 
+## Clean-up (added Wed 15:00)
+- [x] **K20** · P0 · Replace sample pages with real ones: front page, shell, Library (organise, BibTeX/RIS/CSL, bias lens), Trust Center (measured results, Prompt Ledger), Certificate (QR + live re-check), eval runner reads NDJSON · due Wed 18:00 · #mvp #research #honesty #ux
+    - Done in files owned by Avighna and Zedan (with Krishna's go-ahead). Their tasks A03-A06, Z06-Z08, Z10: review, then tick what you accept.
+
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.

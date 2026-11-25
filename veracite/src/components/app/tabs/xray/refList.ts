@@ -7,7 +7,7 @@
  */
 import { useSyncExternalStore } from "react";
 import { ACTIONS } from "@/lib/integrity/receipts";
-import type { Receipt, RefStatus, SourceRecord, Verification } from "@/lib/types";
+import type { Receipt, RefStatus, SourcePatch, SourceRecord, Verification } from "@/lib/types";
 
 const KEY = "vx-reflist-v1";
 const SESSION = "xray";
@@ -102,6 +102,11 @@ export const refList = {
     if (!canAdd(v) || s.sources.some((x) => x.id === sourceId(v))) return;
     const src = toSource(v);
     write({ sources: [...s.sources, src], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, src.id)] });
+  },
+  /** Organise: tags, collections, notes and the student's own explanation. */
+  update(id: string, patch: SourcePatch) {
+    const s = read();
+    write({ ...s, sources: s.sources.map((x) => (x.id === id ? { ...x, ...patch } : x)) });
   },
   remove(id: string) {
     const s = read();
