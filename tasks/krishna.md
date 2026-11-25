@@ -73,7 +73,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 26 Nov: snowball route takes `since` + `perPage`; Library card checks up to 10 sources, 5 each, 2 at a time, since saved or last 12 months; every result verified, one-click add. 3 tests.
 - [x] **K42** · P2 · Related-papers map (2D, from snowball data; click-to-add through the Verifier) · `veracite/src/components/app/tabs/research/PaperMap.tsx mapLayout*` · #research #ux
     - 26 Nov: Map button beside Papers it cites / Papers that cite it: deterministic SVG (no physics), cites left / cited-by right, oldest at top, size = citations, colour = verdict; tap a dot to add. 4 tests; phones scroll inside the map.
-- [ ] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · #ux
+- [x] **K43** · P2 · Arabic / English toggle for the main labels, right-to-left (covers A08) · `veracite/src/lib/i18n/**` · #ux
+    - 26 Nov: العربية / English chip in the header (flag `arabic` on): menus, page titles, AI-autonomy, trust labels and verdict badges in Arabic with lang="ar" dir="rtl"; results and references stay English and a beta note says so; layout not mirrored. 5 tests.
 
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty

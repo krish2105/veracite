@@ -13,3 +13,4 @@
 .jg-next { margin: 8px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ink); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .jg-go { flex: none; }
 .jg .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.vx-lang-note { margin: 10px 0 0; }

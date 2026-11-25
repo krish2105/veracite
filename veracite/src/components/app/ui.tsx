@@ -1,6 +1,7 @@
 "use client";
 
 import type { Label, RefStatus } from "./data";
+import { useT } from "@/lib/i18n/lang";
 
 /** Trust-label shapes: colour is never the only signal (filled ● / half ◐ / diamond ◆ / struck ○). */
 export function LabelIcon({ kind, size = 14 }: { kind: Label; size?: number }) {
@@ -11,18 +12,16 @@ export function LabelIcon({ kind, size = 14 }: { kind: Label; size?: number }) {
   return <svg width={s} height={s} viewBox="0 0 16 16" aria-hidden><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M3.6 12.4l8.8-8.8" stroke="currentColor" strokeWidth="1.5" /></svg>;
 }
 
-const LABEL_TEXT: Record<Label, string> = { verified: "Verified", reported: "Reported, not checked", ai: "AI reasoning", notfound: "Not found" };
 export function TrustLabel({ kind }: { kind: Label }) {
-  return <span className={`lbl lbl-${kind}`}><LabelIcon kind={kind} size={12} />{LABEL_TEXT[kind]}</span>;
+  const { t, attrs } = useT();
+  return <span className={`lbl lbl-${kind}`}><LabelIcon kind={kind} size={12} /><span {...attrs}>{t(`label.${kind}`)}</span></span>;
 }
 
-const STATUS: Record<RefStatus, { text: string; cls: Label }> = {
-  verified: { text: "Verified", cls: "verified" }, partial: { text: "Partial", cls: "reported" }, chimera: { text: "Chimera", cls: "notfound" },
-  mismatch: { text: "Mismatch", cls: "reported" }, notfound: { text: "Not found", cls: "notfound" }, retracted: { text: "Retracted", cls: "notfound" },
-};
+const STATUS: Record<RefStatus, Label> = { verified: "verified", partial: "reported", chimera: "notfound", mismatch: "reported", notfound: "notfound", retracted: "notfound" };
 export function StatusBadge({ status }: { status: RefStatus }) {
-  const s = STATUS[status];
-  return <span className={`lbl lbl-${s.cls} ${status === "retracted" || status === "chimera" ? "lbl-solid" : ""}`}><LabelIcon kind={s.cls} size={12} />{s.text}</span>;
+  const { t, attrs } = useT();
+  const cls = STATUS[status];
+  return <span className={`lbl lbl-${cls} ${status === "retracted" || status === "chimera" ? "lbl-solid" : ""}`}><LabelIcon kind={cls} size={12} /><span {...attrs}>{t(`status.${status}`)}</span></span>;
 }
 
 export function Sample({ children = "SAMPLE" }: { children?: React.ReactNode }) {
