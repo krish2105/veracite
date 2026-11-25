@@ -14,9 +14,9 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 
 ## Wednesday afternoon · cite while you write (M2)
 - [ ] **A06** · P0 · Export with citation-js + official CSL: APA 7, BibTeX, RIS first (MLA 9, Harvard, IEEE, Chicago in the evening); import BibTeX/RIS · `veracite/src/lib/cite/** veracite/src/app/api/export/**` · due Wed 15:00 · #research
-- [ ] **A14** · P0 · Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · `veracite/src/components/app/tabs/draft/Writer.tsx veracite/src/lib/cite/insert*` · due Wed 18:00 · #research #ux #honesty
+- [x] **A14** · P0 · Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · `veracite/src/components/app/tabs/draft/Writer.tsx veracite/src/lib/cite/insert*` · due Wed 18:00 · #research #ux #honesty
     - The brief asks for "insert citations while you write". Krishna's Draft Checker (K10) checks the same text.
-- [ ] **A03** · P0 · Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · `veracite/src/app/page.tsx veracite/src/components/lab/vault/**` · due Wed 19:00 · #ux #honesty
+- [x] **A03** · P0 · Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · `veracite/src/app/page.tsx veracite/src/components/lab/vault/**` · due Wed 19:00 · #ux #honesty
 
 ## Wednesday evening · deck-promised extras (M3)
 - [ ] **A15** · P1 · One-click "Save to Veracite" bookmarklet: reads the page's DOI meta tag, opens Veracite's `/save` page, verifies via `/api/sources/verify`, saves to the library (like Zotero's browser button) · `veracite/src/app/save/** veracite/src/lib/library/bookmarklet*` · due Wed 21:00 · #research #ux
