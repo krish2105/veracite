@@ -1,30 +1,30 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Wed 25 Nov, 15:09 (Dubai)** · commit `8f55724`
+> Last updated **Wed 25 Nov, 20:40 (Dubai)** · commit `0f9821c`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████░░░░░░ **39%** (20/51 tasks) |
-| **P0 demo spine** | ██████░░░░ 15/26 |
+| **Overall progress** | █████░░░░░ **49%** (25/51 tasks) |
+| **P0 demo spine** | ███████░░░ 17/26 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
-| **In progress / blocked** | 3 🔨 · 0 ⛔ |
+| **In progress / blocked** | 1 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
-| Deck upload (team target) | Wed 23:00 | **7h 50m** |
-| Deck upload (official, hard) | Thu 09:00 | **17h 50m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **22h 5m** |
-| Phase 2 submissions close | Thu 15:00 | **23h 50m** |
+| Deck upload (team target) | Wed 23:00 | **2h 19m** |
+| Deck upload (official, hard) | Thu 09:00 | **12h 19m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **16h 34m** |
+| Phase 2 submissions close | Thu 15:00 | **18h 19m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
 | [Krishna Mathur](../tasks/krishna.md) | ███████░░░ 70% | 14 | 0 | 6 | 0 |
-| [Zedan Nasir Parol](../tasks/zedan.md) | ████░░░░░░ 38% | 6 | 3 | 7 | 0 |
+| [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | ░░░░░░░░░░ 0% | 0 | 0 | 15 | 0 |
 
 ## 🎯 Readiness by judging criterion (out of 100)
@@ -32,17 +32,15 @@
 | Criterion | Points | Readiness |
 |---|---|---|
 | Working MVP | 15 | ████████░░ 82% (9/11) |
-| Research & citation features | 12 | ██████░░░░ 56% (10/18) |
-| Honesty & verification in action | 10 | ██████░░░░ 63% (12/19) |
+| Research & citation features | 12 | ███████░░░ 67% (12/18) |
+| Honesty & verification in action | 10 | ████████░░ 84% (16/19) |
 | Day-of requirements | 8 | ░░░░░░░░░░ 0% (0/5) |
-| User experience | 8 | ███░░░░░░░ 31% (5/16) |
+| User experience | 8 | ████░░░░░░ 44% (7/16) |
 | Presentation & Q&A | 12 | ░░░░░░░░░░ 0% (0/8) |
 | Phase 1 deck | 30 | ██░░░░░░░░ 20% (1/5) |
 | AI quiz | 5 | n/a |
 
 ## 🔨 Doing now
-- **Z06** Eval runner: run the X-ray over the golden set → `veracite/tests/results/latest.json` + summary (caught / false-Verified / real verified / time) · Zedan Nasir Parol · due Wed 15:00
-- **Z08** Certificate: encode verified bibliography + SHA-256 into the URL, decode on `/certificate`, re-verify live, real QR · Zedan Nasir Parol · due Wed 21:00
 - **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol · due Wed 22:00
 
 ## ⛔ Blocked
@@ -59,12 +57,7 @@ _Nothing blocked._
 
 ### Zedan Nasir Parol
 - ⬜ **Z02** · P0 · Keep `docs/PROMPT_LOG.md` complete for all three of us (hackathon rule 8): add your own and Avighna's prompts · _due ongoing_
-- 🔨 **Z06** · P0 · Eval runner: run the X-ray over the golden set → `veracite/tests/results/latest.json` + summary (caught / false-Verified / real verified / time) · _due Wed 15:00_
-- ⬜ **Z07** · P0 · Trust Center: replace illustrative numbers with measured ones from Z06; model card (new model map, docs/11 §6), policies, data flow, "report a wrong verdict" link · _due Wed 17:00_
-- ⬜ **Z15** · P1 · Export gate before download: unread-source warning (read-before-you-cite), one explain-it-back line per key source (AI button disabled there), AI-use statement preview. Uses Avighna's library + export libs · _due Wed 20:00_
-- 🔨 **Z08** · P1 · Certificate: encode verified bibliography + SHA-256 into the URL, decode on `/certificate`, re-verify live, real QR · _due Wed 21:00_
 - 🔨 **Z11** · PRES · Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · _due Wed 22:00_
-- ⬜ **Z16** · P2 · Web sources: URL live check + Wayback snapshot + APA retrieval date (moved from K12; a likely Phase-2 ask)
 - ⬜ **Z12** · DAY · Phase 2: underline every "must"; write 3 acceptance checks per requirement; test the live link in incognito at 14:40 · _due Thu 14:50_
 - ⬜ **Z13** · DAY · Update the Trust Center and prompt log for anything Phase 2 changed; export the prompt log to `submissions/prompt-log/` · _due Thu 14:55_
 - ⬜ **Z14** · PRES · Rehearse segment 5:30–7:00 (export → statement → certificate → Rules mode) · _due Thu 12:30_
@@ -104,6 +97,11 @@ _Nothing blocked._
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
 - **Z05** PII scrubber + prompt-injection detector (pure functions + tests). Krishna's LLM gateway calls them. Start Tuesday night if Z01 is done · Zedan Nasir Parol
 - **Z04** Integrity library: AI-use statement generator from the Receipts log (APA 2025 + SP Jain §h(viii)), Prompt Ledger export. Build against the `Receipt` type in `src/lib/types.ts` · Zedan Nasir Parol
+- **Z06** Eval runner: run the X-ray over the golden set → `veracite/tests/results/latest.json` + summary (caught / false-Verified / real verified / time) · Zedan Nasir Parol
+- **Z07** Trust Center: replace illustrative numbers with measured ones from Z06; model card (new model map, docs/11 §6), policies, data flow, "report a wrong verdict" link · Zedan Nasir Parol
+- **Z15** Export gate before download: unread-source warning (read-before-you-cite), one explain-it-back line per key source (AI button disabled there), AI-use statement preview. Uses Avighna's library + export libs · Zedan Nasir Parol
+- **Z08** Certificate: encode verified bibliography + SHA-256 into the URL, decode on `/certificate`, re-verify live, real QR · Zedan Nasir Parol
 - **Z09** Paraphrase guard (n-gram overlap) for the Draft Checker · Zedan Nasir Parol
 - **Z10** Bias-lens numbers from OpenAlex fields (country, year, open access, publisher) · Zedan Nasir Parol
+- **Z16** Web sources: URL live check + Wayback snapshot + APA retrieval date (moved from K12; a likely Phase-2 ask) · Zedan Nasir Parol
 - **Z03** Apply for a Semantic Scholar API key (optional; Semantic Scholar is not in the demo spine) · Zedan Nasir Parol
