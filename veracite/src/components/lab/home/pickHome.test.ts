@@ -2,14 +2,20 @@
 import { describe, expect, it } from "vitest";
 import { pickHome } from "./pickHome";
 
-const laptop = { width: 1440, reducedMotion: false, webgl: true, search: "" };
+const laptop = { width: 1440, height: 900, reducedMotion: false, webgl: true, search: "" };
 
 describe("pickHome", () => {
   it("shows the 3D vault on a laptop", () => expect(pickHome(laptop)).toBe("3d"));
   it("shows it on a projector zoomed to 125%", () => expect(pickHome({ ...laptop, width: 1152 })).toBe("3d"));
-  it("shows plain cards on phones and narrow windows", () => {
-    expect(pickHome({ ...laptop, width: 390 })).toBe("plain");
-    expect(pickHome({ ...laptop, width: 1023 })).toBe("plain");
+  it("shows the 3D vault on phones and tablets held upright", () => {
+    expect(pickHome({ ...laptop, width: 390, height: 664 })).toBe("3d");
+    expect(pickHome({ ...laptop, width: 430, height: 932 })).toBe("3d");
+    expect(pickHome({ ...laptop, width: 768, height: 1024 })).toBe("3d");
+  });
+  it("shows plain cards on very short screens, sideways phones and narrow landscape windows", () => {
+    expect(pickHome({ ...laptop, width: 375, height: 548 })).toBe("plain");
+    expect(pickHome({ ...laptop, width: 844, height: 390 })).toBe("plain");
+    expect(pickHome({ ...laptop, width: 1023, height: 700 })).toBe("plain");
   });
   it("respects the reduced-motion setting", () => expect(pickHome({ ...laptop, reducedMotion: true })).toBe("plain"));
   it("shows plain cards without WebGL", () => expect(pickHome({ ...laptop, webgl: false })).toBe("plain"));

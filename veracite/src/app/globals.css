@@ -3,6 +3,8 @@
 :root {
   --background: #edf1ee;
   --foreground: #0e2a23;
+  /* Veracite has its own dark theme (the UV lamp): stop phones in dark mode repainting the daylight page. */
+  color-scheme: only light;
 }
 
 body {
@@ -87,10 +89,31 @@ h1.lab-brand { margin: 0; }
 .lab-links a.primary { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg); }
 .lab-cta a { font-family: var(--lab-mono); font-size: 12.5px; padding: 12px 18px; border-radius: 6px; border: 1px solid var(--lab-ink); background: var(--lab-ink); color: var(--lab-bg); text-decoration: none; }
 .lab-plain { position: fixed; z-index: 30; left: clamp(16px, 3vw, 34px); bottom: 12px; font-family: var(--lab-mono); font-size: 11px; color: var(--lab-ink); }
+.home-bar .short { display: none; }
+@media (max-width: 899px) {
+  .home-bar { gap: 8px; }
+  .home-bar .lab-links, .home-bar .long { display: none; }
+  .home-bar .short { display: inline; }
+  .home-bar .lab-plain { position: static; margin-left: auto; }
+  .home-bar .lab-btn { white-space: nowrap; }
+  .home-bar .lab-brand { margin-right: auto; }
+  .home-bar .lab-brand small { display: none; }
+}
+/* upright phones and tablets: the vault's story cards sit at the foot, leaving the scene visible above */
+@media (max-width: 1023px) and (orientation: portrait) {
+  .lab-section { left: 12px; right: 12px; width: auto; height: 100dvh; justify-content: flex-end; padding: 0 0 48px; }
+  .lab-section::before { display: none; }
+  .lab-card { padding: 18px 18px 16px; }
+  .lab-card .lab-h { font-size: min(34px, calc((100cqi - 42px) / 10.4)); margin-bottom: 12px; }
+  .lab-card .lab-p { font-size: 14px; line-height: 1.5; }
+  .lab-card .lab-cta { margin-top: 14px; }
+  .lab-tag { width: 132px; font-size: 8.5px; padding: 5px 6px; }
+  .lab-note { left: 12px; right: 12px; bottom: 8px; text-align: center; font-size: 8.5px; }
+}
 .home-loading { position: fixed; inset: 0; display: grid; place-items: center; margin: 0; font-family: var(--font-martian); font-size: 12px; }
 @media (max-width: 1180px) { .lab-links a.more, .lab-bar h1.lab-brand small { display: none; } }
 /* While the browser is still choosing, wide screens stay blank rather than flash the plain page. Without scripts it appears after 4 s. */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference), (max-width: 1023px) and (orientation: portrait) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
   .home-pending { visibility: hidden; animation: home-reveal 0s linear 4s forwards; }
 }
 @keyframes home-reveal { to { visibility: visible; } }
@@ -109,5 +132,8 @@ h1.lab-brand { margin: 0; }
 .lab-card { background: var(--lab-panel); border: 1px solid var(--lab-line); border-radius: 10px; padding: 28px 30px 26px; backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); }
 .lab-card .lab-p { margin-bottom: 0; }
 .lab-card .lab-cta { margin-top: 22px; }
+/* Headings are sized to their box, so the longest word ("counterfeit.", "combination.") always fits inside it. */
+.lab-section { container-type: inline-size; }
+.lab-card .lab-h { font-size: min(var(--lab-hsize, 54px), calc((100cqi - 72px) / 10.4)); }
 
 .lab-portal { position: fixed; inset: 0; pointer-events: none; z-index: 25; }
