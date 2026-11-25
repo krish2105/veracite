@@ -10,6 +10,7 @@ import { Card, StatusBadge } from "@/components/app/ui";
 import { ExplainPaper } from "@/components/app/tabs/research/ExplainPaper";
 import { RelatedPapers } from "@/components/app/tabs/research/RelatedPapers";
 import { apaReference } from "@/components/app/tabs/xray/apa";
+import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
 import { StyleSelect } from "@/components/app/tabs/xray/StyleSelect";
 import { useStyledEntries } from "@/components/app/tabs/xray/useStyled";
 import { listOutput, STYLES, type CiteStyle } from "@/lib/cite/styles";
@@ -50,6 +51,7 @@ function Item({ s, html }: { s: SourceRecord; html?: string }) {
             <ExternalLink size={13} /> {s.opened ? "Opened" : "Open and read"}
           </a>
         )}
+        <FullTextLink doi={s.doi} oaUrl={s.oaUrl} openAccess={s.quality.openAccess} onOpen={() => refList.opened(s.id)} />
         <button className="btn small" onClick={() => refList.remove(s.id)}><Trash2 size={13} /> Remove</button>
       </div>
       <div style={{ marginTop: 6 }}>

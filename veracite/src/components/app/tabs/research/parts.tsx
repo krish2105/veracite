@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle, Check, Pencil, Scale, Swords, X } from "lucide-react";
 import { Card, StatusBadge, TrustLabel } from "@/components/app/ui";
+import { FullTextLink } from "@/components/app/tabs/xray/FullTextLink";
 import { canAdd } from "@/components/app/tabs/xray/refList";
 import { linesToList } from "@/lib/session/machine";
 import { RelatedPapers } from "./RelatedPapers";
@@ -105,6 +106,7 @@ export function SourcesCard({ candidates, decisions, onDecide, onContinue, onBac
                   <X size={13} /> Reject
                 </button>
                 {s.url && <a className="btn small" href={s.url} target="_blank" rel="noopener noreferrer">Open</a>}
+                {canAdd(s.verification) && <FullTextLink doi={s.doi} oaUrl={s.oaUrl} openAccess={s.quality.openAccess} />}
               </div>
               {d === "accepted" && s.doi && <RelatedPapers doi={s.doi} />}
             </li>

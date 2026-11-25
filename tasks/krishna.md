@@ -52,6 +52,14 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [~] **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · `scripts/prewarm.mjs veracite/src/lib/session/**` · #dayof
     - 25 Nov: `scripts/prewarm.mjs` (13/13 live); live-site eval = same numbers (median 0.66 s live vs 0.46 s local), kept in `tests/results/live-site.md`; error banners say which step failed + Try again (5 tests); SAMPLE replay + `?record=1` recorder built and tested. **Left: record the AI SAMPLE session after K02 (needs the Groq key).**
 
+## Thursday 00:50 · quick wins from the research pass ("Do all")
+- [x] **K33** · P1 · Free full text: a legal open-access link (OpenAlex OA location, arXiv PDF) on X-ray rows, Library, save page and research sources · `veracite/src/lib/registries/fulltext*` · #research
+    - 26 Nov: shown only when a registry reports a free copy, never on retracted/chimera/not-found rows; opening it counts as reading. 4 tests.
+- [ ] **K34** · P1 · Registry trace + "why this label": per-registry results and the rule that set each verdict, on every X-ray row · #honesty #ux
+- [ ] **K35** · P1 · Re-check my library for retractions and corrections since saving; warn in Write & cite before citing a retracted source · #honesty
+- [ ] **K36** · P1 · "Does this source say this?": the closest sentence in the source's abstract for each cited claim, code only · #honesty #research
+- [ ] **K37** · P1 · PDF drop on the X-ray page (pdf.js, approved): DOIs and the reference section into an editable list · #research #ux
+
 ## Wednesday evening · deck-promised extras (M3)
 - [x] **K10** · P1 · Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · `veracite/src/components/app/tabs/draft/** veracite/src/app/api/draft/**` · due Wed 21:00 · #research #honesty
     - Avighna owns `tabs/draft/Writer.tsx`; you own the rest of `tabs/draft/**`.
