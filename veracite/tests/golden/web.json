@@ -26,10 +26,10 @@
   {
     "id": "web-004",
     "sample": true,
-    "raw": "UAE Government. (n.d.). UAE strategy for artificial intelligence. Retrieved November 24, 2026, from https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/government-services-and-digital-transformation/uae-strategy-for-artificial-intelligence",
+    "raw": "Crossref. (2003, November 17). Serials Solutions' Article Linker expands linking options with Crossref DOIs [News release]. https://www.crossref.org/news/2003-11-17-serials-solutions-article-linker-expands-linking-options-with-crossref-dois/",
     "expected": "partial",
-    "url": "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/government-services-and-digital-transformation/uae-strategy-for-artificial-intelligence",
-    "notes": "24 Nov 2026: live page returns HTTP 404, but Wayback has a 200 copy (20260513043030) titled 'UAE Strategy for Artificial Intelligence | The Official Platform of the UAE Government'. Real source, dead link: expect 'partial' with the Wayback link offered."
+    "url": "https://www.crossref.org/news/2003-11-17-serials-solutions-article-linker-expands-linking-options-with-crossref-dois/",
+    "notes": "26 Nov 2026: live page returns HTTP 404 and the Wayback Machine has a 200 copy titled 'Serials Solutions’ Article Linker Expands Linking Options With Crossref DOIs - Crossref'. A press release with no DOI: not in Crossref or OpenAlex (checked), so it can only be 'partial', with the Wayback link offered. The web address contains every word of the title, which the X-ray needs to accept a dead page (K21: a dead page's own title can't be read). Replaces the u.ae 'UAE Strategy for Artificial Intelligence' page, whose Wayback copy stopped being listed on 26 Nov. (A dead 2008 Crossref blog post was tried first and rejected: Crossref has since given its blog posts DOIs, so it is correctly 'verified'.)"
   },
   {
     "id": "web-005",
