@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 14:07 (Dubai)** · commit `bfaf51e`
+> Last updated **Thu 26 Nov, 14:14 (Dubai)** · commit `7cfb82c`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████████░░ **80%** (70/88 tasks) |
+| **Overall progress** | ████████░░ **80%** (71/89 tasks) |
 | **P0 demo spine** | ████████░░ 26/32 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -18,12 +18,12 @@
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
 | Arrive at the Simulation Lab | Thu 13:15 | **passed** |
-| Phase 2 submissions close | Thu 15:00 | **0h 52m** |
+| Phase 2 submissions close | Thu 15:00 | **0h 45m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ██████████ 96% | 55 | 0 | 2 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ██████████ 97% | 56 | 0 | 2 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ████████░░ 81% | 13 | 0 | 3 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -34,9 +34,9 @@
 | Working MVP | 15 | █████████░ 92% (11/12) |
 | Research & citation features | 12 | █████████░ 87% (27/31) |
 | Honesty & verification in action | 10 | ██████████ 100% (32/32) |
-| Day-of requirements | 8 | ██████░░░░ 56% (5/9) |
+| Day-of requirements | 8 | ██████░░░░ 60% (6/10) |
 | User experience | 8 | ████████░░ 79% (23/29) |
-| Presentation & Q&A | 12 | ███████░░░ 65% (11/17) |
+| Presentation & Q&A | 12 | ███████░░░ 67% (12/18) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
 | AI quiz | 5 | n/a |
 
@@ -123,6 +123,7 @@ _Nothing blocked._
 - **K57** Home page under the UV lamp: the security strip is see-through instead of a glowing bar; VOID stamp unchanged (centred) · Krishna Mathur
 - **K60** Phase 2 edge cases: six required (Not found, Mismatch, Needs fix with accept or reject, Retracted warning, duplicate merge, no source exists) and bonus B1–B5; statuses in the library and every export · Krishna Mathur
 - **K61** Phase 2 documents: script segments 1:00 and 4:45 rewritten around the judges' test pack, DEMO_INPUTS with the pack and the three requests, paste-ready prompt log for the submission form, prompt log re-exported · Krishna Mathur
+- **K63** Phase 2 Q&A section (which step handles which case, hard-coding, reject a fix, duplicates, Not found), deck notes with the case-to-step map, form-ready prompt log generator · Krishna Mathur
 - **K54** A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
