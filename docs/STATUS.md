@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 12:23 (Dubai)** · commit `0248510`
+> Last updated **Thu 26 Nov, 12:33 (Dubai)** · commit `618190f`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████████░░ **75%** (64/85 tasks) |
+| **Overall progress** | ████████░░ **76%** (65/86 tasks) |
 | **P0 demo spine** | ████████░░ 26/32 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -17,13 +17,13 @@
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
-| Arrive at the Simulation Lab | Thu 13:15 | **0h 51m** |
-| Phase 2 submissions close | Thu 15:00 | **2h 36m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **0h 41m** |
+| Phase 2 submissions close | Thu 15:00 | **2h 26m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████████░ 94% | 51 | 0 | 3 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ██████████ 95% | 52 | 0 | 3 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -35,7 +35,7 @@
 | Research & citation features | 12 | █████████░ 87% (27/31) |
 | Honesty & verification in action | 10 | ██████████ 100% (31/31) |
 | Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
-| User experience | 8 | ████████░░ 79% (22/28) |
+| User experience | 8 | ████████░░ 79% (23/29) |
 | Presentation & Q&A | 12 | █████░░░░░ 50% (8/16) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
 | AI quiz | 5 | n/a |
@@ -124,6 +124,7 @@ _Nothing blocked._
 - **K53** Type-and-show file for the live demo (what to paste at each step, what judges see, fallbacks) and a 100-question AI quiz PDF · Krishna Mathur
 - **K55** Audit fixes that need no deployment: prompt log re-exported (rule 8), `docs/08` says Co-pilot · Krishna Mathur
 - **K56** Save as PDF on the reference list (browser print dialog, A4, no new dependency) · Krishna Mathur
+- **K57** Home page under the UV lamp: the security strip is see-through instead of a glowing bar; VOID stamp unchanged (centred) · Krishna Mathur
 - **K54** A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
