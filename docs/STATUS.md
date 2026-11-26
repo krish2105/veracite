@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 13:50 (Dubai)** · commit `38ce7bf`
+> Last updated **Thu 26 Nov, 13:52 (Dubai)** · commit `50d768d`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████████░░ **78%** (67/86 tasks) |
+| **Overall progress** | ████████░░ **79%** (69/87 tasks) |
 | **P0 demo spine** | ████████░░ 26/32 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -18,12 +18,12 @@
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
 | Arrive at the Simulation Lab | Thu 13:15 | **passed** |
-| Phase 2 submissions close | Thu 15:00 | **1h 9m** |
+| Phase 2 submissions close | Thu 15:00 | **1h 7m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ██████████ 95% | 52 | 0 | 3 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ██████████ 96% | 54 | 0 | 2 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ████████░░ 81% | 13 | 0 | 3 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -33,8 +33,8 @@
 |---|---|---|
 | Working MVP | 15 | █████████░ 92% (11/12) |
 | Research & citation features | 12 | █████████░ 87% (27/31) |
-| Honesty & verification in action | 10 | ██████████ 100% (31/31) |
-| Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
+| Honesty & verification in action | 10 | ██████████ 100% (32/32) |
+| Day-of requirements | 8 | █████░░░░░ 50% (4/8) |
 | User experience | 8 | ████████░░ 79% (23/29) |
 | Presentation & Q&A | 12 | ██████░░░░ 63% (10/16) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
@@ -49,7 +49,6 @@ _Nothing blocked._
 ## 📋 Remaining (by person)
 ### Krishna Mathur
 - ⬜ **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · _due Thu 11:00_
-- ⬜ **K16** · DAY · Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · _due Thu 14:40_
 - ⬜ **K17** · PRES · Rehearse demo segment 2:00–5:30 three times with a timer · _due Thu 12:30_
 
 ### Zedan Nasir Parol
@@ -122,11 +121,13 @@ _Nothing blocked._
 - **K55** Audit fixes that need no deployment: prompt log re-exported (rule 8), `docs/08` says Co-pilot · Krishna Mathur
 - **K56** Save as PDF on the reference list (browser print dialog, A4, no new dependency) · Krishna Mathur
 - **K57** Home page under the UV lamp: the security strip is see-through instead of a glowing bar; VOID stamp unchanged (centred) · Krishna Mathur
+- **K60** Phase 2 edge cases: six required (Not found, Mismatch, Needs fix with accept or reject, Retracted warning, duplicate merge, no source exists) and bonus B1–B5; statuses in the library and every export · Krishna Mathur
 - **K54** A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **K13** Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · Krishna Mathur
 - **K14** Debate mode (Advocate vs Skeptic, student judges, 2 rounds) · Krishna Mathur
+- **K16** Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · Krishna Mathur
 - **Z01** Golden test set: 30 real references (check each DOI by hand), 20 AI-fabricated (generate with ChatGPT/Gemini and log the prompts), 10 chimeras, 5 retracted (real retracted DOIs), 5 web pages. Format in `veracite/tests/golden/README.md` · Zedan Nasir Parol
 - **Z05** PII scrubber + prompt-injection detector (pure functions + tests). Krishna's LLM gateway calls them. Start Tuesday night if Z01 is done · Zedan Nasir Parol
 - **Z04** Integrity library: AI-use statement generator from the Receipts log (APA 2025 + SP Jain §h(viii)), Prompt Ledger export. Build against the `Receipt` type in `src/lib/types.ts` · Zedan Nasir Parol
