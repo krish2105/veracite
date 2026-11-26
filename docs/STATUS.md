@@ -1,7 +1,7 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 12:33 (Dubai)** · commit `618190f`
+> Last updated **Thu 26 Nov, 12:39 (Dubai)** · commit `602ee66`
 
 ## At a glance
 | | |
@@ -17,8 +17,8 @@
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
-| Arrive at the Simulation Lab | Thu 13:15 | **0h 41m** |
-| Phase 2 submissions close | Thu 15:00 | **2h 26m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **0h 35m** |
+| Phase 2 submissions close | Thu 15:00 | **2h 20m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
@@ -58,7 +58,7 @@ _Nothing blocked._
 - 🔨 **Z11** · PRES · Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · _due Wed 22:00_
 - ⬜ **Z12** · DAY · Phase 2: underline every "must"; write 3 acceptance checks per requirement; test the live link in incognito at 14:40 · _due Thu 14:50_
 - ⬜ **Z13** · DAY · Update the Trust Center and prompt log for anything Phase 2 changed; export the prompt log to `submissions/prompt-log/` · _due Thu 14:55_
-- ⬜ **Z14** · PRES · Rehearse segment 5:30–7:00 (export → statement → certificate → Rules mode) · _due Thu 12:30_
+- ⬜ **Z14** · PRES · Rehearse segments 5:35–7:15 (Library → bias lens → export gate → statement → certificate, then Trust Center → results card → DOI-only table → AI autonomy Off), cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` · _due Thu 12:30_
 
 ### Avighna Gavhane
 - ⬜ **A01** · P0 · Apply the 7 deck fixes in `docs/11_BUILD_PLAN.md` §9 (ask Claude Code to edit `submissions/phase1/deck/build-deck.cjs`, rebuild PPTX + PDF); send your GitHub username to Krishna · _due Tue 23:00_
