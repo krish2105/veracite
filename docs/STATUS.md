@@ -1,13 +1,13 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 07:53 (Dubai)** · commit `78f9ef6`
+> Last updated **Thu 26 Nov, 08:14 (Dubai)** · commit `c916ba7`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███████░░░ **72%** (55/76 tasks) |
-| **P0 demo spine** | ████████░░ 23/29 |
+| **Overall progress** | ███████░░░ **73%** (56/77 tasks) |
+| **P0 demo spine** | ████████░░ 24/30 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
 | **In progress / blocked** | 2 🔨 · 0 ⛔ |
@@ -16,14 +16,14 @@
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **1h 6m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **5h 21m** |
-| Phase 2 submissions close | Thu 15:00 | **7h 6m** |
+| Deck upload (official, hard) | Thu 09:00 | **0h 45m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **5h 0m** |
+| Phase 2 submissions close | Thu 15:00 | **6h 45m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████████░ 93% | 42 | 0 | 3 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █████████░ 93% | 43 | 0 | 3 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -33,10 +33,10 @@
 |---|---|---|
 | Working MVP | 15 | █████████░ 91% (10/11) |
 | Research & citation features | 12 | █████████░ 87% (26/30) |
-| Honesty & verification in action | 10 | ██████████ 100% (28/28) |
+| Honesty & verification in action | 10 | ██████████ 100% (29/29) |
 | Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
 | User experience | 8 | ████████░░ 78% (21/27) |
-| Presentation & Q&A | 12 | █░░░░░░░░░ 11% (1/9) |
+| Presentation & Q&A | 12 | ██░░░░░░░░ 20% (2/10) |
 | Phase 1 deck | 30 | ███░░░░░░░ 33% (2/6) |
 | AI quiz | 5 | n/a |
 
@@ -116,6 +116,7 @@ _Nothing blocked._
 - **K45** Save checked web pages to the library (Partial, never Verified, retrieval date kept) · Krishna Mathur
 - **K46** Deck brought up to date with the live site (PPTX + PDF rebuilt, 6 slides) and a humanised 3-person demo script PDF · Krishna Mathur
 - **K47** Fixes from the first live AI session: a source cited once per claim, Skeptic reasons clamped in code at a word boundary (no repeated rule code), clearer "Reported" legend; demo script switched to Co-pilot · Krishna Mathur
+- **K48** Submission polish before the freeze: prompt log re-exported (rule 8), `submissions/README.md` statuses, debate turns say their chip is a quote check · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **K13** Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · Krishna Mathur
