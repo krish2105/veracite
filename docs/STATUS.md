@@ -1,30 +1,30 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 12:39 (Dubai)** · commit `602ee66`
+> Last updated **Thu 26 Nov, 12:45 (Dubai)** · commit `c7e64ef`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████████░░ **76%** (65/86 tasks) |
+| **Overall progress** | ████████░░ **78%** (67/86 tasks) |
 | **P0 demo spine** | ████████░░ 26/32 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
-| **In progress / blocked** | 2 🔨 · 0 ⛔ |
+| **In progress / blocked** | 1 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
-| Arrive at the Simulation Lab | Thu 13:15 | **0h 35m** |
-| Phase 2 submissions close | Thu 15:00 | **2h 20m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **0h 29m** |
+| Phase 2 submissions close | Thu 15:00 | **2h 14m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
 | [Krishna Mathur](../tasks/krishna.md) | ██████████ 95% | 52 | 0 | 3 | 0 |
-| [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
+| [Zedan Nasir Parol](../tasks/zedan.md) | ████████░░ 81% | 13 | 0 | 3 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
 ## 🎯 Readiness by judging criterion (out of 100)
@@ -36,13 +36,12 @@
 | Honesty & verification in action | 10 | ██████████ 100% (31/31) |
 | Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
 | User experience | 8 | ████████░░ 79% (23/29) |
-| Presentation & Q&A | 12 | █████░░░░░ 50% (8/16) |
+| Presentation & Q&A | 12 | ██████░░░░ 63% (10/16) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
 | AI quiz | 5 | n/a |
 
 ## 🔨 Doing now
 - **A11** Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · Avighna Gavhane · due Thu 11:00
-- **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol · due Wed 22:00
 
 ## ⛔ Blocked
 _Nothing blocked._
@@ -55,10 +54,8 @@ _Nothing blocked._
 
 ### Zedan Nasir Parol
 - ⬜ **Z02** · P0 · Keep `docs/PROMPT_LOG.md` complete for all three of us (hackathon rule 8): add your own and Avighna's prompts · _due ongoing_
-- 🔨 **Z11** · PRES · Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · _due Wed 22:00_
 - ⬜ **Z12** · DAY · Phase 2: underline every "must"; write 3 acceptance checks per requirement; test the live link in incognito at 14:40 · _due Thu 14:50_
 - ⬜ **Z13** · DAY · Update the Trust Center and prompt log for anything Phase 2 changed; export the prompt log to `submissions/prompt-log/` · _due Thu 14:55_
-- ⬜ **Z14** · PRES · Rehearse segments 5:35–7:15 (Library → bias lens → export gate → statement → certificate, then Trust Center → results card → DOI-only table → AI autonomy Off), cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` · _due Thu 12:30_
 
 ### Avighna Gavhane
 - ⬜ **A01** · P0 · Apply the 7 deck fixes in `docs/11_BUILD_PLAN.md` §9 (ask Claude Code to edit `submissions/phase1/deck/build-deck.cjs`, rebuild PPTX + PDF); send your GitHub username to Krishna · _due Tue 23:00_
@@ -139,5 +136,7 @@ _Nothing blocked._
 - **Z08** Certificate: encode verified bibliography + SHA-256 into the URL, decode on `/certificate`, re-verify live, real QR · Zedan Nasir Parol
 - **Z09** Paraphrase guard (n-gram overlap) for the Draft Checker · Zedan Nasir Parol
 - **Z10** Bias-lens numbers from OpenAlex fields (country, year, open access, publisher) · Zedan Nasir Parol
+- **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol
 - **Z16** Web sources: URL live check + Wayback snapshot + APA retrieval date (moved from K12; a likely Phase-2 ask) · Zedan Nasir Parol
 - **Z03** Apply for a Semantic Scholar API key (optional; Semantic Scholar is not in the demo spine) · Zedan Nasir Parol
+- **Z14** Rehearse segments 5:35–7:15 (Library → bias lens → export gate → statement → certificate, then Trust Center → results card → DOI-only table → AI autonomy Off), cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` · Zedan Nasir Parol
