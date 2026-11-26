@@ -5,14 +5,15 @@
  * long as they like; every server call is short and stateless. Every step is logged (Receipts + Prompt Ledger).
  */
 import { missingPhrases } from "./notfound";
-import { answerRequest, routeRequest, type AssistantAnswer } from "./assistant";
+import { answerRequest, MAX_PASTED_REFS, routeRequest, type AssistantAnswer } from "./assistant";
+import { canAddWeb, toWebSource } from "@/lib/verify/websource";
 import { useCallback, useRef, useState } from "react";
-import { refList, toSource } from "@/components/app/tabs/xray/refList";
+import { refList, toSource, toTypedSource } from "@/components/app/tabs/xray/refList";
 import type { AgentRun, ScribeResult } from "@/lib/agents/agents";
 import type { DebateResult, DebateTurn } from "@/lib/agents/debate";
 import type { Candidate } from "@/lib/agents/scout";
 import { ACTIONS } from "@/lib/integrity/receipts";
-import type { Autonomy, BlockedFabrication, Challenge, Claim, EvidenceCard, Phase, Plan, Receipt, SourceRecord } from "@/lib/types";
+import type { Autonomy, BlockedFabrication, Challenge, Claim, EvidenceCard, Phase, Plan, Receipt, SourceRecord, Verification } from "@/lib/types";
 import { explainError, HttpError, type SessionStep } from "./errors";
 import { canExport, claimsFromEvidence } from "./machine";
 
@@ -99,6 +100,53 @@ export function useResearch(autonomy: Autonomy) {
       const base = { ...fresh(), question };
       // A note to save or a quote to check is handled by code, against the student's own library (Phase 2, B3 and B5).
       const routed = routeRequest(question);
+      if (routed.kind === "references") {
+        // References pasted instead of a question: look up EACH one with the code Verifier. No Planner, no keyword
+        // search, so nothing unrelated can be listed (found on the live site, 26 Nov).
+        if (routed.tooMany) {
+          replace({ ...base, assistant: { title: "Too many references for this box", tone: "warn", lines: [`More than ${MAX_PASTED_REFS} references were pasted. Use the Reference X-ray page for a long list: it checks up to 30 at a time and shows each one.`], handledBy: "nothing was searched or checked." } });
+          return;
+        }
+        replace({ ...base, phase: "searching", busy: `Checking ${routed.items.length} pasted reference${routed.items.length === 1 ? "" : "s"} against Crossref, OpenAlex and arXiv…` });
+        const checked = await Promise.all(routed.items.map(async (raw) => {
+          try {
+            return { raw, v: (await post<{ verification: Verification }>("/api/sources/verify", { input: raw })).verification };
+          } catch {
+            return { raw, v: undefined };
+          }
+        }));
+        const failed = checked.filter((c) => !c.v).map((c) => c.raw);
+        const seen = new Set<string>();
+        let duplicates = 0;
+        const candidates: SourceRecord[] = [];
+        for (const c of checked) {
+          if (!c.v) continue;
+          const src = c.v.matched && c.v.status !== "chimera" && c.v.status !== "notfound" ? toSource(c.v) : canAddWeb(c.v) ? toWebSource(c.v, c.raw, "research") : toTypedSource(c.raw, c.v);
+          if (seen.has(src.id)) { duplicates++; continue; }
+          seen.add(src.id);
+          candidates.push(src);
+          refList.log({ sessionId: base.sessionId, actor: "verifier", action: "checked_reference", aiUsed: false, ms: c.v.ms, ok: true, detail: `${c.v.status} · ${c.raw.slice(0, 80)}` });
+        }
+        const NAME: Record<string, string> = { verified: "Verified", partial: "Partial", mismatch: "Needs fix", chimera: "Mismatch", retracted: "Retracted", notfound: "Not found" };
+        const counts = candidates.reduce<Record<string, number>>((m, x) => ((m[x.verification.status] = (m[x.verification.status] ?? 0) + 1), m), {});
+        const n = routed.items.length;
+        replace({
+          ...base,
+          candidates,
+          phase: "cp2_sources",
+          assistant: {
+            title: `${n} pasted reference${n === 1 ? "" : "s"} checked`,
+            tone: failed.length || counts.notfound || counts.retracted || counts.chimera ? "warn" : "ok",
+            lines: [
+              `${Object.entries(counts).map(([k, c]) => `${c} ${NAME[k] ?? k}`).join(", ") || "Nothing could be checked"}. Each one was looked up as itself: nothing was searched by keyword, and no other paper is shown.`,
+              ...(duplicates ? [`${duplicates} duplicate${duplicates === 1 ? "" : "s"} merged: the same record was pasted more than once, and one entry is kept.`] : []),
+              ...(failed.length ? [`Could not check, try again: ${failed.map((f) => f.slice(0, 60)).join("; ")}. No status is shown when no check ran.`] : []),
+            ],
+            handledBy: "the Verifier (code, no AI), called once for each pasted reference. The Planner was not called, because these are references, not a question.",
+          },
+        });
+        return;
+      }
       if (routed.kind !== "research") {
         const answer = answerRequest(routed, refList.sources());
         if (answer.save) refList.update(answer.save.id, { notes: answer.save.notes });
