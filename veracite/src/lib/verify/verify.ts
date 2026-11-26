@@ -26,6 +26,7 @@ import { parseReference } from "./parse";
 import { decide, rankCandidates, titleScoreFor, type Evidence } from "./rules";
 import { checkYear, T } from "./text";
 import { applyWebCheck, withDeadline } from "./web";
+import { webVerification } from "./websource";
 
 export interface RegistryDeps {
   lookupDoi: (doi: string) => Promise<DoiLookup>;
@@ -103,5 +104,8 @@ export async function verifyReference(input: ReferenceInput | string, deps: Regi
   if (!deps.webCheck || !ref.url || ref.doi || verdict.status === "verified" || verdict.status === "retracted") return verdict;
   const check = await withDeadline(deps.webCheck(ref.url), WEB_DEADLINE_MS);
   if (!check) return verdict;
+  // Only a web link was pasted (no title, no authors): there is nothing to compare, so the page check is the result.
+  // A live or archived page is a web source (Partial, never Verified); a dead one with no copy is Not found.
+  if (check && !ref.title && ref.raw.replace(/https?:\/\/\S+/g, "").trim() === "") return { ...webVerification(check), searched: verdict.searched, ms: Date.now() - ev.startedAt };
   return { ...applyWebCheck(verdict, ref.title, check, ref.raw), ms: Date.now() - ev.startedAt };
 }

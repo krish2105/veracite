@@ -123,7 +123,7 @@ export function ResearchTab() {
             <span>
               <b>{s.assistant.title}.</b>{" "}
               {s.assistant.lines.map((l, i) => <span key={i} style={{ display: "block", marginTop: i ? 4 : 0 }}>{l}</span>)}
-              <span style={{ display: "block", marginTop: 4 }}><b>Handled by:</b> code, with no AI call (the quote check and the prompt-injection shield from our guardrails). The Planner was not called, because this is not a research question.</span>
+              <span style={{ display: "block", marginTop: 4 }}><b>Handled by:</b> {s.assistant.handledBy ?? "code, with no AI call (the quote check and the prompt-injection shield from our guardrails). The Planner was not called, because this is not a research question."}</span>
             </span>
           </div>
         )}

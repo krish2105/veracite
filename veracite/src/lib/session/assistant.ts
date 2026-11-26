@@ -11,11 +11,14 @@ import { detectInjection } from "../integrity/injection";
 import type { SourceRecord } from "../types";
 
 export type Routed =
+  | { kind: "references"; items: string[]; tooMany: boolean }
   | { kind: "note"; note: string; who: string[] }
   | { kind: "quote"; quote: string; who: string[]; year?: number }
   | { kind: "research" };
 
 export interface AssistantAnswer {
+  /** Which step handled it, shown under the answer. Default: the quote check and the injection shield. */
+  handledBy?: string;
   title: string;
   tone: "ok" | "warn";
   lines: string[];
@@ -28,8 +31,35 @@ const NOT_NAMES = new Set(["save", "add", "attach", "store", "this", "that", "no
 const names = (s: string) => [...new Set((s.match(/\p{Lu}[\p{L}'’\-]+/gu) ?? []).filter((w) => !NOT_NAMES.has(w.toLowerCase())))];
 const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^\p{L}]+/gu, "");
 
+/** At least this share of what was pasted must be references for the request to be treated as references. */
+export const REF_SHARE = 0.6;
+/** More than this many pasted references belong in the Reference X-ray. */
+export const MAX_PASTED_REFS = 25;
+
+const LINK = /^(?:https?:\/\/\S+|(?:doi:\s*)?10\.\d{4,9}\/\S+|arxiv:\s*\d{4}\.\d{4,5}\S*)$/i;
+/** A full citation, not a question: an author-style start and a year, and it does not end with a question mark. */
+const CITATION = /^(?:\[\d+\]\s*|\d+[.)]\s*|[A-Za-z][.)]\s+)?\p{Lu}[\p{L}'’\-]+(?:,|\s\p{Lu}{1,3}[,.])[\s\S]{20,}\b(?:19|20)\d{2}\b/u;
+
+/**
+ * References pasted where a question was expected (Phase 2): DOIs, doi.org or arXiv links, web links, or full
+ * citations, one per line or several links on one line. Each one must be looked up as itself, never searched as
+ * keywords. A normal question that merely contains a DOI is still a question.
+ */
+export function pastedReferences(text: string): string[] | undefined {
+  const lines = text.split(/\n+/).map((l) => l.trim()).filter(Boolean);
+  const items = lines.flatMap((l) => {
+    const parts = l.split(/[\s,;]+/).filter(Boolean);
+    return parts.length > 1 && parts.every((x) => LINK.test(x)) ? parts : [l];
+  });
+  const isRef = (it: string) => LINK.test(it) || (!/\?\s*$/.test(it) && CITATION.test(it));
+  const refs = items.filter(isRef);
+  return refs.length > 0 && refs.length / items.length >= REF_SHARE ? refs : undefined;
+}
+
 export function routeRequest(text: string): Routed {
   const t = text.trim();
+  const pasted = pastedReferences(t);
+  if (pasted) return { kind: "references", items: pasted.slice(0, MAX_PASTED_REFS), tooMany: pasted.length > MAX_PASTED_REFS };
   const q = t.match(QUOTED);
   if (/^\s*(?:please\s+)?(?:save|add|attach|store)\b[^“"]{0,80}\bnote\b/i.test(t)) {
     const head = q ? t.slice(0, q.index) : t.split(":")[0];
@@ -55,7 +85,7 @@ function find(sources: SourceRecord[], who: string[], year?: number): SourceReco
 /** Looks like an order to the checker hidden in content. It is stored as text and not followed. */
 const INSTRUCTION = /\b(?:system|assistant|developer)\s*:|ignore\b[^.]{0,40}\b(?:rules?|instructions?|checks?)|mark\b[^.]{0,60}\bverified\b|override\b|disregard\b/i;
 
-export function answerRequest(r: Exclude<Routed, { kind: "research" }>, sources: SourceRecord[]): AssistantAnswer {
+export function answerRequest(r: Exclude<Routed, { kind: "research" } | { kind: "references" }>, sources: SourceRecord[]): AssistantAnswer {
   const src = find(sources, r.who, r.kind === "quote" ? r.year : undefined);
   const who = r.who.length ? r.who.join(", ") : "that author";
   if (r.kind === "note") {
