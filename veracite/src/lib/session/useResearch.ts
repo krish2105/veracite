@@ -170,7 +170,7 @@ export function useResearch(autonomy: Autonomy) {
         claims = sk.claims;
         notes.push(...notesFrom(sk, "Skeptic"));
       }
-      patch((y) => ({ evidence: read.data, claims, blocked, phase: claims.length ? "cp3_claims" : "export", busy: undefined, notes: [...y.notes, ...notes, ...(claims.length ? [] : ["No claims could be drawn from the approved sources' text."])] }));
+      patch((y) => ({ evidence: read.data, claims, blocked, phase: claims.length ? "cp3_claims" : "export", busy: undefined, notes: [...y.notes, ...notes, ...(claims.length ? [] : ["No claims could be drawn from the approved sources' text. None of their abstracts has a sentence that answers your question, so Veracite wrote nothing instead of guessing. Try a more specific question, or approve different sources."])] }));
     } catch (e) {
       // Back to checkpoint 2, so Try again re-runs the agents on the same approved sources.
       patch({ phase: "cp2_sources" });
