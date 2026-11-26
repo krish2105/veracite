@@ -11,7 +11,7 @@ Used to measure the Verifier and Reference X-ray. Its results go on the Trust Ce
 **Total: 51 records** (30 real · 1 fabricated · 10 chimeras · 5 retracted · 5 web). 30 should come out `verified` (the real set); the other **21 must never be marked Verified** (1 fabricated, 10 chimeras, 5 retracted, 5 web pages: a page without a DOI is at most `partial`, docs/03 §3).
 | `chimeras.json` | 10 | Real title + wrong authors/year (or real authors + someone else's title, or a real DOI on the wrong citation) | ✅ Built by hand from records in `real.json` (`built_from`, `altered`) |
 | `retracted.json` | 5 | Real, retracted papers | ✅ Each confirmed retracted via Crossref `updated-by` (Retraction Watch data) on 24 Nov 2026 |
-| `web.json` | 5 | Web pages (for the web-source + Wayback check) | ✅ 3 live + 1 dead with a Wayback copy → all `partial`; 1 fake path → `notfound`. (Corrected 25 Nov: the 3 live pages were wrongly `verified` before.) Checked by `GET /api/sources/wayback` (Z16): 5/5 match live |
+| `web.json` | 5 | Web pages (for the web-source + Wayback check) | ✅ 3 live + 1 dead with a Wayback copy → all `partial`; 1 fake path → `notfound`. (Corrected 25 Nov: the 3 live pages were wrongly `verified` before.) Checked by `GET /api/sources/wayback` (Z16): 5/5 match live. **26 Nov:** `web-004` swapped from a u.ae page (the Wayback Machine stopped listing its copy) to a dead 2003 Crossref news release (no DOI, not in any registry) that the Wayback Machine has, whose address matches its title (the X-ray needs that for a dead page) |
 
 ## Record format
 ```json
