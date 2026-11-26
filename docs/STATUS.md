@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 09:16 (Dubai)** · commit `3e8a3ae`
+> Last updated **Thu 26 Nov, 09:31 (Dubai)** · commit `7260524`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███████░░░ **74%** (60/81 tasks) |
+| **Overall progress** | ███████░░░ **74%** (61/82 tasks) |
 | **P0 demo spine** | ████████░░ 25/31 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -17,13 +17,13 @@
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
-| Arrive at the Simulation Lab | Thu 13:15 | **3h 58m** |
-| Phase 2 submissions close | Thu 15:00 | **5h 43m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **3h 43m** |
+| Phase 2 submissions close | Thu 15:00 | **5h 28m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████████░ 94% | 47 | 0 | 3 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █████████░ 94% | 48 | 0 | 3 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -36,7 +36,7 @@
 | Honesty & verification in action | 10 | ██████████ 100% (30/30) |
 | Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
 | User experience | 8 | ████████░░ 78% (21/27) |
-| Presentation & Q&A | 12 | ████░░░░░░ 43% (6/14) |
+| Presentation & Q&A | 12 | █████░░░░░ 47% (7/15) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
 | AI quiz | 5 | n/a |
 
@@ -121,6 +121,7 @@ _Nothing blocked._
 - **K50** Presenter deck: one slide per demo segment, the full spoken script in the speaker notes (Presenter View), generated from `script.html` · Krishna Mathur
 - **K51** Spoken script in the speaker notes of the Phase 1 deck itself (per slide: what to say, then the matching demo segment, then sources); slides unchanged · Krishna Mathur
 - **K52** Make the difference from a DOI checker visible: Trust Center comparison table (DOI-only check vs Veracite, same 51 references), X-ray shows the wrong-DOI chimera first with a one-line note; script updated · Krishna Mathur
+- **K53** Type-and-show file for the live demo (what to paste at each step, what judges see, fallbacks) and a 100-question AI quiz PDF · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
 - **K13** Public verify API `GET /api/v1/verify?doi=` (first step to an MCP server) · Krishna Mathur
