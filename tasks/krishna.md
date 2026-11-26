@@ -6,7 +6,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 
 ## Tuesday night · unblock the team (M0)
 - [x] **K00** · P0 · Docs, deck, repo, task system and 3D prototypes in place · `docs/** submissions/** tasks/**` · due Tue 13:00 · #deck
-- [ ] **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · due Tue 22:00 · #mvp
+- [x] **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · due Tue 22:00 · #mvp
+    - 26 Nov: Groq and OpenAlex keys on Vercel Production (not copied into `.env.local`, by choice); live `/api/health` says `"ai":"ai"`; Avighna and Zedan are collaborators. Two full live Co-pilot sessions on 26 Nov; the second (07:47 Dubai) is the SAMPLE.
     - `.env.example` model map already updated in K06. Vercel project `veracite` created and deployed (K07). Still to do: paste the keys into `.env.local` and Vercel, confirm the model IDs and whether Prompt Guard 2 is free, add Avighna to the repo.
 - [x] **K01** · P0 · Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · `veracite/src/components/app/tabs/**` · due Tue 22:30 · #ux
     - Blocks everyone. Merge to `main` first.
@@ -49,8 +50,8 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
     - 25 Nov: `lib/agents/explain.ts` + `POST /api/agents/explain` + a button on every Library source. Verified only when the quote is in the abstract; made-up quotes removed; answers need a real quote or say Not found. Rules mode shows the abstract's sentences and matches questions without AI. 11 tests. Not yet run against a real model (no key).
 - [x] **K31** · P1 · First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states · `veracite/src/components/app/journey/**` · #ux
     - 25 Nov: slim strip under every page header (never a popup), ticks itself from the receipts log + two marks (citation inserted, certificate made), Hide guide remembered, `?journey=1` brings it back; home CTA "Try the full journey". Empty states checked on all six pages. 5 tests.
-- [~] **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · `scripts/prewarm.mjs veracite/src/lib/session/**` · #dayof
-    - 25 Nov: `scripts/prewarm.mjs` (13/13 live); live-site eval = same numbers (median 0.66 s live vs 0.46 s local), kept in `tests/results/live-site.md`; error banners say which step failed + Try again (5 tests); SAMPLE replay + `?record=1` recorder built and tested. **Left: record the AI SAMPLE session after K02 (needs the Groq key).**
+- [x] **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · `scripts/prewarm.mjs veracite/src/lib/session/**` · #dayof
+    - 25 Nov: `scripts/prewarm.mjs` (13/13 live); live-site eval = same numbers (median 0.66 s live vs 0.46 s local), kept in `tests/results/live-site.md`; error banners say which step failed + Try again (5 tests); SAMPLE replay + `?record=1` recorder built and tested. 26 Nov: AI SAMPLE recorded live (Co-pilot, 07:47 Dubai, the Skeptic catches a correlation read as a cause) and pasted unchanged into `tabs/research/sampleSession.ts`; button, banner and click-through tested 11/11.
 
 ## Thursday 00:50 · quick wins from the research pass ("Do all")
 - [x] **K33** · P1 · Free full text: a legal open-access link (OpenAlex OA location, arXiv PDF) on X-ray rows, Library, save page and research sources · `veracite/src/lib/registries/fulltext*` · #research
