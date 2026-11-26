@@ -24,7 +24,7 @@ import { checkWebSource, type WebCheck } from "../../app/api/sources/wayback/che
 import type { ReferenceInput, RegistryRecord, Verification } from "../types";
 import { parseReference } from "./parse";
 import { decide, rankCandidates, titleScoreFor, type Evidence } from "./rules";
-import { T } from "./text";
+import { checkYear, T } from "./text";
 import { applyWebCheck, withDeadline } from "./web";
 
 export interface RegistryDeps {
@@ -81,6 +81,14 @@ export async function verifyReference(input: ReferenceInput | string, deps: Regi
   if (bestCrossref < T.titleClose && ref.title) {
     cands.push(...(await safe(deps.openalexSearch(ref.title, { titleOnly: true, perPage: 5 }), [], "openalex")));
     if (/arxiv|preprint/i.test(ref.raw)) cands.push(...(await safe(deps.arxivSearch(ref.title, 3), [], "arxiv")));
+  }
+  // A title match with the wrong year and no DOI to anchor it: the same work is often registered more than once
+  // (preprint, proceedings, a later copy). Look for its other versions, so the cited year can be matched to a real
+  // record, and the saved link is one that opens.
+  const top = rankCandidates(ref, cands)[0];
+  if (!ref.doi && ref.title && top && bestCrossref >= T.titleClose && checkYear(ref.year, top.year) === "different") {
+    cands.push(...(await safe(deps.openalexSearch(ref.title, { titleOnly: true, perPage: 5 }), [], "openalex")));
+    cands.push(...(await safe(deps.arxivSearch(ref.title, 3), [], "arxiv")));
   }
   ev.candidates = rankCandidates(ref, cands);
 

@@ -41,6 +41,25 @@ const T = (s, t, o) => s.addText(t, { isTextBox: true, margin: 0, fontFace: F.bo
     { x: 9.4, y: 1.95, w: 3.1, h: 3.7, valign: "top", paraSpaceAfter: 8 });
   s.addNotes("Run sheet. Open Slide Show → Presenter View: each slide's notes hold the words to say, in full. Stage directions are in brackets. The projector shows the live site, not this deck."); }
 
+// Architecture: which agent is called, on what basis, and which Phase 2 case it handles.
+{ const s = pres.addSlide(); s.background = { color: K.paper };
+  T(s, "ARCHITECTURE · WHO IS CALLED, AND ON WHAT BASIS", { x: 0.6, y: 0.4, w: 12, h: 0.3, fontFace: F.mono, fontSize: 11, color: "5B4BC4" });
+  T(s, "AI suggests. Code checks. Registries are the only source. You decide.", { x: 0.6, y: 0.72, w: 12.1, h: 0.6, fontFace: F.head, bold: true, fontSize: 22 });
+  const H = (t) => ({ text: t, options: { bold: true, fontFace: F.mono, fontSize: 9, color: K.ink2 } });
+  const A = (t, ai) => ({ text: t, options: { bold: true, color: ai ? "5B4BC4" : "1F6F68" } });
+  const rows = [[H("AGENT / STEP"), H("AI OR CODE"), H("CALLED WHEN (THE BASIS)"), H("WHAT IT MAY DO"), H("PHASE 2 CASE")],
+    [A("Planner", 1), "AI · gpt-oss-20b", "You ask a research question", "Suggest search terms. Never names a paper", "6 No source exists"],
+    [A("Scout", 0), "Code", "You approve the plan (checkpoint 1)", "Search Crossref, OpenAlex, arXiv", "6"],
+    [A("Verifier", 0), "Code, no AI", "Every pasted reference and every search result", "Compare each field with two registries; retraction and duplicate checks", "1 Not found · 2 Mismatch · 3 Needs fix · 4 Retracted · 5 Duplicate"],
+    [A("Reader", 1), "AI · gpt-oss-20b", "You approve the sources (checkpoint 2)", "Pull exact quotes; code checks each quote is in the text", "B3 quote not in source"],
+    [A("Scribe", 1), "AI · gpt-oss-120b", "Co-pilot mode only, after the Reader", "Draft claims from approved sources only; invented IDs are blocked", "—"],
+    [A("Skeptic", 1), "AI · Qwen (other company)", "After every draft", "Challenge each claim; can only lower a label", "—"],
+    [A("Integrity Clerk", 0), "Code", "You export (checkpoint 3)", "Write statuses and the AI-use statement into every export", "Constraints 1 and 4"],
+    [A("Injection shield", 0), "Code", "Any note or source text is saved or read", "Treat it as content, never as a command", "B5"]];
+  s.addTable(rows, { x: 0.6, y: 1.45, w: 12.1, colW: [1.7, 2.0, 3.0, 3.4, 2.0], fontFace: F.body, fontSize: 10.5, color: K.ink, border: { type: "solid", pt: 0.5, color: K.line }, fill: { color: K.card }, valign: "top", margin: 0.06 });
+  T(s, "Website (your browser) → server functions on Vercel (agents + Verifier) → Groq free tier (AI) and Crossref · OpenAlex · arXiv · Wayback (sources) → reference storage on your device. Teal = code, violet = AI.", { x: 0.6, y: 6.55, w: 12.1, h: 0.5, fontSize: 11, color: K.ink2 });
+  s.addNotes("Architecture, to show if a judge asks which agent is called and on what basis. Read it left to right: each agent is called by a student action, not by another agent deciding on its own. The Verifier is code and handles five of today's six cases; Planner, Scout and Verifier together handle 'no source exists', because only a registry record can become a source. On the live site, every result has a 'Handled by' line that says the same thing."); }
+
 segs.forEach((g, i) => {
   const [name, col] = WHO[g.who]; const s = pres.addSlide(); s.background = { color: K.paper };
   s.addShape(pres.ShapeType.rect, { x: 0, y: 0, w: 0.28, h: 7.5, fill: { color: col }, line: { color: col } });
@@ -63,4 +82,4 @@ segs.forEach((g, i) => {
   if (g.risks.length) { notes.push("— IF SOMETHING GOES WRONG —"); g.risks.forEach((r) => notes.push(r)); }
   s.addNotes(notes.join("\n"));
 });
-pres.writeFile({ fileName: OUT }).then(() => { try { require("child_process").execFileSync("zip", ["-dq", OUT, "*/"]); } catch {} }).then(() => console.log(`${segs.length + 1} slides → ${OUT}`));
+pres.writeFile({ fileName: OUT }).then(() => { try { require("child_process").execFileSync("zip", ["-dq", OUT, "*/"]); } catch {} }).then(() => console.log(`${segs.length + 2} slides → ${OUT}`));
