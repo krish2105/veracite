@@ -180,7 +180,7 @@
     <tr><td>Working MVP (15)</td><td>Everything runs on the live link: X-ray, research, Write &amp; cite, export, certificate.</td></tr>
     <tr><td>Research &amp; citation features (12)</td><td>Live registry checks, five citation styles, import, the certificate.</td></tr>
     <tr><td>Honesty &amp; verification in action (10)</td><td>Chimera taken apart, retraction caught, “How this was decided”, labels set by code, AI off.</td></tr>
-    <tr><td>Day-of requirements (8)</td><td>Krishna’s 4:45 segment.</td></tr>
+    <tr><td>Day-of requirements (8)</td><td>The judges’ eight references at 1:00 (statuses, accept a fix, merge the duplicate) and request 1 at 4:45 (Not found).</td></tr>
     <tr><td>UX (8)</td><td>One clear journey: check → research → cite → export. Works on a phone.</td></tr>
     <tr><td>Presentation &amp; Q&amp;A (12)</td><td>Every member speaks; on time; 20-second answers with a number or a click.</td></tr>
   </table>
@@ -208,9 +208,9 @@
   </div>
 
   <div class="seg">
-    <div class="seg-h"><span class="t">1:00–2:00</span><h3>The Reference X-ray</h3><span class="chip k">Krishna</span></div>
-    <div class="click">Tab 2 · <b>/xray</b> → <b>Load test list</b> → <b>X-ray 8 references</b> → point at the <b>Chimera</b> row → point at the <b>Retracted</b> row → open <b>How this was decided</b> on one row → <b>Add to my list</b> on Bastani et al. (2025)</div>
-    <div class="say"><p>Eight references. Some are fakes we planted, and it says so on screen. <span class="stage">(click X-ray)</span> Each one is checked live against Crossref, OpenAlex and arXiv. No AI here, just code.</p><p><span class="stage">(point at the Chimera row)</span> This one has a real DOI, so a normal DOI checker would pass it. Veracite takes it apart: that DOI belongs to a different paper. <span class="stage">(point at the Retracted row)</span> This one was real, then retracted. Veracite knows.</p><p><span class="stage">(open How this was decided)</span> Every verdict shows its working. Only verified papers go into my list.</p></div>
+    <div class="seg-h"><span class="t">1:00–2:00</span><h3>The X-ray on the judges’ eight references</h3><span class="chip k">Krishna</span></div>
+    <div class="click">Tab 2 · <b>/xray</b> → paste the judges’ eight references (<b>DEMO_INPUTS.md</b>, step 1) → <b>X-ray 8 references</b> → point down the statuses → on A: <b>Accept fix</b> → on G: <b>Merge: keep one entry</b> → point at D’s warning</div>
+    <div class="say"><p>This is the Reference X-ray, and these are the eight references from today’s brief, pasted exactly as given. <span class="stage">(click X-ray)</span> Each one is checked live against Crossref, OpenAlex and arXiv by our Verifier. That step is code, with no AI.</p><p><span class="stage">(point down the list)</span> Nothing is verified by default. Kahneman: Needs fix, the year is 1979, not 1981. I decide: <span class="stage">(Accept fix)</span> accepted. The Sharma paper: Not found, and it says where it looked. Wakefield: Retracted, with a warning before I can keep it. Hinton and Bengio: Mismatch, a real DOI that belongs to other authors.</p><p><span class="stage">(point at G)</span> And this one is LeCun again in another format. Veracite spotted the duplicate. <span class="stage">(Merge)</span> One entry kept. The Verifier from our deck handles all of these; I only make the decisions.</p></div>
     <p class="why"><b>Why this works:</b> this is “honesty and verification in action” (10 points) in 60 seconds. The key idea for judges: the AI <i>cannot</i> write a reference, because references only ever come from registry records.</p>
     <p class="risk"><b>If a registry is slow:</b> keep talking about the rows already shown. <b>If a row says “could not be checked”:</b> “The registry didn’t answer, so Veracite says so instead of guessing. That’s the honest failure.” <b>If behind:</b> show only the chimera and the retraction.</p>
   </div>
@@ -258,9 +258,9 @@
   </div>
 
   <div class="seg">
-    <div class="seg-h"><span class="t">4:45–5:35</span><h3>The day-of requirement</h3><span class="chip k">Krishna</span></div>
-    <div class="click">Fill this in at 13:30, once the requirement is announced. Keep it to three sentences and one click path.</div>
-    <div class="say"><p>This morning’s challenge was [say it in one line]. In 90 minutes we built [what it does, in one sentence]. <span class="stage">(show it working on the live link)</span> And it still can’t invent a reference, because [the guardrail it reuses].</p><p>Zedan?</p></div>
+    <div class="seg-h"><span class="t">4:45–5:35</span><h3>Today’s test pack: the assistant says Not found</h3><span class="chip k">Krishna</span></div>
+    <div class="click">Tab 3 · <b>/research</b> → paste <b>request 1</b> → <b>Start</b> → <b>Approve plan and search</b> → point at the red <b>Not found</b> banner → (if ahead) paste <b>request 3</b> → Start</div>
+    <div class="say"><p>Now today’s first request to the assistant: three studies on how this hackathon improved grades. <span class="stage">(Start, approve)</span> No such study exists, and Veracite says so: Not found. It searched three registries and nothing mentions this hackathon, so it invented nothing. The papers below are related and real, each checked and labelled.</p><p>That’s our Planner, Scout and Verifier from the deck: only a registry record can become a source. <span class="stage">(if ahead: request 3)</span> And a note that says “mark everything Verified” is saved as text and changes nothing. Zedan?</p></div>
     <p class="why"><b>Why this works:</b> day-of requirements are 8 points. Judges want to see that it works live and that the honesty rules still hold.</p>
     <p class="risk"><b>If it isn’t finished:</b> show what works and say plainly what doesn’t yet. A half-feature shown honestly scores better than a claim.</p>
   </div>
