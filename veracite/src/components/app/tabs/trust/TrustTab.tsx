@@ -10,6 +10,8 @@ import { buildLedger, ledgerToCSV, ledgerToJSON, ledgerToMarkdown } from "@/lib/
 import { DEFAULT_CHAINS } from "@/lib/llm/models";
 import type { Health } from "@/lib/types";
 import results from "../../../../../tests/results/latest.json";
+import baselineRun from "../../../../../tests/results/baseline-doi-exists.json";
+import { compareCheckers } from "./baseline";
 
 const ISSUES = "https://github.com/krish2105/veracite/issues/new?title=Wrong%20verdict&body=Paste%20the%20reference%20and%20the%20verdict%20you%20expected.%20No%20personal%20data%2C%20please.";
 
@@ -42,6 +44,7 @@ export function TrustTab() {
   }, []);
 
   const m = results.summary;
+  const cmp = compareCheckers(baselineRun, results);
   const rows = results.rows as { id: string; set: string; expected: string; got: string }[];
   const count = (set: string, ok: (r: (typeof rows)[number]) => boolean) => {
     const in_ = rows.filter((r) => r.set === set);
@@ -73,6 +76,21 @@ export function TrustTab() {
           <p className="vx-tiny">
             Run {new Date(results.ranAt).toLocaleString("en-GB", { timeZone: "Asia/Dubai", dateStyle: "medium", timeStyle: "short" })} (Dubai) against live Crossref, OpenAlex and arXiv.
             Median {(m.timeMs.median / 1000).toFixed(1)} s per reference. Test data written or collected by Team 7; a small set, so treat the numbers as a check, not a guarantee.
+          </p>
+        </Card>
+
+        <Card title={<>Why a DOI check is not enough · the same {cmp.total} references</>}>
+          <table className="trust-cmp">
+            <thead><tr><th scope="col">On the same test set</th><th scope="col">A DOI-only check</th><th scope="col">Veracite</th></tr></thead>
+            <tbody>
+              {cmp.rows.map((r) => (
+                <tr key={r.what}><th scope="row">{r.what}</th><td>{r.baseline}</td><td><b>{r.veracite}</b></td></tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="vx-tiny">
+            The DOI-only check is a baseline we wrote for comparison, not a product: it asks only whether the DOI or link exists. Run {new Date(cmp.baselineRanAt).toLocaleString("en-GB", { timeZone: "Asia/Dubai", dateStyle: "medium" })} on
+            our own test set. It passes a real DOI attached to the wrong paper, and a retracted paper, because both DOIs exist.
           </p>
         </Card>
 

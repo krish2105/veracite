@@ -43,11 +43,13 @@ export function ChimeraPanel({ n, parts }: { n?: number; parts?: ChimeraPart[] }
     );
   }
   const slices = parts.slice(0, 3);
+  const realDoi = parts.some((p) => p.field === "doi" && p.belongsTo);
   return (
     <>
       <p className="vx-tiny" style={{ marginTop: 0 }}>
         Reference {n} · built from parts of real references (SP Jain policy §h(ix)) · click to {open ? "reassemble" : "take apart"}
       </p>
+      {realDoi && <p className="vx-tiny" style={{ marginTop: 0 }}><b>A DOI-only check would pass this reference:</b> its DOI is real, but it belongs to a different paper.</p>}
       <div
         className={`chim ${open ? "open" : ""}`}
         style={{ marginTop: 64 }}

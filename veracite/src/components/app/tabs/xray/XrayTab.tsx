@@ -60,7 +60,9 @@ export function XrayTab() {
   const lines = Object.values(state.lines);
   const done = lines.length;
   const counts = ORDER.map((s) => [s, lines.filter((l) => l.verification.status === s).length] as const).filter(([, c]) => c > 0);
-  const firstChimera = lines.filter((l) => l.verification.status === "chimera").sort((a, b) => a.n - b.n)[0];
+  // Show first the chimera a DOI-only check would pass (a real DOI on the wrong paper); otherwise the first one (K52).
+  const chimeras = lines.filter((l) => l.verification.status === "chimera").sort((a, b) => a.n - b.n);
+  const firstChimera = chimeras.find((l) => l.verification.parts?.some((p) => p.field === "doi" && p.belongsTo)) ?? chimeras[0];
   const shown = chimeraN ? state.lines[chimeraN] : firstChimera;
 
   // Every finished check goes into the log the AI-use statement is built from.
