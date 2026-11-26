@@ -153,6 +153,19 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
       workLookup = best.doi ? ev.confirmations[best.doi] : undefined;
     }
   }
+  // The same work can be registered more than once (a preprint, the conference paper, a later re-registered copy).
+  // When no DOI was pasted and the best title match has a different year, prefer the version of the SAME work
+  // (same title, same first author) that carries the cited year, so the saved record and its link are the real ones.
+  if (work && !input.doi && checkYear(input.year, work.year) === "different") {
+    const chosen = work;
+    const better = rankCandidates(input, ev.candidates).find(
+      (c) => c !== chosen && titleSimilarity(chosen.title, c.title) >= T.titleClose && authorsFor(input, c).firstOk && ["exact", "close"].includes(checkYear(input.year, c.year)),
+    );
+    if (better) {
+      work = better;
+      workLookup = better.doi ? ev.confirmations[better.doi] : undefined;
+    }
+  }
   const hijacked = !!doiRec && !doiNotice && !!input.title && (!work || !sameDoi(work.doi, doiRec.doi));
 
   /* ---------- 3. No credible work: chimera (real DOI, other paper) or not found ---------- */

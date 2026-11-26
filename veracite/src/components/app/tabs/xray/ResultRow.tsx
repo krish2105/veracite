@@ -20,6 +20,15 @@ const VERDICT: Record<RefStatus, string> = {
   notfound: "Not found.",
 };
 const LABEL: Record<RefStatus, string> = { verified: "Verified", partial: "Partial", mismatch: "Needs fix", chimera: "Mismatch", retracted: "Retracted", notfound: "Not found" };
+/** Which step from the Phase 1 deck handled this result, and on what basis it was called (Phase 2: "name the step"). */
+const HANDLED: Record<RefStatus, string> = {
+  verified: "check A: two registries (Crossref and OpenAlex) agree on the title, first author and year",
+  partial: "only part of the reference could be confirmed, so it is not Verified",
+  mismatch: "field-by-field comparison with the registry record; you decide whether to accept the correction",
+  chimera: "chimera check: the DOI, title or authors belong to different registry records",
+  retracted: "check B: retraction check (Crossref updates, Retraction Watch and OpenAlex)",
+  notfound: "searched Crossref, OpenAlex and arXiv; no record matches, and nothing is swapped in",
+};
 const FIELD: Record<string, string> = { doi: "DOI", title: "Title", authors: "Authors", year: "Year", venue: "Journal" };
 
 /** One reference in the X-ray results: verdict, plain-English reasons, the field-by-field table and the receipts. */
@@ -146,6 +155,10 @@ export function ResultRow({ n, raw, v, onTakeApart, dupOf, merged, onMerge }: { 
               </button>
             )}
           </div>
+          <p className="vx-tiny" style={{ margin: "6px 0 0" }}>
+            <b>Handled by:</b> the Verifier (code, no AI){v.web ? " and the web check (live page and Wayback Machine)" : ""}. Called for every pasted reference, before anything can enter your list. Basis: {v.web ? "a web page has no registry record, so it is a web source, not checked in a scholarly database" : HANDLED[v.status]}
+            {dupOf ? `; duplicate check: it resolves to the same record as reference ${dupOf}` : ""}.
+          </p>
           <HowDecided v={v} />
         </>
       )}

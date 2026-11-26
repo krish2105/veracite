@@ -123,6 +123,7 @@ export function ResearchTab() {
             <span>
               <b>{s.assistant.title}.</b>{" "}
               {s.assistant.lines.map((l, i) => <span key={i} style={{ display: "block", marginTop: i ? 4 : 0 }}>{l}</span>)}
+              <span style={{ display: "block", marginTop: 4 }}><b>Handled by:</b> code, with no AI call (the quote check and the prompt-injection shield from our guardrails). The Planner was not called, because this is not a research question.</span>
             </span>
           </div>
         )}
@@ -133,6 +134,7 @@ export function ResearchTab() {
             <span>
               <b>Not found.</b> Veracite searched Crossref, OpenAlex and arXiv, and no source mentions {s.notFound.map((p) => `“${p}”`).join(" or ")}. No study answering this question exists there, so none was invented.
               {s.candidates.length > 0 && " The sources below are related real papers, each checked and labelled. They do not answer your question; you decide whether any is useful."}
+              <span style={{ display: "block", marginTop: 4 }}><b>Handled by:</b> Planner ({s.planBy === "ai" ? "AI: proposed the search terms you approved" : "Rules mode: your question as typed"}) → Scout (code: searched the registries) → Verifier (code: checked every result). Only a registry record can become a source, so there is nothing to invent with.</span>
             </span>
           </div>
         )}
