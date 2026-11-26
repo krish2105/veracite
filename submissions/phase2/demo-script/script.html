@@ -218,7 +218,7 @@
     <div class="click">Tab 2 · <b>/xray</b> → <b>Load test list</b> → <b>X-ray 8 references</b> → point at the <b>Chimera</b> row → point at the <b>Retracted</b> row → open <b>How this was decided</b> on one row → <b>Add to my list</b> on Bastani et al. (2025)</div>
     <div class="say">
       <p>This is the Reference X-ray. I’ve loaded a test list our team wrote, with a few fakes hidden in it; it says so right there. <span class="stage">(click X-ray)</span> Every line is now being checked live against Crossref, OpenAlex and arXiv. There’s no AI in this step. It’s plain code.</p>
-      <p><span class="stage">(point)</span> This one looks perfect. Veracite has taken it apart: the title is from Bastani’s 2025 paper, and these authors never wrote it. <span class="stage">(point)</span> This meta-analysis was real. It was retracted in April, and Veracite knows.</p>
+      <p><span class="stage">(point)</span> This one even has a real DOI, so a DOI checker would pass it. <span class="stage">(point at the panel on the right)</span> Veracite has taken it apart: that DOI belongs to a different paper, Bastani’s, and no paper has this title. We call that a chimera: a fake built from real parts. <span class="stage">(point)</span> This meta-analysis was real. It was retracted in April, and Veracite knows.</p>
       <p><span class="stage">(open How this was decided)</span> And you never have to trust a label blindly: it shows which registries it searched, what came back, and the exact rule. The real ones go into my list with one click.</p>
     </div>
     <p class="why"><b>Why this works:</b> this is “honesty and verification in action” (10 points) in 60 seconds. The key idea for judges: the AI <i>cannot</i> write a reference, because references only ever come from registry records.</p>
@@ -307,9 +307,9 @@
 
   <div class="seg">
     <div class="seg-h"><span class="t">6:35–7:15</span><h3>Trust Center and AI off</h3><span class="chip z">Zedan</span></div>
-    <div class="click">Tab 5 · <b>/trust</b> → point at the results card → switch <b>AI autonomy</b> (left sidebar) to <b>Off</b> → point at the status line</div>
+    <div class="click">Tab 5 · <b>/trust</b> → point at the results card → point at the <b>DOI-only check</b> table → switch <b>AI autonomy</b> (left sidebar) to <b>Off</b> → point at the status line</div>
     <div class="say">
-      <p>We don’t ask you to trust us; we measured it. Fifty-one test references, including fakes we built to be hard: zero fakes marked Verified. Eleven out of eleven fakes caught, thirty out of thirty real references verified, five out of five retractions flagged. We ran it again on the live site last night: same result. Our weakest set is web pages, three out of five, and we publish that too.</p>
+      <p>We don’t ask you to trust us; we measured it. Fifty-one test references, including fakes we built to be hard: zero fakes marked Verified. Eleven out of eleven fakes caught, thirty out of thirty real references verified, five out of five retractions flagged. <span class="stage">(point at the table)</span> And here is the same test on a checker that only asks whether the DOI exists: it passed twelve fakes or retracted papers as fine. Veracite passed none. Our weakest set is web pages, three out of five, and we publish that too.</p>
       <p><span class="stage">(AI off)</span> And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server.</p>
     </div>
     <p class="why"><b>Why this works:</b> it backs every claim with a number and shows the strongest guardrail: the checks don’t depend on the AI being right.</p>
@@ -448,7 +448,7 @@
   <p class="muted small">Three turns, about 4 minutes. You hold the mouse for most of the demo, so narrate what’s happening while things load; never leave silence.</p>
 
   <div class="cue"><span class="t">1:00–2:00 · /xray → Load test list → X-ray 8 references → Chimera row → Retracted row → How this was decided → Add to my list</span>
-    <div class="say"><p>This is the Reference X-ray. A test list our team wrote, with fakes hidden in it; it says so right there. Every line is checked live against Crossref, OpenAlex and arXiv. No AI in this step: it’s plain code. This one looks perfect, but Veracite has taken it apart: Bastani’s title, authors who never wrote it. This meta-analysis was real; it was retracted in April, and Veracite knows. And you never trust a label blindly: it shows what it searched and the exact rule. The real ones go into my list with one click.</p></div>
+    <div class="say"><p>This is the Reference X-ray. A test list our team wrote, with fakes hidden in it; it says so right there. Every line is checked live against Crossref, OpenAlex and arXiv. No AI in this step: it’s plain code. This one even has a real DOI, so a DOI checker would pass it. Veracite has taken it apart: that DOI belongs to a different paper, and no paper has this title. This meta-analysis was real; it was retracted in April, and Veracite knows. And you never trust a label blindly: it shows what it searched and the exact rule. The real ones go into my list with one click.</p></div>
     <p class="risk small">Behind? Chimera and retraction only. A row says “could not be checked”? “It says so instead of guessing.”</p></div>
 
   <div class="cue"><span class="t">2:00–4:15 · /research → Use the example question → Co-pilot → Start → Approve plan and search → Add to my list ×3 → Continue → labels, Skeptic → Keep / Edit / Drop → Approve claims and export</span>
@@ -474,8 +474,8 @@
     <p>And a professor scans this QR. The whole bibliography is inside the link, and Veracite checks every reference again, live. That’s SP Jain clause g(vi), faculty verifying references, in one scan.</p></div>
     <p class="risk small">Behind? Skip the bias lens. Ahead? Import → <i>Load sample file</i> → <i>Check only its references</i>: “Bring your Zotero library; keep only what’s real.”</p></div>
 
-  <div class="cue"><span class="t">6:35–7:15 · /trust → results card → AI autonomy: Off</span>
-    <div class="say"><p>We don’t ask you to trust us; we measured it. Fifty-one test references, with fakes built to be hard: zero fakes marked Verified. Eleven of eleven fakes caught, thirty of thirty real ones verified, five of five retractions flagged. Same result on the live site last night. Our weakest set is web pages, three of five, and we publish that too.</p>
+  <div class="cue"><span class="t">6:35–7:15 · /trust → results card → DOI-only table → AI autonomy: Off</span>
+    <div class="say"><p>We don’t ask you to trust us; we measured it. Fifty-one test references, with fakes built to be hard: zero fakes marked Verified. Eleven of eleven fakes caught, thirty of thirty real ones verified, five of five retractions flagged. A DOI-only checker passed twelve fakes or retracted papers on the same test; Veracite passed none. Our weakest set is web pages, three of five, and we publish that too.</p>
     <p>And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server. <b>Avighna?</b></p></div>
     <p class="risk small">Behind? Drop the API and MCP sentence. No Wi-Fi? The Trust numbers still show: they’re from a committed file.</p></div>
 
