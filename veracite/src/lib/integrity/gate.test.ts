@@ -32,11 +32,13 @@ describe("export gate", () => {
     expect(g.lines.at(-1)).toEqual({ level: "warn", text: "2 sources were only partly confirmed or had a mismatched detail. Check them by hand." });
   });
 
-  it("a failed source that slipped in blocks the export", () => {
+  it("Phase 2: a Mismatch, Retracted or Not found source is warned about, and the student decides (it stays marked)", () => {
     for (const status of ["chimera", "retracted", "notfound"] as const) {
       const g = exportGate([src("a"), src("x", { status })]);
-      expect(g.canExport, status).toBe(false);
-      expect(g.lines[0].level).toBe("block");
+      expect(g.canExport, status).toBe(true);
+      expect(g.blocked, status).toHaveLength(1);
+      expect(g.lines[0]).toMatchObject({ level: "warn" });
+      expect(g.lines[0].text).toMatch(/marked in every export/);
     }
   });
 

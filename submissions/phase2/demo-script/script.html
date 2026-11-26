@@ -127,7 +127,8 @@
   <p class="small muted">Same results on the live site, run 25 Nov at 23:50 Dubai: median 0.7 s per reference. The research stats: <i>Nature</i>, Feb 2026, 78–90 % of GPT-4o’s citations to recent research were fabricated · GPTZero via TechCrunch, Jan 2026, 100 hallucinated citations in 51 NeurIPS 2025 papers · SP Jain Academic Integrity Policy v2, 24 Feb 2026, clause h(ix).</p>
 
   <table style="margin-top:3mm">
-    <tr><th style="width:24%">Present from</th><td><b>https://veracite.vercel.app</b>, the live link (rule 15). Desktop browser, zoom 125 %, daylight mode, notifications off.</td></tr>
+    <tr><th style="width:24%">Time slot</th><td><b>10 minutes in total: 8 minutes of demo, then 2 minutes of judges’ questions.</b> Time limits are strict (rule 14): aim to finish the demo by 7:45, so the close is never cut off.</td></tr>
+    <tr><th style="width:24%">Present from</th><td><b>https://veracite-one.vercel.app</b>, our backup deployment, which has every change. Submit that link and present from it (rule 15); veracite.vercel.app is the same app without the last fixes. Desktop browser, zoom 125 %, daylight mode, notifications off.</td></tr>
     <tr><th>How to use this</th><td>Page 2: the checklist. Pages 3–6: the full walkthrough with explanations. Page 7: Q&amp;A. Page 8: how Veracite works, in plain words. Pages 9–11: <b>one cue card per person</b>; print yours and keep it in your hand. Page 12: the rehearsal plan for this morning.</td></tr>
   </table>
 </section>
@@ -193,11 +194,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">0:00–0:40</span><h3>The hook</h3><span class="chip a">Avighna</span></div>
     <div class="click">Tab 1 · <b>home page</b>, daylight mode · stand where the judges can see you and the screen</div>
-    <div class="say">
-      <p>Hi, we’re Team 7. <span class="stage">(beat)</span> Hands up if you’ve ever asked ChatGPT for sources. <span class="stage">(half a second)</span> In February, <em>Nature</em> reported that when GPT-4o cites recent research, between 78 and 90 per cent of those citations are made up.</p>
-      <p>At NeurIPS last year, a hundred fake citations got past reviewers in 51 accepted papers. And our own integrity policy, clause h(ix), now warns about references stitched together from parts of real papers.</p>
-      <p>If that happens in your essay, it’s your name on it, not the chatbot’s. So we built <b>Veracite</b>.</p>
-    </div>
+    <div class="say"><p>Hands up if you’ve ever asked ChatGPT for sources. <span class="stage">(beat)</span> Keep it up if you checked every single one. <span class="stage">(beat)</span> That’s the problem.</p><p>In February, <i>Nature</i> found that between 78 and 90 per cent of GPT-4o’s citations to recent research were made up. A hundred fake citations got into papers accepted at NeurIPS, the top AI conference. And when it happens in an essay, the student gets caught, not the chatbot. SP Jain’s own integrity policy names it, clause h(ix).</p><p>The brief asked for the speed of AI without the invented references. That’s Veracite.</p></div>
     <p class="why"><b>Why this works:</b> three facts, each with its source, then the stakes for the student. It frames the whole demo around honesty, which is what the problem statement asks for.</p>
     <p class="risk"><b>If behind:</b> drop the NeurIPS sentence.</p>
   </div>
@@ -205,10 +202,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">0:40–1:00</span><h3>The UV lamp</h3><span class="chip a">Avighna</span></div>
     <div class="click">Click <b>Switch on UV lamp</b> (top right) → move the lamp over the note → click <b>Check your references</b></div>
-    <div class="say">
-      <p>Think of a bank teller holding a note under a UV lamp. A real note shows its hidden watermark; a fake one doesn’t. <span class="stage">(lamp on)</span> This reference was written by a chatbot, and under the lamp it says <em>void</em>. The title is reworded from a real review, the authors are real but never wrote together, and the DOI doesn’t exist.</p>
-      <p>That’s called a chimera. Krishna’s going to show you how Veracite catches one on real references.</p>
-    </div>
+    <div class="say"><p>A bank teller checks a note under a UV lamp. We do the same for references. <span class="stage">(lamp on)</span> This one was written by a chatbot, and it looks perfect. Under the lamp: void. Real authors who never wrote together, a reworded title, a DOI that doesn’t exist.</p><p>A fake built from real parts. That’s a chimera. Krishna, show them a real one.</p></div>
     <p class="why"><b>Why this works:</b> the metaphor explains the product in one image, and the 3D scene says on screen that it is fictional SAMPLE data (hackathon rule 9).</p>
     <p class="risk"><b>If the 3D is slow:</b> skip the lamp and click <i>Check your references</i>. <b>Handover:</b> the last sentence is the handover; Krishna takes the mouse.</p>
   </div>
@@ -216,11 +210,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">1:00–2:00</span><h3>The Reference X-ray</h3><span class="chip k">Krishna</span></div>
     <div class="click">Tab 2 · <b>/xray</b> → <b>Load test list</b> → <b>X-ray 8 references</b> → point at the <b>Chimera</b> row → point at the <b>Retracted</b> row → open <b>How this was decided</b> on one row → <b>Add to my list</b> on Bastani et al. (2025)</div>
-    <div class="say">
-      <p>This is the Reference X-ray. I’ve loaded a test list our team wrote, with a few fakes hidden in it; it says so right there. <span class="stage">(click X-ray)</span> Every line is now being checked live against Crossref, OpenAlex and arXiv. There’s no AI in this step. It’s plain code.</p>
-      <p><span class="stage">(point)</span> This one even has a real DOI, so a DOI checker would pass it. <span class="stage">(point at the panel on the right)</span> Veracite has taken it apart: that DOI belongs to a different paper, Bastani’s, and no paper has this title. We call that a chimera: a fake built from real parts. <span class="stage">(point)</span> This meta-analysis was real. It was retracted in April, and Veracite knows.</p>
-      <p><span class="stage">(open How this was decided)</span> And you never have to trust a label blindly: it shows which registries it searched, what came back, and the exact rule. The real ones go into my list with one click.</p>
-    </div>
+    <div class="say"><p>Eight references. Some are fakes we planted, and it says so on screen. <span class="stage">(click X-ray)</span> Each one is checked live against Crossref, OpenAlex and arXiv. No AI here, just code.</p><p><span class="stage">(point at the Chimera row)</span> This one has a real DOI, so a normal DOI checker would pass it. Veracite takes it apart: that DOI belongs to a different paper. <span class="stage">(point at the Retracted row)</span> This one was real, then retracted. Veracite knows.</p><p><span class="stage">(open How this was decided)</span> Every verdict shows its working. Only verified papers go into my list.</p></div>
     <p class="why"><b>Why this works:</b> this is “honesty and verification in action” (10 points) in 60 seconds. The key idea for judges: the AI <i>cannot</i> write a reference, because references only ever come from registry records.</p>
     <p class="risk"><b>If a registry is slow:</b> keep talking about the rows already shown. <b>If a row says “could not be checked”:</b> “The registry didn’t answer, so Veracite says so instead of guessing. That’s the honest failure.” <b>If behind:</b> show only the chimera and the retraction.</p>
   </div>
@@ -238,17 +228,10 @@
     Checkpoint 3: point at the labels and a Skeptic challenge → <b>Keep / Edit / Drop</b> each claim → <b>Approve claims and export</b></div>
 
     <h3 style="margin-top:2mm; font-size:10pt">When the AI is live</h3>
-    <div class="say">
-      <p>Now the AI part. I’ll ask a real question: does generative AI help or hurt student learning? <span class="stage">(Start)</span> The Planner proposes a search plan, and nothing happens until I approve it. <span class="stage">(approve)</span> That’s checkpoint one.</p>
-      <p>The Scout searches the registries, and every source has already been through the same Verifier you just saw. <span class="stage">(add three)</span> I choose which ones go in. Checkpoint two.</p>
-      <p>Now the Reader pulls exact quotes from the abstracts, and the Scribe writes claims, but only from the sources I approved. Look at the labels. <span class="stage">(point)</span> Green means the quote really is in the abstract. Half-filled means the source says it, but we couldn’t check it. The diamond means this is the AI’s own reasoning. Code sets these labels, not the AI.</p>
-      <p><span class="stage">(point at a Skeptic flag)</span> And this is the Skeptic: a different model family, with no shared memory, whose only job is to disagree. When it finds a problem, like a correlation presented as a cause, code downgrades the label. I keep, edit or drop each claim. <span class="stage">(approve)</span> Checkpoint three. The student stays in charge the whole way.</p>
-    </div>
+    <div class="say"><p>Now the AI. My question: does generative AI help or hurt student learning? <span class="stage">(Start)</span> The Planner suggests a search, and nothing runs until I approve it. <span class="stage">(approve)</span> Checkpoint one.</p><p>Every source it finds has already been verified. I pick four. <span class="stage">(add, continue)</span> Checkpoint two.</p><p>Now the AI reads them and drafts claims, only from the sources I approved, quoting their exact words. Code checks every quote and sets every label. <span class="stage">(point at a Skeptic line)</span> Then a second AI, from a different company, tries to prove each claim wrong. If it finds a problem, the label drops.</p><p>I keep, edit or drop each one. <span class="stage">(approve)</span> Checkpoint three. The AI helps; I decide.</p></div>
 
     <h3 style="margin-top:2mm; font-size:10pt">When the AI is off (no key, or Groq is down)</h3>
-    <div class="say">
-      <p>The AI is switched off right now, and I want to show you that on purpose. <span class="stage">(Start)</span> In Rules mode, the plan is my question as I typed it. The searching and checking still run, because they’re code, not AI. I still approve the plan and choose the sources. The only thing missing is the AI drafting, and Veracite tells you that plainly instead of faking it.</p>
-    </div>
+    <div class="say"><p>The AI is off right now, on purpose. <span class="stage">(Start)</span> Searching and checking still run, because they’re code. I still approve the plan and the sources. Only the drafting is missing, and Veracite says so instead of faking it.</p></div>
     <p class="why"><b>Why this works:</b> it shows the workflow from the deck live (plan → sources → claims) and the two separations that matter: the Verifier is code, and the Skeptic is a different model. The labels are the honesty system the judges asked for.</p>
     <p class="risk"><b>If it is slow:</b> narrate what each agent is doing while it works; the whole session took about 20 seconds live on 26 Nov. <b>If it fails:</b> press <i>Try again</i> once; if it fails again, say so and switch to Rules mode (above). <b>If the Wi-Fi or the AI fails:</b> <i>No Wi-Fi or AI? Show the SAMPLE session</i> (a real live session we recorded), and say “this is a recording”. <b>If behind at 3:30:</b> skip the Skeptic and approve the claims.</p>
     <p class="risk"><b>Live runs differ:</b> on 26 Nov one run verified every claim and the next had the Skeptic challenge every claim. Say what is on screen. All verified: “the Skeptic checked each claim and found no problem.” Some or all Reported: “the Skeptic found a problem, so code lowered the label.” Either way: “labels come from code checks, not the AI’s opinion.”</p>
@@ -269,9 +252,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">4:15–4:45</span><h3>Write &amp; cite</h3><span class="chip a">Avighna</span></div>
     <div class="click"><b>Check draft</b> in the menu (<span class="mono">/draft</span>) → type a sentence in Write &amp; cite → <b>Choose a verified source to cite</b> → <b>Insert citation</b> → <b>Citation style</b> → Harvard → <b>Send to Draft Checker</b> → <b>Check paragraph</b></div>
-    <div class="say">
-      <p>Now the student writes; the AI doesn’t write the essay. I type my own sentence, pick a source, and the only sources I can pick are verified ones. <span class="stage">(insert)</span> The citation goes in at the cursor and the reference list builds itself. <span class="stage">(switch to Harvard)</span> Your module wants Harvard? One click: APA, MLA, Chicago, Harvard or IEEE, from the official style files. <span class="stage">(check)</span> And the Draft Checker tests every citation in the paragraph.</p>
-    </div>
+    <div class="say"><p>The student writes; the AI doesn’t. I type my sentence and pick a source, and only verified ones are on the list. <span class="stage">(insert)</span> The citation and the reference list appear. Need Harvard? <span class="stage">(switch style)</span> One click.</p><p>Krishna, what changed this morning?</p></div>
     <p class="why"><b>Why this works:</b> it shows the student doing the writing (over-reliance answered) and a citation feature judges can use themselves.</p>
     <p class="risk"><b>If behind:</b> insert one citation and skip the style switch and the checker. <b>Handover:</b> “Krishna, what changed this morning?”</p>
   </div>
@@ -279,9 +260,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">4:45–5:35</span><h3>The day-of requirement</h3><span class="chip k">Krishna</span></div>
     <div class="click">Fill this in at 13:30, once the requirement is announced. Keep it to three sentences and one click path.</div>
-    <div class="say">
-      <p>This morning’s new requirement was <span class="stage">[say it in one line]</span>. We built it in the last 90 minutes, on top of the same guardrails: <span class="stage">[what it does, in one sentence]</span>. <span class="stage">(show it working on the live link)</span> And it still can’t invent a reference, because <span class="stage">[which check covers it]</span>.</p>
-    </div>
+    <div class="say"><p>This morning’s challenge was [say it in one line]. In 90 minutes we built [what it does, in one sentence]. <span class="stage">(show it working on the live link)</span> And it still can’t invent a reference, because [the guardrail it reuses].</p><p>Zedan?</p></div>
     <p class="why"><b>Why this works:</b> day-of requirements are 8 points. Judges want to see that it works live and that the honesty rules still hold.</p>
     <p class="risk"><b>If it isn’t finished:</b> show what works and say plainly what doesn’t yet. A half-feature shown honestly scores better than a claim.</p>
   </div>
@@ -290,11 +269,7 @@
     <div class="seg-h"><span class="t">5:35–6:35</span><h3>Library, export and the certificate</h3><span class="chip z">Zedan</span></div>
     <div class="click">Tab 4 · <b>/library</b> → point at <b>Bias lens</b> → <b>Export ↓</b> → the export gate: warnings, AI-use statement → tick <b>I have read the warnings above…</b> → <b>Download</b> → open <b>/certificate</b> → <b>Create certificate</b> → show the QR<br>
     <span class="muted">Optional if ahead (15 s): Import → <b>Load sample file</b> → <b>Check only its references</b>: a Zotero-style library, with its fakes caught.</span></div>
-    <div class="say">
-      <p>Everything Krishna approved is in the Library, kept in the browser: no account, nothing on our server. <span class="stage">(point)</span> The bias lens shows where the authors are based, how old the evidence is and how much is open access. Facts, never a score.</p>
-      <p><span class="stage">(Export)</span> Before anything leaves, the student sees this: a source they never opened, a source with no note in their own words. Read before you cite. And this AI-use statement is written from the session log: which models, what each one did, what the student decided. It won’t write “I wrote this myself” for you. The student types that line.</p>
-      <p><span class="stage">(certificate)</span> And a professor scans this QR code. The whole bibliography is inside the link, and Veracite checks every reference again, live. That’s SP Jain clause g(vi), faculty verifying references, in one scan.</p>
-    </div>
+    <div class="say"><p>Everything I approved lands in the Library, on this device: no account, nothing on our server. <span class="stage">(Export)</span> Before anything leaves, Veracite asks: did you open this source? Did you explain it in your own words? Then it writes an honest AI-use statement from the log.</p><p><span class="stage">(certificate)</span> And a professor scans this QR code to check every reference again, live. That’s clause g(vi), in one scan.</p></div>
     <p class="why"><b>Why this works:</b> it covers governance and disclosure (APA 2025 guidance, SP Jain h(viii)) and gives faculty a way to check, without anyone taking our word for it.</p>
     <p class="risk"><b>If behind:</b> skip the bias lens and go straight to Export → Certificate.</p>
   </div>
@@ -308,10 +283,7 @@
   <div class="seg">
     <div class="seg-h"><span class="t">6:35–7:15</span><h3>Trust Center and AI off</h3><span class="chip z">Zedan</span></div>
     <div class="click">Tab 5 · <b>/trust</b> → point at the results card → point at the <b>DOI-only check</b> table → switch <b>AI autonomy</b> (left sidebar) to <b>Off</b> → point at the status line</div>
-    <div class="say">
-      <p>We don’t ask you to trust us; we measured it. Fifty-one test references, including fakes we built to be hard: zero fakes marked Verified. Eleven out of eleven fakes caught, thirty out of thirty real references verified, five out of five retractions flagged. <span class="stage">(point at the table)</span> And here is the same test on a checker that only asks whether the DOI exists: it passed twelve fakes or retracted papers as fine. Veracite passed none. Our weakest set is web pages, three out of five, and we publish that too.</p>
-      <p><span class="stage">(AI off)</span> And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server.</p>
-    </div>
+    <div class="say"><p>We measured it. Fifty-one test references: zero fakes marked Verified. <span class="stage">(point at the table)</span> A checker that only asks whether a DOI exists let twelve fakes and retracted papers through. Veracite let none. Our weak spot is web pages, three out of five, and we publish that.</p><p><span class="stage">(AI autonomy: Off)</span> And with the AI switched off, every check still works. Avighna?</p></div>
     <p class="why"><b>Why this works:</b> it backs every claim with a number and shows the strongest guardrail: the checks don’t depend on the AI being right.</p>
     <p class="risk"><b>If behind:</b> drop the API and MCP sentence. <b>Handover:</b> turn to Avighna.</p>
   </div>
@@ -319,21 +291,17 @@
   <div class="seg">
     <div class="seg-h"><span class="t">7:15–8:00</span><h3>The close</h3><span class="chip a">Avighna</span></div>
     <div class="click">Tab 1 · back to the <b>home page</b> · face the judges, not the screen</div>
-    <div class="say">
-      <p>Zotero organises references. ChatGPT is fast. Veracite gives you both, without ever inventing a reference. It’s free, it keeps your library on your own device, and it’s built on SP Jain’s own integrity rules.</p>
-      <p>The AI may plan, search and explain. Only public registries may cite. Only the student may decide.</p>
-      <p><b>Every reference real. Every claim traceable. You stay in charge.</b> Thank you.</p>
-    </div>
+    <div class="say"><p>Zotero organises. ChatGPT is fast. Veracite does both, and it cannot invent a reference.</p><p>The AI may plan, search and explain. Only public registries may cite. Only you decide.</p><p>Every reference real. Every claim traceable. Thank you.</p></div>
     <p class="risk"><b>If behind:</b> say only the last line.</p>
   </div>
 
   <h3 style="margin-top:4mm">Handovers: say these exactly</h3>
   <table class="small">
     <tr><th style="width:12%">At</th><th style="width:22%">From → to</th><th>Line</th></tr>
-    <tr><td>1:00</td><td>Avighna → Krishna</td><td>“Krishna’s going to show you how Veracite catches one on real references.”</td></tr>
+    <tr><td>1:00</td><td>Avighna → Krishna</td><td>“Krishna, show them a real one.”</td></tr>
     <tr><td>4:15</td><td>Krishna → Avighna</td><td>“Now Avighna writes with these sources.”</td></tr>
     <tr><td>4:45</td><td>Avighna → Krishna</td><td>“Krishna, what changed this morning?”</td></tr>
-    <tr><td>5:35</td><td>Krishna → Zedan</td><td>“Zedan, what happens when it leaves Veracite?”</td></tr>
+    <tr><td>5:35</td><td>Krishna → Zedan</td><td>“Zedan?”</td></tr>
     <tr><td>7:15</td><td>Zedan → Avighna</td><td>“Avighna?” (a nod is enough)</td></tr>
   </table>
 
@@ -424,19 +392,19 @@
   <h1><span class="chip a" style="font-size:9pt; vertical-align:middle">Avighna</span>&nbsp; Opening, writing, closing</h1>
   <p class="muted small">Three turns, about 1 min 45 s in total. You set the tone, so speak slowly and look at the judges, not the screen.</p>
 
-  <div class="cue"><span class="t">0:00–0:40 · home page</span>
-    <div class="say"><p>Hi, we’re Team 7. Hands up if you’ve ever asked ChatGPT for sources. In February, <em>Nature</em> reported that when GPT-4o cites recent research, between 78 and 90 per cent of those citations are made up. At NeurIPS last year, a hundred fake citations got past reviewers in 51 accepted papers. And our own integrity policy, clause h(ix), now warns about references stitched together from real papers. If that happens in your essay, it’s your name on it. So we built <b>Veracite</b>.</p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>Hands up if you’ve ever asked ChatGPT for sources. Keep it up if you checked every single one. That’s the problem. In February, <i>Nature</i> found that between 78 and 90 per cent of GPT-4o’s citations to recent research were made up. A hundred fake citations got into papers accepted at NeurIPS, the top AI conference. And when it happens in an essay, the student gets caught, not the chatbot. SP Jain’s own integrity policy names it, clause h(ix). The brief asked for the speed of AI without the invented references. That’s Veracite.</p></div>
     <p class="risk small">Behind? Drop the NeurIPS sentence.</p></div>
 
-  <div class="cue"><span class="t">0:40–1:00 · Switch on UV lamp → Check your references</span>
-    <div class="say"><p>Think of a bank teller holding a note under a UV lamp. A real note shows its watermark; a fake one doesn’t. This reference was written by a chatbot, and under the lamp it says <em>void</em>: reworded title, real authors who never wrote together, a DOI that doesn’t exist. That’s a chimera. <b>Krishna’s going to show you how Veracite catches one on real references.</b></p></div></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>A bank teller checks a note under a UV lamp. We do the same for references. This one was written by a chatbot, and it looks perfect. Under the lamp: void. Real authors who never wrote together, a reworded title, a DOI that doesn’t exist. A fake built from real parts. That’s a chimera. Krishna, show them a real one.</p></div></div>
 
-  <div class="cue"><span class="t">4:15–4:45 · Check draft → Write &amp; cite → Insert citation → Citation style: Harvard → Send to Draft Checker → Check paragraph</span>
-    <div class="say"><p>Now the student writes; the AI doesn’t write the essay. I type my own sentence and pick a source, and I can only pick verified ones. The citation goes in at the cursor and the reference list builds itself. Your module wants Harvard? One click: APA, MLA, Chicago, Harvard or IEEE. And the Draft Checker tests every citation. <b>Krishna, what changed this morning?</b></p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>The student writes; the AI doesn’t. I type my sentence and pick a source, and only verified ones are on the list. The citation and the reference list appear. Need Harvard? One click. Krishna, what changed this morning?</p></div>
     <p class="risk small">Behind? One citation, no style switch.</p></div>
 
-  <div class="cue"><span class="t">7:15–8:00 · back to the home page · face the judges</span>
-    <div class="say"><p>Zotero organises references. ChatGPT is fast. Veracite gives you both, without ever inventing a reference. It’s free, it keeps your library on your own device, and it’s built on SP Jain’s own integrity rules. The AI may plan, search and explain. Only public registries may cite. Only the student may decide. <b>Every reference real. Every claim traceable. You stay in charge.</b> Thank you.</p></div></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>Zotero organises. ChatGPT is fast. Veracite does both, and it cannot invent a reference. The AI may plan, search and explain. Only public registries may cite. Only you decide. Every reference real. Every claim traceable. Thank you.</p></div></div>
 
   <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> users and Zotero, why 3D, rollout at SP Jain, design and accessibility. <b>Your numbers:</b> 78–90 % (<i>Nature</i>, Feb 2026) · 100 citations in 51 NeurIPS papers · policy clause h(ix).</div>
 </section>
@@ -447,17 +415,16 @@
   <h1><span class="chip k" style="font-size:9pt; vertical-align:middle">Krishna</span>&nbsp; X-ray, research, day-of</h1>
   <p class="muted small">Three turns, about 4 minutes. You hold the mouse for most of the demo, so narrate what’s happening while things load; never leave silence.</p>
 
-  <div class="cue"><span class="t">1:00–2:00 · /xray → Load test list → X-ray 8 references → Chimera row → Retracted row → How this was decided → Add to my list</span>
-    <div class="say"><p>This is the Reference X-ray. A test list our team wrote, with fakes hidden in it; it says so right there. Every line is checked live against Crossref, OpenAlex and arXiv. No AI in this step: it’s plain code. This one even has a real DOI, so a DOI checker would pass it. Veracite has taken it apart: that DOI belongs to a different paper, and no paper has this title. This meta-analysis was real; it was retracted in April, and Veracite knows. And you never trust a label blindly: it shows what it searched and the exact rule. The real ones go into my list with one click.</p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>Eight references. Some are fakes we planted, and it says so on screen. Each one is checked live against Crossref, OpenAlex and arXiv. No AI here, just code. This one has a real DOI, so a normal DOI checker would pass it. Veracite takes it apart: that DOI belongs to a different paper. This one was real, then retracted. Veracite knows. Every verdict shows its working. Only verified papers go into my list.</p></div>
     <p class="risk small">Behind? Chimera and retraction only. A row says “could not be checked”? “It says so instead of guessing.”</p></div>
 
-  <div class="cue"><span class="t">2:00–4:15 · /research → Use the example question → Co-pilot → Start → Approve plan and search → Add to my list ×3 → Continue → labels, Skeptic → Keep / Edit / Drop → Approve claims and export</span>
-    <div class="say"><p><b>AI live:</b> The Planner proposes a plan; nothing happens until I approve it. Checkpoint one. Every source has been through the same Verifier; I choose which go in. Checkpoint two. The Reader quotes the abstracts and the Scribe writes only from what I approved. Green: the quote really is in the abstract. Half-filled: reported, not checked. Diamond: the AI’s own reasoning. Code sets these labels, not the AI. This is the Skeptic, a different model family with no shared memory, whose job is to disagree; when it flags a problem, code downgrades the label. I keep, edit or drop each claim. Checkpoint three.</p>
-    <p><b>AI off:</b> The AI is off right now, and I want to show you that on purpose. The searching and checking still run, because they’re code. I still approve the plan and choose the sources. The only thing missing is AI drafting, and Veracite says so instead of faking it.</p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p><b>AI live:</b> Now the AI. My question: does generative AI help or hurt student learning? The Planner suggests a search, and nothing runs until I approve it. Checkpoint one. Every source it finds has already been verified. I pick four. Checkpoint two. Now the AI reads them and drafts claims, only from the sources I approved, quoting their exact words. Code checks every quote and sets every label. Then a second AI, from a different company, tries to prove each claim wrong. If it finds a problem, the label drops. I keep, edit or drop each one. Checkpoint three. The AI helps; I decide.</p><p><b>AI off:</b> The AI is off right now, on purpose. Searching and checking still run, because they’re code. I still approve the plan and the sources. Only the drafting is missing, and Veracite says so instead of faking it.</p></div>
     <p class="risk small">Fails twice? Rules mode. No Wi-Fi or AI? <i>Show the SAMPLE session</i> (a real live session), and call it a recording. Behind at 3:30? Skip the Skeptic. <b>Handover:</b> “Now Avighna writes with these sources.”</p></div>
 
-  <div class="cue"><span class="t">4:45–5:35 · the day-of feature</span>
-    <div class="say"><p>This morning’s new requirement was ___. We built it in 90 minutes on the same guardrails: ___. It still can’t invent a reference, because ___. <b>Zedan, what happens when it leaves Veracite?</b></p></div></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>This morning’s challenge was [say it in one line]. In 90 minutes we built [what it does, in one sentence]. And it still can’t invent a reference, because [the guardrail it reuses]. Zedan?</p></div></div>
 
   <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> the guardrails, registries, models and cost, AI failure, paywalls, the weakest part, the API and MCP server. <b>Your numbers:</b> 0 AI calls to verify · about 4 per research session · gpt-oss-20b / gpt-oss-120b / Qwen · median 0.7 s per reference.</div>
 </section>
@@ -468,15 +435,12 @@
   <h1><span class="chip z" style="font-size:9pt; vertical-align:middle">Zedan</span>&nbsp; Export, certificate, proof</h1>
   <p class="muted small">Two turns, about 1 min 40 s. You make the governance and ethics part of the deck real, so slow down on the numbers.</p>
 
-  <div class="cue"><span class="t">5:35–6:35 · /library → Bias lens → Export ↓ → warnings + AI-use statement → tick “I have read the warnings…” → Download → /certificate → Create certificate → QR</span>
-    <div class="say"><p>Everything Krishna approved is in the Library, kept in the browser: no account, nothing on our server. The bias lens shows where the authors are based, how old the evidence is, how much is open access. Facts, never a score.</p>
-    <p>Before anything leaves, the student sees this: a source they never opened, a source with no note in their own words. Read before you cite. This AI-use statement is written from the session log: which models, what each did, what the student decided. It won’t write “I wrote this myself”; the student types that line.</p>
-    <p>And a professor scans this QR. The whole bibliography is inside the link, and Veracite checks every reference again, live. That’s SP Jain clause g(vi), faculty verifying references, in one scan.</p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>Everything I approved lands in the Library, on this device: no account, nothing on our server. Before anything leaves, Veracite asks: did you open this source? Did you explain it in your own words? Then it writes an honest AI-use statement from the log. And a professor scans this QR code to check every reference again, live. That’s clause g(vi), in one scan.</p></div>
     <p class="risk small">Behind? Skip the bias lens. Ahead? Import → <i>Load sample file</i> → <i>Check only its references</i>: “Bring your Zotero library; keep only what’s real.”</p></div>
 
-  <div class="cue"><span class="t">6:35–7:15 · /trust → results card → DOI-only table → AI autonomy: Off</span>
-    <div class="say"><p>We don’t ask you to trust us; we measured it. Fifty-one test references, with fakes built to be hard: zero fakes marked Verified. Eleven of eleven fakes caught, thirty of thirty real ones verified, five of five retractions flagged. A DOI-only checker passed twelve fakes or retracted papers on the same test; Veracite passed none. Our weakest set is web pages, three of five, and we publish that too.</p>
-    <p>And if the AI fails, or you switch it off, every one of these checks still runs. They’re code, not AI. Any other AI tool can ask Veracite before it cites, through our open API and MCP server. <b>Avighna?</b></p></div>
+  <div class="cue"><span class="t"></span>
+    <div class="say"><p>We measured it. Fifty-one test references: zero fakes marked Verified. A checker that only asks whether a DOI exists let twelve fakes and retracted papers through. Veracite let none. Our weak spot is web pages, three out of five, and we publish that. And with the AI switched off, every check still works. Avighna?</p></div>
     <p class="risk small">Behind? Drop the API and MCP sentence. No Wi-Fi? The Trust numbers still show: they’re from a committed file.</p></div>
 
   <div class="box small" style="margin-top:3mm"><b>Your Q&amp;A topics:</b> privacy, accountability, laziness and over-reliance, AI detectors, bias, policies (SP Jain h(vi), h(viii), h(ix), g(vi); APA 2025; UNESCO; UAE AI Charter; UAE PDPL; EU AI Act Art. 50), prompt injection. <b>Your numbers:</b> 51 · 0 · 11/11 · 30/30 · 5/5 · web 3/5 · detectors flagged 61 % of non-native essays (Stanford, 2023).</div>
@@ -494,10 +458,10 @@
     <tr><th style="width:15%">Time</th><th style="width:22%">What</th><th>How, and what counts as a pass</th></tr>
     <tr><td>11:00</td><td>Freeze and warm up</td><td><b>Krishna:</b> no new features from now. Run <span class="mono">node scripts/prewarm.mjs</span> (pass: 13/13) and open the five tabs from page 2. <b>Others:</b> read your cue card out loud twice.</td></tr>
     <tr><td>11:15</td><td><b>Run 1: slow</b></td><td>Full demo on the live site, stopping whenever a click or a line is unclear. Fix the words, not the app. <b>Pass:</b> every click path works and every handover sentence is said.</td></tr>
-    <tr><td>11:40</td><td><b>Run 2: timed</b></td><td>No stopping. Timer calls 2:00, 4:45, 6:30 and 7:30. <b>Pass:</b> done by 8:15. If over, use the “if behind” lines; do not talk faster.</td></tr>
+    <tr><td>11:40</td><td><b>Run 2: timed</b></td><td>No stopping. Timer calls 2:00, 4:45, 6:30 and 7:30. <b>Pass:</b> done by 7:45 (the limit is a strict 8:00). If over, use the “if behind” lines; do not talk faster.</td></tr>
     <tr><td>12:00</td><td>Q&amp;A drill</td><td>Page 7. One asks, one answers, one times 20 seconds; rotate until each person has answered four. <b>Pass:</b> each of us can say what “Verified” means and name the three checkpoints.</td></tr>
     <tr><td>12:15</td><td>Failure drill</td><td>Do each once: AI autonomy <b>Off</b> (Rules mode lines, page 4), and <i>Show the SAMPLE session</i> while saying “this is a recording”. <b>Pass:</b> each switch takes under 10 seconds.</td></tr>
-    <tr><td>12:20</td><td><b>Run 3: dress</b></td><td>Run <span class="mono">prewarm.mjs</span> again. Then one clean run standing up, on the laptop we present from, with the phone hotspot ready. <b>Pass:</b> under 8:00.</td></tr>
+    <tr><td>12:20</td><td><b>Run 3: dress</b></td><td>Run <span class="mono">prewarm.mjs</span> again. Then one clean run standing up, on the laptop we present from, with the phone hotspot ready. <b>Pass:</b> under 7:45, then 2 minutes of Q&amp;A from page 7 to fill the 10-minute slot.</td></tr>
     <tr><td>12:40</td><td>Pack and go</td><td>Laptop, charger, hotspot, printed cue cards. Arrive by 13:15.</td></tr>
   </table>
 

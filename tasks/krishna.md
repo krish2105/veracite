@@ -91,6 +91,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K55** · PRES · Audit fixes that need no deployment: prompt log re-exported (rule 8), `docs/08` says Co-pilot · `submissions/prompt-log/**` (Zedan's, export only), `docs/08_DEMO_SCRIPT_AND_QA.md` (Avighna's, one line) · due Thu 11:00 · #pres
 - [x] **K56** · P1 · Save as PDF on the reference list (browser print dialog, A4, no new dependency) · `tabs/xray/printDoc.ts`, `ReferenceList.tsx` · due Thu 13:00 · #research #ux
 - [x] **K57** · UX · Home page under the UV lamp: the security strip is see-through instead of a glowing bar; VOID stamp unchanged (centred) · `components/lab/vault/VaultExperience.tsx` (Avighna's) · due Thu 13:00 · #ux
+- [x] **K60** · DAY · Phase 2 edge cases: six required (Not found, Mismatch, Needs fix with accept or reject, Retracted warning, duplicate merge, no source exists) and bonus B1–B5; statuses in the library and every export · `lib/verify/**`, `tabs/xray/**`, `lib/session/**`, `lib/cite/styles.ts`, `lib/integrity/gate.ts` (Zedan's, one rule), `tabs/library/exports.ts` (Avighna's, status note) · due Thu 14:40 · #dayof #honesty
 - [x] **K54** · P0 · A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · `veracite/src/lib/agents/question.ts`, `agents.ts`, `schemas.ts`, `lib/types.ts`, `lib/session/useResearch.ts` · due Thu 11:00 · #honesty #mvp
     - 26 Nov: verdicts keep the web evidence; Add as web page on the X-ray and the save page; record from the live/Wayback check + the student's own author/date; Library shows retrieval date + archive link; exports and certificates include it. 8 new tests.
 
@@ -105,7 +106,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 
 ## Thursday
 - [ ] **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · due Thu 11:00 · #dayof
-- [ ] **K16** · DAY · Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · due Thu 14:40 · #dayof
+- [x] **K16** · DAY · Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · due Thu 14:40 · #dayof
 - [ ] **K17** · PRES · Rehearse demo segment 2:00–5:30 three times with a timer · due Thu 12:30 · #pres
 
 *K12 (web sources + Wayback) moved to Zedan as Z16 (P2).*

@@ -29,11 +29,11 @@ describe("explainVerdict (K34): the registry trace and the rule behind each labe
   });
 
   it("Mismatch lists the fields that differ", () => {
-    expect(explainVerdict(v({ status: "mismatch", matched: rec, checks: [{ field: "year", claimed: "2021", found: "2025", match: "different" }, { field: "title", match: "exact" }] })).rule).toBe("Mismatch because the paper exists, but the year you typed differs from the registry (2021 vs 2025).");
+    expect(explainVerdict(v({ status: "mismatch", matched: rec, checks: [{ field: "year", claimed: "2021", found: "2025", match: "different" }, { field: "title", match: "exact" }] })).rule).toBe("Needs fix because the paper exists, but the year you typed differs from the registry (2021 vs 2025).");
   });
 
   it("Chimera, Retracted and Not found each state their rule", () => {
-    expect(explainVerdict(v({ status: "chimera", parts: [{ field: "title", claimed: "x", note: "n" }, { field: "authors", claimed: "y", note: "m" }] })).rule).toMatch(/^Chimera because the title and the authors come from different places/);
+    expect(explainVerdict(v({ status: "chimera", parts: [{ field: "title", claimed: "x", note: "n" }, { field: "authors", claimed: "y", note: "m" }] })).rule).toMatch(/^Mismatch because the title and the authors come from different places/);
     expect(explainVerdict(v({ status: "retracted", matched: rec, updates: [{ kind: "retraction", noticeDoi: "10.1/notice", source: "retraction-watch", date: "2020-06-04" }] })).rule).toBe("Retracted because a retraction notice (10.1/notice, 2020-06-04) is linked to this paper by Retraction Watch.");
     expect(explainVerdict(v({ status: "notfound", searched: [s("crossref", 0), s("openalex", 0)] })).rule).toBe("Not found because no record in Crossref, OpenAlex or arXiv matches it, after 2 searches.");
   });

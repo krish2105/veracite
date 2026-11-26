@@ -5,11 +5,11 @@ import type { RefStatus } from "@/lib/types";
 
 const MEANING: [RefStatus, string][] = [
   ["verified", "Two public registries have it, and the title, first author and year match."],
-  ["partial", "Not yet verified: only partly confirmed, or a registry did not answer. Check it yourself."],
-  ["mismatch", "The paper exists, but a detail you typed is wrong."],
-  ["chimera", "Parts of different real papers stitched together. Do not cite it."],
+  ["partial", "Not fully checked: only partly confirmed, a web page, or a registry did not answer. Check it yourself."],
+  ["mismatch", "Needs fix: the paper exists, but a detail you typed is wrong. You accept or reject the correction."],
+  ["chimera", "Mismatch: the DOI, title or authors belong to different real papers (a chimera). Do not cite it."],
   ["retracted", "The paper was withdrawn by its publisher. Do not cite it as evidence."],
-  ["notfound", "Could not be verified: no registry we searched has it."],
+  ["notfound", "Not found: Crossref, OpenAlex and arXiv were searched and none has it. Nothing is swapped in."],
 ];
 
 /** What every label means, on screen (hackathon day-of requirement 2). */

@@ -6,7 +6,7 @@ import { normalizeDoi } from "@/lib/registries/normalize";
 import type { RefStatus, Verification } from "@/lib/types";
 
 const MAX_REF = 2000;
-const LABEL: Record<RefStatus, string> = { verified: "Verified", partial: "Partial", mismatch: "Mismatch", chimera: "Chimera", retracted: "Retracted", notfound: "Not found" };
+const LABEL: Record<RefStatus, string> = { verified: "Verified", partial: "Partial", mismatch: "Needs fix", chimera: "Mismatch", retracted: "Retracted", notfound: "Not found" };
 
 export type Echo = { doi?: string; ref?: string };
 export type Parsed = { ok: true; input: string; echo: Echo } | { ok: false; error: string };

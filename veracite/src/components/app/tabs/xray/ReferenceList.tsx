@@ -13,6 +13,14 @@ import { refList, useRefList } from "./refList";
 import { StyleSelect } from "./StyleSelect";
 import { useStyledEntries } from "./useStyled";
 
+/** Nothing is verified by default: what each status in the list means, in one line. */
+const LIST_NOTE: Record<string, string> = {
+  partial: "Not fully checked (only partly confirmed, or a web source that no scholarly database lists). Check it before you submit.",
+  mismatch: "Needs fix: kept as you typed it. A detail differs from the registry record. Marked in every export.",
+  chimera: "Mismatch: kept as you typed it, but its parts belong to different papers. Not verified. Marked in every export.",
+  retracted: "Retracted: withdrawn by the publisher. Do not cite it as evidence. Marked in every export.",
+  notfound: "Not found: kept as you typed it. No registry has it. Not verified. Marked in every export.",
+};
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
 
 /** Copy with italics where the browser allows it, plain text everywhere else. */
@@ -93,7 +101,7 @@ export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonom
                   <p className="xrx-apa" dangerouslySetInnerHTML={{ __html: e.html }} />
                   <div className="xrx-row">
                     <StatusBadge status={s.verification.status} />
-                    {s.verification.status !== "verified" && <span className="vx-tiny">Registry version. Not yet verified: check it before you submit.</span>}
+                    {s.verification.status !== "verified" && <span className="vx-tiny">{LIST_NOTE[s.verification.status]}</span>}
                     {s.url && (
                       <a className="btn small" href={s.url} target="_blank" rel="noopener noreferrer" onClick={() => refList.opened(s.id)}>
                         <ExternalLink size={13} /> {s.opened ? "Opened" : "Open and read"}

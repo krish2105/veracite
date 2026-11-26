@@ -30,4 +30,18 @@ describe("splitBibliography", () => {
     expect(splitBibliography("References\n\n---\n\n")).toEqual([]);
     expect(splitBibliography(Array.from({ length: 40 }, (_, i) => `${i + 1}. ${A}`).join("\n"))).toHaveLength(30);
   });
+
+  it("Phase 2: a lettered list (A. B. C.) is one reference per letter, with the letters removed", () => {
+    const refs = splitBibliography("A. Smith, J. (2020). One title here. Journal, 1(2), 3–4.\nB. JONES K, LEE P. Second title. Lancet 2019;12:101-9.\nC. Air quality. European Environment Agency. https://example.org/air");
+    expect(refs).toHaveLength(3);
+    expect(refs[0].startsWith("Smith, J.")).toBe(true);
+    expect(refs[1].startsWith("JONES K")).toBe(true);
+  });
+  it("Phase 2: one reference per line with no numbers, in mixed formats", () => {
+    const refs = splitBibliography("Smith, J. (2020). One title here. Journal, 1(2), 3–4. https://doi.org/10.1000/abc\nJONES K, LEE P. Second title. Lancet 2019;12:101-9.\nAir quality. European Environment Agency. https://example.org/air");
+    expect(refs).toHaveLength(3);
+  });
+  it("initials at the start of IEEE lines are not taken for list letters", () => {
+    expect(splitBibliography("A. Smith and B. Jones, \"A long enough title,\" J. Test., vol. 1, 2020.")).toHaveLength(1);
+  });
 });

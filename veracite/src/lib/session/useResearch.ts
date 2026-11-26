@@ -4,6 +4,8 @@
  * Research session orchestrator (K09). Runs in the browser so the three checkpoints can wait for the student as
  * long as they like; every server call is short and stateless. Every step is logged (Receipts + Prompt Ledger).
  */
+import { missingPhrases } from "./notfound";
+import { answerRequest, routeRequest, type AssistantAnswer } from "./assistant";
 import { useCallback, useRef, useState } from "react";
 import { refList, toSource } from "@/components/app/tabs/xray/refList";
 import type { AgentRun, ScribeResult } from "@/lib/agents/agents";
@@ -28,6 +30,10 @@ export interface ResearchState {
   blocked: BlockedFabrication[];
   /** Debate mode (K14): Advocate vs Skeptic turns per claim id, at most two rounds. */
   debates?: Record<string, DebateTurn[]>;
+  /** Phase 2, B3 and B5: the answer to a note or quote request, made by code. Nothing is searched. */
+  assistant?: AssistantAnswer;
+  /** Phase 2, case 6: things the question names that no source mentions. Shown as an honest "Not found". */
+  notFound?: string[];
   /** Plain-English notes: Rules mode, what code removed, registry problems. */
   notes: string[];
   busy?: string;
@@ -91,6 +97,15 @@ export function useResearch(autonomy: Autonomy) {
   const ask = useCallback(
     async (question: string) => {
       const base = { ...fresh(), question };
+      // A note to save or a quote to check is handled by code, against the student's own library (Phase 2, B3 and B5).
+      const routed = routeRequest(question);
+      if (routed.kind !== "research") {
+        const answer = answerRequest(routed, refList.sources());
+        if (answer.save) refList.update(answer.save.id, { notes: answer.save.notes });
+        refList.log({ sessionId: base.sessionId, actor: "verifier", action: routed.kind === "note" ? "saved_note_as_content" : "checked_quote", aiUsed: false, ms: 0, ok: true, detail: answer.title });
+        replace({ ...base, assistant: answer });
+        return;
+      }
       replace({ ...base, phase: "planning", busy: aiOff ? "Preparing the search…" : "The Planner is proposing a search plan…" });
       refList.log({ sessionId: base.sessionId, actor: "student", action: "asked_question", aiUsed: false, ms: 0, ok: true, detail: `${question} · autonomy ${autonomy}` });
       try {
@@ -121,7 +136,9 @@ export function useResearch(autonomy: Autonomy) {
       const candidates = r.candidates.map((c) => toSource(c.verification.matched ? c.verification : { ...c.verification, matched: c.record }));
       const counts = candidates.reduce<Record<string, number>>((m, c) => ((m[c.verification.status] = (m[c.verification.status] ?? 0) + 1), m), {});
       refList.log({ sessionId, actor: "verifier", action: "checked_references", aiUsed: false, ms: Date.now() - t0, ok: true, detail: `${candidates.length} found: ${Object.entries(counts).map(([k, n]) => `${n} ${k}`).join(", ")}` });
-      patch((x) => ({ candidates, phase: "cp2_sources", busy: undefined, notes: [...x.notes, ...r.problems, ...(candidates.length ? [] : ["No sources found. Edit the search terms and try again."])] }));
+      const missing = missingPhrases(ref.current.question, candidates);
+      if (missing.length) refList.log({ sessionId, actor: "verifier", action: "not_found", aiUsed: false, ms: 0, ok: true, detail: `No source mentions: ${missing.join("; ")}` });
+      patch((x) => ({ candidates, notFound: missing.length ? missing : undefined, phase: "cp2_sources", busy: undefined, notes: [...x.notes, ...r.problems, ...(candidates.length ? [] : ["No sources found. Edit the search terms and try again."])] }));
     } catch (e) {
       fail("search", e, () => void approvePlan(plan));
     }

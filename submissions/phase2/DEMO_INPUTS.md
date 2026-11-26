@@ -5,7 +5,7 @@ Everything you need to type or paste in front of the judges, in demo order. All 
 ## How to use this file
 
 1. Open this file on the presenter's laptop, in a plain text editor or the GitHub page, next to the browser.
-2. Open **https://veracite.vercel.app** in the browser. That is the only window the projector shows.
+2. Open **https://veracite-one.vercel.app** in the browser. That is the only window the projector shows. It is our backup deployment and has every change; veracite.vercel.app is the same app but missing the last fixes (our host's daily deploy limit). Present from the link you submitted.
 3. For each step: copy the grey block with the copy button (or select it all), switch to the browser, paste, and click what the step says.
 4. Read the "Judges see" line before you click, so you know what should appear. If something else appears, say what it says. Do not explain it away.
 5. Copy, do not retype. A typo in a reference changes its verdict.

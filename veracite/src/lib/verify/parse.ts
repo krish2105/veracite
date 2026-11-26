@@ -12,6 +12,12 @@ const L = "\\p{L}'’\\-";
 const APA_AUTHOR = new RegExp(`([${U}][${L}]+(?:[\\s-][${U}][${L}]+)*),\\s*((?:[${U}]\\.(?:\\s?-?[${U}]\\.)*\\s*)+)`, "gu");
 const IEEE_AUTHOR = new RegExp(`((?:[${U}]\\.\\s?-?)+)\\s?([${U}][${L}]+(?:\\s[${U}][${L}]+)?)`, "gu");
 
+const VANCOUVER_AUTHOR = new RegExp(`^([${L}]+(?:\\s[${L}]+)?)\\s+([${U}]{1,3})$`, "u");
+/** "LECUN" → "Lecun"; names already in mixed case are left alone. */
+const nameCase = (n: string) => (n.length > 2 && n === n.toUpperCase() ? n[0] + n.slice(1).toLowerCase() : n);
+/** A journal citation tail, not a title: "Nature 2015;521:436-44", "Econometrica, 47(2), 263–291". */
+const venueLike = (p: string) => /\b(?:19|20)\d{2}\s*;|;\s*\d+\s*[:(]|\d+\s*\(\d+\)\s*[:,]/.test(p);
+
 /** Corporate authors are kept whole ("World Health Organization", "OECD"). */
 const ORG = /\b(organi[sz]ation|association|institute|university|department|ministry|council|agency|bank|fund|commission|society|foundation|office|cent(?:re|er)|board|authority|forum|government|OECD|UNESCO|UNICEF|WHO)\b/i;
 
@@ -23,6 +29,9 @@ export function parseAuthors(seg: string): Author[] {
   if (apa.length) return apa.map((m) => ({ family: m[1].trim(), given: m[2].trim() }));
   const ieee = [...s.matchAll(IEEE_AUTHOR)];
   if (ieee.length) return ieee.map((m) => ({ family: m[2].trim(), given: m[1].trim() }));
+  // Vancouver / NLM (Phase 2): "LECUN Y, BENGIO Y, HINTON G" · surname, then initials with no dots.
+  const vanc = s.replace(/[.\s]+$/, "").split(/,\s*/).map((c) => c.trim().match(VANCOUVER_AUTHOR));
+  if (vanc.length && vanc.every(Boolean)) return vanc.map((m) => ({ family: nameCase(m![1]), given: `${m![2].split("").join(". ")}.` }));
   // MLA / Chicago: "Surname, First, and First Surname" · organisations: "World Health Organization"
   const chunks = s.split(/,?\s+and\s+|\s*&\s*|;\s*/).map((c) => c.trim().replace(/[.,]$/, "")).filter(Boolean);
   const out: Author[] = [];
@@ -115,9 +124,18 @@ export function parseReference(rawInput: string): ReferenceInput {
   } else {
     // Unknown format: first segment = authors, longest remaining sentence = title.
     const parts = body.split(/\.\s+/).map((p) => p.trim()).filter(Boolean);
-    if (parts.length > 1) {
+    const org = parts.findIndex((p) => ORG.test(p) && p.split(/\s+/).length <= 8);
+    if (parts.length > 1 && org > 0 && url) {
+      // A web page cited as "Title. Organisation. link": the organisation is the author (APA 7), the first part the title.
+      out.authors = [{ family: parts[org].replace(/[.,\s]+$/, "") }];
+      out.title = cleanTitle(parts[0]);
+    } else if (parts.length > 1) {
       out.authors = parseAuthors(parts[0]);
-      out.title = cleanTitle(parts.slice(1).sort((a, b) => b.length - a.length)[0]);
+      const rest = parts.slice(1);
+      const titles = rest.filter((p) => !venueLike(p));
+      out.title = cleanTitle([...(titles.length ? titles : rest)].sort((a, b) => b.length - a.length)[0]);
+      const tail = rest.find(venueLike)?.match(/^[^\d(;,]+/)?.[0]?.trim(); // "Nature 2015;521:436-44" → "Nature"
+      if (tail && tail.length > 2) out.venue = tail;
     } else if (/\p{L}{3}/u.test(body)) {
       out.title = cleanTitle(body); // only a title was typed
     }

@@ -81,9 +81,30 @@ export function toCslItem(r: SourceRecord): CslItem {
 /** One formatted entry per record, in the style's own order (alphabetical, or as given for IEEE). */
 export async function formatEntries(style: CiteStyle, records: SourceRecord[]): Promise<StyledEntry[]> {
   if (!records.length) return [];
-  if (style === "apa") return apaSorted(records).map((r) => ({ id: r.id, ...apaReference(r) }));
+  const byId = new Map(records.map((r) => [r.id, r]));
+  const marked = (e: StyledEntry): StyledEntry => {
+    const m = statusMark(byId.get(e.id));
+    return m ? { ...e, text: `${e.text} ${m}`, html: `${e.html} <b>${m}</b>` } : e;
+  };
+  if (style === "apa") return apaSorted(records).map((r) => marked({ id: r.id, ...apaReference(r) }));
   const engine = await import("./engine");
-  return engine.bibliography(style, records.map(toCslItem));
+  return (await engine.bibliography(style, records.map(toCslItem))).map(marked);
+}
+
+/**
+ * Phase 2, constraint 4: warnings travel with the reference. Anything that is not Verified carries its status in
+ * every copied or downloaded list, in every style.
+ */
+export function statusMark(r: SourceRecord | undefined): string {
+  if (!r) return "";
+  const st = r.verification?.status;
+  if (!st) return "[NOT CHECKED: no check has run on this reference.]"; // nothing is verified by default
+  if (st === "verified") return "";
+  if (st === "retracted") return "[RETRACTED: withdrawn by the publisher. Do not cite as evidence.]";
+  if (st === "mismatch") return "[NEEDS FIX: not verified as typed; a detail differs from the registry record.]";
+  if (st === "chimera") return "[MISMATCH: not verified; its parts belong to different papers.]";
+  if (st === "notfound") return "[NOT FOUND: not verified; no record in Crossref, OpenAlex or arXiv.]";
+  return r.type === "web" ? "[Web source: not checked in a scholarly database.]" : "[NOT FULLY CHECKED: only partly confirmed.]";
 }
 
 /** The in-text citation for `record`. IEEE numbers it by its place in `list` (or the next number). */
