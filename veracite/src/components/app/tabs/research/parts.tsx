@@ -10,12 +10,13 @@ import { linesToList } from "@/lib/session/machine";
 import { RelatedPapers } from "./RelatedPapers";
 import type { DebateTurn } from "@/lib/agents/debate";
 import type { Claim, Label, Plan, SourceRecord } from "@/lib/types";
+import { tidyReason, uniqueIds } from "@/lib/agents/reasons";
 
 const short = (s: SourceRecord) => `${s.authors[0]?.family ?? "Unknown"}${s.authors.length > 1 ? " et al." : ""}, ${s.year ?? "n.d."}`;
 
 const LABELS: [Label, string][] = [
-  ["verified", "A registry-verified source contains this, word for word, and the Skeptic did not reject it."],
-  ["reported", "Not yet checked: the source is real, but this detail could not be confirmed in its text."],
+  ["verified", "A registry-verified source contains this, word for word, and the Skeptic found no problem with it."],
+  ["reported", "Not fully checked: the source is real, but this detail could not be confirmed in its text, or the Skeptic found it only partly supported."],
   ["ai", "AI suggestion: the AI's own reasoning across sources, not something a source says."],
   ["notfound", "Not found: no approved source supports it, the quote is not in the text, or the Skeptic rejected it."],
 ];
@@ -153,12 +154,12 @@ function ClaimRow({ c, sources, onDecide, busy, debate, onDebate }: { c: Claim; 
       )}
       <div className="meta">
         <TrustLabel kind={c.label} />
-        {c.sourceIds.map((id) => <span key={id} className="srcchip">{sources.get(id) ? short(sources.get(id)!) : id}</span>)}
+        {uniqueIds(c.sourceIds).map((id) => <span key={id} className="srcchip">{sources.get(id) ? short(sources.get(id)!) : id}</span>)}
         {c.decision === "edited" && <span className="vx-tiny" style={{ margin: 0 }}>Edited by you: re-check it against the source.</span>}
       </div>
       {c.quote && <p className="quote">“{c.quote}” · {c.quoteFound ? "found in the source text" : "NOT found in the source text"}</p>}
       {c.skeptic && (c.skeptic.rules.length > 0 || c.skeptic.reasons.length > 0) && (
-        <p className="sk"><Swords size={14} /> Skeptic ({c.skeptic.verdict}{c.skeptic.rules.length ? ` · ${c.skeptic.rules.join(", ")}` : ""}): {c.skeptic.reasons.join(" ") || "no reason given"}</p>
+        <p className="sk"><Swords size={14} /> Skeptic ({c.skeptic.verdict}{c.skeptic.rules.length ? ` · ${c.skeptic.rules.join(", ")}` : ""}): {c.skeptic.reasons.map(tidyReason).join(" ") || "no reason given"}</p>
       )}
       {debate && debate.length > 0 && <Debate turns={debate} sources={sources} />}
       <div className="xrx-row">

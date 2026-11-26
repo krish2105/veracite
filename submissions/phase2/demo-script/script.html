@@ -141,7 +141,7 @@
     <div class="box">
       <h3>Morning (by 11:00)</h3>
       <ul class="check small">
-        <li><b>Krishna:</b> decide AI on or off. If the Groq key is on Vercel and <span class="mono">/api/health</span> says AI is available, run one real research session and record it with <span class="mono">/research?record=1</span>. If not, the research segment runs in Rules mode (page 4 has the lines).</li>
+        <li><b>Krishna:</b> the AI keys are on Vercel (since 26 Nov). Open <span class="mono">/api/health</span> and check it says <span class="mono">"ai":"ai"</span>. If it says <span class="mono">rules</span>, the research segment runs in Rules mode (page 4 has the lines).</li>
         <li><b>Krishna:</b> run <span class="mono">node scripts/prewarm.mjs</span> from the repo root. Every line should pass.</li>
         <li><b>Everyone:</b> read your cue card twice, out loud, with a timer.</li>
         <li><b>Avighna:</b> upload the deck (<span class="mono">Team7_Veracite_Phase1_Deck.pptx</span>) by <b>09:00</b>.</li>
@@ -163,14 +163,14 @@
     <tr><th style="width:8%">Tab</th><th style="width:30%">Page</th><th>Why it’s open</th></tr>
     <tr><td>1</td><td><span class="mono">veracite.vercel.app/</span></td><td>The home page and the UV lamp. Make sure daylight mode is on, so the lamp has something to switch.</td></tr>
     <tr><td>2</td><td><span class="mono">/xray</span></td><td>Opened once so it loads instantly. Nothing pasted yet.</td></tr>
-    <tr><td>3</td><td><span class="mono">/research</span></td><td>AI autonomy on <b>Assist</b>. The question box empty.</td></tr>
+    <tr><td>3</td><td><span class="mono">/research</span></td><td>AI autonomy on <b>Co-pilot</b>, so all four AI agents run (Planner, Reader, Scribe, Skeptic). The question box empty.</td></tr>
     <tr><td>4</td><td><span class="mono">/library</span></td><td>Zedan’s segment. The Library should hold the sources Krishna adds during the demo; if a rehearsal left old ones, that’s fine.</td></tr>
     <tr><td>5</td><td><span class="mono">/trust</span></td><td>The test results. They come from a committed file, so they show even without Wi-Fi.</td></tr>
   </table>
 
   <div class="warn">
     <h3>Two rules that keep us honest on stage</h3>
-    <p class="small" style="margin:0">1. <b>Never call a recording live.</b> If we show the SAMPLE session, say “this is a recording from this morning”; the SAMPLE banner says the same on screen. 2. <b>If something fails, say so and show the honest failure.</b> Veracite says “could not be checked” rather than guessing. That is the product working, and judges score honesty.</p>
+    <p class="small" style="margin:0">1. <b>Never call a recording live.</b> If we show the SAMPLE session, say “this is a recording”; the SAMPLE banner says the same on screen. 2. <b>If something fails, say so and show the honest failure.</b> Veracite says “could not be checked” rather than guessing. That is the product working, and judges score honesty.</p>
   </div>
 
   <h3>What judges are scoring while we talk</h3>
@@ -233,7 +233,7 @@
 
   <div class="seg">
     <div class="seg-h"><span class="t">2:00–4:15</span><h3>Research: the student approves three times</h3><span class="chip k">Krishna</span></div>
-    <div class="click">Tab 3 · <b>/research</b> → <b>Use the example question</b> (“Does generative AI help or hurt student learning?”) → AI autonomy <b>Assist</b> → <b>Start</b><br>
+    <div class="click">Tab 3 · <b>/research</b> → <b>Use the example question</b> (“Does generative AI help or hurt student learning?”) → AI autonomy <b>Co-pilot</b> → <b>Start</b><br>
     Checkpoint 1: <b>Approve plan and search</b> → Checkpoint 2: <b>Add to my list</b> on 3–4 verified sources → <b>Continue with N approved sources</b><br>
     Checkpoint 3: point at the labels and a Skeptic challenge → <b>Keep / Edit / Drop</b> each claim → <b>Approve claims and export</b></div>
 
@@ -242,7 +242,7 @@
       <p>Now the AI part. I’ll ask a real question: does generative AI help or hurt student learning? <span class="stage">(Start)</span> The Planner proposes a search plan, and nothing happens until I approve it. <span class="stage">(approve)</span> That’s checkpoint one.</p>
       <p>The Scout searches the registries, and every source has already been through the same Verifier you just saw. <span class="stage">(add three)</span> I choose which ones go in. Checkpoint two.</p>
       <p>Now the Reader pulls exact quotes from the abstracts, and the Scribe writes claims, but only from the sources I approved. Look at the labels. <span class="stage">(point)</span> Green means the quote really is in the abstract. Half-filled means the source says it, but we couldn’t check it. The diamond means this is the AI’s own reasoning. Code sets these labels, not the AI.</p>
-      <p><span class="stage">(point at a challenge)</span> And this is the Skeptic: a different model family, with no shared memory, whose only job is to disagree. I keep, edit or drop each claim. <span class="stage">(approve)</span> Checkpoint three. The student stays in charge the whole way.</p>
+      <p><span class="stage">(point at a Skeptic flag)</span> And this is the Skeptic: a different model family, with no shared memory, whose only job is to disagree. When it finds a problem, like a correlation presented as a cause, code downgrades the label. I keep, edit or drop each claim. <span class="stage">(approve)</span> Checkpoint three. The student stays in charge the whole way.</p>
     </div>
 
     <h3 style="margin-top:2mm; font-size:10pt">When the AI is off (no key, or Groq is down)</h3>
@@ -250,8 +250,8 @@
       <p>The AI is switched off right now, and I want to show you that on purpose. <span class="stage">(Start)</span> In Rules mode, the plan is my question as I typed it. The searching and checking still run, because they’re code, not AI. I still approve the plan and choose the sources. The only thing missing is the AI drafting, and Veracite tells you that plainly instead of faking it.</p>
     </div>
     <p class="why"><b>Why this works:</b> it shows the workflow from the deck live (plan → sources → claims) and the two separations that matter: the Verifier is code, and the Skeptic is a different model. The labels are the honesty system the judges asked for.</p>
-    <p class="risk"><b>If it is slow:</b> narrate what each agent is doing while it works; it usually takes 10–20 seconds. <b>If it fails:</b> press <i>Try again</i> once; if it fails again, say so and switch to Rules mode (above). <b>If we recorded a session this morning:</b> <i>Show the SAMPLE session</i>, and say “this is a recording from this morning”. <b>If behind at 3:30:</b> skip the Skeptic and approve the claims.</p>
-    <p class="risk"><b>Optional, only if ahead (10 s):</b> on a claim, <i>Debate this claim</i>: the Skeptic and the Scribe argue for one round and the student decides. Don’t risk it if the clock is tight.</p>
+    <p class="risk"><b>If it is slow:</b> narrate what each agent is doing while it works; the whole session took about 20 seconds live on 26 Nov. <b>If it fails:</b> press <i>Try again</i> once; if it fails again, say so and switch to Rules mode (above). <b>If the Wi-Fi or the AI fails:</b> <i>No Wi-Fi or AI? Show the SAMPLE session</i> (a real live session we recorded), and say “this is a recording”. <b>If behind at 3:30:</b> skip the Skeptic and approve the claims.</p>
+    <p class="risk"><b>Optional, only if ahead (10 s):</b> on a claim, <i>Debate this claim</i>: the Advocate and the Skeptic argue for one round, each quoting the source, and the student decides. It took about 2 seconds live. Don’t risk it if the clock is tight.</p>
   </div>
 
   <div class="box small">
@@ -450,10 +450,10 @@
     <div class="say"><p>This is the Reference X-ray. A test list our team wrote, with fakes hidden in it; it says so right there. Every line is checked live against Crossref, OpenAlex and arXiv. No AI in this step: it’s plain code. This one looks perfect, but Veracite has taken it apart: Bastani’s title, authors who never wrote it. This meta-analysis was real; it was retracted in April, and Veracite knows. And you never trust a label blindly: it shows what it searched and the exact rule. The real ones go into my list with one click.</p></div>
     <p class="risk small">Behind? Chimera and retraction only. A row says “could not be checked”? “It says so instead of guessing.”</p></div>
 
-  <div class="cue"><span class="t">2:00–4:15 · /research → Use the example question → Assist → Start → Approve plan and search → Add to my list ×3 → Continue → labels, Skeptic → Keep / Edit / Drop → Approve claims and export</span>
-    <div class="say"><p><b>AI live:</b> The Planner proposes a plan; nothing happens until I approve it. Checkpoint one. Every source has been through the same Verifier; I choose which go in. Checkpoint two. The Reader quotes the abstracts and the Scribe writes only from what I approved. Green: the quote really is in the abstract. Half-filled: reported, not checked. Diamond: the AI’s own reasoning. Code sets these labels, not the AI. This is the Skeptic, a different model family with no shared memory, whose job is to disagree. I keep, edit or drop each claim. Checkpoint three.</p>
+  <div class="cue"><span class="t">2:00–4:15 · /research → Use the example question → Co-pilot → Start → Approve plan and search → Add to my list ×3 → Continue → labels, Skeptic → Keep / Edit / Drop → Approve claims and export</span>
+    <div class="say"><p><b>AI live:</b> The Planner proposes a plan; nothing happens until I approve it. Checkpoint one. Every source has been through the same Verifier; I choose which go in. Checkpoint two. The Reader quotes the abstracts and the Scribe writes only from what I approved. Green: the quote really is in the abstract. Half-filled: reported, not checked. Diamond: the AI’s own reasoning. Code sets these labels, not the AI. This is the Skeptic, a different model family with no shared memory, whose job is to disagree; when it flags a problem, code downgrades the label. I keep, edit or drop each claim. Checkpoint three.</p>
     <p><b>AI off:</b> The AI is off right now, and I want to show you that on purpose. The searching and checking still run, because they’re code. I still approve the plan and choose the sources. The only thing missing is AI drafting, and Veracite says so instead of faking it.</p></div>
-    <p class="risk small">Fails twice? Rules mode. Recorded this morning? <i>Show the SAMPLE session</i>, and call it a recording. Behind at 3:30? Skip the Skeptic. <b>Handover:</b> “Now Avighna writes with these sources.”</p></div>
+    <p class="risk small">Fails twice? Rules mode. No Wi-Fi or AI? <i>Show the SAMPLE session</i> (a real live session), and call it a recording. Behind at 3:30? Skip the Skeptic. <b>Handover:</b> “Now Avighna writes with these sources.”</p></div>
 
   <div class="cue"><span class="t">4:45–5:35 · the day-of feature</span>
     <div class="say"><p>This morning’s new requirement was ___. We built it in 90 minutes on the same guardrails: ___. It still can’t invent a reference, because ___. <b>Zedan, what happens when it leaves Veracite?</b></p></div></div>
