@@ -1,12 +1,12 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 14:31 (Dubai)** · commit `c6b9332`
+> Last updated **Thu 26 Nov, 14:37 (Dubai)** · commit `2b28bc0`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ████████░░ **80%** (73/91 tasks) |
+| **Overall progress** | ████████░░ **80%** (74/92 tasks) |
 | **P0 demo spine** | ████████░░ 26/32 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
@@ -18,12 +18,12 @@
 | Deck upload (team target) | Wed 23:00 | **passed** |
 | Deck upload (official, hard) | Thu 09:00 | **passed** |
 | Arrive at the Simulation Lab | Thu 13:15 | **passed** |
-| Phase 2 submissions close | Thu 15:00 | **0h 28m** |
+| Phase 2 submissions close | Thu 15:00 | **0h 22m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | ██████████ 97% | 58 | 0 | 2 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | ██████████ 97% | 59 | 0 | 2 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ████████░░ 81% | 13 | 0 | 3 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -36,7 +36,7 @@
 | Honesty & verification in action | 10 | ██████████ 100% (33/33) |
 | Day-of requirements | 8 | ███████░░░ 67% (8/12) |
 | User experience | 8 | ████████░░ 79% (23/29) |
-| Presentation & Q&A | 12 | ███████░░░ 68% (13/19) |
+| Presentation & Q&A | 12 | ███████░░░ 70% (14/20) |
 | Phase 1 deck | 30 | ████░░░░░░ 43% (3/7) |
 | AI quiz | 5 | n/a |
 
@@ -126,6 +126,7 @@ _Nothing blocked._
 - **K63** Phase 2 Q&A section (which step handles which case, hard-coding, reject a fix, duplicates, Not found), deck notes with the case-to-step map, form-ready prompt log generator · Krishna Mathur
 - **K64** Real links and named agents: a no-DOI reference keeps the registered version with the cited year (its link opens); a "Handled by" line on every result; architecture slide in the presenter deck · Krishna Mathur
 - **K65** Showcase deck (10 slides, live screenshots of the test pack); the chatbot-answer banner no longer fires on a lettered reference list; form prompt log grouped by phase with our method, prompts as typed · Krishna Mathur
+- **K66** Showcase deck as 6 slides, Phase 1 look, one colour: introduction, architecture and AI agents with live-run receipts, speaker notes, links checked · Krishna Mathur
 - **K54** A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · Krishna Mathur
 - **K10** Draft Checker: parse APA in-text citations → match library → support check (works on text from Avighna's Writer) · Krishna Mathur
 - **K11** Citation snowballing (OpenAlex `referenced_works` / `cited_by`), results go through the Verifier · Krishna Mathur
