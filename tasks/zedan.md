@@ -49,5 +49,5 @@
     - 25 Nov prep: `submissions/phase2/ACCEPTANCE_CHECKS.md` (3 ready checks for each of the 17 likely requirements) + `node submissions/phase2/smoke.mjs` (15 live checks; 15/15 on Wed night). Thursday: copy the requirements, adapt the checks, run smoke at 14:40.
 - [ ] **Z13** · DAY · Update the Trust Center and prompt log for anything Phase 2 changed; export the prompt log to `submissions/prompt-log/` · due Thu 14:55 · #dayof #deck
     - 25 Nov prep: `node submissions/prompt-log/export.mjs` runs the PII scrubber over the log, then writes HTML + PDF (58 entries, passed). Thursday: add Phase 2 prompts, re-run.
-- [ ] **Z14** · PRES · Rehearse segment 5:30–7:00 (export → statement → certificate → Rules mode) · due Thu 12:30 · #pres
+- [ ] **Z14** · PRES · Rehearse segments 5:35–7:15 (Library → bias lens → export gate → statement → certificate, then Trust Center → results card → DOI-only table → AI autonomy Off), cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` · due Thu 12:30 · #pres
     - 25 Nov prep: timed cue card `submissions/phase2/ZEDAN_DEMO_CUES.md` (export gate → statement → certificate → Trust Center → Rules mode).
