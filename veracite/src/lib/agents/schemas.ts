@@ -7,6 +7,8 @@ import { z } from "zod";
 const id = z.string().min(1).max(200); // "doi:…" ids; old SICI DOIs are long
 
 export const PlanOut = z.object({
+  /** false when the text is not something the Planner can understand; code then throws the lists away (K54). */
+  understood: z.boolean(),
   subQuestions: z.array(z.string().min(3).max(200)).min(1).max(5),
   queries: z.array(z.string().min(3).max(120)).min(1).max(6),
   yearFrom: z.number().int().min(1900).max(2100).nullable(),

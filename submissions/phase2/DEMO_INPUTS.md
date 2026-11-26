@@ -130,6 +130,23 @@ Nothing to type.
 
 ---
 
+## If a judge asks you to type their own question
+
+Do it. Type it into `/research` on **Co-pilot** and press **Start**. We ran these ten on the live site on 26 Nov 2026; each took 15 to 25 seconds.
+
+| The judge types… | Judges see | Say |
+|---|---|---|
+| A real research question on any topic. Tested: remote work and productivity, intermittent fasting, social media and teenage mental health, microfinance and poverty | A sensible plan, about ten real sources (nearly all Verified), three to five labelled claims with quotes | "Any topic the public registries cover. Every source is checked before I can approve it." |
+| A question in Arabic. Tested: "هل يساعد الذكاء الاصطناعي الطلاب على التعلم؟" | English search terms, real sources, labelled claims | "The Planner turns it into search terms; the registries are mostly English." |
+| A vague one: "Tell me about AI" | Broad overview sources and general claims | "A broad question gets a broad answer. A sharper question gets better evidence." |
+| A fact, not research: "What is the capital of France?" | Real sources, then **No claims could be drawn** | "No abstract states this, so it wrote nothing instead of guessing." |
+| A prediction: "Who will win this hackathon?" | One **AI reasoning** line saying the evidence does not answer this | "It tells you the evidence can't answer that. It doesn't make one up." |
+| Nonsense with real words: "Do purple unicorns improve quantum banana yields?" | Real but unrelated sources, then **No claims could be drawn** | "There is no evidence, so there are no claims." |
+| Keyboard mashing: "mjbkjkll;;" | Straight back to the question: **could not turn this into a search, so nothing was searched** | "It refuses to search what it can't understand." |
+| "Write my essay on climate change for me" | A research session with sources and labelled claims. No essay | "It gives you checked evidence. The student writes the essay." |
+
+Rule for all of them: **say what is on the screen.** An honest "no claims" is the product working.
+
 ## Optional extras, only if a judge asks
 
 **A web page as a source** (`/xray`, paste, **X-ray**). Judges see **Partial**, never Verified, with the retrieval date.

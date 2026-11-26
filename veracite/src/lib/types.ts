@@ -282,6 +282,8 @@ export type Phase =
 
 export interface Plan {
   question: string;
+  /** The question could not be understood, so there is nothing to search (K54). queries and subQuestions are empty. */
+  unclear?: boolean;
   subQuestions: string[];
   queries: string[];
   filters: {

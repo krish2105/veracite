@@ -68,7 +68,7 @@ describe("checks", () => {
 
 describe("Planner", () => {
   it("returns the model's plan", async () => {
-    const r = await runPlanner("Does generative AI help or hurt student learning?", ctx(gw({ subQuestions: ["Effect of AI tutors on test scores"], queries: ["AI tutor learning outcomes"], yearFrom: 2022, rationale: "Recent topic." })));
+    const r = await runPlanner("Does generative AI help or hurt student learning?", ctx(gw({ understood: true, subQuestions: ["Effect of AI tutors on test scores"], queries: ["AI tutor learning outcomes"], yearFrom: 2022, rationale: "Recent topic." })));
     expect(r.mode).toBe("ai");
     expect(r.data.queries).toEqual(["AI tutor learning outcomes"]);
     expect(r.data.filters).toEqual({ yearFrom: 2022 });
@@ -81,6 +81,27 @@ describe("Planner", () => {
     expect(r.mode).toBe("rules");
     expect(r.data.queries).toEqual(["Does AI tutoring work"]);
     expect(seen).toHaveLength(0);
+  });
+});
+
+describe("Planner, when the question cannot be understood (K54)", () => {
+  it("the model says it does not understand: no plan to search, and its guesses are thrown away", async () => {
+    const r = await runPlanner("What about the thing with the stuff?", ctx(gw({ understood: false, subQuestions: ["What is the current state of research on the topic?"], queries: ["current state of research on topic"], yearFrom: null, rationale: "The question is ambiguous." })));
+    expect(r.data.unclear).toBe(true);
+    expect(r.data.queries).toEqual([]);
+    expect(r.data.subQuestions).toEqual([]);
+    expect(r.data.rationale).toBe("The question is ambiguous.");
+  });
+
+  it("keyboard mashing is stopped by code before any model is called, in every mode", async () => {
+    const seen: string[] = [];
+    const r = await runPlanner("mjbkjkll;;", ctx(gw({}, seen)));
+    expect(seen).toHaveLength(0);
+    expect(r.mode).toBe("rules");
+    expect(r.data.unclear).toBe(true);
+    expect(r.data.queries).toEqual([]);
+    const off = await runPlanner("mjbkjkll;;", { ...ctx(gw({}, seen)), aiOff: true });
+    expect(off.data.unclear).toBe(true);
   });
 });
 
