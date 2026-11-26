@@ -114,8 +114,11 @@ export function parseCrossrefWork(w: CrossrefWork, fetchedAt = new Date().toISOS
   );
   if (titleSaysRetracted(fullTitle) && !updates.some((u) => u.kind === "retraction")) updates.push({ kind: "retraction", source: "publisher" });
 
-  const target = w["update-to"]?.find((u) => updateKind(u.type) && normalizeDoi(u.DOI) !== doi);
-  const titleNotice = noticeKindFromTitle(fullTitle);
+  // A record whose own title says "RETRACTED: …" is the retracted paper itself, whatever its `update-to` lists
+  // (The Lancet points a retracted article at its notices). It must never be mistaken for a notice and skipped.
+  const isRetractedPaper = titleSaysRetracted(fullTitle);
+  const target = isRetractedPaper ? undefined : w["update-to"]?.find((u) => updateKind(u.type) && normalizeDoi(u.DOI) !== doi);
+  const titleNotice = isRetractedPaper ? undefined : noticeKindFromTitle(fullTitle);
   const noticeFor = target ? { kind: updateKind(target.type)!, doi: normalizeDoi(target.DOI) } : titleNotice ? { kind: titleNotice } : undefined;
 
   return {

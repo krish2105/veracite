@@ -237,7 +237,8 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
   const yMatch = versions.map((r) => checkYear(input.year, r.year)).sort((a, b) => yearRank[a] - yearRank[b])[0];
   const doiMatch: FieldCheck["match"] = !input.doi ? "missing" : sameDoi(input.doi, work.doi) || sameDoi(input.doi, work.publishedDoi) ? "exact" : "different";
   const vScore = venueSimilarity(input.venue, work.venue);
-  const vMatch = venueMatch(vScore, !!input.venue && !!work.venue);
+  // A book's "venue" in a registry is its publisher's imprint; a typed "City: Publisher" is not a wrong journal.
+  const vMatch = venueMatch(vScore, !!input.venue && !!work.venue && work.type !== "book");
 
   const checks: FieldCheck[] = [
     { field: "doi", claimed: input.doi, found: work.doi, match: doiMatch },

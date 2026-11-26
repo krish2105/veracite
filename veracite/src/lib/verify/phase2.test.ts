@@ -23,3 +23,14 @@ describe("Phase 2 formats (26 Nov): parsed by format, not by reference", () => {
     expect(r.title).toBe("Prospect theory: An analysis of decision under risk");
   });
 });
+
+import { parseCrossrefWork, type CrossrefWork } from "../registries/crossref";
+
+describe("a retracted paper's own record is the paper, not a notice (found testing beyond the pack)", () => {
+  it("title 'RETRACTED: …' with update-to entries pointing at its notices → a retracted work, never skipped", () => {
+    const w = { DOI: "10.1000/paper.1", type: "journal-article", title: ["RETRACTED: A registry analysis of a treatment"], author: [{ family: "Rowe", given: "M." }], issued: { "date-parts": [[2020]] }, "update-to": [{ type: "retraction", DOI: "10.1000/notice.9" }] } as unknown as CrossrefWork;
+    const r = parseCrossrefWork(w);
+    expect(r.noticeFor).toBeUndefined();
+    expect(r.updates?.some((u) => u.kind === "retraction")).toBe(true);
+  });
+});
