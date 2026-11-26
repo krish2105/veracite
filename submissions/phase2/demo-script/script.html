@@ -128,7 +128,7 @@
 
   <table style="margin-top:3mm">
     <tr><th style="width:24%">Present from</th><td><b>https://veracite.vercel.app</b>, the live link (rule 15). Desktop browser, zoom 125 %, daylight mode, notifications off.</td></tr>
-    <tr><th>How to use this</th><td>Page 2: the checklist. Pages 3–6: the full walkthrough with explanations. Page 7: Q&amp;A. Page 8: how Veracite works, in plain words. Pages 9–11: <b>one cue card per person</b>; print yours and keep it in your hand.</td></tr>
+    <tr><th>How to use this</th><td>Page 2: the checklist. Pages 3–6: the full walkthrough with explanations. Page 7: Q&amp;A. Page 8: how Veracite works, in plain words. Pages 9–11: <b>one cue card per person</b>; print yours and keep it in your hand. Page 12: the rehearsal plan for this morning.</td></tr>
   </table>
 </section>
 
@@ -144,14 +144,14 @@
         <li><b>Krishna:</b> the AI keys are on Vercel (since 26 Nov). Open <span class="mono">/api/health</span> and check it says <span class="mono">"ai":"ai"</span>. If it says <span class="mono">rules</span>, the research segment runs in Rules mode (page 4 has the lines).</li>
         <li><b>Krishna:</b> run <span class="mono">node scripts/prewarm.mjs</span> from the repo root. Every line should pass.</li>
         <li><b>Everyone:</b> read your cue card twice, out loud, with a timer.</li>
-        <li><b>Avighna:</b> upload the deck (<span class="mono">Team7_Veracite_Phase1_Deck.pptx</span>) by <b>09:00</b>.</li>
+        <li><b>Done:</b> the deck was submitted at 02:19 (<span class="mono">Team7_Veracite_Phase1_Deck.pptx</span>). No new features after <b>11:00</b>.</li>
       </ul>
     </div>
     <div class="box">
       <h3>12:20 · final run-through</h3>
       <ul class="check small">
         <li>Run <span class="mono">prewarm.mjs</span> again, so the server functions are warm.</li>
-        <li>One full rehearsal with the clock. Note which segment ran long and use its “if behind” line.</li>
+        <li>The third timed rehearsal (plan on page 12). Note which segment ran long and use its “if behind” line.</li>
         <li>Practise every handover sentence. A clean handover saves 5 seconds each.</li>
         <li>Charge the laptop; bring the charger and a phone hotspot.</li>
       </ul>
@@ -251,7 +251,8 @@
     </div>
     <p class="why"><b>Why this works:</b> it shows the workflow from the deck live (plan → sources → claims) and the two separations that matter: the Verifier is code, and the Skeptic is a different model. The labels are the honesty system the judges asked for.</p>
     <p class="risk"><b>If it is slow:</b> narrate what each agent is doing while it works; the whole session took about 20 seconds live on 26 Nov. <b>If it fails:</b> press <i>Try again</i> once; if it fails again, say so and switch to Rules mode (above). <b>If the Wi-Fi or the AI fails:</b> <i>No Wi-Fi or AI? Show the SAMPLE session</i> (a real live session we recorded), and say “this is a recording”. <b>If behind at 3:30:</b> skip the Skeptic and approve the claims.</p>
-    <p class="risk"><b>Optional, only if ahead (10 s):</b> on a claim, <i>Debate this claim</i>: the Advocate and the Skeptic argue for one round, each quoting the source, and the student decides. It took about 2 seconds live. Don’t risk it if the clock is tight.</p>
+    <p class="risk"><b>Live runs differ:</b> on 26 Nov one run verified every claim and the next had the Skeptic challenge every claim. Say what is on screen. All verified: “the Skeptic checked each claim and found no problem.” Some or all Reported: “the Skeptic found a problem, so code lowered the label.” Either way: “labels come from code checks, not the AI’s opinion.”</p>
+    <p class="risk"><b>Optional, only if ahead (10 s):</b> on a claim, <i>Debate this claim</i>: the Advocate and the Skeptic argue for one round, each quoting the source, and the student decides. It took about 2 seconds live. Each turn’s chip is a <i>quote check</i>: it says the quote is in the source, not who is right. Don’t risk it if the clock is tight.</p>
   </div>
 
   <div class="box small">
@@ -482,5 +483,48 @@
   <p class="foot">Team 7 · Krishna Mathur · Zedan Nasir Parol · Avighna Gavhane · script version 26 Nov 2026. Update the day-of segment at 13:30.</p>
 </section>
 
+
+<!-- ============ REHEARSAL PLAN ============ -->
+<section class="page">
+  <div class="eyebrow">Thursday 26 Nov · 11:00 to 12:40 · all three together</div>
+  <h2>Rehearsal plan: three timed runs before we leave</h2>
+  <p class="small">The app is finished and tested. The points still open are Presentation &amp; Q&amp;A (12) and the day-of requirement (8), and both depend on practice. One person holds a phone timer in every run and calls the time at each handover.</p>
+
+  <table>
+    <tr><th style="width:15%">Time</th><th style="width:22%">What</th><th>How, and what counts as a pass</th></tr>
+    <tr><td>11:00</td><td>Freeze and warm up</td><td><b>Krishna:</b> no new features from now. Run <span class="mono">node scripts/prewarm.mjs</span> (pass: 13/13) and open the five tabs from page 2. <b>Others:</b> read your cue card out loud twice.</td></tr>
+    <tr><td>11:15</td><td><b>Run 1: slow</b></td><td>Full demo on the live site, stopping whenever a click or a line is unclear. Fix the words, not the app. <b>Pass:</b> every click path works and every handover sentence is said.</td></tr>
+    <tr><td>11:40</td><td><b>Run 2: timed</b></td><td>No stopping. Timer calls 2:00, 4:45, 6:30 and 7:30. <b>Pass:</b> done by 8:15. If over, use the “if behind” lines; do not talk faster.</td></tr>
+    <tr><td>12:00</td><td>Q&amp;A drill</td><td>Page 7. One asks, one answers, one times 20 seconds; rotate until each person has answered four. <b>Pass:</b> each of us can say what “Verified” means and name the three checkpoints.</td></tr>
+    <tr><td>12:15</td><td>Failure drill</td><td>Do each once: AI autonomy <b>Off</b> (Rules mode lines, page 4), and <i>Show the SAMPLE session</i> while saying “this is a recording”. <b>Pass:</b> each switch takes under 10 seconds.</td></tr>
+    <tr><td>12:20</td><td><b>Run 3: dress</b></td><td>Run <span class="mono">prewarm.mjs</span> again. Then one clean run standing up, on the laptop we present from, with the phone hotspot ready. <b>Pass:</b> under 8:00.</td></tr>
+    <tr><td>12:40</td><td>Pack and go</td><td>Laptop, charger, hotspot, printed cue cards. Arrive by 13:15.</td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top:3mm">
+    <div class="box">
+      <h3>Who speaks when (check it in Run 2)</h3>
+      <ul class="small">
+        <li><b>Avighna:</b> opening, Write &amp; cite, the close. Also answers deck, design and ethics questions.</li>
+        <li><b>Krishna:</b> X-ray, the research session, the day-of feature. Answers how the checks and agents work.</li>
+        <li><b>Zedan:</b> export, certificate, the test results, AI off. Answers evaluation and governance.</li>
+      </ul>
+      <p class="small" style="margin:0">Judges may question anyone, so each of us should be able to give the 30-second opening.</p>
+    </div>
+    <div class="box">
+      <h3>Keep out of the demo</h3>
+      <ul class="small">
+        <li>New papers citing your sources (about 35 seconds to load).</li>
+        <li>The related-papers map, the Arabic toggle, the API and MCP server.</li>
+      </ul>
+      <p class="small" style="margin:0">Name them in one sentence at the close: “There is also an Arabic interface and an API other AI tools can call.”</p>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3>At 13:30, for the day-of requirement</h3>
+    <p class="small" style="margin:0">Zedan copies each requirement word for word and underlines every “must”. Pick the smallest change that meets it. Deploy by <b>14:40</b>, test the live link in a private window, and stop coding at <b>14:50</b>. Then rehearse the 4:45 segment once, and re-run <span class="mono">node submissions/prompt-log/export.mjs</span> so the prompt log includes today’s prompts.</p>
+  </div>
+</section>
 </body>
 </html>
