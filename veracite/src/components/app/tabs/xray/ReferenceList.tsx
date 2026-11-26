@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, Copy, Download, ExternalLink, Trash2 } from "lucide-react";
+import { Check, Copy, Download, ExternalLink, Printer, Trash2 } from "lucide-react";
+import { printAsPdf } from "./printDoc";
 import { Card, StatusBadge } from "@/components/app/ui";
 import { buildAiUseStatement, type StatementClaim } from "@/lib/integrity/statement";
 import type { Autonomy, RegistryName } from "@/lib/types";
@@ -113,6 +114,9 @@ export function ReferenceList({ autonomy = "off", claims }: { autonomy?: Autonom
                 onClick={() => download(file.replace(/\.txt$/, ".doc"), `<!doctype html><meta charset="utf-8"><body style="font-family:'Times New Roman',serif;font-size:12pt">${list.html.replace(/<p style="margin:0 0 12px;font-weight:600">[^<]*<\/p>/, `<p style="text-align:center"><b>${heading}</b></p>`)}</body>`, "application/msword")}
               >
                 <Download size={13} /> Download for Word
+              </button>
+              <button className="btn small" disabled={styled.loading} onClick={() => printAsPdf(list.html, `References (${label})`)} title="Opens the print dialog: choose Save as PDF">
+                <Printer size={13} /> Save as PDF
               </button>
               <button className="btn small" disabled={styled.loading} onClick={() => download(file, `${list.text}\n`, "text/plain;charset=utf-8")}>
                 <Download size={13} /> Download text
