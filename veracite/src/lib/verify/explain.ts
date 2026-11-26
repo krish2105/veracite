@@ -31,11 +31,11 @@ function ruleFor(v: Verification): string {
     case "mismatch": {
       const diff = v.checks.filter((c) => c.match === "different");
       const vals = diff.filter((c) => c.claimed && c.found).map((c) => (diff.length === 1 ? `${c.claimed} vs ${c.found}` : `${FIELD[c.field]} ${c.claimed} vs ${c.found}`));
-      return `Mismatch because the paper exists, but the ${list(diff.map((c) => FIELD[c.field]))} you typed differ${diff.length === 1 ? "s" : ""} from the registry${vals.length ? ` (${vals.join("; ")})` : ""}.`;
+      return `Needs fix because the paper exists, but the ${list(diff.map((c) => FIELD[c.field]))} you typed differ${diff.length === 1 ? "s" : ""} from the registry${vals.length ? ` (${vals.join("; ")})` : ""}.`;
     }
     case "chimera": {
       const parts = (v.parts ?? []).map((p) => `the ${FIELD[p.field]}`);
-      return `Chimera because ${parts.length ? `${list(parts)} come from different places` : "its parts come from different records"}: a reference stitched together from real pieces.`;
+      return `Mismatch because ${parts.length ? `${list(parts)} come from different places` : "its parts come from different records"}: a reference stitched together from real pieces.`;
     }
     case "retracted": {
       const u = v.updates.find((x) => x.kind === "retraction" || x.kind === "withdrawal");

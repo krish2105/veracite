@@ -1,12 +1,12 @@
 "use client";
 
-import { Check, ExternalLink, Plus, Scissors } from "lucide-react";
+import { AlertTriangle, Check, Copy, ExternalLink, Plus, Scissors, X } from "lucide-react";
 import { StatusBadge } from "@/components/app/ui";
 import type { RefStatus, RegistryName, Verification } from "@/lib/types";
 import { FullTextLink } from "./FullTextLink";
 import { HowDecided } from "./HowDecided";
 import { JournalChips } from "./JournalChips";
-import { canAdd, refList, sourceId, useRefList } from "./refList";
+import { canAdd, refList, sourceId, typedId, useRefList } from "./refList";
 import { canAddWeb, toWebSource } from "@/lib/verify/websource";
 
 const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex: "OpenAlex", arxiv: "arXiv" };
@@ -14,20 +14,23 @@ const REGISTRY: Record<RegistryName, string> = { crossref: "Crossref", openalex:
 const VERDICT: Record<RefStatus, string> = {
   verified: "Verified.",
   partial: "Not yet verified.",
-  mismatch: "Not verified as typed.",
-  chimera: "Could not be verified. Do not cite it.",
+  mismatch: "Needs fix: not verified as typed.",
+  chimera: "Mismatch: it does not point to one real paper. Do not cite it.",
   retracted: "Retracted. Do not cite it.",
-  notfound: "Could not be verified.",
+  notfound: "Not found.",
 };
+const LABEL: Record<RefStatus, string> = { verified: "Verified", partial: "Partial", mismatch: "Needs fix", chimera: "Mismatch", retracted: "Retracted", notfound: "Not found" };
 const FIELD: Record<string, string> = { doi: "DOI", title: "Title", authors: "Authors", year: "Year", venue: "Journal" };
 
 /** One reference in the X-ray results: verdict, plain-English reasons, the field-by-field table and the receipts. */
-export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; v?: Verification; onTakeApart?: () => void }) {
+export function ResultRow({ n, raw, v, onTakeApart, dupOf, merged, onMerge }: { n: number; raw: string; v?: Verification; onTakeApart?: () => void; dupOf?: number; merged?: boolean; onMerge?: () => void }) {
   const rows = v?.checks.filter((c) => c.claimed || c.found) ?? [];
   const notice = v?.updates.find((u) => u.noticeDoi);
   const { sources } = useRefList();
   const added = !!v?.matched && sources.some((s) => s.id === sourceId(v));
   const webAdded = !!v?.web && sources.some((s) => s.id === `url:${v.web!.url}`);
+  const typedKept = sources.some((s) => s.id === typedId(raw));
+  const fix = v?.status === "mismatch" ? v.reasons.slice(1).filter((r) => !/^A (correction|expression)/.test(r)) : [];
   return (
     <div className="xr">
       <div className="xr-head">
@@ -68,20 +71,56 @@ export function ResultRow({ n, raw, v, onTakeApart }: { n: number; raw: string; 
               </tbody>
             </table>
           )}
+          {v.status === "retracted" && (
+            <div className="banner" role="alert" style={{ marginTop: 8 }}>
+              <AlertTriangle size={16} color="var(--alert)" />
+              <span><b>Retracted.</b> This paper was withdrawn after publication. It is not a normal verified source: do not cite it as evidence. If you keep it, it stays marked Retracted in your library and in every export.</span>
+            </div>
+          )}
+          {fix.length > 0 && !added && !typedKept && (
+            <p className="xr-note" style={{ marginTop: 8 }}><b>Suggested fix:</b> {fix.join(" ")} Nothing changes until you accept or reject it.</p>
+          )}
+          {dupOf && !merged && (
+            <div className="banner" role="status" style={{ marginTop: 8 }}>
+              <Copy size={16} />
+              <span><b>Duplicate.</b> This is the same paper as reference {dupOf} (the registries resolve both to the same record), typed in a different format. Your list keeps one entry.</span>
+              <button className="btn small primary" onClick={onMerge}>Merge: keep one entry</button>
+            </div>
+          )}
           <div className="chips" style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
-            {canAdd(v) ? (
+            {dupOf && merged ? (
+              <span className="lbl lbl-verified"><Check size={12} /> Merged into reference {dupOf}: one entry kept</span>
+            ) : v.status === "mismatch" && v.matched ? (
+              <>
+                <button className={`btn small ${added ? "ok" : "primary"}`} onClick={() => refList.acceptFix(v)} disabled={added || typedKept}>
+                  <Check size={13} /> {added ? "Fix accepted · in my list" : "Accept fix: use the registry’s details"}
+                </button>
+                <button className={`btn small ${typedKept ? "ok" : ""}`} onClick={() => refList.keepAsTyped(raw, v)} disabled={added || typedKept}>
+                  <X size={13} /> {typedKept ? "Fix rejected · kept as typed, marked Needs fix" : "Reject fix: keep as typed"}
+                </button>
+              </>
+            ) : v.status === "retracted" && v.matched ? (
+              <button className={`btn small ${added ? "ok" : "no"}`} onClick={() => refList.addRetracted(v)} disabled={added}>
+                {added ? <Check size={13} /> : <AlertTriangle size={13} />} {added ? "In my list, marked Retracted" : "I have read the warning: keep it, marked Retracted"}
+              </button>
+            ) : canAdd(v) ? (
               <button className={`btn small ${added ? "ok" : "primary"}`} onClick={() => refList.approve(v)} disabled={added}>
-                {added ? <Check size={13} /> : <Plus size={13} />} {added ? "In my list" : v.status === "mismatch" ? "Add the registry's version" : "Add to my list"}
+                {added ? <Check size={13} /> : <Plus size={13} />} {added ? "In my list" : "Add to my list"}
               </button>
             ) : canAddWeb(v) ? (
               <>
                 <button className={`btn small ${webAdded ? "ok" : ""}`} onClick={() => refList.addWeb(toWebSource(v, raw))} disabled={webAdded}>
-                  {webAdded ? <Check size={13} /> : <Plus size={13} />} {webAdded ? "In my list (web page)" : "Add as web page"}
+                  {webAdded ? <Check size={13} /> : <Plus size={13} />} {webAdded ? "In my list (web source)" : "Add as web source"}
                 </button>
-                <span className="vx-tiny" style={{ margin: 0 }}>Saved as Partial, never Verified: a web page has no registry record. Author and date as you typed them; retrieval date kept.</span>
+                <span className="vx-tiny" style={{ margin: 0 }}>Web source, not checked in a scholarly database: saved as Partial, never Verified. Author and date as you typed them; “n.d.” if there is no date.</span>
               </>
             ) : (
-              <span className="vx-tiny" style={{ margin: 0 }}>Cannot be added to your list.</span>
+              <>
+                <button className={`btn small ${typedKept ? "ok" : ""}`} onClick={() => refList.keepAsTyped(raw, v)} disabled={typedKept}>
+                  {typedKept ? <Check size={13} /> : <Plus size={13} />} {typedKept ? `Kept as typed, marked ${LABEL[v.status]}` : `Keep as typed, marked ${LABEL[v.status]}`}
+                </button>
+                <span className="vx-tiny" style={{ margin: 0 }}>Never added as verified; the mark stays in your library and every export.</span>
+              </>
             )}
             {v.registries.map((r) => (
               <span key={r} className="lbl lbl-verified">{REGISTRY[r]} ✓</span>

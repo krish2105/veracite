@@ -117,6 +117,26 @@ export function ResearchTab() {
 
         {s.phase === "cp1_plan" && s.plan && <PlanCard key={s.sessionId} plan={s.plan} by={s.planBy} onApprove={(p) => void approvePlan(p)} onRestart={restart} busy={busy} />}
 
+        {s.assistant && (
+          <div className={`banner ${s.assistant.tone === "warn" ? "rs-notfound" : ""}`} role="status">
+            {s.assistant.tone === "warn" ? <AlertTriangle size={16} color="var(--alert)" /> : <FlaskConical size={16} />}
+            <span>
+              <b>{s.assistant.title}.</b>{" "}
+              {s.assistant.lines.map((l, i) => <span key={i} style={{ display: "block", marginTop: i ? 4 : 0 }}>{l}</span>)}
+            </span>
+          </div>
+        )}
+
+        {s.notFound && s.phase !== "ask" && s.phase !== "cp1_plan" && (
+          <div className="banner rs-notfound" role="alert">
+            <AlertTriangle size={16} color="var(--alert)" />
+            <span>
+              <b>Not found.</b> Veracite searched Crossref, OpenAlex and arXiv, and no source mentions {s.notFound.map((p) => `“${p}”`).join(" or ")}. No study answering this question exists there, so none was invented.
+              {s.candidates.length > 0 && " The sources below are related real papers, each checked and labelled. They do not answer your question; you decide whether any is useful."}
+            </span>
+          </div>
+        )}
+
         {(s.phase === "cp2_sources" || (s.phase === "searching" && s.candidates.length > 0)) && (
           <SourcesCard candidates={s.candidates} decisions={s.decisions} onDecide={decide} onContinue={() => void continueWithSources()} onBack={backToPlan} busy={busy} aiOff={autonomy === "off"} />
         )}

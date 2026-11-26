@@ -7,6 +7,7 @@ import { Card, Sample, StatusBadge } from "@/components/app/ui";
 import type { RefStatus } from "@/lib/types";
 import { MAX_REFERENCES, splitBibliography } from "@/lib/verify/split";
 import { ChimeraPanel } from "./ChimeraPanel";
+import { dedupeKey, findDuplicates } from "./duplicates";
 import { LabelLegend } from "./LabelLegend";
 import { ReferenceList } from "./ReferenceList";
 import { refList } from "./refList";
@@ -22,6 +23,7 @@ const ORDER: RefStatus[] = ["verified", "partial", "mismatch", "chimera", "retra
 export function XrayTab() {
   const [text, setText] = useState("");
   const [chimeraN, setChimeraN] = useState<number | undefined>();
+  const [merged, setMerged] = useState<number[]>([]); // Phase 2, case 5: duplicates the student merged
   const { state, run, reset } = useXray();
   // PDF drop (K37): read the PDF in this browser, fill the box, let the student check it before the X-ray.
   const pdfRef = useRef<HTMLInputElement>(null);
@@ -65,6 +67,9 @@ export function XrayTab() {
   const firstChimera = chimeras.find((l) => l.verification.parts?.some((p) => p.field === "doi" && p.belongsTo)) ?? chimeras[0];
   const shown = chimeraN ? state.lines[chimeraN] : firstChimera;
 
+  // Phase 2, case 5: the same registry record reached twice (whatever the format) is a duplicate of its first line.
+  const dupes = useMemo(() => findDuplicates(lines.map((l) => ({ n: l.n, key: dedupeKey(l.verification) }))), [lines]);
+
   // Every finished check goes into the log the AI-use statement is built from.
   useEffect(() => {
     if (state.summary) refList.logCheck(state.summary.total, state.summary.byStatus);
@@ -72,6 +77,7 @@ export function XrayTab() {
 
   const start = () => {
     setChimeraN(undefined);
+    setMerged([]);
     void run(text);
   };
   const download = () => {
@@ -156,7 +162,7 @@ export function XrayTab() {
           </p>
         </Card>
 
-        <Card title="Chimera, taken apart">
+        <Card title="Mismatch, taken apart (a chimera)">
           <ChimeraPanel n={shown?.n} parts={shown?.verification.parts} />
         </Card>
       </div>
@@ -192,12 +198,20 @@ export function XrayTab() {
         <div aria-live="polite">
           {state.refs.length === 0 ? (
             <p className="xr-note">
-              Paste a reference list above and press <b>X-ray</b>. Each reference gets a verdict: Verified, Partial, Mismatch, Chimera, Retracted or Not
-              found, with the reasons and what the registries actually say.
+              Paste a reference list above and press <b>X-ray</b>. Each reference gets a status: Verified, Needs fix, Mismatch, Retracted, Not found or Partial (not fully checked). Nothing is verified by default, and you decide what happens to each one.
             </p>
           ) : (
             state.refs.map((raw, i) => (
-              <ResultRow key={i} n={i + 1} raw={raw} v={state.lines[i + 1]?.verification} onTakeApart={() => setChimeraN(i + 1)} />
+              <ResultRow
+                key={i}
+                n={i + 1}
+                raw={raw}
+                v={state.lines[i + 1]?.verification}
+                onTakeApart={() => setChimeraN(i + 1)}
+                dupOf={dupes[i + 1]}
+                merged={merged.includes(i + 1)}
+                onMerge={() => setMerged((m) => (m.includes(i + 1) ? m : [...m, i + 1]))}
+              />
             ))
           )}
         </div>

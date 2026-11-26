@@ -18,7 +18,7 @@ const en = {
   "autonomy.copilot.hint": "AI also drafts a labelled brief.",
   "autonomy.recorded": "Recorded in your AI-use statement.",
   "label.verified": "Verified", "label.reported": "Reported, not checked", "label.ai": "AI reasoning", "label.notfound": "Not found",
-  "status.verified": "Verified", "status.partial": "Partial", "status.mismatch": "Mismatch", "status.chimera": "Chimera", "status.retracted": "Retracted", "status.notfound": "Not found",
+  "status.verified": "Verified", "status.partial": "Partial", "status.mismatch": "Needs fix", "status.chimera": "Mismatch", "status.retracted": "Retracted", "status.notfound": "Not found",
   "lang.switch": "العربية",
   "lang.note": "",
   "side.foot": "Sources come only from Crossref, OpenAlex and arXiv",

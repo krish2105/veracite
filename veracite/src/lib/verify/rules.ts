@@ -230,7 +230,11 @@ export function decide(ev: Evidence, now = Date.now()): Verification {
   const tScore = titleScoreFor(input, work);
   const tMatch = input.title ? titleMatch(tScore, true) : tScore >= T.titleClose ? "close" : "different";
   const au = authorsFor(input, work);
-  const yMatch = checkYear(input.year, work.year);
+  // The same work can sit in the registries under several dates (preprint, conference, later re-registration). The
+  // cited year is right if any record of this same work (same title, same first author) carries it. No DOI needed.
+  const versions = [work, ...records, ...ev.candidates.filter((c) => !c.noticeFor && titleSimilarity(work.title, c.title) >= T.titleClose && authorsFor(input, c).firstOk)];
+  const yearRank = { exact: 0, close: 1, missing: 2, different: 3 } as const;
+  const yMatch = versions.map((r) => checkYear(input.year, r.year)).sort((a, b) => yearRank[a] - yearRank[b])[0];
   const doiMatch: FieldCheck["match"] = !input.doi ? "missing" : sameDoi(input.doi, work.doi) || sameDoi(input.doi, work.publishedDoi) ? "exact" : "different";
   const vScore = venueSimilarity(input.venue, work.venue);
   const vMatch = venueMatch(vScore, !!input.venue && !!work.venue);

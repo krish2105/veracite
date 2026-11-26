@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatEntries, type CiteStyle, type StyledEntry } from "@/lib/cite/styles";
+import { formatEntries, statusMark, type CiteStyle, type StyledEntry } from "@/lib/cite/styles";
 import type { SourceRecord } from "@/lib/types";
 import { apaReference, apaSorted } from "./apa";
 
@@ -13,7 +13,12 @@ export interface Styled {
   failed: boolean;
 }
 
-const apaEntries = (records: SourceRecord[]) => apaSorted(records).map((r) => ({ id: r.id, ...apaReference(r) }));
+const apaEntries = (records: SourceRecord[]): StyledEntry[] =>
+  apaSorted(records).map((r) => {
+    const e = { id: r.id, ...apaReference(r) };
+    const m = statusMark(r); // Phase 2: warnings travel with the reference
+    return m ? { ...e, text: `${e.text} ${m}`, html: `${e.html} <b>${m}</b>` } : e;
+  });
 
 /** Formats `records` in `style` (K29). Pure formatting of registry records; no AI. */
 export function useStyledEntries(style: CiteStyle, records: SourceRecord[]): Styled {

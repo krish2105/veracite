@@ -1,6 +1,7 @@
 /**
  * BibTeX, RIS and CSL-JSON export (K20). Pure code from registry records; opens in Zotero and Mendeley.
  */
+import { statusMark } from "@/lib/cite/styles";
 import type { SourceRecord, WorkType } from "@/lib/types";
 
 const bibType: Partial<Record<WorkType, string>> = { article: "article", review: "article", book: "book", chapter: "incollection", report: "techreport" };
@@ -10,6 +11,9 @@ const cslType: Partial<Record<WorkType, string>> = { article: "article-journal",
 const texEscape = (s: string) => s.replace(/[\\{}]/g, "").replace(/([&%$#_])/g, "\\$1");
 
 /** Unique keys such as "bastani2025", "bastani2025a". */
+/** Phase 2, constraints 1 and 4: every exported reference carries its status, in every format. */
+export const statusNote = (r: SourceRecord): string => (r.verification?.status === "verified" ? "Veracite status: Verified (Crossref and OpenAlex agree)." : `Veracite status: ${(statusMark(r) || "[NOT CHECKED]").replace(/^\[|\]$/g, "")}`);
+
 export function citeKeys(records: SourceRecord[]): string[] {
   const seen = new Map<string, number>();
   return records.map((r) => {
@@ -35,6 +39,7 @@ export function toBibTeX(records: SourceRecord[]): string {
         ["pages", r.pages?.replace(/(\d)\s*[-–]\s*(\d)/, "$1--$2")],
         ["doi", r.doi],
         ["url", r.doi ? `https://doi.org/${r.doi}` : r.url],
+        ["note", texEscape(statusNote(r))],
       ];
       return `@${type}{${keys[i]},\n${fields.filter(([, v]) => v).map(([k, v]) => `  ${k} = {${v}}`).join(",\n")}\n}`;
     })
@@ -59,6 +64,7 @@ export function toRIS(records: SourceRecord[]): string {
         ...line("DO", r.doi),
         ...line("UR", r.doi ? `https://doi.org/${r.doi}` : r.url),
         ...r.tags.flatMap((t) => line("KW", t)),
+        ...line("N1", statusNote(r)),
         ...line("N1", r.notes),
         "ER  - ",
       ].join("\r\n");
@@ -76,6 +82,7 @@ export function toCslJson(records: SourceRecord[]): string {
       author: r.authors.map((a) => (a.given ? { family: a.family, given: a.given } : { literal: a.family })),
       issued: r.year ? { "date-parts": [[r.year]] } : undefined,
       "container-title": r.venue,
+      note: statusNote(r),
       volume: r.volume,
       issue: r.issue,
       page: r.pages,

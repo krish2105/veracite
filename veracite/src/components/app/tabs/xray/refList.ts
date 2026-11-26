@@ -5,6 +5,7 @@
  * built from. Stored on this device (localStorage). Nothing enters the list without a click.
  * Interim store: Avighna's IndexedDB library (A05) can replace it; records use the shared SourceRecord type.
  */
+import { parseReference } from "@/lib/verify/parse";
 import { useSyncExternalStore } from "react";
 import { ACTIONS } from "@/lib/integrity/receipts";
 import type { Receipt, RefStatus, SourcePatch, SourceRecord, Verification } from "@/lib/types";
@@ -81,7 +82,42 @@ export function toSource(v: Verification): SourceRecord {
   };
 }
 
+/** A stable id for a reference kept as typed (no registry record stands behind it). */
+export const typedId = (raw: string) => {
+  let h = 5381;
+  for (const ch of raw.replace(/\s+/g, " ").trim().toLowerCase()) h = ((h << 5) + h + ch.charCodeAt(0)) >>> 0;
+  return `typed:${h.toString(36)}`;
+};
+
+/** The reference exactly as the student typed it. Nothing is filled in from a registry or an AI. */
+export function toTypedSource(raw: string, v: Verification): SourceRecord {
+  const t = parseReference(raw);
+  return {
+    id: typedId(raw),
+    doi: t.doi,
+    title: t.title ?? raw.slice(0, 120),
+    authors: t.authors ?? [],
+    year: t.year,
+    venue: t.venue,
+    type: "article",
+    textAvailable: "none",
+    url: t.url,
+    verification: v,
+    quality: {},
+    tags: [],
+    collections: [],
+    notes: "",
+    opened: false,
+    addedAt: new Date().toISOString(),
+    addedVia: "xray",
+  };
+}
+
 export const refList = {
+  /** The list as it is now (for code that runs outside React). */
+  sources(): SourceRecord[] {
+    return read().sources;
+  },
   /** Any step for the Receipts log and Prompt Ledger (agents, the Scout, student decisions). */
   log(r: Omit<Receipt, "id" | "at" | "sessionId"> & { sessionId?: string }) {
     const s = read();
@@ -110,6 +146,26 @@ export const refList = {
     if (!canAdd(v) || s.sources.some((x) => x.id === sourceId(v))) return;
     const src = { ...toSource(v), addedVia: via };
     write({ sources: [...s.sources, src], receipts: [...s.receipts, receipt("student", ACTIONS.approveSources, src.id)] });
+  },
+  /** Phase 2, case 3: the student ACCEPTS the registry's correction. The saved record is the registry's, and says so. */
+  acceptFix(v: Verification) {
+    const s = read();
+    if (v.status !== "mismatch" || !v.matched || s.sources.some((x) => x.id === sourceId(v))) return;
+    const fixed: Verification = { ...v, status: v.registries.length >= 2 ? "verified" : "partial", reasons: ["You accepted the registry's correction. The saved details are the registry's, not the ones pasted.", ...v.reasons.slice(1)] };
+    write({ sources: [...s.sources, { ...toSource(fixed), addedVia: "xray" }], receipts: [...s.receipts, receipt("student", "accepted_fix", sourceId(v))] });
+  },
+  /** Phase 2, constraint 2: the student decides. A reference kept exactly as typed keeps its status everywhere. */
+  keepAsTyped(raw: string, v: Verification) {
+    const s = read();
+    const src = toTypedSource(raw, v);
+    if (v.status === "verified" || s.sources.some((x) => x.id === src.id)) return;
+    write({ sources: [...s.sources, src], receipts: [...s.receipts, receipt("student", v.status === "mismatch" ? "rejected_fix" : "kept_as_typed", `${src.id} (${v.status})`)] });
+  },
+  /** Phase 2, case 4: a retracted paper may be kept only after the warning, and stays marked Retracted. */
+  addRetracted(v: Verification) {
+    const s = read();
+    if (v.status !== "retracted" || !v.matched || s.sources.some((x) => x.id === sourceId(v))) return;
+    write({ sources: [...s.sources, { ...toSource(v), addedVia: "xray" }], receipts: [...s.receipts, receipt("student", "kept_retracted_after_warning", sourceId(v))] });
   },
   /** Organise: tags, collections, notes and the student's own explanation. */
   update(id: string, patch: SourcePatch) {

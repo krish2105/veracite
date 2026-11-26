@@ -5,7 +5,7 @@ import { formatEntries, formatInText, listOutput, STYLES, toCslItem } from "./st
 
 // Registry records as they sit in a student's list (Crossref / OpenAlex / arXiv fields).
 const rec = (p: Partial<SourceRecord> & Pick<SourceRecord, "id" | "title" | "type">): SourceRecord =>
-  ({ authors: [], tags: [], collections: [], notes: "", opened: false, addedAt: "2026-11-25T10:00:00.000Z", addedVia: "xray", textAvailable: "none", quality: {}, verification: {} as SourceRecord["verification"], ...p }) as SourceRecord;
+  ({ authors: [], tags: [], collections: [], notes: "", opened: false, addedAt: "2026-11-25T10:00:00.000Z", addedVia: "xray", textAvailable: "none", quality: {}, verification: { status: "verified" } as SourceRecord["verification"], ...p }) as SourceRecord;
 
 const LECUN = rec({
   id: "doi:10.1038/nature14539", doi: "10.1038/nature14539", type: "article", title: "Deep learning", year: 2015,
@@ -60,6 +60,14 @@ describe("toCslItem: the registry record in CSL-JSON (no AI, no guessing)", () =
 describe("reference lists in each style", () => {
   it("APA 7 is exactly the existing tested formatter", async () => {
     expect((await one("apa", LECUN)).text).toBe(apaReference(LECUN).text);
+  });
+
+  it("Phase 2: warnings travel with the reference, in every style; nothing is verified by default", async () => {
+    const retracted = { ...LECUN, verification: { status: "retracted" } as SourceRecord["verification"] };
+    const unchecked = { ...LECUN, verification: {} as SourceRecord["verification"] };
+    for (const style of ["apa", "mla", "ieee"] as const) expect((await one(style, retracted)).text, style).toMatch(/\[RETRACTED: withdrawn by the publisher/);
+    expect((await one("apa", unchecked)).text).toMatch(/\[NOT CHECKED/);
+    expect((await one("apa", LECUN)).text).not.toMatch(/\[/);
   });
 
   it("MLA 9", async () => {

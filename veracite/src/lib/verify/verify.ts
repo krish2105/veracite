@@ -95,5 +95,5 @@ export async function verifyReference(input: ReferenceInput | string, deps: Regi
   if (!deps.webCheck || !ref.url || ref.doi || verdict.status === "verified" || verdict.status === "retracted") return verdict;
   const check = await withDeadline(deps.webCheck(ref.url), WEB_DEADLINE_MS);
   if (!check) return verdict;
-  return { ...applyWebCheck(verdict, ref.title, check), ms: Date.now() - ev.startedAt };
+  return { ...applyWebCheck(verdict, ref.title, check, ref.raw), ms: Date.now() - ev.startedAt };
 }

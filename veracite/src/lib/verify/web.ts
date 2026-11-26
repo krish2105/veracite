@@ -14,9 +14,16 @@ const STOP = new Set(["the", "and", "for", "with", "from", "that", "this", "are"
 const words = (s: string) => s.toLowerCase().normalize("NFKD").split(/[^\p{L}\p{N}]+/u).filter((w) => w.length > 2 && !STOP.has(w));
 
 /** "title": the page's own title agrees. "address": only the words in the web address do. */
-export function pageSupportsTitle(claimed: string | undefined, check: WebCheck): "title" | "address" | undefined {
-  if (!claimed) return undefined;
+export function pageSupportsTitle(claimed: string | undefined, check: WebCheck, raw?: string): "title" | "address" | undefined {
   const title = check.live.ok ? check.live.title : undefined;
+  // The reference names the page's own title somewhere ("Mental health. World Health Organization. link"): that is
+  // the page, whatever the parser took for the title.
+  if (title && raw) {
+    const segs = raw.replace(/https?:\/\/\S+/g, " ").split(/\.\s+|\s[|–—]\s/).map((x) => x.trim()).filter((x) => x.length > 3);
+    const pageParts = [title, ...title.split(/\s+[|\-–—·]\s+/)];
+    if (segs.some((sg) => pageParts.some((pp) => titleSimilarity(sg, pp) >= T.titleClose))) return "title";
+  }
+  if (!claimed) return undefined;
   if (title) {
     // "REST API - Crossref" → also try each part, since sites append their name to titles.
     const parts = [title, ...title.split(/\s+[|\-–—·]\s+/)];
@@ -33,11 +40,11 @@ export function pageSupportsTitle(claimed: string | undefined, check: WebCheck):
   return want.length >= 3 && want.filter((w) => have.has(w)).length / want.length >= 0.8 ? "address" : undefined;
 }
 
-export function applyWebCheck(verdict: Verification, claimedTitle: string | undefined, check: WebCheck): Verification {
+export function applyWebCheck(verdict: Verification, claimedTitle: string | undefined, check: WebCheck, raw?: string): Verification {
   const { status } = verdict;
   if (status === "verified" || status === "retracted") return verdict;
   const exists = check.status === "partial";
-  const support = exists ? pageSupportsTitle(claimedTitle, check) : undefined;
+  const support = exists ? pageSupportsTitle(claimedTitle, check, raw) : undefined;
   // "Stitched together" is a strong finding: only the page's own title can overturn it, not its address.
   const replace = status === "partial" ? false : status === "chimera" ? support === "title" : !!support;
   const linkNotes = [...check.reasons];
@@ -52,6 +59,7 @@ export function applyWebCheck(verdict: Verification, claimedTitle: string | unde
     parts: undefined,
     updates: [],
     reasons: [
+      "Web source: not checked in a scholarly database. Crossref, OpenAlex and arXiv do not index web pages, so it can never be Verified.",
       support === "title" ? "The page at this link has a matching title." : "The words in this web address match the title; the page's own title could not be confirmed.",
       ...linkNotes,
       `APA 7 retrieval line: ${check.retrieval}`,

@@ -58,7 +58,7 @@ export function exportGate(sources: (SourceRecord | GateSource)[]): GateReport {
   const lines: GateReport["lines"] = [];
 
   if (list.length === 0) lines.push({ level: "block", text: "There is nothing to export yet." });
-  if (blocked.length) lines.push({ level: "block", text: `${plural(blocked.length, "source")} failed verification (chimera, retracted or not found). Remove ${blocked.length === 1 ? "it" : "them"} before exporting.` });
+  if (blocked.length) lines.push({ level: "warn", text: `${plural(blocked.length, "source")} ${blocked.length === 1 ? "is" : "are"} marked Mismatch, Retracted or Not found. ${blocked.length === 1 ? "It stays" : "They stay"} marked in every export; remove ${blocked.length === 1 ? "it" : "them"} unless you mean to discuss ${blocked.length === 1 ? "it" : "them"}.` });
   if (unread.length) lines.push({ level: "warn", text: `You have not opened ${plural(unread.length, "source")}. Read before you cite.` });
   else if (list.length) lines.push({ level: "ok", text: `You opened all ${plural(list.length, "source")}.` });
   if (unexplained.length) lines.push({ level: "warn", text: `${plural(unexplained.length, "source")} ${unexplained.length === 1 ? "has" : "have"} no explanation in your own words yet.` });
@@ -72,7 +72,7 @@ export function exportGate(sources: (SourceRecord | GateSource)[]): GateReport {
     flagged,
     blocked,
     clean: list.length > 0 && !unread.length && !unexplained.length && !flagged.length && !blocked.length,
-    canExport: list.length > 0 && blocked.length === 0,
+    canExport: list.length > 0, // Phase 2: the student decides; warnings travel with the reference
     lines,
   };
 }
