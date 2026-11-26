@@ -4,6 +4,7 @@
  */
 const path = require("path");
 const pptxgen = require("pptxgenjs");
+const NOTES = require("./script-notes.cjs"); // K51: the spoken script goes in the speaker notes
 
 const SKILL = process.env.PPTX_SKILL_DIR;
 const OUT = path.join(__dirname, "..", "Team7_Veracite_Phase1_Deck.pptx");
@@ -107,7 +108,7 @@ pres.addSection({ title: "Overview" });
   s.addImage({ path: IMG("s1-home-uv.jpg"), x: 7.25, y: 0.5, w: 5.48, h: 5.86, altText: "Screenshot of the live home page in UV-lamp mode: a fictional AI-written reference shows VOID and is stamped Chimera, do not cite" });
   s.addShape(pres.shapes.RECTANGLE, { x: 7.2, y: 0.45, w: 5.58, h: 5.96, fill: { color: K.uv, transparency: 100 }, line: { color: K.cyan, width: 0.75 } });
   T(s, "The live home page under the UV lamp: a fictional AI-written reference shows VOID · SAMPLE data", { x: 7.25, y: 6.45, w: 5.48, h: 0.4, fontFace: F.mono, fontSize: 7.5, color: K.uvInk2 });
-  s.addNotes("Pre-read deck. Slide 1: problem + promise. Stats: Asai et al., Nature (Feb 2026); GPTZero NeurIPS analysis via TechCrunch (21 Jan 2026); SP Jain Academic Integrity Policy and Procedures v2 (24 Feb 2026) clause h(ix).");
+  s.addNotes(NOTES(1, "Pre-read deck. Slide 1: problem + promise. Stats: Asai et al., Nature (Feb 2026); GPTZero NeurIPS analysis via TechCrunch (21 Jan 2026); SP Jain Academic Integrity Policy and Procedures v2 (24 Feb 2026) clause h(ix)."));
 }
 
 /* ================= Slide 2 · Workflow ================= */
@@ -164,7 +165,7 @@ pres.addSection({ title: "Workflow" });
   frame(s, 8.95, 5.42, 3.78, 1.3, { fill: K.card2 });
   T(s, "In a research session, nothing is searched before you approve the plan, or exported before you decide on every claim.", { x: 9.13, y: 5.55, w: 3.45, h: 1.05, fontFace: F.read, fontSize: 12.5, italic: true, color: K.ink, valign: "middle" });
   T(s, "■ teal = deterministic code   □ violet = AI model", { x: 7.23, y: 1.71, w: 5.5, h: 0.2, fontFace: F.mono, fontSize: 7.5, color: K.ink2, align: "right" });
-  s.addNotes("Workflow: question → Planner proposes plan → CP1 approve plan → Scout searches registries → Verifier (code) cross-matches → CP2 approve sources → Reader extracts exact quotes → Scribe drafts from approved IDs only → Skeptic challenges (and can debate a claim) → CP3 approve claims → Integrity Clerk exports in the chosen style (APA 7, MLA 9, Chicago, Harvard, IEEE) with an AI-use statement and certificate. Side doors, all through the same Verifier: paste a reference list or a chatbot answer, drop a PDF (read in the browser), import a .bib/.ris library, save a page from any site with the bookmarklet, re-check the library for papers retracted after saving.");
+  s.addNotes(NOTES(2, "Workflow: question → Planner proposes plan → CP1 approve plan → Scout searches registries → Verifier (code) cross-matches → CP2 approve sources → Reader extracts exact quotes → Scribe drafts from approved IDs only → Skeptic challenges (and can debate a claim) → CP3 approve claims → Integrity Clerk exports in the chosen style (APA 7, MLA 9, Chicago, Harvard, IEEE) with an AI-use statement and certificate. Side doors, all through the same Verifier: paste a reference list or a chatbot answer, drop a PDF (read in the browser), import a .bib/.ris library, save a page from any site with the bookmarklet, re-check the library for papers retracted after saving."));
 }
 
 /* ================= Slide 3 · Architecture ================= */
@@ -198,7 +199,7 @@ pres.addSection({ title: "Architecture" });
     T(s, t, { x: x + 1.15, y: 5.68, w: 2.6, h: 0.9, fontSize: 11, color: K.ink, valign: "middle" });
   });
   T(s, "■ teal = deterministic code (unit-tested)   ■ violet = AI model", { x: 7.6, y: 1.71, w: 5.13, h: 0.2, fontFace: F.mono, fontSize: 7.5, color: K.ink2, align: "right" });
-  s.addNotes("Architecture: the orchestrator runs in the browser so checkpoints can wait for a human and data stays on the device; server functions are stateless and hold the API keys. Verification uses zero AI calls. Citation styles come from the official CSL files (citation-js); PDFs are parsed in the browser with pdf.js, so the file is never uploaded. Other tools can call the same Verifier: GET/POST /api/v1/verify and an MCP server at /api/mcp (documented in docs/API.md).");
+  s.addNotes(NOTES(3, "Architecture: the orchestrator runs in the browser so checkpoints can wait for a human and data stays on the device; server functions are stateless and hold the API keys. Verification uses zero AI calls. Citation styles come from the official CSL files (citation-js); PDFs are parsed in the browser with pdf.js, so the file is never uploaded. Other tools can call the same Verifier: GET/POST /api/v1/verify and an MCP server at /api/mcp (documented in docs/API.md)."));
 }
 
 /* ================= Slide 4 · Ethics ================= */
@@ -225,7 +226,7 @@ pres.addSection({ title: "Ethics" });
     T(s, d, { x: x + 0.5, y: y + 1.14, w: w - 0.7, h: 0.86, fontSize: 10.5, color: K.ink });
   });
   T(s, "Also designed in: prompt-injection shield · a library re-check flags papers retracted after you saved them · works on a phone · English/Arabic labels · labels never rely on colour alone.", { x: 0.6, y: 6.55, w: 12.13, h: 0.3, fontSize: 10, color: K.ink2 });
-  s.addNotes("Ethics: each card is risk → what we built. Sources: MIT Media Lab 'Your Brain on ChatGPT' (2025, preprint); Liang et al., Stanford HAI (2023) on AI-detector bias.");
+  s.addNotes(NOTES(4, "Ethics: each card is risk → what we built. Sources: MIT Media Lab 'Your Brain on ChatGPT' (2025, preprint); Liang et al., Stanford HAI (2023) on AI-detector bias."));
 }
 
 /* ================= Slide 5 · Governance ================= */
@@ -260,7 +261,7 @@ pres.addSection({ title: "Governance" });
   s.addImage({ path: IMG("s5-certificate.jpg"), x: 7.585, y: 1.95, w: 4.96, h: 4.04, altText: "Screenshot of a live Veracite certificate: three references re-checked and verified, with QR code and fingerprint" });
   s.addShape(pres.shapes.RECTANGLE, { x: 7.54, y: 1.905, w: 5.05, h: 4.13, fill: { color: "FFFFFF", transparency: 100 }, line: { color: K.line, width: 0.75 } });
   T(s, "A real certificate from the live site: scan the QR and Veracite checks every reference again", { x: 7.4, y: 6.08, w: 5.33, h: 0.4, fontFace: F.mono, fontSize: 7.5, color: K.ink2 });
-  s.addNotes("Governance: student = author (COPE/ICMJE), Veracite owns check accuracy, faculty can audit, Team 7 maintains. Disclosure is generated from logs, never written from memory.");
+  s.addNotes(NOTES(5, "Governance: student = author (COPE/ICMJE), Veracite owns check accuracy, faculty can audit, Team 7 maintains. Disclosure is generated from logs, never written from memory."));
 }
 
 /* ================= Slide 6 · Guardrails ================= */
@@ -294,7 +295,7 @@ pres.addSection({ title: "Guardrails" });
     { text: "51 test references on the live site, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions flagged. Weakest: web pages 3/5, never marked Verified.", options: { fontSize: 8.5, color: K.uvInk } },
   ], { x: 8.6, y: 5.1, w: 4.0, h: 1.15 });
   T(s, "Every reference real. Every claim traceable. You stay in charge.", { x: 0.6, y: 6.33, w: 12.13, h: 0.45, fontFace: F.head2, fontSize: 17, bold: true, color: K.cyan });
-  s.addNotes("Guardrails grouped strongest-first. Proof numbers: golden-set evaluation of 25 Nov 2026 (veracite/tests/results/latest.json) against live Crossref, OpenAlex and arXiv: 51 test references (30 real, 10 hand-built chimeras, 1 AI-fabricated, 5 retracted, 5 web pages); the same run against the live site (tests/results/live-site.md, 25 Nov 23:50 Dubai) gave identical results, median 0.7 s per reference. 'How this was decided' (under every X-ray verdict) lists each registry searched, what it returned and the rule that set the label. The screenshot is the working X-ray on a team-written test list.");
+  s.addNotes(NOTES(6, "Guardrails grouped strongest-first. Proof numbers: golden-set evaluation of 25 Nov 2026 (veracite/tests/results/latest.json) against live Crossref, OpenAlex and arXiv: 51 test references (30 real, 10 hand-built chimeras, 1 AI-fabricated, 5 retracted, 5 web pages); the same run against the live site (tests/results/live-site.md, 25 Nov 23:50 Dubai) gave identical results, median 0.7 s per reference. 'How this was decided' (under every X-ray verdict) lists each registry searched, what it returned and the rule that set the label. The screenshot is the working X-ray on a team-written test list."));
 }
 
 (async () => {
