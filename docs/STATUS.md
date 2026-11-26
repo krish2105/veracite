@@ -1,29 +1,29 @@
 # 📊 Veracite · live project status
 
 > **Auto-generated** from `tasks/*.md` by `scripts/status.mjs`. Don't edit by hand: tick your task file and push.
-> Last updated **Thu 26 Nov, 07:46 (Dubai)** · commit `2a9b0d3`
+> Last updated **Thu 26 Nov, 07:53 (Dubai)** · commit `78f9ef6`
 
 ## At a glance
 | | |
 |---|---|
-| **Overall progress** | ███████░░░ **70%** (53/76 tasks) |
-| **P0 demo spine** | ███████░░░ 21/29 |
+| **Overall progress** | ███████░░░ **72%** (55/76 tasks) |
+| **P0 demo spine** | ████████░░ 23/29 |
 | **Build** | Type-check 🟢 passing · Production build 🟢 passing |
 | **Live link** | https://veracite.vercel.app |
-| **In progress / blocked** | 3 🔨 · 0 ⛔ |
+| **In progress / blocked** | 2 🔨 · 0 ⛔ |
 
 ## ⏱️ Deadlines
 | What | When (Dubai) | Time left |
 |---|---|---|
 | Deck upload (team target) | Wed 23:00 | **passed** |
-| Deck upload (official, hard) | Thu 09:00 | **1h 13m** |
-| Arrive at the Simulation Lab | Thu 13:15 | **5h 28m** |
-| Phase 2 submissions close | Thu 15:00 | **7h 13m** |
+| Deck upload (official, hard) | Thu 09:00 | **1h 6m** |
+| Arrive at the Simulation Lab | Thu 13:15 | **5h 21m** |
+| Phase 2 submissions close | Thu 15:00 | **7h 6m** |
 
 ## 👥 By person
 | Person | Progress | ✅ | 🔨 | ⬜ | ⛔ |
 |---|---|---|---|---|---|
-| [Krishna Mathur](../tasks/krishna.md) | █████████░ 89% | 40 | 1 | 4 | 0 |
+| [Krishna Mathur](../tasks/krishna.md) | █████████░ 93% | 42 | 0 | 3 | 0 |
 | [Zedan Nasir Parol](../tasks/zedan.md) | ███████░░░ 69% | 11 | 1 | 4 | 0 |
 | [Avighna Gavhane](../tasks/avighna.md) | █░░░░░░░░░ 13% | 2 | 1 | 12 | 0 |
 
@@ -31,10 +31,10 @@
 *Share of tasks tagged with each criterion that are done. A progress signal, not a predicted score.*
 | Criterion | Points | Readiness |
 |---|---|---|
-| Working MVP | 15 | ████████░░ 82% (9/11) |
+| Working MVP | 15 | █████████░ 91% (10/11) |
 | Research & citation features | 12 | █████████░ 87% (26/30) |
 | Honesty & verification in action | 10 | ██████████ 100% (28/28) |
-| Day-of requirements | 8 | █░░░░░░░░░ 14% (1/7) |
+| Day-of requirements | 8 | ███░░░░░░░ 29% (2/7) |
 | User experience | 8 | ████████░░ 78% (21/27) |
 | Presentation & Q&A | 12 | █░░░░░░░░░ 11% (1/9) |
 | Phase 1 deck | 30 | ███░░░░░░░ 33% (2/6) |
@@ -42,7 +42,6 @@
 
 ## 🔨 Doing now
 - **A11** Final demo script with timings (add the Write & cite moment); record a 90-second backup video; take README screenshots · Avighna Gavhane · due Thu 11:00
-- **K32** Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · Krishna Mathur
 - **Z11** Write final answers for the ethics/governance Q&A bank (docs/08 Q9–Q16) and memorise the 60-second pitch · Zedan Nasir Parol · due Wed 22:00
 
 ## ⛔ Blocked
@@ -50,8 +49,6 @@ _Nothing blocked._
 
 ## 📋 Remaining (by person)
 ### Krishna Mathur
-- ⬜ **K02** · P0 · Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · _due Tue 22:00_
-- 🔨 **K32** · P0 · Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site
 - ⬜ **K15** · DAY · Code freeze 11:00; pre-warm demo queries; backup deploy promoted · _due Thu 11:00_
 - ⬜ **K16** · DAY · Phase 2: drive Claude Code using `docs/09_PHASE2_PLAYBOOK.md`; deploy by 14:40 · _due Thu 14:40_
 - ⬜ **K17** · PRES · Rehearse demo segment 2:00–5:30 three times with a timer · _due Thu 12:30_
@@ -82,6 +79,7 @@ _Nothing blocked._
 - **A14** Write & cite: a writing pane where "Insert citation" picks from the verified library, drops "(Author, Year)" into the text and builds the APA 7 reference list live; only library sources can be cited · Avighna Gavhane
 - **A03** Landing page `/` = the Vault 3D (from `/lab/vault`) with real buttons into X-ray, Research and Library; UV-lamp theme toggle · Avighna Gavhane
 - **K00** Docs, deck, repo, task system and 3D prototypes in place · Krishna Mathur
+- **K02** Free keys (Groq, OpenAlex) in `veracite/.env.local`; Vercel project (root dir `veracite`) + env vars; add Avighna to the repo · Krishna Mathur
 - **K01** Split `components/app/tabs.tsx` into one folder per tab (no behaviour change) so Z and A can work in parallel · Krishna Mathur
 - **K18** Shared contracts: `src/lib/types.ts` (types from docs/03 §7) + `src/lib/flags.ts` (feature flags) · Krishna Mathur
 - **K07** First deploy of the current preview to Vercel; live link in `README.md` and `submissions/phase2/LIVE_LINK.md`; every merge to main auto-deploys after this · Krishna Mathur
@@ -103,6 +101,7 @@ _Nothing blocked._
 - **K29** Citation styles: APA 7, MLA 9, Harvard, IEEE, Chicago author-date (citation-js) in Write & cite, X-ray list and Library export · Krishna Mathur
 - **K30** Explain this paper: the Reader explains a saved source's abstract, every sentence labelled by code · Krishna Mathur
 - **K31** First-visit guidance: one "Try the full journey" path, a dismissible 3-step guide and clear empty states · Krishna Mathur
+- **K32** Demo safety: pre-warmed searches, SAMPLE-labelled cached research session, plain error banners, 51-reference eval re-run on the live site · Krishna Mathur
 - **K33** Free full text: a legal open-access link (OpenAlex OA location, arXiv PDF) on X-ray rows, Library, save page and research sources · Krishna Mathur
 - **K34** Registry trace + "why this label": per-registry results and the rule that set each verdict, on every X-ray row · Krishna Mathur
 - **K35** Re-check my library for retractions and corrections since saving; warn in Write & cite before citing a retracted source · Krishna Mathur
