@@ -13,6 +13,7 @@ import { gateway as defaultGateway, type AgentResult, type Gateway } from "../ll
 import type { BlockedFabrication, Challenge, Claim, EvidenceCard, Plan, SkepticRule, SourceRecord } from "../types";
 import { assignLabel, quoteInText } from "./checks";
 import { tidyReason, uniqueIds } from "./reasons";
+import { looksUnclear, UNCLEAR_REASON } from "./question";
 import { PlanOut, ReaderOut, ScribeOut, SkepticOut } from "./schemas";
 
 /** At most this many abstracts go to the Scribe: Groq's free tier allows ~8K tokens per minute per model. */
@@ -66,7 +67,8 @@ const sourcesFor = (list: SourceRecord[]) =>
 const PLANNER_SYSTEM = `You are the Planner in Veracite, a research assistant for university students.
 Turn the student's question into a search plan: 2-4 sub-questions and 2-5 short keyword queries for scholarly databases (Crossref, OpenAlex).
 Rules: do not answer the question. Do not name or invent any paper, author, journal or DOI. Use plain academic keywords, no boolean syntax.
-Set yearFrom only if the question implies recent work; otherwise null. Keep the rationale to one or two sentences.`;
+Set yearFrom only if the question implies recent work; otherwise null. Keep the rationale to one or two sentences.
+If the text is not a question you can understand (random letters, or no recognisable topic), set understood to false and say why in the rationale. Never guess a topic or fall back to generic queries. Otherwise set understood to true.`;
 
 /** Rules mode: the question itself is the query. Honest and still searchable. */
 function rulesPlan(question: string): Plan {
@@ -75,10 +77,13 @@ function rulesPlan(question: string): Plan {
 }
 
 export async function runPlanner(question: string, ctx: Ctx): Promise<AgentRun<Plan>> {
+  const unclear = (rationale: string): Plan => ({ question, unclear: true, subQuestions: [], queries: [], filters: {}, rationale });
+  if (looksUnclear(question)) return { data: unclear(UNCLEAR_REASON), mode: "rules", reason: UNCLEAR_REASON, ms: 0, dropped: [] };
   const gw = ctx.gateway ?? defaultGateway;
   const r = await gw.run({ agent: "planner", sessionId: ctx.sessionId, system: PLANNER_SYSTEM, task: `Student question: ${question}`, schema: PlanOut, maxOutputTokens: 700 }, { aiOff: ctx.aiOff });
   if (!r.ok) return meta(r, rulesPlan(question), []);
   const p = r.data;
+  if (!p.understood) return meta(r, unclear(p.rationale), ["The Planner could not understand the question, so its search terms were not used."]);
   return meta(r, { question, subQuestions: p.subQuestions, queries: p.queries, filters: p.yearFrom ? { yearFrom: p.yearFrom } : {}, rationale: p.rationale }, []);
 }
 

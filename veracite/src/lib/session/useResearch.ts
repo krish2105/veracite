@@ -96,6 +96,11 @@ export function useResearch(autonomy: Autonomy) {
       try {
         const run = await post<AgentRun<Plan>>("/api/agents/planner", { sessionId: base.sessionId, aiOff, question });
         logRun(base.sessionId, "planner", "proposed_plan", run);
+        if (run.data.unclear) {
+          // Nothing to search (K54): back to the question, with the reason. No plan, no sources, no claims.
+          patch({ phase: "ask", busy: undefined, error: `Veracite could not turn this into a search, so nothing was searched. ${run.data.rationale} Try a full question, for example: “Does generative AI help or hurt student learning?”` });
+          return;
+        }
         patch((x) => ({ plan: run.data, planBy: run.mode, phase: "cp1_plan", busy: undefined, notes: [...x.notes, ...notesFrom(run, "Planner")] }));
       } catch (e) {
         fail("plan", e, () => void ask(question));
