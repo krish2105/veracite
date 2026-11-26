@@ -95,13 +95,14 @@ export function drawEmissive(g: CanvasRenderingContext2D, w: number, h: number, 
   } else {
     const pc = document.createElement("canvas"); pc.width = pc.height = 8; const pg = pc.getContext("2d")!;
     pg.strokeStyle = "#FF3B5C"; pg.lineWidth = 1.7; pg.beginPath(); pg.moveTo(0, 8); pg.lineTo(8, 0); pg.stroke();
-    // The stamp sits in the empty right-hand part of the note, so the title, authors and DOI stay readable (K57).
-    // Sized by measuring, so it fits the same space whichever fallback font loads.
+    // Original stamp (pattern, glow, tilt), moved to the bottom-right corner: clear of the reference text and of the
+    // holographic foil strip, which covers about 64-74% of the note's width (VaultExperience: x = W * 0.19, width 0.3).
+    // Sized by measuring so it fits that corner whichever font loads (K57).
     const stretch = g as CanvasRenderingContext2D & { fontStretch: string };
-    g.save(); g.translate(w * 0.845, h * 0.52); g.rotate(-0.13); g.fillStyle = g.createPattern(pc, "repeat")!;
+    g.save(); g.translate(w * 0.855, h * 0.8); g.rotate(-0.13); g.fillStyle = g.createPattern(pc, "repeat")!;
     g.font = `900 100px ${f.display}`; stretch.fontStretch = "expanded";
-    const size = Math.min(150, Math.floor((100 * w * 0.25) / Math.max(1, g.measureText("VOID").width)));
-    g.shadowColor = "#FF3B5C"; g.shadowBlur = 14; g.font = `900 ${size}px ${f.display}`; stretch.fontStretch = "expanded";
+    const size = Math.min(250, Math.floor((100 * w * 0.2) / Math.max(1, g.measureText("VOID").width)));
+    g.shadowColor = "#FF3B5C"; g.shadowBlur = 16; g.font = `900 ${size}px ${f.display}`; stretch.fontStretch = "expanded";
     g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("VOID", 0, 0); g.restore();
     g.save(); g.shadowColor = "#FF3B5C"; g.shadowBlur = 8; g.fillStyle = "#FF6B85"; g.font = `600 15px ${f.mono}`;
     g.fillText("NO REGISTRY RECORD · NOT FOUND IN CROSSREF, OPENALEX OR ARXIV", 58, h - 60); g.restore();
