@@ -24,7 +24,8 @@ const SLIDES = [
     "This is how a student moves through Veracite. Read the top row from left to right: you ask a question, and then you approve three times. The plan, the sources, and every claim.",
     "Under that are the seven agents. Teal ones are plain code, violet ones are AI. The Planner suggests search terms. The Scout searches Crossref, OpenAlex and arXiv. The Verifier is code with no AI in it: it checks that two registries agree and that the paper isn’t retracted.",
     "Then the Reader pulls exact quotes, the Scribe drafts only from the sources you approved, and the Skeptic, which is a different model, challenges each claim. That’s five checks on the AI, A to E.",
-    "Every sentence gets one of four labels, and code sets the label, not the AI. There are side doors too: X-ray any reference list, bring your Zotero library, and export in five styles." ] },
+    "Every sentence gets one of four labels, and code sets the label, not the AI. There are side doors too: X-ray any reference list, bring your Zotero library, and export in five styles." ,
+    "PHASE 2, which step handles which case. The Verifier, the code step in the middle of this slide, handles five of today’s six cases: an invented reference is Not found; a real DOI on the wrong paper is Mismatch; a small error is Needs fix, and the student accepts or rejects the correction; a retracted paper gets a warning before it can be kept; and two lines that resolve to the same record are a duplicate the student merges. Case six, no source exists, is the Planner, Scout and Verifier together: only a registry record can become a source, so the assistant answers Not found." ] },
   { who: "AVIGHNA", demo: ["Write & cite", "The day-of requirement"], say: [
     "Five parts, and they match the five words in the brief. The website runs in your browser. Small server functions on Vercel hold the keys and run the Verifier.",
     "The AI is Groq’s free tier with open-weight models, and Qwen for the Skeptic, so it doesn’t share the writer’s blind spots. The sources are open registries: Crossref with Retraction Watch, OpenAlex, arXiv, and the Wayback Machine for web pages.",
@@ -43,7 +44,8 @@ const SLIDES = [
     "Five layers of guardrails, strongest first. Structural means it can’t happen: the AI can only cite records we fetched, and an invented ID is blocked by code. Deterministic means checked by code: DOI, title, first author and year must agree in two registries, plus the retraction check.",
     "Adversarial: the Skeptic, a different model with eight named rules. Human gates: you approve the plan, the sources and the claims. And transparency: when something fails, it says so.",
     "Here is the proof. Fifty-one test references: eleven out of eleven fakes caught, zero fakes marked Verified, thirty out of thirty real ones verified, five out of five retractions flagged. Our weakest area is web pages, three out of five, and they are never marked Verified.",
-    "Every reference real. Every claim traceable. You stay in charge." ] },
+    "Every reference real. Every claim traceable. You stay in charge." ,
+    "PHASE 2, the constraints on this slide. Nothing is verified by default: every reference carries a status. The student decides: accept or reject, merge, keep with a mark or remove. No guessing: a missing detail or a silent database is said plainly. Warnings travel: the marks are written into every export. And none of it is hard-coded to today’s eight references." ] },
 ];
 
 module.exports = function notesFor(n, sources) {
