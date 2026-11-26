@@ -7,7 +7,10 @@ const pptxgen = require("pptxgenjs");
 const NOTES = require("./script-notes.cjs"); // K51: the spoken script goes in the speaker notes
 
 const SKILL = process.env.PPTX_SKILL_DIR;
-const OUT = path.join(__dirname, "..", "Team7_Veracite_Phase1_Deck.pptx");
+// PHASE2=1 builds the Phase 2 presentation version (same design, same six slides) next to the Phase 2 files.
+// The submitted Phase 1 deck is never overwritten by that build.
+const P2 = process.env.PHASE2 === "1";
+const OUT = P2 ? path.join(__dirname, "..", "..", "phase2", "Team7_Veracite_Phase2_Deck.pptx") : path.join(__dirname, "..", "Team7_Veracite_Phase1_Deck.pptx");
 const IMG = (f) => path.join(__dirname, "img", f);
 
 const F = { head: "Archivo Expanded ExtraBold", head2: "Archivo Expanded", body: "Archivo", semi: "Archivo SemiBold", read: "Literata", mono: "Martian Mono", monoM: "Martian Mono Medium" };
@@ -79,7 +82,7 @@ function icon(s, kind, x, y, d, dark = false) {
 pres.addSection({ title: "Overview" });
 {
   const s = pres.addSlide({ masterName: "DARK", sectionTitle: "Overview" });
-  s.addText("TEAM 7 · AI CLUB HACKATHON 2026", { placeholder: "eyebrow" });
+  s.addText(P2 ? "TEAM 7 · AI CLUB HACKATHON 2026 · PHASE 2" : "TEAM 7 · AI CLUB HACKATHON 2026", { placeholder: "eyebrow" });
   T(s, "VERACITE", { x: 0.6, y: 0.95, w: 6.4, h: 1.05, fontFace: F.head, fontSize: 60, color: K.uvInk, charSpacing: 4 });
   T(s, "The AI research assistant that can't make up a reference", { x: 0.6, y: 2.05, w: 6.2, h: 0.8, fontFace: F.read, fontSize: 20, italic: true, color: K.uvInk2 });
   const stats = [
@@ -149,8 +152,13 @@ pres.addSection({ title: "Workflow" });
   [2, 3, 4, 5].forEach((i) => s.addShape(pres.shapes.LINE, { x: ax(i) + BW / 2, y: AY + AH, w: 0, h: 0.44, line: { color: K.teal, width: 0.75, dashType: "sysDot" } }));
   // bottom row
   frame(s, 0.6, 5.42, 3.95, 1.3);
-  T(s, "YOUR LIBRARY AND THE SIDE DOORS", { x: 0.78, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
-  T(s, [
+  T(s, P2 ? "PHASE 2 · WHICH STEP HANDLES WHICH CASE" : "YOUR LIBRARY AND THE SIDE DOORS", { x: 0.78, y: 5.53, w: 3.7, h: 0.22, fontFace: F.monoM, fontSize: 8, color: K.ink2 });
+  T(s, P2 ? [
+    { text: "Verifier (code): ", options: { bold: true } }, { text: "Not found · Mismatch · Needs fix.", options: { breakLine: true } },
+    { text: "Verifier, then you: ", options: { bold: true } }, { text: "Retracted warning · merge a duplicate.", options: { breakLine: true } },
+    { text: "Planner → Scout → Verifier: ", options: { bold: true } }, { text: "no source exists.", options: { breakLine: true } },
+    { text: "Every status ", options: { bold: true } }, { text: "travels into the library and every export." },
+  ] : [
     { text: "X-ray: ", options: { bold: true } }, { text: "a reference list, a chatbot answer or a PDF.", options: { breakLine: true } },
     { text: "Library: ", options: { bold: true } }, { text: "import .bib/.ris, save web pages, re-check.", options: { breakLine: true } },
     { text: "Export: ", options: { bold: true } }, { text: "APA 7, MLA 9, Chicago, Harvard, IEEE.", options: { breakLine: true } },
@@ -172,7 +180,7 @@ pres.addSection({ title: "Workflow" });
 pres.addSection({ title: "Architecture" });
 {
   const s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "Architecture" });
-  s.addText("2 · ARCHITECTURE · THE PARTS AND HOW THEY CONNECT", { placeholder: "eyebrow" });
+  s.addText(P2 ? "2 · ARCHITECTURE AND AI AGENTS · WHO IS CALLED, WHEN, AND WHAT CHECKS IT" : "2 · ARCHITECTURE · THE PARTS AND HOW THEY CONNECT", { placeholder: "eyebrow" });
   s.addText("AI suggests, registries prove, your browser keeps your data", { placeholder: "title" });
   const cols = [
     ["WEBSITE", "in your browser", K.teal, ["Next.js app with a 3D home page; works on a phone", "3 checkpoints; every step logged in Receipts", "PDFs read in your browser: the file never leaves", "English / Arabic labels"]],
@@ -191,6 +199,30 @@ pres.addSection({ title: "Architecture" });
     T(s, items.map((t, k) => ({ text: t, options: { bullet: { indent: 10 }, breakLine: k < items.length - 1 } })), { x: x + 0.12, y: Y + 0.88, w: W - 0.24, h: H - 1.0, fontSize: 11, color: K.ink, paraSpaceAfter: 7 });
     if (i < cols.length - 1) arrow(s, x + W + 0.03, Y + 1.6, x + W + G - 0.03, Y + 1.6, K.ink);
   });
+  if (P2) {
+    // The agents that actually run: engine, what calls each one, and what checks its output. Same two colours as above.
+    const agents = [
+      ["Planner", "AI · gpt-oss-20b", "you ask a question", "you approve the plan", 1],
+      ["Scout", "code", "the plan is approved", "the Verifier", 0],
+      ["Verifier", "code, no AI", "every reference", "two registries agree", 0],
+      ["Reader", "AI · gpt-oss-20b", "sources approved", "quote is in the text", 1],
+      ["Scribe", "AI · gpt-oss-120b", "Co-pilot mode", "approved IDs only", 1],
+      ["Skeptic", "AI · Qwen", "after each draft", "can only lower a label", 1],
+      ["Integrity Clerk", "code", "you export", "the export gate", 0],
+    ];
+    const AW = 1.62, AG = 0.132;
+    agents.forEach(([name, engine, when, check, ai], i) => {
+      const x = 0.6 + i * (AW + AG), c = ai ? K.violet : K.teal;
+      frame(s, x, 5.5, AW, 1.25, { fill: "FFFFFF" });
+      s.addShape(pres.shapes.RECTANGLE, { x, y: 5.5, w: AW, h: 0.3, fill: { color: c }, line: { color: c, width: 0.5 } });
+      T(s, name, { x: x + 0.08, y: 5.5, w: AW - 0.16, h: 0.3, fontFace: F.head2, fontSize: 8.5, bold: true, color: "FFFFFF", valign: "middle" });
+      T(s, [
+        { text: engine, options: { fontFace: F.mono, fontSize: 7.5, color: c, breakLine: true } },
+        { text: "Called when: ", options: { bold: true } }, { text: when, options: { breakLine: true } },
+        { text: "Checked by: ", options: { bold: true } }, { text: check },
+      ], { x: x + 0.08, y: 5.84, w: AW - 0.16, h: 0.88, fontSize: 8, color: K.ink, valign: "top", paraSpaceAfter: 1 });
+    });
+  } else {
   const stats = [["0", "AI calls needed to verify a reference: it's pure code against two registries"], ["~4", "AI calls per full research session, spread across free Groq models"], ["3", "fallback levels: other model → Rules mode → honest banner"]];
   stats.forEach(([n, t], i) => {
     const x = 0.6 + i * 4.1;
@@ -198,6 +230,7 @@ pres.addSection({ title: "Architecture" });
     T(s, n, { x: x + 0.18, y: 5.66, w: 0.95, h: 0.9, fontFace: F.head, fontSize: 34, color: i === 1 ? K.violet : K.teal, valign: "middle" });
     T(s, t, { x: x + 1.15, y: 5.68, w: 2.6, h: 0.9, fontSize: 11, color: K.ink, valign: "middle" });
   });
+  }
   T(s, "■ teal = deterministic code (unit-tested)   ■ violet = AI model", { x: 7.6, y: 1.71, w: 5.13, h: 0.2, fontFace: F.mono, fontSize: 7.5, color: K.ink2, align: "right" });
   s.addNotes(NOTES(3, "Architecture: the orchestrator runs in the browser so checkpoints can wait for a human and data stays on the device; server functions are stateless and hold the API keys. Verification uses zero AI calls. Citation styles come from the official CSL files (citation-js); PDFs are parsed in the browser with pdf.js, so the file is never uploaded. Other tools can call the same Verifier: GET/POST /api/v1/verify and an MCP server at /api/mcp (documented in docs/API.md)."));
 }
@@ -292,7 +325,7 @@ pres.addSection({ title: "Guardrails" });
   T(s, [
     { text: "HOW WE PROVE IT  ", options: { fontFace: F.monoM, fontSize: 8, color: K.gold, breakLine: true } },
     { text: "0 fakes marked Verified", options: { fontFace: F.head2, fontSize: 13, bold: true, color: K.cyan, breakLine: true } },
-    { text: "51 test references on the live site, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions flagged. Weakest: web pages 3/5, never marked Verified.", options: { fontSize: 8.5, color: K.uvInk } },
+    { text: P2 ? "51 test references, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions. Today’s test pack, live: 8 of 8 references get the status the brief asks for. Weakest: web pages 3/5, never Verified." : "51 test references on the live site, 25 Nov: 11/11 fakes caught · 30/30 real verified · 5/5 retractions flagged. Weakest: web pages 3/5, never marked Verified.", options: { fontSize: 8.5, color: K.uvInk } },
   ], { x: 8.6, y: 5.1, w: 4.0, h: 1.15 });
   T(s, "Every reference real. Every claim traceable. You stay in charge.", { x: 0.6, y: 6.33, w: 12.13, h: 0.45, fontFace: F.head2, fontSize: 17, bold: true, color: K.cyan });
   s.addNotes(NOTES(6, "Guardrails grouped strongest-first. Proof numbers: golden-set evaluation of 25 Nov 2026 (veracite/tests/results/latest.json) against live Crossref, OpenAlex and arXiv: 51 test references (30 real, 10 hand-built chimeras, 1 AI-fabricated, 5 retracted, 5 web pages); the same run against the live site (tests/results/live-site.md, 25 Nov 23:50 Dubai) gave identical results, median 0.7 s per reference. 'How this was decided' (under every X-ray verdict) lists each registry searched, what it returned and the rule that set the label. The screenshot is the working X-ray on a team-written test list."));
