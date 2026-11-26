@@ -7,6 +7,7 @@
  * Anything else is a research question and goes to the Planner as before.
  */
 import { quoteInText } from "../agents/checks";
+import { detectInjection } from "../integrity/injection";
 import type { SourceRecord } from "../types";
 
 export type Routed =
@@ -58,7 +59,8 @@ export function answerRequest(r: Exclude<Routed, { kind: "research" }>, sources:
   const src = find(sources, r.who, r.kind === "quote" ? r.year : undefined);
   const who = r.who.length ? r.who.join(", ") : "that author";
   if (r.kind === "note") {
-    const command = INSTRUCTION.test(r.note);
+    // Zedan's prompt-injection shield (lib/integrity/injection.ts) plus a plain pattern: either one flags the note.
+    const command = detectInjection(r.note).findings.length > 0 || INSTRUCTION.test(r.note);
     if (!src) {
       return { title: "Note not saved", tone: "warn", lines: [`No source by ${who} is in your library, so there is nothing to attach the note to. Add the paper on the X-ray page first.`, ...(command ? ["The note reads like an instruction to the checker. Notes are content, not commands: nothing was changed."] : [])] };
     }
