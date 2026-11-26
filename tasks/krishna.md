@@ -90,6 +90,7 @@ Read first: `docs/11_BUILD_PLAN.md` (the plan we follow) → `docs/HANDOFF.md` �
 - [x] **K53** · PRES · Type-and-show file for the live demo (what to paste at each step, what judges see, fallbacks) and a 100-question AI quiz PDF · `submissions/phase2/DEMO_INPUTS.md`, `docs/Team7_AI_Quiz_100.pdf` · due Thu 11:00 · #pres
 - [x] **K55** · PRES · Audit fixes that need no deployment: prompt log re-exported (rule 8), `docs/08` says Co-pilot · `submissions/prompt-log/**` (Zedan's, export only), `docs/08_DEMO_SCRIPT_AND_QA.md` (Avighna's, one line) · due Thu 11:00 · #pres
 - [x] **K56** · P1 · Save as PDF on the reference list (browser print dialog, A4, no new dependency) · `tabs/xray/printDoc.ts`, `ReferenceList.tsx` · due Thu 13:00 · #research #ux
+- [x] **K57** · UX · Home page under the UV lamp: the security strip is see-through instead of a glowing bar; VOID stamp unchanged (centred) · `components/lab/vault/VaultExperience.tsx` (Avighna's) · due Thu 13:00 · #ux
 - [x] **K54** · P0 · A question that cannot be understood is not searched: code guard for text with no usable words (every mode), Planner flag `understood`, back to the question with the reason · `veracite/src/lib/agents/question.ts`, `agents.ts`, `schemas.ts`, `lib/types.ts`, `lib/session/useResearch.ts` · due Thu 11:00 · #honesty #mvp
     - 26 Nov: verdicts keep the web evidence; Add as web page on the X-ray and the save page; record from the live/Wayback check + the student's own author/date; Library shows retrieval date + archive link; exports and certificates include it. 8 new tests.
 

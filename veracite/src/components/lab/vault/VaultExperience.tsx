@@ -46,9 +46,9 @@ void main(){
   vec3 c = mix(vec3(0.84, 0.89, 0.89), pal(t), 0.42);
   c *= 0.9 + 0.1 * sin(vUv.y * 320.0 + vUv.x * 30.0);
   c *= 0.85 + 0.35 * pow(max(dot(reflect(-v, vN), normalize(vec3(0.3, 0.8, 0.5))), 0.0), 8.0);
-  c = mix(c, c * vec3(0.5, 1.0, 1.3) * 1.25, uMode * 0.7);
+  c = mix(c, c * vec3(0.6, 0.9, 1.15), uMode * 0.5); // K57: a soft tint under the UV lamp, not a glowing bar
   float edge = smoothstep(0.0, 0.06, vUv.x) * smoothstep(1.0, 0.94, vUv.x);
-  gl_FragColor = vec4(c, 0.94 * edge);
+  gl_FragColor = vec4(c, edge * mix(0.8, 0.3, uMode)); // K57: see-through, so the note's print and the VOID stamp show beneath it
   #include <colorspace_fragment>
 }`;
 const story = { explodeManual: 0 };
