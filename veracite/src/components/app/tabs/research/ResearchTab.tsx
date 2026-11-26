@@ -58,7 +58,19 @@ export function ResearchTab() {
               if (q.trim().length >= 5 && !busy) void ask(q.trim());
             }}
           >
-            <input className="rs-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={EXAMPLE} aria-label="Research question" disabled={started && busy} />
+            <input
+              className="rs-q"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              // A one-line box drops line breaks on paste and glues a list of links together. Keep them apart (K70).
+              onPaste={(e) => {
+                const text = e.clipboardData.getData("text");
+                if (!/[\r\n]/.test(text)) return;
+                e.preventDefault();
+                const el = e.currentTarget;
+                const joined = text.split(/[\r\n]+/).map((l) => l.trim()).filter(Boolean).join(" ");
+                setQ(`${q.slice(0, el.selectionStart ?? q.length)}${joined}${q.slice(el.selectionEnd ?? q.length)}`);
+              }} placeholder={EXAMPLE} aria-label="Research question" disabled={started && busy} />
             <button className="btn primary" type="submit" disabled={busy || q.trim().length < 5}><Search size={15} /> {started ? "Ask again" : "Start"}</button>
           </form>
           {!started && (
