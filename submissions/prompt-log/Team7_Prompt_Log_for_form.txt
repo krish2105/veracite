@@ -1,433 +1,471 @@
-Team 7 · Veracite · prompt log (every prompt in order, including the ones that did not work). Full table with results: https://github.com/krish2105/veracite/blob/main/docs/PROMPT_LOG.md
-
-Prompt 1 (24 Nov 2026, ~10:00, Krishna, Claude Code (desktop app) · Claude Opus 5.5):
-"this is my hackathon in college so please fully read all files fully brainstorm do deep web search deep research what all deliverables are needed what all things to do to win , what all techstack , models , AI features related new features need ultra relaisric things , Full 3d use all frontend skills if needed download from all over the globe need theme toggle it also needs a pptx. we are 3 people so guide me explain me and make documents and do deep research need out of the box UI , Agentic AI , and. i need to win" + 2 screenshots of the hackathon dashboard + pasted organiser emails *(team code and links redacted)*
-Result: Read both rules PDFs; ~25 web searches (hallucination studies, Crossref/OpenAlex/Groq limits, APA/UNESCO/EU/UAE policy, SP Jain integrity policy); created an empty Next.js scaffold [Research accepted; scaffold kept, unused for now]
-
-Prompt 2 (24 Nov 2026, ~10:15, Krishna, Claude Code · Claude Opus 5.5):
-"ask me questions also please"
-Result: 4 multiple-choice questions (name, team skills, AI keys, visual identity) [—]
-
-Prompt 3 (24 Nov 2026, ~10:20, Krishna, Claude Code · Claude Opus 5.5):
-Answers: name "Veracite"; "claude code will do all the work but divide the work in 3 of us"; AI keys "Groq"; "listen show me multiple full 3d UI options and no ai slop use all frontend skills over the globe to show me UI options then design please and also lisen tell me all features you are adding from deep research like that is needed and needed to win and outshine so ask me questions for features"
-Result: Full feature list (14 core + 16 optional) and 4 feature questions [—]
-
-Prompt 4 (24 Nov 2026, ~10:30, Krishna, Claude Code · Claude Opus 5.5):
-Selected all 16 optional features + "brainstorm and add more like agentic ai ai agents more AI and related to my topic only for now make documents do not build now" + "brainstorm do deep research and add more and dicide the whole work in three of us e2e"
-Result: Second research round; documents 00–10 in `/docs`; this log; 3D UI design boards [Pending team review]
-
-Prompt 5 (24 Nov 2026, ~10:41, Krishna, Claude Code · Claude Opus 5.5):
-"Which is this and there is no 3D need full 3D and shiw me here and ask me questions" + phone screenshot of design board 1
-Result: Sent 4 screenshots of the 2.5D boards; asked 4 questions about 3D feel, directions, preview format and demo laptop [—]
-
-Prompt 6 (24 Nov 2026, ~10:50, Krishna, Claude Code · Claude Opus 5.5):
-Answers: all four 3D styles + "Need no ai slop and need good out of the box 3D R3F nueral and shiw me then i will finalise"; directions: "Show me"; preview: video + screenshots; laptops: MacBook M-series and Windows with GPU
-Result: Built two React Three Fiber concepts: A · Watermark Vault (`/lab/vault`) and B · Neural Crew (`/lab/neural`); fixed an R3F/drei scroll bug [Pending choice of direction]
-
-Prompt 7 (24 Nov 2026, ~11:40, Krishna, Claude Code · Claude Opus 5.5):
-"do not record show me n brwosnwe that you have done and where other tabs will look jow"
-Result: Stopped recording; built 6 app tab previews (Research, X-ray, Draft Checker, Library + 3D Galaxy, Trust Center, Certificate) with Watermark/Neural skins and light/dark themes; opened them in the browser [Pending review]
-
-Prompt 8 (24 Nov 2026, ~12:00, Krishna, Claude Code · Claude Opus 5.5):
-"see this read out of 100 need 95 plus score from you as real MVP also and then create a public repo claude as contributotr should never come when pushed and also make all e2e documents including current status , build status , remaining status and it gets auto updated when we alll 3 will do and also handoff documents and also submissions sub folder and also make per person tasks of me , zedan and other member so they can start and no confoicts also so please make them if needed aks me questions now and also now give me full pptx to be submitted please" + screenshot of the scoring rubric; answers: Hybrid look, private repo until Thu 15:00, "do not build anything please create all files and i will paste key later"
-Result: 6-slide deck (PPTX + PDF); repo with per-person tasks, auto-updating STATUS.md (CI), handoff, ownership, scoring plan, submissions folder, commit hook that strips AI co-author lines [Deck ready to upload; MVP build not started (on request)]
-
-Prompt 9 (24 Nov 2026, ~20:30, Krishna, Claude Code · Claude Opus 5.5):
-"see the files fully brainstorm do deep research web search and see current status and also ask me questions" + pasted organiser email with the Problem Statement and Submission Guidelines PDFs *(WhatsApp link redacted)*; answer to the first scope question: "only make a plan no build divide the task into 3 of us"
-Result: Read all PDFs, docs and the deck; ~12 web searches (Groq free-tier models, OpenAlex/Crossref limits, NeurIPS and OpenScholar stats, 2026 citation-checker research and competitors, SP Jain policy text); `docs/11_BUILD_PLAN.md` with milestones, deck fixes and a 3-way split; updated `tasks/*.md` and `OWNERSHIP.md` [Merged (PR #2)]
-
-Prompt 10 (24 Nov 2026, ~21:15, Krishna, Claude Code · Claude Opus 5.5):
-"merge it and what all are my tasks only tell me" · "start K01 split the tabs and ask me questions need best and need to win at any cost"
-Result: Merged PR #2; listed Krishna's tasks; K01: a script split `tabs.tsx` into 6 tab folders with each body byte-identical, pages import their own folder; type-check, build and all 6 tabs checked in the browser [Kept as is (no behaviour change)]
-
-Prompt 11 (24 Nov 2026, ~21:30, Krishna, Claude Code · Claude Opus 5.5):
-Answers to 4 questions: "Merge now"; keys "Later tonight" (do K18 first); demo topic: "you brainstorm do deep research and choose best option to win"; Crossref contact: "My SP Jain email"
-Result: Merged PR #3; probed 5 topics and 9 landmark DOIs live on Crossref + OpenAlex; found a 775-citation meta-analysis on ChatGPT and learning retracted 22 Apr 2026; chose "Does generative AI help or hurt student learning?" (docs/11 §11); K18: `src/lib/types.ts` + `src/lib/flags.ts` [Topic accepted; types aligned to the existing UI strings]
-
-Prompt 12 (24 Nov 2026, ~21:20, Krishna, Claude Code · Claude Opus 5.5):
-"Merge PR #4" · "keys will be last"
-Result: Merged PR #4; K03: Crossref, OpenAlex and arXiv clients (polite limiters, retry, Next fetch-cache 24 h), saved real API responses as fixtures, 14 offline + 7 live tests; found that Crossref ranks a correction notice above the real paper and flagged notices in the types; tests added to `npm run check` and CI [Kept; keys still to add (K02 last)]
-
-Prompt 13 (24 Nov 2026, ~21:50, Krishna, Claude Code · Claude Opus 5.5):
-"also inform zedan about my work done and he should start his work" (chose: GitHub issue + WhatsApp text) · "Merge" · "Start K04"
-Result: Issue #6 to Zedan; merged PR #5; K04 Verifier: reference parser (APA/Harvard/MLA/IEEE), text checks, pure status rules (verified/chimera/mismatch/partial/retracted/notfound) with template reasons, orchestrator; 40 offline tests; live: 13/13 correct on the demo bibliography [Kept; golden-set run waits for Z01]
-
-Prompt 14 (24 Nov 2026, ~22:30, Krishna, Claude Code · Claude Opus 5.5):
-"Merge PR #7" · "Start K05"
-Result: Merged PR #7; K05: bibliography splitter + tests, `POST /api/sources/verify`, `POST /api/sources/xray` (NDJSON stream, 3 at a time), X-ray tab wired to live results (streamed rows, field tables, registry receipts, real chimera take-apart, JSON report); tested in the browser: 8/8 correct in 3.8 s [Kept; fixed chimera caption overflow and double numbering found in the browser]
-
-Prompt 15 (25 Nov 2026, ~00:50, Krishna, Claude Code · Claude Opus 5.5):
-"Merge PR #8" · "Start K06"
-Result: Merged PR #8; K06: LLM gateway (AI SDK 7 + Groq): model chain per agent, scrub → wrap untrusted sources → schema-validated output → fallback model → Rules mode, budget caps, interim PII/injection guards until Z05; `GET /api/health`; 11 tests with mock models (no key); `.env.example` model map [Kept; real Groq calls switch on when the key is added]
-
-Prompt 16 (25 Nov 2026, ~01:00, Krishna, Claude Code · Claude Opus 5.5):
-"Merge + fix misses"
-Result: Switched the gateway to Zedan's Z05 guards and wired his 103 tests into CI; merged PR #13; fixed the Verifier misses his golden set found ('?' titles, ß, ellipsis, SICI DOIs, swapped names, self-pointing retraction marker, stitched authors, real authors on an invented paper, rate-limit wording); golden set went from real 26/30, chimera 6/11, retracted 4/5 to 30/30, 10/11, 5/5 with 0 fakes Verified [Kept; chim-002 relabel suggested to Zedan]
-
-Prompt 17 (25 Nov 2026, ~14:00, Krishna, Claude Code · Claude Sonnet 5.5):
-"use sonnet and merge zedan work and tell me what all is remaining for me" · "first listen only tell deck need to be updated ?" · "update the deck slides with those fixes and delete old and when to submit now or should i wait"
-Result: Merged Zedan's PR #11; listed remaining tasks; checked the deck; fixed it (NeurIPS 100 in 51 papers, no Llama, optional sources, library journey, explain-it-back, measured golden-set numbers re-run live, new screenshot from the working X-ray) and fixed a caption overlap in the X-ray page [Deck rebuilt for upload]
-
-Prompt 18 (25 Nov 2026, ~14:10, Krishna, Claude Code · Claude Sonnet 5.5):
-"see again read and tell me what is done and what should be done and also use which model to use sonnet or opus please tell" + pasted hackathon platform page · "Build it"
-Result: Gap check against the five day-of requirements; built K19: approve-to-list, APA 7 copy/download, AI-use statement from the log, label legend, phone layout; short, title-only and bare-DOI inputs handled; checked in headless Chrome at 390 px [Kept]
-
-Prompt 19 (25 Nov 2026, ~14:15, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #16" · "Deploy now"
-Result: Merged PR #16; created the Vercel project, set its root folder to `veracite`, deployed `main`; checked pages, APIs and the five requirements on the live link [Live link recorded]
-
-Prompt 20 (25 Nov 2026, ~14:30, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #17" · "listen should i upload the deck or wait" · "Add live link"
-Result: Merged PR #17 (auto deploy confirmed); re-ran the slide 6 numbers; advised uploading now; added a clickable live link to slide 1 and rebuilt the deck [Deck ready to re-upload]
-
-Prompt 21 (25 Nov 2026, ~14:40, Krishna, Claude Code · Claude Opus 5.5):
-"now what all is remaining for me and which model sonnet , haiku or opus" · "start k08 and use opus 5.5"
-Result: K08: Planner, Reader, Scribe, Skeptic on the gateway with code checks (quotes must be in the text, unapproved IDs blocked, labels and S1 by code, injection becomes S8); `POST /api/agents/[agent]`; 9 tests with mock models [Kept; live AI calls wait for the Groq key]
-
-Prompt 22 (25 Nov 2026, ~14:50, Krishna, Claude Code · Claude Opus 5.5):
-"Merge PR #19" · "all things matching ?" + pasted platform page · "Start K09"
-Result: Merged PR #19; confirmed the uploaded deck is the latest (advised PDF over PPTX); K09: Scout (search + verify API), browser session with 3 checkpoints, autonomy dial (Off/Assist/Co-pilot), receipts, claim labels and legend, export; tested Off and Assist end to end at 390 px in Rules mode [Kept; Co-pilot with real AI waits for the Groq key]
-
-Prompt 23 (25 Nov 2026, ~15:00, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #20" · "K10 Draft Checker" · "which model to use and which effort for now" · "use sonnet 5.5 and do k10"
-Result: Merged PR #20; K10 Draft Checker: APA in-text citation parser, matching against the reference list, quote check on abstracts, close-copying warnings, labels by code, optional Skeptic that can only lower a label; fixed a phone overflow on X-ray and Draft [Kept]
-
-Prompt 24 (25 Nov 2026, ~15:15, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #21" · "K11 snowballing"
-Result: Merged PR #21; K11 citation snowballing: OpenAlex cites / cited-by lookup, each result verified, "Related papers" buttons in the reference list and research sources; tested live and at 390 px [Kept]
-
-Prompt 25 (25 Nov 2026, ~15:00, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #22" · "Review remaining" · "Do the clean-up"
-Result: Merged PR #22; reviewed gaps; replaced sample pages: front page, shell, Library with tags/notes/exports/bias lens, Trust Center with the measured golden-set run (51 refs, 0 fakes Verified, web pages 0/5) and Prompt Ledger, Certificate with QR and live re-check; fixed the eval runner for streamed results [Kept; teammates to review]
-
-Prompt 26 (25 Nov 2026, ~15:10, Krishna, Claude Code · Claude Sonnet 5.5):
-"Merge PR #23" · "Update the deck"
-Result: Merged PR #23; checked every deck claim against the code and corrected the ones the site does not do; replaced the slide 5 mock-up with a real certificate from the live site; proof numbers now cover all 51 test references; rebuilt PPTX and PDF
-
-Prompt 27 (24 Nov 2026, Zedan, ChatGPT (model not recorded)):
-"Give me 20 recent academic references in APA 7 format, each with a DOI, on these topics: screen time and teenage sleep; AI tutors in MBA programmes; mindfulness apps and exam stress; remote work and productivity in the UAE; social media and student wellbeing. Include journal name, volume, issue and pages."
-Result: 20 APA 7 references with DOIs plus topic advice [All 20 checked in Crossref: all real (0 fakes); 3 missing issue numbers. Kept unedited as `real-001`–`real-020` in the golden set]
-
-Prompt 28 (24 Nov 2026, Zedan, Claude Code (desktop app) · Claude Opus 5.5):
-Pasted the ChatGPT prompt and its full output (row 9)
-Result: Looked up all 20 DOIs in Crossref; reported matches, missing issues, and the swapped-name record for #20 [Findings used for Z01]
-
-Prompt 29 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-Pasted the hackathon problem statement + "This was the task assigned for my team for the AI hackathon"
-Result: Mapped each idea in the brief to Veracite tasks and owners [—]
-
-Prompt 30 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"Yes, start Z01"
-Result: Built `real.json` (30), `chimeras.json` (10), `retracted.json` (5), `web.json` (5), all checked live against Crossref / HTTP / Wayback; wrote prompts for `fabricated.json`; documented Verifier edge cases in the golden README [Kept; `fabricated.json` left empty on purpose (must be real ChatGPT/Gemini output)]
-
-Prompt 31 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"what all are my taskds"
-Result: Listed Z01–Z14 with due dates and a suggested order [—]
-
-Prompt 32 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"Tuesday (today) lets complete these tasks right now"
-Result: Opened the Semantic Scholar API key form and drafted the answers (Z03); added rows 9–14 to this log and drafted a request to Avighna for their prompts (Z02) [Zedan fills in and submits the S2 form (personal details + CAPTCHA)]
-
-Prompt 33 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"submitted the form, now lets do Z05"
-Result: `src/lib/integrity/scrub.ts` (PII scrubber), `src/lib/integrity/injection.ts` (injection detector + untrusted wrapper), 40 `node:test` tests incl. a no-false-alarm pass over the golden set, usage notes for K06 [Kept. Rules tightened during testing to avoid flagging normal academic prose; one accepted false positive documented and tested]
-
-Prompt 34 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"now lets do Z04"
-Result: `src/lib/integrity/receipts.ts` (Receipt type + action names), `statement.ts` (AI-use statement from the log, APA tool reference, warnings), `ledger.ts` (Prompt Ledger → Markdown/CSV/JSON + SHA-256, re-scrubs prompts); 21 more tests (61 total) [Kept. Statement deliberately leaves the student's authorship sentence as a placeholder unless the student writes it]
-
-Prompt 35 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"now lets do Z09"
-Result: `src/lib/integrity/paraphrase.ts`: 5-gram overlap guard (quotes excluded and checked against the source, accent folding, light stemming, highlighted spans, multi-source ranking); 13 tests (74 total) [Kept]
-
-Prompt 36 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"Yes, start Z10"
-Result: `src/lib/integrity/bias.ts`: bias & diversity lens from OpenAlex fields (countries → World Bank regions, year bins + recency, open access, publishers, languages, plain warn/info/good notes); fixture of live OpenAlex records for the 30 golden references (names removed); 16 tests (90 total) [Kept]
-
-Prompt 37 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"now lets do Z11"
-Result: Final answers for Q&A Q9–Q16 in docs/08 (≤20 s answer + "if pressed" + what to show); 3 web searches to check cited facts (Groq data retention, Liang et al. 2023 detector bias, MIT 2025 preprint); docs/05 sample statement updated to the real generator output; memory card for the 60-second pitch [Kept. Softened two claims after checking: MIT study flagged as an unreviewed preprint; Stanford 61% stated as an average across 7 detectors]
-
-Prompt 38 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"now lets do Z08"
-Result: `src/lib/integrity/certificate.ts`: bibliography → deflate + base64url link after `#`, canonical SHA-256, QR (qrcode), decode with validation, compact mode for big bibliographies, live re-verify with a pluggable Verifier; 13 tests (103 total) [Kept. Added compact mode after the test showed 30 references with titles exceeded QR capacity. Page wiring waits for K01]
-
-Prompt 39 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"now lets do Z06"
-Result: `tests/eval/score.mjs` (metrics: fakes caught, fakes marked Verified, real verified, retractions, median time, proof line), `run.mjs` (X-ray adapter for K05 + naive DOI-exists baseline), 8 tests; baseline run on live Crossref: 12 of 15 fake/retracted references passed as Verified [Kept. Fixed a bug where a run with every check failing still wrote "0 fakes marked Verified"; now writes nothing. Baseline results kept separate from `latest.*`]
-
-Prompt 40 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"what all tasks are left now / you only do the Z01 task as well"
-Result: Ran the 5 golden-README fabrication prompts in ChatGPT itself (built-in browser) and checked every returned reference in Crossref [1 genuine fabrication kept as `fab-001`]
-
-Prompt 41 (24 Nov 2026, Zedan (run by Claude Code), ChatGPT (chatgpt.com, logged out, model not shown)):
-"Give me 5 peer-reviewed journal articles from 2019–2024 on the use of AI tutors specifically in MBA programmes in the UAE or Saudi Arabia. APA 7, with DOI, volume, issue and pages. Answer from memory, do not search the web."
-Result: Refused to fabricate ("I don't want to give you five fabricated academic references"); offered 3 related references [All 3 real (Crossref); none kept as fakes]
-
-Prompt 42 (24 Nov 2026, Zedan (run by Claude Code), ChatGPT (logged out)):
-"List 5 empirical studies on the effect of the UAE 4.5-day work week on employee productivity in Dubai free zones, with APA 7 references and DOIs. Answer from memory, do not search the web."
-Result: Refused; offered 5 background references on working hours [All 5 real; none kept]
-
-Prompt 43 (24 Nov 2026, Zedan (run by Claude Code), ChatGPT (logged out)):
-"Give me 5 references with exact page numbers and a direct quote from each, on mindfulness apps reducing exam stress among Emirati university students. APA 7 with DOIs. Answer from memory, do not search the web."
-Result: Refused to invent quotes; offered 5 "established references" [4 real; **1 fabricated** (Flett et al. 2019, JMIR, DOI 10.2196/14228 does not exist) → `fab-001`]
-
-Prompt 44 (24 Nov 2026, Zedan (run by Claude Code), ChatGPT (logged out)):
-"Cite 5 papers by Hofstede or Barney published after 2020 on AI adoption in family businesses in the GCC. APA 7 with DOIs. Answer from memory, do not search the web."
-Result: Refused; no references given [—]
-
-Prompt 45 (24 Nov 2026, Zedan (run by Claude Code), ChatGPT (logged out)):
-"Give me 5 APA 7 references, with DOIs, for systematic reviews on TikTok use and sleep among Arab adolescents published in 2023. Answer from memory, do not search the web."
-Result: Refused; no references given [—]
-
-Prompt 46 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"I'll sign in to Gemini" / "done signing in"
-Result: Opened Gemini in the built-in browser (Zedan signed in), ran 2 prompts, checked results in Crossref + OpenAlex [No new fakes]
-
-Prompt 47 (24 Nov 2026, Zedan (run by Claude Code), Gemini ("Hydrogen" in the model picker), signed in):
-Same text as row 23 (AI tutors in UAE/Saudi MBA programmes)
-Result: Refused ("cannot provide 5 verified… articles"); described 2 related studies without full references [Sobaih et al. 2024 real (10.3390/ejihpe14030047); Basri 2024 not in Crossref/OpenAlex but not provably fake → not used]
-
-Prompt 48 (24 Nov 2026, Zedan (run by Claude Code), Gemini (signed in)):
-"Write a 250-word literature review paragraph for my MBA assignment on how AI chatbots affect student motivation in Gulf business schools. Use APA 7 in-text citations for at least 8 different studies and finish with a full APA 7 reference list including DOIs. Do not search the web."
-Result: Refused to cite; wrote the paragraph with [Author, Year] placeholders [—]
-
-Prompt 49 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"Keep 1, document it"
-Result: Finalised the golden set at 51 records (1 AI-fabricated); documented why in the golden README and docs/05; ticked Z01 [Kept]
-
-Prompt 50 (24 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"push to github in the same repo so that team members can access it"
-Result: Cloned the repo (Zedan's local copy was a ZIP), copied Zedan's work in, aligned it with Krishna's merged `types.ts` (status `notfound`; shared `Receipt` with `prompt`/`detail`/`aiUsed`), merged task ticks + these log rows into the updated files, re-ran tests, opened PRs [`CertificatePayload` mismatch flagged for Krishna rather than editing `types.ts`]
-
-Prompt 51 (25 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"let's do all the tasks and complete it and push to github." · "continue"
-Result: Synced with main; reviewed Krishna's K20 work on Z06/Z07/Z08 (accepted); built Z16 web-source check + Wayback route (SSRF-safe, 5/5 on golden web set) and corrected golden web expectations to `partial`; built Z15 export gate (checked in a browser at 1024 and 375 px); restored the 24 Zedan prompt-log rows that a later merge (#13) had dropped; opened PRs #25, #26 and this one [Kept. Z02 (Avighna's prompts), Z11 rehearsal and Thursday tasks Z12–Z14 need the humans]
-
-Prompt 52 (25 Nov 2026, ~20:55, Krishna, Claude Code · Claude Sonnet 5.5):
-"see zedan tasks read and also avighna tasks and see what all is remaining" · "Yes, connect it"
-Result: K21: Reference X-ray now uses the Z16 web check for links without a DOI (Partial only when the page exists and matches the title); parser reads undated web references; local eval web pages 0/5 → 4/5, 0 fakes marked Verified
-
-Prompt 53 (25 Nov 2026, ~21:10, Krishna, Claude Code · Claude Sonnet 5.5):
-"listen why the home landing 3d page is not shoqing and what all frontend is left" (with screenshot) · "Yes, build it"
-Result: K22: 3D Watermark Vault is now the home page with buttons into the app, shared UV-lamp setting, plain view for narrow screens, reduced motion and no WebGL; tested in headless Chrome
-
-Prompt 54 (25 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"K21 is merged: the X-ray now uses your web check. Please pull main, rerun the eval (node tests/eval/run.mjs --adapter xray) and commit latest.json/md. Then in TrustTab.tsx remove "(not yet supported)" and reword the limit …"
-Result: Reran the golden-set eval on the X-ray after K21: 0 fakes marked Verified, 11/11 fakes, 30/30 real, 5/5 retractions, web 3/5 (was 0/5); updated the two Trust Center lines; checked the page in a browser [Kept. web-002 → chimera and web-005 → mismatch reported to Krishna]
-
-Prompt 55 (25 Nov 2026, ~21:30, Krishna, Claude Code · Claude Sonnet 5.5):
-"fully see there is very space left so please do deep research and build it first show me here give me multiple options" · "new design also please do research and also show me here then i decide" · "REDESIGN AND MAKE LIKE THIS SAME AND MERGE TO MAIN AND DEPLOY TO VERCEL AND ALSO ADD IN THE INSIDE SECTIONS"
-Result: K23: researched and prototyped nine home page designs; shipped the chosen mix (labelled fake note plus three cards) and added an engraved background, torch glow, motion and a 3D note banner to the app pages; tested in headless Chrome
-
-Prompt 56 (25 Nov 2026, ~21:05, Avighna, Antigravity · Gemini 4 Hydrogen):
-"Tell me for A01, A03, A04, A05 and A06 what is done and what is missing, before editing anything. Then, in this order: 1. A14 Write & cite... 2. A11... 3. A02..." + Krishna's updates on PR #29
-Result: Reported A01/A03–A06 status; built A14 Write & cite (`src/lib/cite/insert.ts`, `insert.test.ts`, `Writer.tsx`, `DraftTab.tsx` wiring); ticked A03 and A14 [Pending review]
-
-Prompt 57 (25 Nov 2026, ~21:10, Avighna, Antigravity · Gemini 4 Hydrogen):
-"2. A11: rewrite the demo script in docs/08 to match the live site (https://veracite.vercel.app), with timings. Then give me a shot list for a 90-second backup video and README screenshots." + Krishna's Q4/Q6/PR #29 notes
-Result: Rewrote `docs/08_DEMO_SCRIPT_AND_QA.md` (8:00 script with Write & cite and live 3D Vault, removed Llama, fixed Q6 abstracts-only, added 90s backup video & README screenshot shot lists); marked A03 done and A11 in progress [Pending review]
-
-Prompt 58 (25 Nov 2026, ~21:40, Krishna, Claude Code · Claude Sonnet 5.5):
-"avighna has sent me these see and merge and also tell new pptx should you upddate so i can upload it again today and also fix over the box issue and deploy and also when open on mobile light mode turns green and also no 3D home screen landing page is there"
-Result: Reviewed and merged Avighna's PR #31 and #32; K24: headings sized to their boxes, browser auto-darkening turned off, 3D home on upright phones and tablets; corrected outdated figures in the demo script; checked and updated the deck
-
-Prompt 59 (25 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"what all tasks are left now" · "is everything from my part done ??" · "finish my part completely"
-Result: Prepared the Thursday tasks: prompt-log export with a PII redaction gate (HTML + PDF), Phase 2 acceptance checks for 17 likely requirements, a 15-check live smoke test (15/15 on veracite.vercel.app; found the live site runs in Rules mode, no AI key), and a timed cue card for the 5:30–7:10 demo segment [Kept. Memorising the pitch, Avighna's prompts and the Thursday runs stay with Zedan]
-
-Prompt 60 (25 Nov 2026, ~22:20, Krishna, Claude Code · Claude Opus 5.5):
-Hand-off prompt "You are continuing Team 7's hackathon project, Veracite… Start by reading the files above, then ask me the five questions. Do not build until I answer." (plan steps 1–10) + answers: "Skip AI for now", "Public, after secret scan", "Yes, add citation-js", scope "all", "No note", PR #37 "Yes, merge #37", "Public now anyway"
-Result: Read the hand-off docs; reviewed Zedan's PR #37 (smoke test 15/15 live, export checked); gitleaks scan of the whole history (0 leaks); made the repo public; K26: `LIVE_LINK.md` lists the live app, repo, prompt log and deck [Kept. PR #37 merged on Krishna's yes]
-
-Prompt 61 (25 Nov 2026, ~22:45, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 3 from the hand-off prompt: "One-click save (brief names Zotero's browser button). veracite/src/app/save/ page: reads ?doi= or ?url= (+ title), verifies via the existing /api/sources/verify (or wayback for URLs), shows the verdict, \"Add to my list\" only if canAdd. Plus a drag-to-bookmarks bookmarklet on the Library page that reads citation_doi / dc.identifier / og:url meta tags."
-Result: K27: `/save` page, `lib/library/bookmarklet.ts` (+23 tests), Save to Veracite bookmarklet on the Library page; checked on live Nature and arXiv pages and at 1440, 1152 and 390 px [Kept. Added arXiv IDs after testing on arxiv.org]
-
-Prompt 62 (25 Nov 2026, ~23:05, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 4 from the hand-off prompt: "Import an existing library. Library page: paste or upload a .bib / .ris file → parse (hand-written parser + tests) → run each entry through the streamed X-ray → show verdicts → add only real ones. Message: \"Bring your Zotero library; keep only the references that are real.\"" + "Yes, merge #39"
-Result: K28: `lib/import/bibfile.ts` (BibTeX + RIS, 19 tests), SAMPLE `.bib`, Library import card (30 per batch, bulk-add only verified, per-row add); browser-tested upload, paste, wrong file and 35-entry batching; 1440/1152/390 px [Kept. Stacked badges above references on phones after the screenshot check]
-
-Prompt 63 (25 Nov 2026, ~23:20, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 5 from the hand-off prompt: "More citation styles. Style switcher (APA 7 default, MLA 9, Harvard, IEEE, Chicago author-date) used by Write & cite, the X-ray list and Library export. Unit tests with real records (Bastani 2025 PNAS, LeCun 2015 Nature, an arXiv preprint, a web page with retrieval date)." + "Yes, download + install" (4 official CSL files, @citation-js/core + plugin-csl) + "Yes, merge #40"
-Result: K29: `lib/cite/styles.ts`, `engine.ts`, `styleStore.ts`, 4 CSL styles, style picker on the X-ray list, Write & cite and Library export (24 tests); Write & cite rewrites inserted citations when the style changes [Kept. Tests corrected to MLA 9 / Chicago 18 rules (access dates only for undated pages; Chicago 18 "et al." for 3+ authors)]
-
-Prompt 64 (25 Nov 2026, ~23:35, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 6 from the hand-off prompt: "Explain this paper (SciSpace-style). On a saved source: the Reader explains the abstract in plain English; every sentence labelled by code (Verified only if it quotes the abstract exactly; otherwise AI reasoning); \"Not found in the abstract\" when it can't answer. Works in Rules mode with an honest message." + "Yes, merge #41"
-Result: K30: Explainer agent (`lib/agents/explain.ts`, 11 tests with a mock model), `explain` case in the agents route, Explain this paper on Library sources (logged as Reader receipts); headless-browser test in Rules mode at 1440/1152/390 px [Kept. Not yet tested against a live model (no Groq key yet)]
-
-Prompt 65 (25 Nov 2026, ~23:45, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 7 from the hand-off prompt: "First-visit guidance (UX 8). One \"Try the full journey\" path: home → X-ray with test list → add 2 sources → Write & cite → export → certificate, with a dismissible 3-step guide and clear empty states on every page. No popups that block the demo." + "Yes, merge #42"
-Result: K31: `components/app/journey/` (progress logic + 5 tests, store, guide strip), home CTA, marks in Write & cite and Certificate; full journey driven end to end in headless Chrome; 1440/1152/390 px [Kept]
-
-Prompt 66 (25 Nov 2026, ~23:55, Krishna, Claude Code · Claude Opus 5.5):
-Plan step 8 from the hand-off prompt: "Demo safety. Pre-warm the demo searches before 11:00, a clearly SAMPLE-labelled cached research session as fallback, error banners that say what happened. Re-run the 51-reference eval on the live site and update the Trust Center/deck only if numbers changed." + "Yes, merge #43"
-Result: K32: `scripts/prewarm.mjs`, live-site eval (unchanged numbers, no deck change), step-specific error banners with Try again (5 tests), read-only SAMPLE replay with a `?record=1` recorder; also corrected the times in rows 61–65 [Kept. The AI SAMPLE session is recorded only after the keys are in; no AI output was written by hand]
-
-Prompt 67 (26 Nov 2026, ~00:15, Krishna, Claude Code · Claude Opus 5.5):
-"do all the remaining things and then rescore it e2e and tell what still can be built to increase the score e2e do deep research of that also"
-Result: K13: public verify API `/api/v1/verify` + an MCP server `/api/mcp` with `verify_reference` (13 tests, `docs/API.md`); background research on competitors and a 100-question quiz started [Kept]
-
-Prompt 68 (26 Nov 2026, ~00:15, Krishna, Claude Code · Claude Opus 5.5):
-(same prompt as row 67: "do all the remaining things…")
-Result: K14: debate mode (`lib/agents/debate.ts`, `debate` route case, Debate this claim at checkpoint 3), 6 unit tests + a UI wiring test with stand-in AI answers [Kept; to be tried on a real model after the keys]
-
-Prompt 69 (26 Nov 2026, ~00:40, Krishna, Claude Code · Claude Opus 5.5):
-"Do all" (build the quick wins from the rescore: free full text, registry trace, library re-check, claim-support check, PDF drop) + "Yes, add pdfjs-dist"
-Result: K33: free full-text links (`lib/registries/fulltext.ts`, 4 tests) on X-ray, Library, save page and research sources [Kept]
-
-Prompt 70 (26 Nov 2026, ~00:43, Krishna, Claude Code · Claude Opus 5.5):
-(same "Do all" prompt)
-Result: K34: "How this was decided" (`lib/verify/explain.ts`, 6 tests): registry trace and the rule behind each verdict on X-ray rows and the save page [Kept]
-
-Prompt 71 (26 Nov 2026, ~00:45, Krishna, Claude Code · Claude Opus 5.5):
-(same "Do all" prompt)
-Result: K35: re-check my library (`lib/verify/recheck.ts`, 6 tests) + RETRACTED warning in Write & cite; tested with Wang & Fan 2025, retracted in April 2026 [Kept]
-
-Prompt 72 (26 Nov 2026, ~00:47, Krishna, Claude Code · Claude Opus 5.5):
-(same "Do all" prompt)
-Result: K36: "Does this source say this?" in the Draft Checker (`tabs/draft/support.ts`, 6 tests): closest abstract sentence + shared key words, code only [Kept]
-
-Prompt 73 (26 Nov 2026, ~00:52, Krishna, Claude Code · Claude Opus 5.5):
-(same "Do all" prompt) + "Yes, add pdfjs-dist"
-Result: K37: PDF drop on the X-ray page (`lib/import/pdftext.ts` 11 tests, `pdfread.ts` with pdfjs-dist 6.5.438), reading in the browser; fixed DOIs broken across lines after testing [Kept]
-
-Prompt 74 (26 Nov 2026, ~00:53, Krishna, Claude Code · Claude Opus 5.5):
-(same "Do all" prompt)
-Result: Quiz notes: EU AI Act 2026 "AI Omnibus" dates and the 2018/2024/2025 Turing Awards corrected in `docs/10_AI_QUIZ_PREP.md`, from a fact-checked 100-question practice set (research agent, sources checked 26 Nov) [Kept]
-
-Prompt 75 (26 Nov 2026, ~01:05, Krishna, Claude Code · Claude Opus 5.5):
-"Merge and do all" (build the remaining ideas: journal chips, new-citation alerts, related-papers map, Arabic toggle; plus the chatbot-answer mode)
-Result: K39: paste a chatbot answer (`lib/import/chatanswer.ts`, 7 tests); fixed a numbering merge found in the browser test [Kept]
-
-Prompt 76 (26 Nov 2026, ~01:09, Krishna, Claude Code · Claude Opus 5.5):
-(same "Merge and do all" prompt)
-Result: K40: journal-index chips from OpenAlex (`lib/registries/journal.ts`, 3 tests) on X-ray, Library and research sources [Kept]
-
-Prompt 77 (26 Nov 2026, ~01:12, Krishna, Claude Code · Claude Opus 5.5):
-(same "Merge and do all" prompt)
-Result: K41: new papers citing your sources (`relatedQuery` with `since`, 3 tests; Library card) [Kept]
-
-Prompt 78 (26 Nov 2026, ~01:15, Krishna, Claude Code · Claude Opus 5.5):
-(same "Merge and do all" prompt)
-Result: K42: related-papers map (`mapLayout.ts` 4 tests, `PaperMap.tsx`); fixed an oversized map and a CSS rule that enlarged badge icons after the screenshot check [Kept]
-
-Prompt 79 (26 Nov 2026, ~01:19, Krishna, Claude Code · Claude Opus 5.5):
-(same "Merge and do all" prompt)
-Result: K43: Arabic / English toggle (`lib/i18n/strings.ts`, `lang.ts`, 5 tests): menus, titles, trust labels and badges; results stay English with a beta note [Kept; Arabic wording to be read once by an Arabic speaker]
-
-Prompt 80 (26 Nov 2026, ~01:25, Krishna, Claude Code · Claude Opus 5.5):
-"rescore e2e" then "Yes, fix both"
-Result: Evidence-based rescore (rubric, problem statement, deck, live e2e 32/32, first-time-judge walkthrough); K44: Library order (Export second, More tools), flags aligned with live features [Kept]
-
-Prompt 81 (26 Nov 2026, ~01:36, Krishna, Claude Code · Claude Opus 5.5):
-(same "Yes, fix both" prompt)
-Result: K45: save checked web pages (`lib/verify/websource.ts`, web evidence on verdicts, 8 tests); Add as web page on the X-ray and save page [Kept]
-
-Prompt 82 (26 Nov 2026, ~02:00, Krishna, Claude Code · Claude Opus 5.5):
-"now update the pptx and pdf proper latest … make me a proper script humanised in pdf for all of 3 … steps to add api keys … confidence of winning"
-Result: K46: deck text updated to the live site (side doors, CSL styles, API + MCP, PDF in browser, re-check, How this was decided), PPTX + PDF rebuilt; 11-page demo script PDF with walkthrough, Q&A and a cue card per person [Kept]
-
-Prompt 83 (26 Nov 2026, ~02:20, Krishna, Claude Code · Claude Opus 5.5):
-"yes run the live AI session and record it and check api full working and rescore"
-Result: K47: ran the first full live AI session (Co-pilot, ~22 s, all agents + debate); fixed what it showed (duplicate source chips, Skeptic reasons cut mid-word, "S7: S7:"), 5 tests; script switched to Co-pilot [Kept]
-
-Prompt 84 (26 Nov 2026, ~07:45, Krishna, Claude Code · Claude Opus 5.5):
-"Yes, merge #61" (then record the SAMPLE, per the K47 plan)
-Result: K02/K32: recorded two live Co-pilot sessions after the K47 deploy; the second, where the Skeptic catches a correlation read as a cause, pasted unchanged into `sampleSession.ts`; SAMPLE button tested 11/11 [Kept]
-
-Prompt 85 (26 Nov 2026, ~08:00, Krishna, Claude Code · Claude Fable 5.2):
-"rescore strict and winning chance" (pasted the problem statement and a first-place review brief), then "yes re-export and merge and rescore and do remaining to score high"
-Result: K48: strict read-only review and rescore (live smoke 15/15, journey 34/34); prompt log re-exported; submission notes brought up to date; debate turns now say their chip is a quote check [Kept]
-
-Prompt 86 (26 Nov 2026, ~08:20, Krishna, Claude Code · Claude Fable 5.2):
-"give me the updated demo script pdf and rehearsal plan"
-Result: K49: script updated (deck submitted, what to say when live runs differ, debate chip is a quote check) and a rehearsal-plan page added; PDF reprinted, 12 pages [Kept]
-
-Prompt 87 (26 Nov 2026, ~08:40, Krishna, Claude Code · Claude Fable 5.2):
-"add in the pptx when i share presenter mode so i can see the script fully humanised"
-Result: K50: a separate presenter deck (10 slides, one per demo segment) with the full spoken script in the speaker notes, generated from script.html; the judged Phase 1 deck is unchanged [Kept]
-
-Prompt 88 (26 Nov 2026, ~08:30, Krishna, Claude Code · Claude Fable 5.2):
-"embed the script in the uploaded deck of mine … i need script inside that"
-Result: K51: the spoken script for each of the six slides, plus the matching demo segment, added to the Phase 1 deck's speaker notes; the six slides are byte-identical to the uploaded deck [Kept]
-
-Prompt 89 (26 Nov 2026, ~09:00, Krishna, Claude Code · Claude Fable 5.2):
-"do only if winning chance increases: 1. the chimera catch … 2. measured results"
-Result: K52: Trust Center shows a DOI-only check next to Veracite on the same 51 references (from the two committed result files); the X-ray shows first the chimera a DOI check would pass, and says so; script lines updated [Kept]
-
-Prompt 90 (26 Nov 2026, ~09:30, Krishna, Claude Code · Claude Fable 5.2):
-"give me 100 quiz questions with answers in pdf" and "make me file also to type and show to the judges e2e … mention how to use"
-Result: K53: 100-question AI quiz PDF (practice questions, sources linked); DEMO_INPUTS.md with the exact text to paste at each demo step, what judges should see, and what to say if a step fails; reference verdicts checked on the live site [Kept]
-
-Prompt 91 (26 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-Relayed note: "I added a comparison table to the Trust Center (DOI-only check vs Veracite). In your 6:35 segment, point at it after the results card; the new line is on your cue card."
-Result: Checked K52 on main (table + new line in the team demo script); rewrote ZEDAN_DEMO_CUES.md to match the script (5:35–7:15, DOI-only table step); updated Zedan's personal guide PDF [Kept. The team script is now the master copy for timings]
-
-Prompt 92 (26 Nov 2026, ~09:55, Krishna, Claude Code · Claude Fable 5.2):
-"audit as senior auditor e2e", then "fix that can it be done"
-Result: K55: read-only end-to-end audit against the official rules (live checks, secrets scan, submissions); fixed what needs no deployment: prompt log re-exported, demo doc says Co-pilot [Kept]
-
-Prompt 93 (26 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-Backup site (pasted steps from Krishna: fork, Vercel, keys, practice sync) · "Yes, swap it"
-Result: Forked the repo; smoke-tested the backup veracite-one.vercel.app (15/15, AI on after the keys were fixed); did the practice Sync fork (3 behind → level, Vercel redeployed); found the Wayback Machine no longer lists golden web-004 (u.ae) and swapped it for a dead 2003 Crossref news release with an archived copy and no DOI [Kept. A 2008 Crossref blog post was tried first and rejected: it now has a Crossref DOI, so it is correctly Verified]
-
-Prompt 94 (26 Nov 2026, ~12:20, Krishna, Claude Code · Claude Fable 5.2):
-"why pdf is not downloading in pdf it should be downloadable in pdf", then "add now"
-Result: K56: Save as PDF button on the reference list (X-ray and Research): the formatted list opens in the browser's print dialog as an A4 page; no PDF library, nothing leaves the device. 3 tests [Kept]
-
-Prompt 95 (26 Nov 2026, ~12:35, Krishna, Claude Code · Claude Opus 5.5):
-Screenshot of the home page under the UV lamp: "see this void it overlaps and looks bad" (then "revert void to center original… this strip is looking bad")
-Result: K57: VOID stamp kept as originally designed (centred); the holographic security strip made see-through under the UV lamp, so the stamp and print show beneath it. Two placements of the stamp were tried and rejected by Krishna [Kept]
-
-Prompt 96 (26 Nov 2026, ~13:05, Krishna, Claude Code · Claude Opus 5.5):
-"the full demo and presentation is of 10 minutes where 2 minutes included our judges Q/A so update the script", then "our group members are saying to short and make impactful and engaging and proper problem statement"
-Result: Script: 10-minute slot stated, finish by 7:45; every spoken line shortened (about 950 → 620 words) with a problem-statement opening; cue cards and deck notes rebuilt [Kept]
-
-Prompt 97 (26 Nov 2026, ~13:15, Krishna, Claude Code · Claude Opus 5.5):
-"judges questions and answers please also send here", then "make input drafts also … so i can send to group"
-Result: Judges' Q&A PDF (26 questions, owner and 20-second answer each); Draft Checker input paragraph tested on the live backup, as a file and a PDF [Kept]
-
-Prompt 98 (26 Nov 2026, ~13:25, Krishna, Claude Code · Claude Opus 5.5):
-"please prepare your self for phase 2 for proper brainstorming … i need to win"
-Result: Phase 2 plan agreed before the reveal: triage, one flag-free small change per requirement, one merge, backup deploy through Zedan's fork. No code [Kept]
-
-Prompt 99 (26 Nov 2026, 13:35, Krishna, Claude Code · Claude Fable 5.2):
-Pasted the Phase 2 brief word for word (six required edge cases, eight test references, three requests, six constraints, five bonus cases): "the attached is the brief for phase 2 … ask me questions also and end update the whole UI and all documents"
-Result: K60. First ran the eight references through the live site: 5 of 8 right; F (no DOI) and H (web page) wrong, G (Vancouver style) not recognised, and a lettered list was read as one reference. Then fixed by rule, not by reference: lettered and one-per-line lists; Vancouver authors; a cited year matches any registered version of the same work; a web page that names its own title is a web source [Kept]
-
-Prompt 100 (26 Nov 2026, 13:45, Krishna, Claude Code · Claude Fable 5.2):
-(same brief, required cases)
-Result: K60: labels renamed to the brief's words (Needs fix, Mismatch); accept or reject a fix; retracted warning before keeping; duplicate detection with a merge offer; "Not found" when no source mentions what the question names; every status carried into the library and every export (APA and the other styles, BibTeX, RIS, CSL-JSON); the export gate warns and no longer blocks, so the student decides [Kept]
-
-Prompt 101 (26 Nov 2026, 13:50, Krishna, Claude Code · Claude Fable 5.2):
-(same brief, bonus cases B3 and B5: the quote request and the note request)
-Result: K60: the assistant handles "check this quote" and "save this note" by code against the student's library: a quote is confirmed only if it is in the abstract word for word; a note is stored as text and changes no status. One wrong first attempt: my browser test addressed rows by their old "A." letters and failed after the splitter fix; rewrote it to use row numbers [Kept]
-
-Prompt 102 (26 Nov 2026, ~09:50, Krishna, Claude Code · Claude Fable 5.2):
-Screenshot of a research session on "mjbkjkll;;": "is it right if not also tell me RAG is there or not", then "Yes, fix it"
-Result: K54: a question with no usable words is stopped by code before any search or AI call; when the Planner itself says it does not understand, its guessed search terms are thrown away; the student is sent back to the question with the reason. 6 tests [Kept]
-
-Prompt 103 (26 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"update the Z14 task line to 5:35–7:15"
-Result: Z14 task line now matches the team demo script's timings and order (5:35–6:35 Library → certificate, 6:35–7:15 Trust Center → AI off) [Kept]
-
-Prompt 104 (26 Nov 2026, Zedan, Claude Code · Claude Opus 5.5):
-"tick Z11 and Z14"
-Result: Z11 (pitch + Q9–Q16 rehearsed) and Z14 (demo segments 5:35–7:15 rehearsed) ticked in tasks/zedan.md [Kept]
-
-Prompt 105 (26 Nov 2026, ~13:30, Zedan, Claude Code · Claude Opus 5.5):
-Pasted the Phase 2 day-of brief: "tell me how is everything going to be processed ahead", then "Yes, do both"
-Result: Z12: ran the 8-reference test pack on the live X-ray (5/8 meet the brief; gaps: needs-fix accept/reject, duplicate merge, Vancouver parsing, no-DOI title search, web page parsing, injection flag not wired). DAY_OF_NOTES.md filled (every must/never, step, checks, results); `submissions/phase2/pack.mjs` reruns the pack [Kept]
-
-Prompt 106 (26 Nov 2026, 13:58, Krishna, Claude Code · Claude Fable 5.2):
-"see all the api keys are functional and also you use it and ask them all related questions … if wrong you only correct" (asked for sign-in too)
-Result: K62: ran 14 unseen references in six formats through the Verifier. 12 right; two wrong and fixed by rule: a retracted paper whose own record lists its notices was skipped as "a notice" (came out Mismatch), and a correct book reference was told its journal was wrong. Declined sign-in: no accounts is a privacy promise in our Phase 1 deck (constraint 5) [Kept]
-
-Prompt 107 (26 Nov 2026, 14:10, Krishna, Claude Code · Claude Fable 5.2):
-"Yes, merge #79" then "Yes, update them" (Q&A sheet and deck notes for Phase 2)
-Result: Ran the judges' full pack on the live site with the AI on: 8 of 8 statuses, accept fix, merge, the three requests, 13 of 14 unseen references (one network timeout), smoke 15/15. Q&A sheet rebuilt with a Phase 2 section (32 questions); deck notes now say which step handles which case [Kept]
-
-Prompt 108 (26 Nov 2026, 14:16, Krishna, Claude Code · Claude Fable 5.2):
-"there is a requirement on what basis ai agent is calling which all ai agents are working … judges will paste the citations … the link should not be hallucinated should be real link and should open … full architecture also add in pptx"
-Result: K64. Checked that the link behind every pack reference opens: one did not (a no-DOI paper was matched to a re-registered copy whose DOI returns 404). Fixed by rule: with no DOI and a wrong year, look for the other registered versions and keep the one with the cited year (now the arXiv record, link opens). Added a "Handled by" line to every result and assistant answer, and an architecture slide (agent, AI or code, called when, Phase 2 case) to the presenter deck [Kept]
+TEAM 7 · VERACITE · PROMPT LOG
+Every prompt we used, in order, exactly as typed, including the ones that did not work. Full table: https://github.com/krish2105/veracite/blob/main/docs/PROMPT_LOG.md
+
+HOW WE WORKED WITH AI
+1. One task per prompt. Each task had its own branch and pull request, and a human approved every merge.
+2. The AI never decides what is true. References come only from Crossref, OpenAlex and arXiv records; the Verifier is code, and its results are unit-tested.
+3. Test first, then fix. We ran the real thing (our 51-reference set, live AI sessions, today's test pack), read what failed, and only then asked for a fix.
+4. Fix by rule, never for one example. Each fix has a test that uses different references.
+5. Failures stay in the log. Results marked Changed or Dropped, and notes such as 'one wrong first attempt', are prompts that did not work the first time.
+6. Tools: Claude Code (Claude Opus 5.5 and Fable 5.2) for building; the app itself runs free Groq models (gpt-oss, Qwen).
+
+============================================================
+PHASE A · Research, rules and planning (24 Nov)
+Read the brief and rubric, researched the problem, chose the design, wrote the plan and the Phase 1 deck before any code.
+============================================================
+
+Prompt 1 · 24 Nov 2026, ~10:00 · Krishna · Claude Code (desktop app) · Claude Opus 5.5
+Prompt (as typed): "this is my hackathon in college so please fully read all files fully brainstorm do deep web search deep research what all deliverables are needed what all things to do to win , what all techstack , models , AI features related new features need ultra relaisric things , Full 3d use all frontend skills if needed download from all over the globe need theme toggle it also needs a pptx. we are 3 people so guide me explain me and make documents and do deep research need out of the box UI , Agentic AI , and. i need to win" + 2 screenshots of the hackathon dashboard + pasted organiser emails *(team code and links redacted)*
+What came back: Read both rules PDFs; ~25 web searches (hallucination studies, Crossref/OpenAlex/Groq limits, APA/UNESCO/EU/UAE policy, SP Jain integrity policy); created an empty Next.js scaffold [Research accepted; scaffold kept, unused for now]
+
+Prompt 2 · 24 Nov 2026, ~10:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "ask me questions also please"
+What came back: 4 multiple-choice questions (name, team skills, AI keys, visual identity) [—]
+
+Prompt 3 · 24 Nov 2026, ~10:20 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Answers: name "Veracite"; "claude code will do all the work but divide the work in 3 of us"; AI keys "Groq"; "listen show me multiple full 3d UI options and no ai slop use all frontend skills over the globe to show me UI options then design please and also lisen tell me all features you are adding from deep research like that is needed and needed to win and outshine so ask me questions for features"
+What came back: Full feature list (14 core + 16 optional) and 4 feature questions [—]
+
+Prompt 4 · 24 Nov 2026, ~10:30 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Selected all 16 optional features + "brainstorm and add more like agentic ai ai agents more AI and related to my topic only for now make documents do not build now" + "brainstorm do deep research and add more and dicide the whole work in three of us e2e"
+What came back: Second research round; documents 00–10 in `/docs`; this log; 3D UI design boards [Pending team review]
+
+Prompt 5 · 24 Nov 2026, ~10:41 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Which is this and there is no 3D need full 3D and shiw me here and ask me questions" + phone screenshot of design board 1
+What came back: Sent 4 screenshots of the 2.5D boards; asked 4 questions about 3D feel, directions, preview format and demo laptop [—]
+
+Prompt 6 · 24 Nov 2026, ~10:50 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Answers: all four 3D styles + "Need no ai slop and need good out of the box 3D R3F nueral and shiw me then i will finalise"; directions: "Show me"; preview: video + screenshots; laptops: MacBook M-series and Windows with GPU
+What came back: Built two React Three Fiber concepts: A · Watermark Vault (`/lab/vault`) and B · Neural Crew (`/lab/neural`); fixed an R3F/drei scroll bug [Pending choice of direction]
+
+Prompt 7 · 24 Nov 2026, ~11:40 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "do not record show me n brwosnwe that you have done and where other tabs will look jow"
+What came back: Stopped recording; built 6 app tab previews (Research, X-ray, Draft Checker, Library + 3D Galaxy, Trust Center, Certificate) with Watermark/Neural skins and light/dark themes; opened them in the browser [Pending review]
+
+Prompt 8 · 24 Nov 2026, ~12:00 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "see this read out of 100 need 95 plus score from you as real MVP also and then create a public repo claude as contributotr should never come when pushed and also make all e2e documents including current status , build status , remaining status and it gets auto updated when we alll 3 will do and also handoff documents and also submissions sub folder and also make per person tasks of me , zedan and other member so they can start and no confoicts also so please make them if needed aks me questions now and also now give me full pptx to be submitted please" + screenshot of the scoring rubric; answers: Hybrid look, private repo until Thu 15:00, "do not build anything please create all files and i will paste key later"
+What came back: 6-slide deck (PPTX + PDF); repo with per-person tasks, auto-updating STATUS.md (CI), handoff, ownership, scoring plan, submissions folder, commit hook that strips AI co-author lines [Deck ready to upload; MVP build not started (on request)]
+
+Prompt 9 · 24 Nov 2026, ~20:30 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "see the files fully brainstorm do deep research web search and see current status and also ask me questions" + pasted organiser email with the Problem Statement and Submission Guidelines PDFs *(WhatsApp link redacted)*; answer to the first scope question: "only make a plan no build divide the task into 3 of us"
+What came back: Read all PDFs, docs and the deck; ~12 web searches (Groq free-tier models, OpenAlex/Crossref limits, NeurIPS and OpenScholar stats, 2026 citation-checker research and competitors, SP Jain policy text); `docs/11_BUILD_PLAN.md` with milestones, deck fixes and a 3-way split; updated `tasks/*.md` and `OWNERSHIP.md` [Merged (PR #2)]
+
+Prompt 10 · 24 Nov 2026, ~21:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "merge it and what all are my tasks only tell me" · "start K01 split the tabs and ask me questions need best and need to win at any cost"
+What came back: Merged PR #2; listed Krishna's tasks; K01: a script split `tabs.tsx` into 6 tab folders with each body byte-identical, pages import their own folder; type-check, build and all 6 tabs checked in the browser [Kept as is (no behaviour change)]
+
+Prompt 11 · 24 Nov 2026, ~21:30 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Answers to 4 questions: "Merge now"; keys "Later tonight" (do K18 first); demo topic: "you brainstorm do deep research and choose best option to win"; Crossref contact: "My SP Jain email"
+What came back: Merged PR #3; probed 5 topics and 9 landmark DOIs live on Crossref + OpenAlex; found a 775-citation meta-analysis on ChatGPT and learning retracted 22 Apr 2026; chose "Does generative AI help or hurt student learning?" (docs/11 §11); K18: `src/lib/types.ts` + `src/lib/flags.ts` [Topic accepted; types aligned to the existing UI strings]
+
+Prompt 12 · 24 Nov 2026, ~21:20 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge PR #4" · "keys will be last"
+What came back: Merged PR #4; K03: Crossref, OpenAlex and arXiv clients (polite limiters, retry, Next fetch-cache 24 h), saved real API responses as fixtures, 14 offline + 7 live tests; found that Crossref ranks a correction notice above the real paper and flagged notices in the types; tests added to `npm run check` and CI [Kept; keys still to add (K02 last)]
+
+Prompt 13 · 24 Nov 2026, ~21:50 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "also inform zedan about my work done and he should start his work" (chose: GitHub issue + WhatsApp text) · "Merge" · "Start K04"
+What came back: Issue #6 to Zedan; merged PR #5; K04 Verifier: reference parser (APA/Harvard/MLA/IEEE), text checks, pure status rules (verified/chimera/mismatch/partial/retracted/notfound) with template reasons, orchestrator; 40 offline tests; live: 13/13 correct on the demo bibliography [Kept; golden-set run waits for Z01]
+
+Prompt 14 · 24 Nov 2026, ~22:30 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge PR #7" · "Start K05"
+What came back: Merged PR #7; K05: bibliography splitter + tests, `POST /api/sources/verify`, `POST /api/sources/xray` (NDJSON stream, 3 at a time), X-ray tab wired to live results (streamed rows, field tables, registry receipts, real chimera take-apart, JSON report); tested in the browser: 8/8 correct in 3.8 s [Kept; fixed chimera caption overflow and double numbering found in the browser]
+
+Prompt 27 · 24 Nov 2026 · Zedan · ChatGPT (model not recorded)
+Prompt (as typed): "Give me 20 recent academic references in APA 7 format, each with a DOI, on these topics: screen time and teenage sleep; AI tutors in MBA programmes; mindfulness apps and exam stress; remote work and productivity in the UAE; social media and student wellbeing. Include journal name, volume, issue and pages."
+What came back: 20 APA 7 references with DOIs plus topic advice [All 20 checked in Crossref: all real (0 fakes); 3 missing issue numbers. Kept unedited as `real-001`–`real-020` in the golden set]
+
+Prompt 28 · 24 Nov 2026 · Zedan · Claude Code (desktop app) · Claude Opus 5.5
+Prompt (as typed): Pasted the ChatGPT prompt and its full output (row 9)
+What came back: Looked up all 20 DOIs in Crossref; reported matches, missing issues, and the swapped-name record for #20 [Findings used for Z01]
+
+Prompt 29 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): Pasted the hackathon problem statement + "This was the task assigned for my team for the AI hackathon"
+What came back: Mapped each idea in the brief to Veracite tasks and owners [—]
+
+Prompt 30 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Yes, start Z01"
+What came back: Built `real.json` (30), `chimeras.json` (10), `retracted.json` (5), `web.json` (5), all checked live against Crossref / HTTP / Wayback; wrote prompts for `fabricated.json`; documented Verifier edge cases in the golden README [Kept; `fabricated.json` left empty on purpose (must be real ChatGPT/Gemini output)]
+
+Prompt 31 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "what all are my taskds"
+What came back: Listed Z01–Z14 with due dates and a suggested order [—]
+
+Prompt 32 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Tuesday (today) lets complete these tasks right now"
+What came back: Opened the Semantic Scholar API key form and drafted the answers (Z03); added rows 9–14 to this log and drafted a request to Avighna for their prompts (Z02) [Zedan fills in and submits the S2 form (personal details + CAPTCHA)]
+
+Prompt 33 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "submitted the form, now lets do Z05"
+What came back: `src/lib/integrity/scrub.ts` (PII scrubber), `src/lib/integrity/injection.ts` (injection detector + untrusted wrapper), 40 `node:test` tests incl. a no-false-alarm pass over the golden set, usage notes for K06 [Kept. Rules tightened during testing to avoid flagging normal academic prose; one accepted false positive documented and tested]
+
+Prompt 34 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now lets do Z04"
+What came back: `src/lib/integrity/receipts.ts` (Receipt type + action names), `statement.ts` (AI-use statement from the log, APA tool reference, warnings), `ledger.ts` (Prompt Ledger → Markdown/CSV/JSON + SHA-256, re-scrubs prompts); 21 more tests (61 total) [Kept. Statement deliberately leaves the student's authorship sentence as a placeholder unless the student writes it]
+
+Prompt 35 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now lets do Z09"
+What came back: `src/lib/integrity/paraphrase.ts`: 5-gram overlap guard (quotes excluded and checked against the source, accent folding, light stemming, highlighted spans, multi-source ranking); 13 tests (74 total) [Kept]
+
+Prompt 36 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Yes, start Z10"
+What came back: `src/lib/integrity/bias.ts`: bias & diversity lens from OpenAlex fields (countries → World Bank regions, year bins + recency, open access, publishers, languages, plain warn/info/good notes); fixture of live OpenAlex records for the 30 golden references (names removed); 16 tests (90 total) [Kept]
+
+Prompt 37 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now lets do Z11"
+What came back: Final answers for Q&A Q9–Q16 in docs/08 (≤20 s answer + "if pressed" + what to show); 3 web searches to check cited facts (Groq data retention, Liang et al. 2023 detector bias, MIT 2025 preprint); docs/05 sample statement updated to the real generator output; memory card for the 60-second pitch [Kept. Softened two claims after checking: MIT study flagged as an unreviewed preprint; Stanford 61% stated as an average across 7 detectors]
+
+Prompt 38 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now lets do Z08"
+What came back: `src/lib/integrity/certificate.ts`: bibliography → deflate + base64url link after `#`, canonical SHA-256, QR (qrcode), decode with validation, compact mode for big bibliographies, live re-verify with a pluggable Verifier; 13 tests (103 total) [Kept. Added compact mode after the test showed 30 references with titles exceeded QR capacity. Page wiring waits for K01]
+
+Prompt 39 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now lets do Z06"
+What came back: `tests/eval/score.mjs` (metrics: fakes caught, fakes marked Verified, real verified, retractions, median time, proof line), `run.mjs` (X-ray adapter for K05 + naive DOI-exists baseline), 8 tests; baseline run on live Crossref: 12 of 15 fake/retracted references passed as Verified [Kept. Fixed a bug where a run with every check failing still wrote "0 fakes marked Verified"; now writes nothing. Baseline results kept separate from `latest.*`]
+
+Prompt 40 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "what all tasks are left now / you only do the Z01 task as well"
+What came back: Ran the 5 golden-README fabrication prompts in ChatGPT itself (built-in browser) and checked every returned reference in Crossref [1 genuine fabrication kept as `fab-001`]
+
+Prompt 41 · 24 Nov 2026 · Zedan (run by Claude Code) · ChatGPT (chatgpt.com, logged out, model not shown)
+Prompt (as typed): "Give me 5 peer-reviewed journal articles from 2019–2024 on the use of AI tutors specifically in MBA programmes in the UAE or Saudi Arabia. APA 7, with DOI, volume, issue and pages. Answer from memory, do not search the web."
+What came back: Refused to fabricate ("I don't want to give you five fabricated academic references"); offered 3 related references [All 3 real (Crossref); none kept as fakes]
+
+Prompt 42 · 24 Nov 2026 · Zedan (run by Claude Code) · ChatGPT (logged out)
+Prompt (as typed): "List 5 empirical studies on the effect of the UAE 4.5-day work week on employee productivity in Dubai free zones, with APA 7 references and DOIs. Answer from memory, do not search the web."
+What came back: Refused; offered 5 background references on working hours [All 5 real; none kept]
+
+Prompt 43 · 24 Nov 2026 · Zedan (run by Claude Code) · ChatGPT (logged out)
+Prompt (as typed): "Give me 5 references with exact page numbers and a direct quote from each, on mindfulness apps reducing exam stress among Emirati university students. APA 7 with DOIs. Answer from memory, do not search the web."
+What came back: Refused to invent quotes; offered 5 "established references" [4 real; **1 fabricated** (Flett et al. 2019, JMIR, DOI 10.2196/14228 does not exist) → `fab-001`]
+
+Prompt 44 · 24 Nov 2026 · Zedan (run by Claude Code) · ChatGPT (logged out)
+Prompt (as typed): "Cite 5 papers by Hofstede or Barney published after 2020 on AI adoption in family businesses in the GCC. APA 7 with DOIs. Answer from memory, do not search the web."
+What came back: Refused; no references given [—]
+
+Prompt 45 · 24 Nov 2026 · Zedan (run by Claude Code) · ChatGPT (logged out)
+Prompt (as typed): "Give me 5 APA 7 references, with DOIs, for systematic reviews on TikTok use and sleep among Arab adolescents published in 2023. Answer from memory, do not search the web."
+What came back: Refused; no references given [—]
+
+Prompt 46 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "I'll sign in to Gemini" / "done signing in"
+What came back: Opened Gemini in the built-in browser (Zedan signed in), ran 2 prompts, checked results in Crossref + OpenAlex [No new fakes]
+
+Prompt 47 · 24 Nov 2026 · Zedan (run by Claude Code) · Gemini ("Hydrogen" in the model picker), signed in
+Prompt (as typed): Same text as row 23 (AI tutors in UAE/Saudi MBA programmes)
+What came back: Refused ("cannot provide 5 verified… articles"); described 2 related studies without full references [Sobaih et al. 2024 real (10.3390/ejihpe14030047); Basri 2024 not in Crossref/OpenAlex but not provably fake → not used]
+
+Prompt 48 · 24 Nov 2026 · Zedan (run by Claude Code) · Gemini (signed in)
+Prompt (as typed): "Write a 250-word literature review paragraph for my MBA assignment on how AI chatbots affect student motivation in Gulf business schools. Use APA 7 in-text citations for at least 8 different studies and finish with a full APA 7 reference list including DOIs. Do not search the web."
+What came back: Refused to cite; wrote the paragraph with [Author, Year] placeholders [—]
+
+Prompt 49 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Keep 1, document it"
+What came back: Finalised the golden set at 51 records (1 AI-fabricated); documented why in the golden README and docs/05; ticked Z01 [Kept]
+
+Prompt 50 · 24 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "push to github in the same repo so that team members can access it"
+What came back: Cloned the repo (Zedan's local copy was a ZIP), copied Zedan's work in, aligned it with Krishna's merged `types.ts` (status `notfound`; shared `Receipt` with `prompt`/`detail`/`aiUsed`), merged task ticks + these log rows into the updated files, re-ran tests, opened PRs [`CertificatePayload` mismatch flagged for Krishna rather than editing `types.ts`]
+
+============================================================
+PHASE B · Building the MVP (25 Nov)
+One task per prompt and per branch: registries, the code Verifier, the agents, the library, exports, the test set. Tests first; a human approved every merge.
+============================================================
+
+Prompt 15 · 25 Nov 2026, ~00:50 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge PR #8" · "Start K06"
+What came back: Merged PR #8; K06: LLM gateway (AI SDK 7 + Groq): model chain per agent, scrub → wrap untrusted sources → schema-validated output → fallback model → Rules mode, budget caps, interim PII/injection guards until Z05; `GET /api/health`; 11 tests with mock models (no key); `.env.example` model map [Kept; real Groq calls switch on when the key is added]
+
+Prompt 16 · 25 Nov 2026, ~01:00 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge + fix misses"
+What came back: Switched the gateway to Zedan's Z05 guards and wired his 103 tests into CI; merged PR #13; fixed the Verifier misses his golden set found ('?' titles, ß, ellipsis, SICI DOIs, swapped names, self-pointing retraction marker, stitched authors, real authors on an invented paper, rate-limit wording); golden set went from real 26/30, chimera 6/11, retracted 4/5 to 30/30, 10/11, 5/5 with 0 fakes Verified [Kept; chim-002 relabel suggested to Zedan]
+
+Prompt 17 · 25 Nov 2026, ~14:00 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "use sonnet and merge zedan work and tell me what all is remaining for me" · "first listen only tell deck need to be updated ?" · "update the deck slides with those fixes and delete old and when to submit now or should i wait"
+What came back: Merged Zedan's PR #11; listed remaining tasks; checked the deck; fixed it (NeurIPS 100 in 51 papers, no Llama, optional sources, library journey, explain-it-back, measured golden-set numbers re-run live, new screenshot from the working X-ray) and fixed a caption overlap in the X-ray page [Deck rebuilt for upload]
+
+Prompt 18 · 25 Nov 2026, ~14:10 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "see again read and tell me what is done and what should be done and also use which model to use sonnet or opus please tell" + pasted hackathon platform page · "Build it"
+What came back: Gap check against the five day-of requirements; built K19: approve-to-list, APA 7 copy/download, AI-use statement from the log, label legend, phone layout; short, title-only and bare-DOI inputs handled; checked in headless Chrome at 390 px [Kept]
+
+Prompt 19 · 25 Nov 2026, ~14:15 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #16" · "Deploy now"
+What came back: Merged PR #16; created the Vercel project, set its root folder to `veracite`, deployed `main`; checked pages, APIs and the five requirements on the live link [Live link recorded]
+
+Prompt 20 · 25 Nov 2026, ~14:30 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #17" · "listen should i upload the deck or wait" · "Add live link"
+What came back: Merged PR #17 (auto deploy confirmed); re-ran the slide 6 numbers; advised uploading now; added a clickable live link to slide 1 and rebuilt the deck [Deck ready to re-upload]
+
+Prompt 21 · 25 Nov 2026, ~14:40 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now what all is remaining for me and which model sonnet , haiku or opus" · "start k08 and use opus 5.5"
+What came back: K08: Planner, Reader, Scribe, Skeptic on the gateway with code checks (quotes must be in the text, unapproved IDs blocked, labels and S1 by code, injection becomes S8); `POST /api/agents/[agent]`; 9 tests with mock models [Kept; live AI calls wait for the Groq key]
+
+Prompt 22 · 25 Nov 2026, ~14:50 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge PR #19" · "all things matching ?" + pasted platform page · "Start K09"
+What came back: Merged PR #19; confirmed the uploaded deck is the latest (advised PDF over PPTX); K09: Scout (search + verify API), browser session with 3 checkpoints, autonomy dial (Off/Assist/Co-pilot), receipts, claim labels and legend, export; tested Off and Assist end to end at 390 px in Rules mode [Kept; Co-pilot with real AI waits for the Groq key]
+
+Prompt 23 · 25 Nov 2026, ~15:00 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #20" · "K10 Draft Checker" · "which model to use and which effort for now" · "use sonnet 5.5 and do k10"
+What came back: Merged PR #20; K10 Draft Checker: APA in-text citation parser, matching against the reference list, quote check on abstracts, close-copying warnings, labels by code, optional Skeptic that can only lower a label; fixed a phone overflow on X-ray and Draft [Kept]
+
+Prompt 24 · 25 Nov 2026, ~15:15 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #21" · "K11 snowballing"
+What came back: Merged PR #21; K11 citation snowballing: OpenAlex cites / cited-by lookup, each result verified, "Related papers" buttons in the reference list and research sources; tested live and at 390 px [Kept]
+
+Prompt 25 · 25 Nov 2026, ~15:00 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #22" · "Review remaining" · "Do the clean-up"
+What came back: Merged PR #22; reviewed gaps; replaced sample pages: front page, shell, Library with tags/notes/exports/bias lens, Trust Center with the measured golden-set run (51 refs, 0 fakes Verified, web pages 0/5) and Prompt Ledger, Certificate with QR and live re-check; fixed the eval runner for streamed results [Kept; teammates to review]
+
+Prompt 26 · 25 Nov 2026, ~15:10 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "Merge PR #23" · "Update the deck"
+What came back: Merged PR #23; checked every deck claim against the code and corrected the ones the site does not do; replaced the slide 5 mock-up with a real certificate from the live site; proof numbers now cover all 51 test references; rebuilt PPTX and PDF
+
+Prompt 51 · 25 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "let's do all the tasks and complete it and push to github." · "continue"
+What came back: Synced with main; reviewed Krishna's K20 work on Z06/Z07/Z08 (accepted); built Z16 web-source check + Wayback route (SSRF-safe, 5/5 on golden web set) and corrected golden web expectations to `partial`; built Z15 export gate (checked in a browser at 1024 and 375 px); restored the 24 Zedan prompt-log rows that a later merge (#13) had dropped; opened PRs #25, #26 and this one [Kept. Z02 (Avighna's prompts), Z11 rehearsal and Thursday tasks Z12–Z14 need the humans]
+
+Prompt 52 · 25 Nov 2026, ~20:55 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "see zedan tasks read and also avighna tasks and see what all is remaining" · "Yes, connect it"
+What came back: K21: Reference X-ray now uses the Z16 web check for links without a DOI (Partial only when the page exists and matches the title); parser reads undated web references; local eval web pages 0/5 → 4/5, 0 fakes marked Verified
+
+Prompt 53 · 25 Nov 2026, ~21:10 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "listen why the home landing 3d page is not shoqing and what all frontend is left" (with screenshot) · "Yes, build it"
+What came back: K22: 3D Watermark Vault is now the home page with buttons into the app, shared UV-lamp setting, plain view for narrow screens, reduced motion and no WebGL; tested in headless Chrome
+
+Prompt 54 · 25 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "K21 is merged: the X-ray now uses your web check. Please pull main, rerun the eval (node tests/eval/run.mjs --adapter xray) and commit latest.json/md. Then in TrustTab.tsx remove "(not yet supported)" and reword the limit …"
+What came back: Reran the golden-set eval on the X-ray after K21: 0 fakes marked Verified, 11/11 fakes, 30/30 real, 5/5 retractions, web 3/5 (was 0/5); updated the two Trust Center lines; checked the page in a browser [Kept. web-002 → chimera and web-005 → mismatch reported to Krishna]
+
+Prompt 55 · 25 Nov 2026, ~21:30 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "fully see there is very space left so please do deep research and build it first show me here give me multiple options" · "new design also please do research and also show me here then i decide" · "REDESIGN AND MAKE LIKE THIS SAME AND MERGE TO MAIN AND DEPLOY TO VERCEL AND ALSO ADD IN THE INSIDE SECTIONS"
+What came back: K23: researched and prototyped nine home page designs; shipped the chosen mix (labelled fake note plus three cards) and added an engraved background, torch glow, motion and a 3D note banner to the app pages; tested in headless Chrome
+
+Prompt 56 · 25 Nov 2026, ~21:05 · Avighna · Antigravity · Gemini 4 Hydrogen
+Prompt (as typed): "Tell me for A01, A03, A04, A05 and A06 what is done and what is missing, before editing anything. Then, in this order: 1. A14 Write & cite... 2. A11... 3. A02..." + Krishna's updates on PR #29
+What came back: Reported A01/A03–A06 status; built A14 Write & cite (`src/lib/cite/insert.ts`, `insert.test.ts`, `Writer.tsx`, `DraftTab.tsx` wiring); ticked A03 and A14 [Pending review]
+
+Prompt 57 · 25 Nov 2026, ~21:10 · Avighna · Antigravity · Gemini 4 Hydrogen
+Prompt (as typed): "2. A11: rewrite the demo script in docs/08 to match the live site (https://veracite.vercel.app), with timings. Then give me a shot list for a 90-second backup video and README screenshots." + Krishna's Q4/Q6/PR #29 notes
+What came back: Rewrote `docs/08_DEMO_SCRIPT_AND_QA.md` (8:00 script with Write & cite and live 3D Vault, removed Llama, fixed Q6 abstracts-only, added 90s backup video & README screenshot shot lists); marked A03 done and A11 in progress [Pending review]
+
+Prompt 58 · 25 Nov 2026, ~21:40 · Krishna · Claude Code · Claude Sonnet 5.5
+Prompt (as typed): "avighna has sent me these see and merge and also tell new pptx should you upddate so i can upload it again today and also fix over the box issue and deploy and also when open on mobile light mode turns green and also no 3D home screen landing page is there"
+What came back: Reviewed and merged Avighna's PR #31 and #32; K24: headings sized to their boxes, browser auto-darkening turned off, 3D home on upright phones and tablets; corrected outdated figures in the demo script; checked and updated the deck
+
+Prompt 59 · 25 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "what all tasks are left now" · "is everything from my part done ??" · "finish my part completely"
+What came back: Prepared the Thursday tasks: prompt-log export with a PII redaction gate (HTML + PDF), Phase 2 acceptance checks for 17 likely requirements, a 15-check live smoke test (15/15 on veracite.vercel.app; found the live site runs in Rules mode, no AI key), and a timed cue card for the 5:30–7:10 demo segment [Kept. Memorising the pitch, Avighna's prompts and the Thursday runs stay with Zedan]
+
+Prompt 60 · 25 Nov 2026, ~22:20 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Hand-off prompt "You are continuing Team 7's hackathon project, Veracite… Start by reading the files above, then ask me the five questions. Do not build until I answer." (plan steps 1–10) + answers: "Skip AI for now", "Public, after secret scan", "Yes, add citation-js", scope "all", "No note", PR #37 "Yes, merge #37", "Public now anyway"
+What came back: Read the hand-off docs; reviewed Zedan's PR #37 (smoke test 15/15 live, export checked); gitleaks scan of the whole history (0 leaks); made the repo public; K26: `LIVE_LINK.md` lists the live app, repo, prompt log and deck [Kept. PR #37 merged on Krishna's yes]
+
+Prompt 61 · 25 Nov 2026, ~22:45 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 3 from the hand-off prompt: "One-click save (brief names Zotero's browser button). veracite/src/app/save/ page: reads ?doi= or ?url= (+ title), verifies via the existing /api/sources/verify (or wayback for URLs), shows the verdict, \"Add to my list\" only if canAdd. Plus a drag-to-bookmarks bookmarklet on the Library page that reads citation_doi / dc.identifier / og:url meta tags."
+What came back: K27: `/save` page, `lib/library/bookmarklet.ts` (+23 tests), Save to Veracite bookmarklet on the Library page; checked on live Nature and arXiv pages and at 1440, 1152 and 390 px [Kept. Added arXiv IDs after testing on arxiv.org]
+
+Prompt 62 · 25 Nov 2026, ~23:05 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 4 from the hand-off prompt: "Import an existing library. Library page: paste or upload a .bib / .ris file → parse (hand-written parser + tests) → run each entry through the streamed X-ray → show verdicts → add only real ones. Message: \"Bring your Zotero library; keep only the references that are real.\"" + "Yes, merge #39"
+What came back: K28: `lib/import/bibfile.ts` (BibTeX + RIS, 19 tests), SAMPLE `.bib`, Library import card (30 per batch, bulk-add only verified, per-row add); browser-tested upload, paste, wrong file and 35-entry batching; 1440/1152/390 px [Kept. Stacked badges above references on phones after the screenshot check]
+
+Prompt 63 · 25 Nov 2026, ~23:20 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 5 from the hand-off prompt: "More citation styles. Style switcher (APA 7 default, MLA 9, Harvard, IEEE, Chicago author-date) used by Write & cite, the X-ray list and Library export. Unit tests with real records (Bastani 2025 PNAS, LeCun 2015 Nature, an arXiv preprint, a web page with retrieval date)." + "Yes, download + install" (4 official CSL files, @citation-js/core + plugin-csl) + "Yes, merge #40"
+What came back: K29: `lib/cite/styles.ts`, `engine.ts`, `styleStore.ts`, 4 CSL styles, style picker on the X-ray list, Write & cite and Library export (24 tests); Write & cite rewrites inserted citations when the style changes [Kept. Tests corrected to MLA 9 / Chicago 18 rules (access dates only for undated pages; Chicago 18 "et al." for 3+ authors)]
+
+Prompt 64 · 25 Nov 2026, ~23:35 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 6 from the hand-off prompt: "Explain this paper (SciSpace-style). On a saved source: the Reader explains the abstract in plain English; every sentence labelled by code (Verified only if it quotes the abstract exactly; otherwise AI reasoning); \"Not found in the abstract\" when it can't answer. Works in Rules mode with an honest message." + "Yes, merge #41"
+What came back: K30: Explainer agent (`lib/agents/explain.ts`, 11 tests with a mock model), `explain` case in the agents route, Explain this paper on Library sources (logged as Reader receipts); headless-browser test in Rules mode at 1440/1152/390 px [Kept. Not yet tested against a live model (no Groq key yet)]
+
+Prompt 65 · 25 Nov 2026, ~23:45 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 7 from the hand-off prompt: "First-visit guidance (UX 8). One \"Try the full journey\" path: home → X-ray with test list → add 2 sources → Write & cite → export → certificate, with a dismissible 3-step guide and clear empty states on every page. No popups that block the demo." + "Yes, merge #42"
+What came back: K31: `components/app/journey/` (progress logic + 5 tests, store, guide strip), home CTA, marks in Write & cite and Certificate; full journey driven end to end in headless Chrome; 1440/1152/390 px [Kept]
+
+Prompt 66 · 25 Nov 2026, ~23:55 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Plan step 8 from the hand-off prompt: "Demo safety. Pre-warm the demo searches before 11:00, a clearly SAMPLE-labelled cached research session as fallback, error banners that say what happened. Re-run the 51-reference eval on the live site and update the Trust Center/deck only if numbers changed." + "Yes, merge #43"
+What came back: K32: `scripts/prewarm.mjs`, live-site eval (unchanged numbers, no deck change), step-specific error banners with Try again (5 tests), read-only SAMPLE replay with a `?record=1` recorder; also corrected the times in rows 61–65 [Kept. The AI SAMPLE session is recorded only after the keys are in; no AI output was written by hand]
+
+============================================================
+PHASE C · Live AI, testing and fixes (26 Nov, before 09:00)
+Turned the AI on, ran real sessions, measured results on the live site and fixed what the runs showed.
+============================================================
+
+Prompt 67 · 26 Nov 2026, ~00:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "do all the remaining things and then rescore it e2e and tell what still can be built to increase the score e2e do deep research of that also"
+What came back: K13: public verify API `/api/v1/verify` + an MCP server `/api/mcp` with `verify_reference` (13 tests, `docs/API.md`); background research on competitors and a 100-question quiz started [Kept]
+
+Prompt 68 · 26 Nov 2026, ~00:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same prompt as row 67: "do all the remaining things…")
+What came back: K14: debate mode (`lib/agents/debate.ts`, `debate` route case, Debate this claim at checkpoint 3), 6 unit tests + a UI wiring test with stand-in AI answers [Kept; to be tried on a real model after the keys]
+
+Prompt 69 · 26 Nov 2026, ~00:40 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Do all" (build the quick wins from the rescore: free full text, registry trace, library re-check, claim-support check, PDF drop) + "Yes, add pdfjs-dist"
+What came back: K33: free full-text links (`lib/registries/fulltext.ts`, 4 tests) on X-ray, Library, save page and research sources [Kept]
+
+Prompt 70 · 26 Nov 2026, ~00:43 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Do all" prompt)
+What came back: K34: "How this was decided" (`lib/verify/explain.ts`, 6 tests): registry trace and the rule behind each verdict on X-ray rows and the save page [Kept]
+
+Prompt 71 · 26 Nov 2026, ~00:45 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Do all" prompt)
+What came back: K35: re-check my library (`lib/verify/recheck.ts`, 6 tests) + RETRACTED warning in Write & cite; tested with Wang & Fan 2025, retracted in April 2026 [Kept]
+
+Prompt 72 · 26 Nov 2026, ~00:47 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Do all" prompt)
+What came back: K36: "Does this source say this?" in the Draft Checker (`tabs/draft/support.ts`, 6 tests): closest abstract sentence + shared key words, code only [Kept]
+
+Prompt 73 · 26 Nov 2026, ~00:52 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Do all" prompt) + "Yes, add pdfjs-dist"
+What came back: K37: PDF drop on the X-ray page (`lib/import/pdftext.ts` 11 tests, `pdfread.ts` with pdfjs-dist 6.5.438), reading in the browser; fixed DOIs broken across lines after testing [Kept]
+
+Prompt 74 · 26 Nov 2026, ~00:53 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Do all" prompt)
+What came back: Quiz notes: EU AI Act 2026 "AI Omnibus" dates and the 2018/2024/2025 Turing Awards corrected in `docs/10_AI_QUIZ_PREP.md`, from a fact-checked 100-question practice set (research agent, sources checked 26 Nov) [Kept]
+
+Prompt 75 · 26 Nov 2026, ~01:05 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Merge and do all" (build the remaining ideas: journal chips, new-citation alerts, related-papers map, Arabic toggle; plus the chatbot-answer mode)
+What came back: K39: paste a chatbot answer (`lib/import/chatanswer.ts`, 7 tests); fixed a numbering merge found in the browser test [Kept]
+
+Prompt 76 · 26 Nov 2026, ~01:09 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Merge and do all" prompt)
+What came back: K40: journal-index chips from OpenAlex (`lib/registries/journal.ts`, 3 tests) on X-ray, Library and research sources [Kept]
+
+Prompt 77 · 26 Nov 2026, ~01:12 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Merge and do all" prompt)
+What came back: K41: new papers citing your sources (`relatedQuery` with `since`, 3 tests; Library card) [Kept]
+
+Prompt 78 · 26 Nov 2026, ~01:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Merge and do all" prompt)
+What came back: K42: related-papers map (`mapLayout.ts` 4 tests, `PaperMap.tsx`); fixed an oversized map and a CSS rule that enlarged badge icons after the screenshot check [Kept]
+
+Prompt 79 · 26 Nov 2026, ~01:19 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Merge and do all" prompt)
+What came back: K43: Arabic / English toggle (`lib/i18n/strings.ts`, `lang.ts`, 5 tests): menus, titles, trust labels and badges; results stay English with a beta note [Kept; Arabic wording to be read once by an Arabic speaker]
+
+Prompt 80 · 26 Nov 2026, ~01:25 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "rescore e2e" then "Yes, fix both"
+What came back: Evidence-based rescore (rubric, problem statement, deck, live e2e 32/32, first-time-judge walkthrough); K44: Library order (Export second, More tools), flags aligned with live features [Kept]
+
+Prompt 81 · 26 Nov 2026, ~01:36 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): (same "Yes, fix both" prompt)
+What came back: K45: save checked web pages (`lib/verify/websource.ts`, web evidence on verdicts, 8 tests); Add as web page on the X-ray and save page [Kept]
+
+Prompt 82 · 26 Nov 2026, ~02:00 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "now update the pptx and pdf proper latest … make me a proper script humanised in pdf for all of 3 … steps to add api keys … confidence of winning"
+What came back: K46: deck text updated to the live site (side doors, CSL styles, API + MCP, PDF in browser, re-check, How this was decided), PPTX + PDF rebuilt; 11-page demo script PDF with walkthrough, Q&A and a cue card per person [Kept]
+
+Prompt 83 · 26 Nov 2026, ~02:20 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "yes run the live AI session and record it and check api full working and rescore"
+What came back: K47: ran the first full live AI session (Co-pilot, ~22 s, all agents + debate); fixed what it showed (duplicate source chips, Skeptic reasons cut mid-word, "S7: S7:"), 5 tests; script switched to Co-pilot [Kept]
+
+Prompt 84 · 26 Nov 2026, ~07:45 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "Yes, merge #61" (then record the SAMPLE, per the K47 plan)
+What came back: K02/K32: recorded two live Co-pilot sessions after the K47 deploy; the second, where the Skeptic catches a correlation read as a cause, pasted unchanged into `sampleSession.ts`; SAMPLE button tested 11/11 [Kept]
+
+Prompt 85 · 26 Nov 2026, ~08:00 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "rescore strict and winning chance" (pasted the problem statement and a first-place review brief), then "yes re-export and merge and rescore and do remaining to score high"
+What came back: K48: strict read-only review and rescore (live smoke 15/15, journey 34/34); prompt log re-exported; submission notes brought up to date; debate turns now say their chip is a quote check [Kept]
+
+Prompt 86 · 26 Nov 2026, ~08:20 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "give me the updated demo script pdf and rehearsal plan"
+What came back: K49: script updated (deck submitted, what to say when live runs differ, debate chip is a quote check) and a rehearsal-plan page added; PDF reprinted, 12 pages [Kept]
+
+Prompt 87 · 26 Nov 2026, ~08:40 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "add in the pptx when i share presenter mode so i can see the script fully humanised"
+What came back: K50: a separate presenter deck (10 slides, one per demo segment) with the full spoken script in the speaker notes, generated from script.html; the judged Phase 1 deck is unchanged [Kept]
+
+Prompt 88 · 26 Nov 2026, ~08:30 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "embed the script in the uploaded deck of mine … i need script inside that"
+What came back: K51: the spoken script for each of the six slides, plus the matching demo segment, added to the Phase 1 deck's speaker notes; the six slides are byte-identical to the uploaded deck [Kept]
+
+============================================================
+PHASE D · Audit and demo preparation (26 Nov, 09:00 to 13:30)
+End-to-end audit against the rules, deploy backup, demo script, judges' questions, rehearsal plan.
+============================================================
+
+Prompt 89 · 26 Nov 2026, ~09:00 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "do only if winning chance increases: 1. the chimera catch … 2. measured results"
+What came back: K52: Trust Center shows a DOI-only check next to Veracite on the same 51 references (from the two committed result files); the X-ray shows first the chimera a DOI check would pass, and says so; script lines updated [Kept]
+
+Prompt 90 · 26 Nov 2026, ~09:30 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "give me 100 quiz questions with answers in pdf" and "make me file also to type and show to the judges e2e … mention how to use"
+What came back: K53: 100-question AI quiz PDF (practice questions, sources linked); DEMO_INPUTS.md with the exact text to paste at each demo step, what judges should see, and what to say if a step fails; reference verdicts checked on the live site [Kept]
+
+Prompt 91 · 26 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): Relayed note: "I added a comparison table to the Trust Center (DOI-only check vs Veracite). In your 6:35 segment, point at it after the results card; the new line is on your cue card."
+What came back: Checked K52 on main (table + new line in the team demo script); rewrote ZEDAN_DEMO_CUES.md to match the script (5:35–7:15, DOI-only table step); updated Zedan's personal guide PDF [Kept. The team script is now the master copy for timings]
+
+Prompt 92 · 26 Nov 2026, ~09:55 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "audit as senior auditor e2e", then "fix that can it be done"
+What came back: K55: read-only end-to-end audit against the official rules (live checks, secrets scan, submissions); fixed what needs no deployment: prompt log re-exported, demo doc says Co-pilot [Kept]
+
+Prompt 93 · 26 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): Backup site (pasted steps from Krishna: fork, Vercel, keys, practice sync) · "Yes, swap it"
+What came back: Forked the repo; smoke-tested the backup veracite-one.vercel.app (15/15, AI on after the keys were fixed); did the practice Sync fork (3 behind → level, Vercel redeployed); found the Wayback Machine no longer lists golden web-004 (u.ae) and swapped it for a dead 2003 Crossref news release with an archived copy and no DOI [Kept. A 2008 Crossref blog post was tried first and rejected: it now has a Crossref DOI, so it is correctly Verified]
+
+Prompt 94 · 26 Nov 2026, ~12:20 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "why pdf is not downloading in pdf it should be downloadable in pdf", then "add now"
+What came back: K56: Save as PDF button on the reference list (X-ray and Research): the formatted list opens in the browser's print dialog as an A4 page; no PDF library, nothing leaves the device. 3 tests [Kept]
+
+Prompt 95 · 26 Nov 2026, ~12:35 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): Screenshot of the home page under the UV lamp: "see this void it overlaps and looks bad" (then "revert void to center original… this strip is looking bad")
+What came back: K57: VOID stamp kept as originally designed (centred); the holographic security strip made see-through under the UV lamp, so the stamp and print show beneath it. Two placements of the stamp were tried and rejected by Krishna [Kept]
+
+Prompt 96 · 26 Nov 2026, ~13:05 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "the full demo and presentation is of 10 minutes where 2 minutes included our judges Q/A so update the script", then "our group members are saying to short and make impactful and engaging and proper problem statement"
+What came back: Script: 10-minute slot stated, finish by 7:45; every spoken line shortened (about 950 → 620 words) with a problem-statement opening; cue cards and deck notes rebuilt [Kept]
+
+Prompt 97 · 26 Nov 2026, ~13:15 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "judges questions and answers please also send here", then "make input drafts also … so i can send to group"
+What came back: Judges' Q&A PDF (26 questions, owner and 20-second answer each); Draft Checker input paragraph tested on the live backup, as a file and a PDF [Kept]
+
+Prompt 98 · 26 Nov 2026, ~13:25 · Krishna · Claude Code · Claude Opus 5.5
+Prompt (as typed): "please prepare your self for phase 2 for proper brainstorming … i need to win"
+What came back: Phase 2 plan agreed before the reveal: triage, one flag-free small change per requirement, one merge, backup deploy through Zedan's fork. No code [Kept]
+
+Prompt 102 · 26 Nov 2026, ~09:50 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): Screenshot of a research session on "mjbkjkll;;": "is it right if not also tell me RAG is there or not", then "Yes, fix it"
+What came back: K54: a question with no usable words is stopped by code before any search or AI call; when the Planner itself says it does not understand, its guessed search terms are thrown away; the student is sent back to the question with the reason. 6 tests [Kept]
+
+Prompt 103 · 26 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "update the Z14 task line to 5:35–7:15"
+What came back: Z14 task line now matches the team demo script's timings and order (5:35–6:35 Library → certificate, 6:35–7:15 Trust Center → AI off) [Kept]
+
+Prompt 104 · 26 Nov 2026 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): "tick Z11 and Z14"
+What came back: Z11 (pitch + Q9–Q16 rehearsed) and Z14 (demo segments 5:35–7:15 rehearsed) ticked in tasks/zedan.md [Kept]
+
+============================================================
+PHASE E · Phase 2 day-of requirements (26 Nov, from 13:30)
+Ran the judges' test pack first to see what failed, then fixed by general rule (never for one reference), tested beyond the pack, and checked that every link opens.
+============================================================
+
+Prompt 99 · 26 Nov 2026, 13:35 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): Pasted the Phase 2 brief word for word (six required edge cases, eight test references, three requests, six constraints, five bonus cases): "the attached is the brief for phase 2 … ask me questions also and end update the whole UI and all documents"
+What came back: K60. First ran the eight references through the live site: 5 of 8 right; F (no DOI) and H (web page) wrong, G (Vancouver style) not recognised, and a lettered list was read as one reference. Then fixed by rule, not by reference: lettered and one-per-line lists; Vancouver authors; a cited year matches any registered version of the same work; a web page that names its own title is a web source [Kept]
+
+Prompt 100 · 26 Nov 2026, 13:45 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): (same brief, required cases)
+What came back: K60: labels renamed to the brief's words (Needs fix, Mismatch); accept or reject a fix; retracted warning before keeping; duplicate detection with a merge offer; "Not found" when no source mentions what the question names; every status carried into the library and every export (APA and the other styles, BibTeX, RIS, CSL-JSON); the export gate warns and no longer blocks, so the student decides [Kept]
+
+Prompt 101 · 26 Nov 2026, 13:50 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): (same brief, bonus cases B3 and B5: the quote request and the note request)
+What came back: K60: the assistant handles "check this quote" and "save this note" by code against the student's library: a quote is confirmed only if it is in the abstract word for word; a note is stored as text and changes no status. One wrong first attempt: my browser test addressed rows by their old "A." letters and failed after the splitter fix; rewrote it to use row numbers [Kept]
+
+Prompt 105 · 26 Nov 2026, ~13:30 · Zedan · Claude Code · Claude Opus 5.5
+Prompt (as typed): Pasted the Phase 2 day-of brief: "tell me how is everything going to be processed ahead", then "Yes, do both"
+What came back: Z12: ran the 8-reference test pack on the live X-ray (5/8 meet the brief; gaps: needs-fix accept/reject, duplicate merge, Vancouver parsing, no-DOI title search, web page parsing, injection flag not wired). DAY_OF_NOTES.md filled (every must/never, step, checks, results); `submissions/phase2/pack.mjs` reruns the pack [Kept]
+
+Prompt 106 · 26 Nov 2026, 13:58 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "see all the api keys are functional and also you use it and ask them all related questions … if wrong you only correct" (asked for sign-in too)
+What came back: K62: ran 14 unseen references in six formats through the Verifier. 12 right; two wrong and fixed by rule: a retracted paper whose own record lists its notices was skipped as "a notice" (came out Mismatch), and a correct book reference was told its journal was wrong. Declined sign-in: no accounts is a privacy promise in our Phase 1 deck (constraint 5) [Kept]
+
+Prompt 107 · 26 Nov 2026, 14:10 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "Yes, merge #79" then "Yes, update them" (Q&A sheet and deck notes for Phase 2)
+What came back: Ran the judges' full pack on the live site with the AI on: 8 of 8 statuses, accept fix, merge, the three requests, 13 of 14 unseen references (one network timeout), smoke 15/15. Q&A sheet rebuilt with a Phase 2 section (32 questions); deck notes now say which step handles which case [Kept]
+
+Prompt 108 · 26 Nov 2026, 14:16 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "there is a requirement on what basis ai agent is calling which all ai agents are working … judges will paste the citations … the link should not be hallucinated should be real link and should open … full architecture also add in pptx"
+What came back: K64. Checked that the link behind every pack reference opens: one did not (a no-DOI paper was matched to a re-registered copy whose DOI returns 404). Fixed by rule: with no DOI and a wrong year, look for the other registered versions and keep the one with the cited year (now the arXiv record, link opens). Added a "Handled by" line to every result and assistant answer, and an architecture slide (agent, AI or code, called when, Phase 2 case) to the presenter deck [Kept]
+
+Prompt 109 · 26 Nov 2026, 14:25 · Krishna · Claude Code · Claude Fable 5.2
+Prompt (as typed): "give me proper pptx to showcase please not this" (the presenter-notes deck), and a request to present the prompt log more professionally
+What came back: K65: 10-slide showcase deck built from live screenshots of the judges' pack (cases, the student's decisions, Not found, architecture, measured results). While taking the screenshots, found that a lettered reference list set off the "this looks like a chatbot answer" banner; fixed. Prompt log for the form restructured with our method and phases; every prompt is kept exactly as typed, nothing rewritten [Kept]

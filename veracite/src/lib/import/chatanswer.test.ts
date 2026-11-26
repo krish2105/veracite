@@ -43,4 +43,9 @@ describe("readChatAnswer (K39): a chatbot answer, not a reference list", () => {
   it("is not fooled by a short plain sentence", () => {
     expect(readChatAnswer("Deep learning. Nature, 2015.").looksLikeProse).toBe(false);
   });
+
+  it("a lettered reference list (A. B. C.) is a reference list, not a chatbot answer", () => {
+    const list = "A. Smith, J., & Lee, K. (2020). One long enough title about learning outcomes in schools. Journal of Tests, 1(2), 3–4. https://doi.org/10.1000/abc\nB. Jones, P. (2019). Another long enough title about memory and sleep in adults. Lancet, 12, 101–109. https://doi.org/10.1000/def";
+    expect(readChatAnswer(list).looksLikeProse).toBe(false);
+  });
 });

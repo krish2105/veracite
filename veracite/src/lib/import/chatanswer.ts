@@ -19,7 +19,7 @@ export interface ChatAnswer {
 }
 
 const LIST_HEADING = /^[ \t]*(?:sources|references|reference list|bibliography|works cited|citations|further reading)[ \t]*:?[ \t]*$/im;
-const STARTS_REF = /^\s*(?:\[\d{1,3}\]|\d{1,3}[.)])?\s*(?:\p{Lu}[\p{L}'’\-]+,\s*\p{Lu}\.|\p{Lu}[\p{L}'’\-]+,\s*\p{Lu}[\p{L}]+,|10\.\d{4,9}\/|https?:\/\/(?:dx\.)?doi\.org\/)/u;
+const STARTS_REF = /^\s*(?:\[\d{1,3}\]|\d{1,3}[.)]|[A-Za-z][.)])?\s*(?:\p{Lu}[\p{L}'’\-]+,\s*\p{Lu}\.|\p{Lu}[\p{L}'’\-]+,\s*\p{Lu}[\p{L}]+,|10\.\d{4,9}\/|https?:\/\/(?:dx\.)?doi\.org\/)/u;
 /** "Kestin and colleagues (2025)", "Doe and co-workers (2020)" */
 const COLLEAGUES = /(\p{Lu}[\p{L}'’\-]+)\s+and\s+(?:colleagues|co-?workers|co-?authors|team)\s*\((\d{4})\)/gu;
 
