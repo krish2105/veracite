@@ -133,6 +133,7 @@ function Debate({ turns, sources }: { turns: DebateTurn[]; sources: Map<string, 
       {turns.map((t, i) => (
         <li key={i} data-side={t.side}>
           <span className="debate-who">{t.side === "advocate" ? "Advocate" : "Skeptic"} · round {t.round}</span>
+          <span className="vx-tiny" style={{ margin: 0 }}>Quote check (not a verdict on the claim):</span>
           <TrustLabel kind={t.label} />
           <span className="debate-text">{t.text}</span>
           {t.quote && <span className="debate-quote">“{t.quote}” · {t.sourceId && sources.get(t.sourceId) ? short(sources.get(t.sourceId)!) : t.sourceId} · found in its text</span>}
